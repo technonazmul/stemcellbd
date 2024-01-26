@@ -1,0 +1,106 @@
+.feature {
+    @include padding(50px 0 100px);
+    &__top {
+        @include padding-bottom(50px);
+        @include margin-bottom(100px);
+        border-bottom: 1px solid rgba($white-color, $alpha: .1);
+        &--area {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            @extend %justify-center, %w-100;
+            @include breakpoint(sm) {
+                justify-content: space-between;
+            }
+        }
+        &--left {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            @extend %align-items-center;
+            @include breakpoint(max-sm) {
+                justify-content: center;
+                text-align: center;
+            }
+            .content {
+                @include margin-right(15px);
+                @include breakpoint(max-sm) {
+                    width: 100%;
+                }
+                h5 {
+                    @extend %white-color;
+                    @include margin-bottom(0);
+                }
+            }
+            .thumb {
+                img {
+                    @include breakpoint(max-sm) {
+                        max-width: 70%;
+                    }
+                    @include breakpoint(lg) {
+                        @include breakpoint(max-xxl) {
+                            max-width: 70%;
+                        }
+                    }
+                }
+            }
+        }
+        &--right {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            @extend %align-items-center;
+            @include breakpoint(max-sm) {
+                justify-content: center;
+                text-align: center;
+            }
+            .content {
+                @include margin-right(15px);
+                @include breakpoint(max-sm) {
+                    width: 100%;
+                }
+                h5 {
+                    @extend %white-color;
+                    @include margin-bottom(0);
+                }
+            }
+            .thumb {
+                img {
+                    @include breakpoint(max-sm) {
+                        max-width: 70%;
+                    }
+                    @include breakpoint(lg) {
+                        @include breakpoint(max-xxl) {
+                            max-width: 70%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &__bottom {}
+    &__item {
+        @extend %text-center, %bg-white;
+        @include padding(50px 30px);
+        @include border-radius(4px);
+        @include transition($transition);
+        &:hover {
+            @include transform(translateY(-10px));
+        }
+    }
+    &__thumb {
+        @include margin-bottom(25px);
+        img {
+            @extend %hidden;
+            @include border-radius(100%);
+        }
+    }
+    &__content {
+        h5 {
+            @include font-size(24px);
+        }
+        p {
+            @include margin-bottom(0px);
+        }
+    }
+}

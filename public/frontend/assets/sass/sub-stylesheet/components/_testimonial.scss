@@ -1,0 +1,85 @@
+.testimonial {
+    @extend %hidden;
+    .section {
+        &__header {
+            h2, p {
+                @extend %white-color;
+            }
+        }
+    }
+    &__item {
+        @include padding(30px);
+        @extend %bg-white;
+        display: inline-flex;
+        flex-wrap: wrap;
+        gap: 50px;
+        @include border-radius(4px);
+        @include breakpoint(sm) {
+            gap: 30px;
+            flex-wrap: nowrap;
+        }
+    }
+    &__thumb {
+        @extend %rel;
+        width: 100px;
+        height: 100px;
+        @include breakpoint(max-sm) {
+            margin: 0 auto;
+        }
+        &--quote {
+            @extend %abs, %text-center, %bg-theme, %white-color;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            left: 50%;
+            top: calc(100% - 20px);
+            border: 1px solid $white-color;
+            @include font-size(20px);
+            @include border-radius(100%);
+            @include transform(translateX(-50%));
+        }
+        img {
+            @extend %hidden, %w-100;
+            @include border-radius(100%);
+        }
+    }
+    &__content {
+        @include breakpoint(max-sm) {
+            text-align: center;
+        }
+        @include breakpoint(sm) {
+            width: calc(100% - 100px);
+        }
+        &--bottom {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            @extend %justify-between, %w-100;
+            .left {
+                @include breakpoint(max-sm) {
+                    width: 100%;
+                }
+                h6 {
+                    @include margin-bottom(0);
+                }
+                span {
+                    @extend %d-inline-block, %text-capitalize;
+                }
+            }
+            .right {
+                @include breakpoint(max-sm) {
+                    width: 100%;
+                }
+                @include breakpoint(sm) {
+                    text-align: right;
+                }
+                ul {
+                    li {
+                        display: inline-flex;
+                        color: $star;
+                    }
+                }
+            }
+        }
+    }
+}

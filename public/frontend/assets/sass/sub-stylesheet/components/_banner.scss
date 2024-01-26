@@ -1,0 +1,113 @@
+.banner {
+    background-blend-mode: overlay;
+    @extend %rel, %hidden;
+    @include padding(250px 0 120px);
+    @include breakpoint(md) {
+        @include padding(0);
+    }
+    @include breakpoint(md) {
+        &::after {
+            position: absolute;
+            content: "";
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: rgba(0, 0, 0, .7);
+        }
+        &__content {
+            z-index: 1;
+        }
+    }
+    video {
+        @extend %w-100;
+        display: block;
+        @include breakpoint(max-md) {
+            display: none;
+        }
+    }
+    &__content {
+        max-width: 650px;
+        margin: 0 auto;
+        @extend %text-center;
+        @include breakpoint(md) {
+            position: absolute;
+            top: calc(50% + 60px);
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100vh;
+            max-width: 100%;
+        }
+        h2 {
+            line-height: 1.1;
+            @extend %white-color;
+            @include margin-bottom(15px);
+            @include font-size(30px);
+            @include breakpoint(sm) {
+                @include font-size(64px);
+            }
+            @include breakpoint(xl) {
+                @include breakpoint(max-xxl) {
+                    @include font-size(52px);
+                }
+            }
+        }
+        p {
+            max-width: 520px;
+            @extend %white-color;
+            @include font-size(16px);
+            @include margin(0 auto 40px);
+            @include breakpoint(sm) {
+                @include font-size(20px);
+            }
+        }
+        ul {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+    }
+}
+
+
+
+
+.pageheader {
+    @include padding(250px 0 150px);
+    @extend %rel;
+    &::after {
+        @extend %abs, %w-100, %h-100;
+        top: 0;
+        left: 0;
+        background: rgba(0, 0, 0, .5);
+
+    }
+    &__content {
+        z-index: 1;
+        @extend %text-center, %rel;
+        h2 {
+            @extend %white-color;
+        }
+        ol {
+            @include padding(0);
+            @include margin(0);
+            @extend %justify-center;
+            li {
+                @extend %white-color;
+                &::before {
+                    color: $white-color !important;
+                }
+                &.active {
+                    @extend %white-color;
+                }
+                a {
+                    @extend %white-color;
+                    &:hover {
+                        @extend %theme-color;
+                    }
+                }
+            }
+        }
+    }
+}

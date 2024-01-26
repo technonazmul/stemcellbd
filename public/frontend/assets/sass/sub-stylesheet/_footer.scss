@@ -1,0 +1,308 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the footer of the site/application.
+// -----------------------------------------------------------------------------
+.footer {
+    @extend %rel, %hidden;
+    &.bgVideo {
+        @include breakpoint(xl) {
+            &::after {
+                position: absolute;
+                content: "";
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                background: rgba(0, 0, 0, .8);
+            }
+            &__content {
+                z-index: 1;
+            }
+        }
+    }
+    video {
+        @extend %abs;
+        top: 0;
+        left: 0;
+        width: 100%;
+        @include breakpoint(max-md) {
+            display: none;
+        }
+    }
+    &__top {
+        border-bottom: 1px solid rgba($white-color, $alpha: .05);
+        @include padding(50px 0);
+        @extend %rel;
+        z-index: 1;
+        &--title {
+            h3 {
+                @extend %mb-0, %white-color;
+                @include breakpoint(lg) {
+                    @include breakpoint(max-xl) {
+                        font-size: 30px;
+                    }
+                }
+            }
+        }
+        &--form {
+            form {
+                @extend %flex;
+                gap: 15px;
+                padding: 5px;
+                @include border-radius(4px);
+                @include breakpoint(sm) {
+                    border: 1px solid rgba($white-color, $alpha: .1);
+                }
+                input {
+                    width: calc(100%);
+                    color: $white-color;
+                    background: transparent;
+                    border: 1px solid rgba($white-color, $alpha: .1);
+                    @include breakpoint(sm) {
+                        width: calc(100% - 215px);
+                        border: none;
+                    }
+                    &::placeholder {
+                        color: rgba($white-color, $alpha: .8);
+                    }
+                }
+                button {
+                    // width: 200px;
+                    border: 0;
+                    @extend %white-color;
+                    background-image: linear-gradient(to right top, #30aff0, #1593e3, #2176d2, #3957bb, #4c359f);
+                    @include border-radius(4px);
+                    @include breakpoint(sm) {
+                        width: 200px;
+                    }
+                    &:hover {
+                        background-image: linear-gradient(to right top, #30aff0, #1593e3, #2176d2, #3957bb, #4c359f);
+                    }
+                }
+            }
+        }
+    }
+    &__middile {
+        border-bottom: 1px solid rgba($white-color, $alpha: .05);
+        @include padding(80px 0);
+        @extend %rel;
+        z-index: 1;
+    }
+    &__bottom {
+        padding-block: 30px;
+        @extend %rel;
+        z-index: 1;
+        p {
+            @extend %mb-0, %white-color;
+            a {
+                @extend %white-color, %text-capitalize, %text-700;
+                &:hover {
+                    @extend %theme-color;
+                }
+            }
+        }
+    }
+    &__title {
+        h5 {
+            @extend %white-color, %mb-30, %text-capitalize;
+        }
+    }
+    &__about {
+        img {
+            @extend %mb-15;
+        }
+        p {
+            @extend %white-color, %mb-30;
+            line-height: 1.5;
+            @include breakpoint(lg) {
+                @include breakpoint(max-xl) {
+                    max-width: 350px;
+                }
+            }
+        }
+        h6 {
+            @extend %white-color, %mb-0;
+        }
+        ul {
+            @extend %mt-15, %flex;
+            gap: 10px;
+            li {
+                @extend %d-inline-block;
+                @include border-radius(2px);
+                &:hover {
+                    span {
+                        display: inherit;
+                        @include breakpoint(max-xl) {
+                            display: none;
+                        }
+                    }
+                }
+                a {
+                    @extend %d-inline-block, %white-color;
+                    @include border-radius(2px);
+                }
+                i {
+                    width: 40px;
+                    height: 40px;
+                    line-height: 40px;
+                    border-radius: 100%;
+                    @extend %d-inline-block, %text-center;
+                }
+                span {
+                    @extend %d-none, %white-color, %text-capitalize;
+                    padding-right: 15px;
+                    @include transition($transition);
+                }
+            }
+        }
+    }
+    &__product {
+        &--thumb {
+            width: 70px;
+            height: 70px;
+            @extend %hidden;
+            @include border-radius(4px);
+            img {
+                @extend %w-100, %h-100;
+                object-fit: cover;
+                @include border-radius(4px);
+            }
+        }
+        &--content {
+            width: calc(100% - 70px);
+            @extend %pl-15;
+            h6 {
+                @include font-size(16px);
+                @extend %mb-0;
+                a {
+                    @extend %white-color, %text-2;
+                    line-height: 1.5;
+                }
+            }
+            span {
+                @extend %theme-color, %d-inline-block;
+            }
+        }
+        ul {
+            li {
+                @extend %flex, %align-items-center;
+                padding-block: 15px;
+                border-bottom: 1px solid rgba($white-color, $alpha: .1);
+                &:first-child {
+                    padding-top: 0;
+                }
+                &:last-child {
+                    border-bottom: none;
+                }
+                &:hover {
+                    .footer {
+                        &__product {
+                            &--thumb {
+                                img {
+                                    @include transform(scale(1.4));
+                                }
+                            }
+                            &--content {
+                                h6 {
+                                    a {
+                                        @extend %theme-color;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        &--rating {
+            i {
+                @extend %d-inline-block;
+                color: $white-color;
+                @include font-size(10px);
+            }
+        }
+    }
+    &__post {
+        &--thumb {
+            width: 70px;
+            height: 70px;
+            @extend %hidden;
+            @include border-radius(4px);
+            img {
+                @extend %w-100, %h-100;
+                object-fit: cover;
+                @include border-radius(4px);
+            }
+        }
+        &--content {
+            width: calc(100% - 70px);
+            @extend %pl-15;
+            h6 {
+                @include font-size(16px);
+                @extend %mb-0;
+                a {
+                    @extend %white-color, %text-2;
+                    line-height: 1.5;
+                }
+            }
+            span {
+                @extend %white-color, %d-inline-block;
+                @include font-size(14px);
+            }
+        }
+        ul {
+            li {
+                @extend %flex, %align-items-center;
+                padding-block: 15px;
+                border-bottom: 1px solid rgba($white-color, $alpha: .1);
+                &:first-child {
+                    padding-top: 0;
+                }
+                &:last-child {
+                    border-bottom: none;
+                }
+                &:hover {
+                    .footer {
+                        &__post {
+                            &--thumb {
+                                img {
+                                    @include transform(scale(1.4));
+                                }
+                            }
+                            &--content {
+                                h6 {
+                                    a {
+                                        @extend %theme-color;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &__gallery {
+        ul {
+            @extend %flex;
+            gap: 15px;
+            li {
+                @extend %d-inline-block, %hidden;
+                width: 70px;
+                a {
+                    @extend %d-block, %hidden;
+                    @include border-radius(4px);
+                    img {
+                        @extend %w-100;
+                    }
+                }
+                &:hover {
+                    a {
+                        img {
+                            @include transform(scale(1.2));
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

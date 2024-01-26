@@ -1,0 +1,34 @@
+.result {
+    @extend %hidden;
+    &__thumb {
+        img {}
+    }
+    &__content {
+        @extend %bg-white, %rel;
+        @include padding(30px);
+        &::after {
+            @extend %abs, %bg-white;
+            width: 30px;
+            height: 100%;
+            top: 0;
+            left: 100%;
+            z-index: 1;
+        }
+        h2 {
+            @include margin-bottom(20px);
+        }
+        p {
+            @include margin-bottom(30px);
+        }
+        .lab-btn {
+            i {
+                width: 24px;
+                height: 24px;
+                line-height: 24px;
+                @extend %bg-white, %text-center, %theme-color;
+                @include border-radius(100%);
+                @include font-size(12px);
+            }
+        }
+    }   
+}
