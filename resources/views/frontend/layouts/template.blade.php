@@ -90,8 +90,8 @@
                                     <a href="{{route('stemcell')}}">Service</a>
                                     <ul>
                                         <li><a href="{{route('stemcell')}}">Stem Cell</a></li>
-                                        <li><a href="cosmetic.html">Cosmetic</a></li>
-                                        <li><a href="training.html">Training</a></li>
+                                        <li><a href="{{route('cosmetic')}}">Cosmetic</a></li>
+                                        <li><a href="{{route('training')}}">Training</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="{{route('doctors')}}">Doctors</a></li>
@@ -117,6 +117,8 @@
 
     @yield("dynamic_content")
     @yield("stemcell")
+    @yield("cosmetic")
+    @yield("training")
     @yield("doctors")
     @yield("blog")
     @yield("shop")

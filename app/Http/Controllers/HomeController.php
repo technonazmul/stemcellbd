@@ -15,6 +15,12 @@ class HomeController extends Controller
     function stemcell(){
         return view('frontend.pages.stemcell');
     }
+    function cosmetic(){
+        return view('frontend.pages.cosmetic');
+    }
+    function training(){
+        return view('frontend.pages.training');
+    }
     function doctors(){
         return view('frontend.pages.doctors');
     }

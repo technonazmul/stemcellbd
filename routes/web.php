@@ -19,6 +19,8 @@ Route::get('/', function () {
 Route::get('/index',[HomeController::class,'index'])->name('index');
 Route::get('/service',[HomeController::class,'service'])->name('service');
 Route::get('/stemcell',[HomeController::class,'stemcell'])->name('stemcell');
+Route::get('/cosmetic',[HomeController::class,'cosmetic'])->name('cosmetic');
+Route::get('/training',[HomeController::class,'training'])->name('training');
 Route::get('/service',[HomeController::class,'service'])->name('service');
 Route::get('/doctors',[HomeController::class,'doctors'])->name('doctors');
 Route::get('/blog',[HomeController::class,'blog'])->name('blog');
