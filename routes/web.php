@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AuthController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,7 +20,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\AuthController::class, 'index'])->name('home');
+Route::get('/home', [AuthController::class, 'index'])->name('home');
 Route::get('/index',[HomeController::class,'index'])->name('index');
 Route::get('/service',[HomeController::class,'service'])->name('service');
 Route::get('/stemcell',[HomeController::class,'stemcell'])->name('stemcell');
@@ -30,3 +31,4 @@ Route::get('/doctors',[HomeController::class,'doctors'])->name('doctors');
 Route::get('/blog',[HomeController::class,'blog'])->name('blog');
 Route::get('/shop',[HomeController::class,'shop'])->name('shop');
 Route::get('/contact',[HomeController::class,'contact'])->name('contact');
+Route::get('/eb_registration',[HomeController::class,'eb_registration'])->name('eb_registration');

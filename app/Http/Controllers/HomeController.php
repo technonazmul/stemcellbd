@@ -34,4 +34,7 @@ class HomeController extends Controller
     function contact(){
         return view('frontend.pages.contact');
     }
+    function eb_registration(){
+        return view('frontend.pages.eb_registration');
+    }
 }

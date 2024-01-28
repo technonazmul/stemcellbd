@@ -45,7 +45,7 @@
                                     <i class="fa-solid fa-user"></i>
                                 </div>
                                 <ul>
-                                    <li><a href="login.html">Login</a></li>
+                                    <li><a href="{{route('login')}}">Login</a></li>
                                     <li>/</li>
                                     <li><a href="signup.html">Register</a></li>
                                 </ul>
@@ -98,6 +98,7 @@
                                 <li><a href="{{route('blog')}}">Blog</a></li>
                                 <li><a href="{{route('shop')}}">Shop</a></li>
                                 <li><a href="{{route('contact')}}">Contact</a></li>
+                                <li><a href="{{route('eb_registration')}}">E.B Registration</a></li>
                             </ul>
                         </div>
                         <div class="cartbtn">
@@ -123,6 +124,7 @@
     @yield("blog")
     @yield("shop")
     @yield("contact")
+    @yield("eb_registration")
     <!-- ==========Footer Section Ends Here========== -->
     <footer class="footer bg-img" style="background-image: url({{asset('frontend/assets/images/bg/03.jpg')}});">
         <div class="footer__top">
