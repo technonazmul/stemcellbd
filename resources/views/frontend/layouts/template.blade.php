@@ -3,6 +3,7 @@
 
 <head>
 @include('frontend.layouts.inc.css')
+@yield('extra_css')
 </head>
 
 <body>

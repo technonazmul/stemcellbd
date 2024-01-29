@@ -1,4 +1,11 @@
 @extends('frontend.layouts.template')
+@section("extra_css")
+<style>
+    .sidebar__search form input, .shop__item, .shop__title, input, textarea, select {
+    padding: 0;
+}
+</style>
+@endsection
 @section("eb_registration")
     <!-- ==========Page Header Section Start Here========== -->
     <div class="pageheader bg-img" style="background-image: url({{asset('frontend/assets/images/bg/04.jpg')}});">
@@ -98,20 +105,20 @@
                       <div class="card-body">
                           <label for="exampleFormControlInput1" class="form-label">Gender</label> <span style="color:red">*</span>
                           <div class="form-check">
-                              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadio1" value="option1">
-                              <label class="form-check-label" for="exampleRadio1">
+                              <input class="form-check-input" type="radio" name="gender" id="male" value="option1">
+                              <label class="form-check-label" for="male">
                                 Male
                               </label>
                             </div>
                             <div class="form-check">
-                              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadio2" value="option2">
-                              <label class="form-check-label" for="exampleRadio2">
+                              <input class="form-check-input" type="radio" name="gender" id="female" value="option2">
+                              <label class="form-check-label" for="female">
                                 Female
                               </label>
                             </div>
                             <div class="form-check">
-                              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadio2" value="option3">
-                              <label class="form-check-label" for="exampleRadio3">
+                              <input class="form-check-input" type="radio" name="gender" id="others" value="option3">
+                              <label class="form-check-label" for="others">
                                 Others
                               </label>
                             </div>
