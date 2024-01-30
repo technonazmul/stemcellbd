@@ -131,7 +131,7 @@
               <div class="col-md-7 my-2 mx-auto">
                 <div class="card ">
                     <div class="card-body">
-                        <label for="exampleFormControlInput1" class="form-label"> of Interest</label>
+                        <label for="exampleFormControlInput1" class="form-label">Treatment of Interest</label>
                         <div class="form-check">
                             <input name="treatment_of_interest[]" value="Stem Cell Therapy" class="form-check-input" type="checkbox" id="checkButton">
                             <label class="form-check-label" for="checkButton">
