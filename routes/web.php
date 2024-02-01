@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\Backend\PageController as BackendPageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,3 +37,7 @@ Route::get('/eb_registration',[HomeController::class,'eb_registration'])->name('
 
 
 Route::post('/eb_form_submit',[FormController::class,'eb_form_submit'])->name('eb_form_submit');
+
+// Admin route start, will make group and middleware later
+Route::get('/dashboard',[BackendPageController::class,'dashboard'])->name('admin.dashboard');
+// Admin route end
