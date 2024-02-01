@@ -44,4 +44,8 @@ class FormController extends Controller
         return redirect()->back()->with('success', 'Form submitted successfully!');
 
     }
+
+    public function e(){
+        return view('frontend.pages.e');
+    }
 }
