@@ -41,3 +41,4 @@ Route::post('/eb_form_submit',[FormController::class,'eb_form_submit'])->name('e
 // Admin route start, will make group and middleware later
 Route::get('/dashboard',[BackendPageController::class,'dashboard'])->name('admin.dashboard');
 // Admin route end
+
