@@ -39,6 +39,19 @@ Route::get('/eb_registration',[HomeController::class,'eb_registration'])->name('
 Route::post('/eb_form_submit',[FormController::class,'eb_form_submit'])->name('eb_form_submit');
 
 // Admin route start, will make group and middleware later
-Route::get('/dashboard',[BackendPageController::class,'dashboard'])->name('admin.dashboard');
+
 // Admin route end
 
+Route::prefix('admin')->group(function () {
+    Route::get('/dashboard',[BackendPageController::class,'dashboard'])->name('admin.dashboard');
+    // Doctors
+Route::get('/doctor',[BackendPageController::class,'doctor'])->name('admin.doctor');
+Route::get('/add_doctor',[BackendPageController::class,'add_doctor'])->name('add_doctor');
+//Blogs
+Route::get('/blog',[BackendPageController::class,'blog'])->name('admin.blog');
+Route::get('/add_blog',[BackendPageController::class,'add_blog'])->name('add_blog');
+//Products
+Route::get('/product',[BackendPageController::class,'product'])->name('admin.product');
+Route::get('/add_product',[BackendPageController::class,'add_product'])->name('add_product');
+
+});

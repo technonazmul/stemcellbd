@@ -14,7 +14,7 @@
             </div>
         </div>
     </div>
-    <!-- ==========Page Header Section Ends Here========== -->
+    <!-- ==========Page Header Section Ends Here========== --> 
     <!-- ==========Team Section Start Here========== -->
     <div class="team padding-tb section-bg" id="team">
         <div class="container">
@@ -170,4 +170,4 @@
         </div>
     </div>
     <!-- ==========Team Section Ends Here========== -->
-@endsetion
+@endsection
