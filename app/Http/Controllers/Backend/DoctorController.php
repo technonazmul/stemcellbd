@@ -26,15 +26,11 @@ class DoctorController extends Controller
     $doctor->twitter = $request->input('twitter');
     $doctor->about = $request->input('about');
 
-    if($request->has('image')){
-
-        $file = $request->file('image');
-        $extension = $file->getClientOriginalExtension();
-
-        $filename = time().'.'.$extension;
-
-        $path = 'public/doctors';
-        $file->move($path, $filename);
+    if ($request->hasFile('image')) {
+        $image = $request->file('image');
+        $newFilename = time() . '.' . $image->getClientOriginalExtension();
+        $path = $image->storeAs('public/doctors',$newFilename); // Store in the storage directory
+        $doctor->image= $path; // Save the image path to the database
     }
 
     $doctor->save();
