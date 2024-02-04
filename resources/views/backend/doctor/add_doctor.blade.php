@@ -1,5 +1,5 @@
 @extends('backend.dashboard')
-@section('add_doctor')
+@section('content')
 <div class="container">
 
     <!-- Display validation errors -->

@@ -1,4 +1,4 @@
 @extends('backend.dashboard')
-@section('add_blog')
+@section('content')
 add blog
 @endsection

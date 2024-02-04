@@ -1,4 +1,4 @@
 @extends('backend.dashboard')
-@section('product')
+@section('content')
 product
 @endsection

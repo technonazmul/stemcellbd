@@ -1,4 +1,4 @@
 @extends('backend.dashboard')
-@section('doctor')
+@section('content')
 doctor list
 @endsection
