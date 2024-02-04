@@ -1,5 +1,5 @@
 @extends('frontend.layouts.template')
-@section("contact")
+@section("content")
             <!-- ==========Page Header Section Start Here========== -->
             <div
             class="pageheader bg-img"

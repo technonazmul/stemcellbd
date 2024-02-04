@@ -1,6 +1,6 @@
 @extends('frontend.layouts.template')
 
-@section("dynamic_content")
+@section("content")
     <!-- ==========Banner Section Start Here========== -->
     <div class="banner bg-img" id="banner" style="background: url({{asset('frontend/assets/images/bg/04.jpg')}}) rgba(0,0,0,.5);">
         <video src="{{asset('frontend/assets/video/01.mp4')}}" muted="" loop="" autoplay=""></video>

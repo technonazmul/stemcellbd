@@ -117,15 +117,7 @@
     </header>
     <!-- ==========Header Section Ends Here========== -->
 
-    @yield("dynamic_content")
-    @yield("stemcell")
-    @yield("cosmetic")
-    @yield("training")
-    @yield("doctors")
-    @yield("blog")
-    @yield("shop")
-    @yield("contact")
-    @yield("eb_registration")
+    @yield("content")
     <!-- ==========Footer Section Ends Here========== -->
     <footer class="footer bg-img" style="background-image: url({{asset('frontend/assets/images/bg/03.jpg')}});">
         <div class="footer__top">

@@ -1,5 +1,5 @@
 @extends('frontend.layouts.template')
-@section("cosmetic")
+@section("content")
     <!-- ==========Page Header Section Start Here========== -->
     <div class="pageheader bg-img" style="background-image: url({{asset('frontend/assets/images/bg/04.jpg')}});">
         <div class="container">
