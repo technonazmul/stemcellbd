@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\Backend\DoctorController;
 use App\Http\Controllers\Backend\PageController as BackendPageController;
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,7 @@ Route::prefix('admin')->group(function () {
     // Doctors
 Route::get('/doctor',[BackendPageController::class,'doctor'])->name('admin.doctor');
 Route::get('/add_doctor',[BackendPageController::class,'add_doctor'])->name('add_doctor');
+Route::post('/save_doctor',[DoctorController::class,'save_doctor'])->name('save_doctor');
 //Blogs
 Route::get('/blog',[BackendPageController::class,'blog'])->name('admin.blog');
 Route::get('/add_blog',[BackendPageController::class,'add_blog'])->name('add_blog');
