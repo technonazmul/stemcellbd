@@ -117,7 +117,7 @@
             <a href="#" class="nav-link">
               <i class=""></i>
               <p>
-                Product
+                Products
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -125,7 +125,7 @@
               <li class="nav-item">
                 <a href="{{route('admin.product')}}" class="nav-link">
                   <i class=""></i>
-                  <p>Product</p>
+                  <p>Products</p>
                 </a>
               </li>
               <li class="nav-item">
