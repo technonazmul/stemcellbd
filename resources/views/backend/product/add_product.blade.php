@@ -14,7 +14,9 @@
                         </div>
                         <div class="mt-2">
                             <label for="exampleFormControlInput1" class="form-label">Description</label>
-                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Description">
+                            <textarea class="summernote">
+                                Place <em>some</em> <u>text</u> <strong>here</strong>
+                              </textarea>
                         </div>
                         <div class="mt-2">
                             <label for="exampleFormControlInput1" class="form-label">Price</label>
@@ -34,4 +36,11 @@
         </div>
     </div>
 </div>
+@endsection
+@section("extra_script")
+<script>
+    $(document).ready(function() {
+  $('.summernote').summernote();
+});
+</script>
 @endsection

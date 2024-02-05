@@ -198,5 +198,6 @@
 <!-- ./wrapper -->
 
 @include('backend.inc.script')
+@yield('extra_script')
 </body>
 </html>
