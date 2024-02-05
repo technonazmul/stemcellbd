@@ -3,7 +3,7 @@
 <div class="container">
 
     <!-- Display validation errors -->
-    <form action="{{route('eb_form_submit')}}" method="Post">
+    <form action="{{route('save_doctor')}}" method="Post" enctype="multipart/form-data">
         @csrf
       <div class="row ">  
         <div class="col-md-7 my-2 mx-auto">
@@ -43,12 +43,12 @@
                         <input name="Specialization" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Specialization ">
                      </div>
                         <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Chember</label>
-                            <input name="chember" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Chember Addrress ">
+                            <label for="exampleFormControlInput1" class="form-label">Chamber</label>
+                            <input name="chamber" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Chamber Addrress ">
                         </div>
                         <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Reaponsibility</label>
-                            <input name="reaponsibility" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Your Reaponsibility " >
+                            <label for="exampleFormControlInput1" class="form-label">Responsibility</label>
+                            <input name="responsibility" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Your responsibility " >
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Facebook</label>
