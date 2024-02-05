@@ -29,7 +29,7 @@ class DoctorController extends Controller
     if ($request->hasFile('image')) {
         $image = $request->file('image');
         $newFilename = time() . '.' . $image->getClientOriginalExtension();
-        $path = $image->storeAs('public/doctors',$newFilename); // Store in the storage directory
+        $path = $image->storeAs('public/storage/doctors',$newFilename); // Store in the storage directory
         $doctor->image= $path; // Save the image path to the database
     }
 
