@@ -22,10 +22,17 @@ class PageController extends Controller
     function add_blog(){
         return view('backend.blog.add_blog');
      }
+     function categories(){
+        return view('backend.category.index');
+   }
+    function add_category(){
+         return view('backend.category.add');
+    }
     function product(){
          return view('backend.product.product');
     }
      function add_product(){
          return view('backend.product.add_product');
     }
+    
 }
