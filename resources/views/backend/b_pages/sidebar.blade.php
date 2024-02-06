@@ -112,7 +112,29 @@
               </li>
             </ul>
           </li>
-          {{-- product --}}
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class=""></i>
+              <p>
+                Categories
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('admin.product')}}" class="nav-link">
+                  <i class=""></i>
+                  <p>All Categories</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('add_category')}}" class="nav-link">
+                  <i class=""></i>
+                  <p>Add Category</p>
+                </a>
+              </li>
+            </ul>
+          </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class=""></i>

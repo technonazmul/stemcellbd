@@ -56,4 +56,8 @@ Route::get('/add_blog',[BackendPageController::class,'add_blog'])->name('add_blo
 Route::get('/product',[BackendPageController::class,'product'])->name('admin.product');
 Route::get('/add_product',[BackendPageController::class,'add_product'])->name('add_product');
 
+//Products
+Route::get('/categories',[BackendPageController::class,'categories'])->name('admin.categories');
+Route::get('/category',[BackendPageController::class,'add_category'])->name('add_category');
+
 });
