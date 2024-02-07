@@ -35,8 +35,8 @@
                         <input name="phone" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Your Phone" required>
                       </div>
                       <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Email</label>
-                        <input name="email" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Your email">
+                        <label for="exampleFormControlInput1" class="form-label">Email</label><span style="color:red">*</span>
+                        <input name="email" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Your email" required>
                       </div>
                       <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Specialization</label>
