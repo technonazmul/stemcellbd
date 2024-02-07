@@ -40,4 +40,14 @@ class DoctorController extends Controller
     //    print_r($request->all());
     //    echo"</pre>";
     }
+
+    public function doctor() {
+        $doctor = Doctor::all();
+    
+        // if (!$doctor) {
+        //     // Handle the case where the doctor is not found (e.g., redirect to a 404 page)
+        //     return redirect()->route('404'); // Adjust the route name and logic accordingly
+        // }    
+        return view('backend.doctor.doctor', compact('doctor'));
+    }
 }
