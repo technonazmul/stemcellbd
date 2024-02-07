@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\Backend\DoctorController;
+use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\PageController as BackendPageController;
 /*
 |--------------------------------------------------------------------------
@@ -52,12 +53,14 @@ Route::post('/save_doctor',[DoctorController::class,'save_doctor'])->name('save_
 //Blogs
 Route::get('/blog',[BackendPageController::class,'blog'])->name('admin.blog');
 Route::get('/add_blog',[BackendPageController::class,'add_blog'])->name('add_blog');
+//Category CRUD
+Route::get('/categories',[BackendPageController::class,'categories'])->name('admin.categories');
+Route::get('/category',[CategoryController::class,'add_category'])->name('add_category');
+
 //Products
 Route::get('/product',[BackendPageController::class,'product'])->name('admin.product');
 Route::get('/add_product',[BackendPageController::class,'add_product'])->name('add_product');
 
-//Products
-Route::get('/categories',[BackendPageController::class,'categories'])->name('admin.categories');
-Route::get('/category',[BackendPageController::class,'add_category'])->name('add_category');
+
 
 });
