@@ -46,9 +46,9 @@ Route::post('/eb_form_submit',[FormController::class,'eb_form_submit'])->name('e
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard',[BackendPageController::class,'dashboard'])->name('admin.dashboard');
     // Doctors
-Route::get('/doctor',[BackendPageController::class,'doctor'])->name('admin.doctor');
-Route::get('/add_doctor',[BackendPageController::class,'add_doctor'])->name('add_doctor');
-Route::post('/save_doctor',[DoctorController::class,'save_doctor'])->name('save_doctor');
+    Route::get('/add_doctor',[BackendPageController::class,'add_doctor'])->name('add_doctor');
+    Route::post('/save_doctor',[DoctorController::class,'save_doctor'])->name('save_doctor');
+    Route::get('/doctor',[DoctorController::class,'doctor'])->name('admin.doctor');
 //Blogs
 Route::get('/blog',[BackendPageController::class,'blog'])->name('admin.blog');
 Route::get('/add_blog',[BackendPageController::class,'add_blog'])->name('add_blog');
