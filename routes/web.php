@@ -50,6 +50,9 @@ Route::prefix('admin')->group(function () {
     Route::get('/add_doctor',[BackendPageController::class,'add_doctor'])->name('add_doctor');
     Route::post('/save_doctor',[DoctorController::class,'save_doctor'])->name('save_doctor');
     Route::get('/doctor',[DoctorController::class,'doctor'])->name('admin.doctor');
+    Route::get('/edit_doctor/{id}',[DoctorController::class,'edit_doctor'])->name('admin.edit_doctor');
+    Route::post('/update_doctor/{id}',[DoctorController::class,'update_doctor'])->name('admin.update_doctor');
+    Route::get('/delete_doctor/{id}',[DoctorController::class,'delete_doctor'])->name('admin.delete_doctor');
 //Blogs
 Route::get('/blog',[BackendPageController::class,'blog'])->name('admin.blog');
 Route::get('/add_blog',[BackendPageController::class,'add_blog'])->name('add_blog');
