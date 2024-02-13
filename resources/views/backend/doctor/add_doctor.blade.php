@@ -51,6 +51,10 @@
                             <input name="responsibility" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Your responsibility " >
                         </div>
                         <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Experience</label>
+                            <input name="experience" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Your experience " >
+                        </div>
+                        <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Facebook</label>
                             <input name="facebook" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Your facebook Profile Link">
                         </div>

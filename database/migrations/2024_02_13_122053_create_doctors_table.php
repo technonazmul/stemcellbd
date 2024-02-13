@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('specialization')->nullable();
             $table->string('chamber')->nullable();
             $table->string('responsibility')->nullable();
+            $table->string('experience')->nullable();
             $table->string('facebook')->nullable();
             $table->string('instagram')->nullable();
             $table->string('telegram')->nullable();
