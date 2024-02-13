@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\Form;
+use App\Models\Contact;
 class PageController extends Controller
 {
     function dashboard() {
@@ -34,5 +35,12 @@ class PageController extends Controller
      function add_product(){
          return view('backend.product.add_product');
     }
-    
+    function eb_form_data(){
+        $eb_data= Form::all();
+        return view('backend.eb_form_data',compact('eb_data'));
+    }
+    function contact_data(){
+        $contact_data= Contact::orderBy('id','desc')->get();
+        return view('backend.contact_form_data',compact('contact_data'));
+    }
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\FormController;
 use App\Http\Controllers\Backend\DoctorController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\PageController as BackendPageController;
+use App\Http\Controllers\Frontend\PagesController as FrontendPagesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,20 +19,17 @@ use App\Http\Controllers\Backend\PageController as BackendPageController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
+Route::get('/',[HomeController::class,'index'])->name('index');
 Route::get('/home', [AuthController::class, 'index'])->name('home');
-Route::get('/index',[HomeController::class,'index'])->name('index');
 Route::get('/service',[HomeController::class,'service'])->name('service');
 Route::get('/stemcell',[HomeController::class,'stemcell'])->name('stemcell');
 Route::get('/cosmetic',[HomeController::class,'cosmetic'])->name('cosmetic');
 Route::get('/training',[HomeController::class,'training'])->name('training');
 Route::get('/service',[HomeController::class,'service'])->name('service');
-Route::get('/doctors',[HomeController::class,'doctors'])->name('doctors');
+Route::get('/doctors',[FrontendPagesController::class,'doctors'])->name('doctors');
+Route::get('/single_doctor/{id}',[FrontendPagesController::class,'single_doctor'])->name('single_doctor');
 Route::get('/blog',[HomeController::class,'blog'])->name('blog');
 Route::get('/shop',[HomeController::class,'shop'])->name('shop');
 Route::get('/contact',[HomeController::class,'contact'])->name('contact');
@@ -39,7 +37,7 @@ Route::get('/eb_registration',[HomeController::class,'eb_registration'])->name('
 
 
 Route::post('/eb_form_submit',[FormController::class,'eb_form_submit'])->name('eb_form_submit');
-
+Route::post('/contact_form',[FormController::class,'contact_form'])->name('contact_form');
 // Admin route start, will make group and middleware later
 
 // Admin route end
@@ -64,6 +62,8 @@ Route::get('/categoryadd',[CategoryController::class,'add_category'])->name('add
 Route::get('/product',[BackendPageController::class,'product'])->name('admin.product');
 Route::get('/add_product',[BackendPageController::class,'add_product'])->name('add_product');
 
-
+//eb_form_data
+Route::get('/eb_form_data',[BackendPageController::class,'eb_form_data'])->name('admin.eb_form_data');
+Route::get('/contact_data',[BackendPageController::class,'contact_data'])->name('admin.contact_data');
 
 });

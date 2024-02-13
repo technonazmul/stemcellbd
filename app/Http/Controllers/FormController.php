@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Form;
+use App\Models\Contact;
 class FormController extends Controller
 {
     public function eb_form_submit(Request $request) {
@@ -43,5 +44,22 @@ class FormController extends Controller
 
         return redirect()->back()->with('success', 'Form submitted successfully!');
 
+    }
+
+    //contact form 
+    public function contact_form(Request $request){
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|max:255',
+            'message' => 'required|string',
+        ]);
+        $data= new Contact();
+        $data->name = $request->input('name');
+        $data->email = $request->input('email');
+        $data->company = $request->input('company');
+        $data->subject = $request->input('subject');
+        $data->message = $request->input('message');
+        $data->save();
+        return redirect()->back()->with('success','Message send Successfull');
     }
 }
