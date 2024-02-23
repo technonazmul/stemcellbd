@@ -151,7 +151,7 @@
                 <div class="card ">
                     <div class="card-body">
                         <label for="exampleFormControlInput1" class="form-label">Preferred Consultation Date</label>
-                            <input name="preferred_date" type="date" class="form-control" id="datepicker">
+                            <input name="preferred_date" type="date" class="form-control" id="datepicker" min="<?php echo date('Y-m-d'); ?>">
                     </div>
                 </div>
               </div>

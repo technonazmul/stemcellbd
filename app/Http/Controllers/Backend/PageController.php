@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Form;
 use App\Models\Contact;
+use App\Models\Appointment;
 class PageController extends Controller
 {
     function dashboard() {
@@ -42,5 +43,9 @@ class PageController extends Controller
     function contact_data(){
         $contact_data= Contact::orderBy('id','desc')->get();
         return view('backend.contact_form_data',compact('contact_data'));
+    }
+    function appointment_data(){
+        $appointmet_data= Appointment::orderBy('id','desc')->get();
+        return view('backend.appointment.appointmet_data',compact('appointmet_data'));
     }
 }

@@ -647,44 +647,57 @@
                 <div class="col-lg-6 col-12">
                     <div class="appointment__content" id="appointment">
                         <div class="title">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                @endif
+                                @if(session('success'))
+                                    <div class="alert alert-success">
+                                        {{ session('success') }}
+                                    </div>
+                            @endif
                             <h2>Take an Appointment</h2>
                             <p>Please fill in the details below to schedule an appointment.</p>
                         </div>
-                        <form action="#">
+                        <form action="{{route('admin.take_appointment')}}" method="post">
+                            @csrf
                             <div class="row g-4">
                                 <div class="col-md-6 col-12">
-                                    <input type="text" placeholder="full name*" required>
+                                    <input name="name" type="text" placeholder="full name*" required>
                                 </div>
                                 <div class="col-md-6 col-12">
-                                    <input type="text" placeholder="Phone Number">
+                                    <input name="phone" type="text" placeholder="Phone Number" required>
                                 </div>
                                 <div class="col-12">
-                                    <input type="email" placeholder="email address">
+                                    <input name="email" type="email" placeholder="email address">
                                 </div>
                                 <div class="col-md-6 col-12">
-                                    <select>
-                                        <option value="1">Sex</option>
-                                        <option value="2">Male</option>
-                                        <option value="3">Female</option>
-                                        <option value="4">Other</option>
+                                    <select name="gender" required>
+                                        <option value="">Sex</option>
+                                        <option name="gender" value="male">Male</option>
+                                        <option name="gender" value="female">Female</option>
+                                        <option name="gender" value="other">Other</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6 col-12">
-                                    <input type="date" >
+                                    <input id="datepicker" name="date" type="date" min="<?php echo date('Y-m-d'); ?>" required>
                                 </div>
                                 <div class="col-12">
-                                    <select>
-                                        <option value="1">need treatment for</option>
-                                        <option value="2">need treatment for</option>
-                                        <option value="3">need treatment for</option>
-                                        <option value="4">need treatment for</option>
-                                        <option value="5">need treatment for</option>
-                                        <option value="6">need treatment for</option>
-                                        <option value="7">need treatment for</option>
+                                    <select name="treatment_types" required> <!-- Added the name attribute here -->
+                                        <option value="">Need Appointment for</option>
+                                        @foreach($data as $data)
+                                        <option value="{{$data->title}}">{{$data->title}}</option>
+                                        @endforeach
+                                        <!-- Add more options as needed -->
                                     </select>
                                 </div>
                                 <div class="col-12">
-                                    <textarea rows="4" placeholder="Message"></textarea>
+                                    <textarea name="message" rows="4" placeholder="Message"></textarea>
                                 </div>
                             </div>
                             <button type="submit" class="lab-btn">take an appointment</button>
@@ -741,3 +754,14 @@
     </div>
     <!-- ==========contact Section Ends Here========== -->
 @endsection
+{{-- <script>
+    function validateDate() {
+      var inputDate = document.getElementById('datepicker').value;
+      var currentDate = new Date().toISOString().split('T')[0]; // Get current date in YYYY-MM-DD format
+      
+      if (inputDate < currentDate) {
+        alert('Please select a date equal to or after today.');
+        document.getElementById('datepicker').value = currentDate; // Reset input value to current date
+      }
+    }
+</script> --}}

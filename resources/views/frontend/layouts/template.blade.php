@@ -107,7 +107,7 @@
                                 <a href="cart.html"><i class="fa-solid fa-basket-shopping"></i></a>
                             </div>
                             <div class="headerbtn">
-                                <a href="#appointment" class="lab-btn">appointment <i class="fa-solid fa-border-all"></i></a>
+                                <a href="{{route('index')}}#appointment" class="lab-btn">appointment <i class="fa-solid fa-border-all"></i></a>
                             </div>
                         </div>
                     </div>
