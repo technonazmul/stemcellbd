@@ -162,32 +162,21 @@
             <a href="#" class="nav-link">
               <i class=""></i>
               <p>
-                EB form DATA
+                Appointment
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('admin.eb_form_data')}}" class="nav-link">
+                <a href="{{route('admin.appointment')}}" class="nav-link">
                   <i class=""></i>
-                  <p>EB form DATA</p>
+                  <p>Appointment</p>
                 </a>
               </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class=""></i>
-              <p>
-                Contact form Data
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('admin.contact_data')}}" class="nav-link">
+                <a href="{{route('admin.treatment_types')}}" class="nav-link">
                   <i class=""></i>
-                  <p>Contact form DATA</p>
+                  <p>Treatment type</p>
                 </a>
               </li>
             </ul>

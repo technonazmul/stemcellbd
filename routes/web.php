@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\Backend\DoctorController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\BackendFormController;
 use App\Http\Controllers\Backend\PageController as BackendPageController;
 use App\Http\Controllers\Frontend\PagesController as FrontendPagesController;
 /*
@@ -41,7 +42,6 @@ Route::post('/contact_form',[FormController::class,'contact_form'])->name('conta
 // Admin route start, will make group and middleware later
 
 // Admin route end
-
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard',[BackendPageController::class,'dashboard'])->name('admin.dashboard');
     // Doctors
@@ -64,6 +64,20 @@ Route::get('/add_product',[BackendPageController::class,'add_product'])->name('a
 
 //eb_form_data
 Route::get('/eb_form_data',[BackendPageController::class,'eb_form_data'])->name('admin.eb_form_data');
+//contact us form data
 Route::get('/contact_data',[BackendPageController::class,'contact_data'])->name('admin.contact_data');
+//appoitment data
+Route::get('/appointment_data',[BackendPageController::class,'appointment_data'])->name('admin.appointment');
+
+// treatment categorty
+Route::get('/treatment_types',[BackendFormController::class,'treatment_types'])->name('admin.treatment_types');
+Route::post('/add_treatmen_types',[BackendFormController::class,'add_treatmen_types'])->name('admin.add_treatmen_types');
+Route::get('/edit_treatment_types/{id}',[BackendFormController::class,'edit_treatment_types'])->name('admin.edit_treatment_types');
+Route::post('/update_treatmen_types/{id}',[BackendFormController::class,'update_treatmen_types'])->name('admin.update_treatmen_types');
+//Appoinment
+Route::post('/take_appointment',[BackendFormController::class,'take_appointment'])->name('admin.take_appointment');
+Route::get('/edit_appointment/{id}',[BackendFormController::class,'edit_appointment'])->name('admin.edit_appointment');
+Route::post('/update_appointment/{id}',[BackendFormController::class,'update_appointment'])->name('admin.update_appointment');
+Route::post('/delete_appointment/{id}',[BackendFormController::class,'delete_appointment'])->name('admin.delete_appointment');
 
 });
