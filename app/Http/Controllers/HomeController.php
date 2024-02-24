@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Treatment_type;
 class HomeController extends Controller
 {
 
     function index(){
-        return view('frontend.pages.index');
+        $data=Treatment_type::all();
+        return view('frontend.pages.index',compact('data'));
     }
     function service(){
         return view('frontend.pages.service');
