@@ -122,7 +122,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('admin.product')}}" class="nav-link">
+                <a href="{{route('admin.categories')}}" class="nav-link">
                   <i class=""></i>
                   <p>All Categories</p>
                 </a>
