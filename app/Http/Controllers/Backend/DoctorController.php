@@ -20,6 +20,7 @@ class DoctorController extends Controller
     $doctor->Specialization = $request->input('Specialization');
     $doctor->chamber = $request->input('chamber');
     $doctor->responsibility = $request->input('responsibility');
+    $doctor->experience = $request->input('experience');
     $doctor->facebook = $request->input('facebook');
     $doctor->instagram = $request->input('instagram');
     $doctor->telegram = $request->input('telegram');
@@ -62,6 +63,7 @@ class DoctorController extends Controller
     $doctor->Specialization = $request->input('Specialization');
     $doctor->chamber = $request->input('chamber');
     $doctor->responsibility = $request->input('responsibility');
+    $doctor->experience = $request->input('experience');
     $doctor->facebook = $request->input('facebook');
     $doctor->instagram = $request->input('instagram');
     $doctor->telegram = $request->input('telegram');

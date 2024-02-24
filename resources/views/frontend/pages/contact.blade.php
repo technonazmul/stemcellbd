@@ -99,57 +99,45 @@
                         Unde veritatis magnam porro, temporibus perferendis eum.
                     </p>
                 </div>
+                {{-- message --}}
+                <div class="col-md-7 my-2 mx-auto">
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+                    @if(session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                </div>
                 <div class="section__wrapper">
                     <div class="contactform__area">
-                        <form action="#" id="contact-form" method="POST">
+                        <form action="{{route('contact_form')}}" id="contact-form" method="post">
+                            @csrf
                             <div class="row g-3">
                                 <div class="col-sm-6 col-12">
-                                    <input
-                                        type="text"
-                                        placeholder="Your Name*"
-                                        name="name"
-                                        id="name"
-                                        required
-                                    />
+                                    <input type="text" placeholder="Your Name*" name="name" id="name" required />
                                 </div>
                                 <div class="col-sm-6 col-12">
-                                    <input
-                                        type="text"
-                                        placeholder="Your Company"
-                                        name="company"
-                                        id="company"
-                                    />
+                                    <input type="text" placeholder="Your Company" name="company" id="company" />
                                 </div>
                                 <div class="col-sm-6 col-12">
-                                    <input
-                                        type="email"
-                                        placeholder="Email*"
-                                        name="email"
-                                        id="email"
-                                        required
-                                    />
+                                    <input type="email" placeholder="Email*" name="email" id="email" required />
                                 </div>
                                 <div class="col-sm-6 col-12">
-                                    <input
-                                        type="text"
-                                        placeholder="Subject"
-                                        name="subject"
-                                        id="subject"
-                                    />
+                                    <input type="text" placeholder="Subject" name="subject" id="subject" />
                                 </div>
                                 <div class="col-12">
-                                    <textarea
-                                        name="massage"
-                                        id="massage"
-                                        rows="5"
-                                        placeholder="Massage*"
-                                        required
-                                    ></textarea>
+                                    <textarea name="message" id="message" rows="5" placeholder="Message*" required></textarea>
                                 </div>
                                 <div class="col-12 text-center">
-                                    <button type="submit" class="lab-btn">
-                                        send your massage
-                                    </button>
+                                    <button type="submit" class="lab-btn">Send Your Message</button>
                                 </div>
                             </div>
                         </form>

@@ -158,6 +158,29 @@
               </li>
             </ul>
           </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class=""></i>
+              <p>
+                Appointment
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('admin.appointment')}}" class="nav-link">
+                  <i class=""></i>
+                  <p>Appointment</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('admin.treatment_types')}}" class="nav-link">
+                  <i class=""></i>
+                  <p>Treatment type</p>
+                </a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
