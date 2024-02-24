@@ -1,13 +1,15 @@
 @extends('backend.dashboard')
 @section("extra_css")
 <link rel="stylesheet" href="{{asset("backend/vendor/drug-drop-image-upload/image-uploader.css")}}">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 @endsection
 @section('content')
 <div class="container">
     <div class="row ">
         <div class="col-md-12 mx-auto">
+           
             <h2>Add New Category</h2>
-            <form action="">
+            <form action="{{route('save_category')}}" method="POST">
                 @csrf
                 <div class="card">
                     <div class="card-body">
@@ -19,11 +21,17 @@
                             <label for="parent_category">Parent Category</label>
                             
                             <select class="form-control" id="parent_category" name="parent_category">
-                              <option>1</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
-                              <option>5</option>
+                                @php 
+                                $categories = App\Models\Category::where('parent_id', null)->get();
+                                @endphp
+                                <option value="null">Select Parent ID</option>
+                                @foreach( $categories as $category )
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @foreach(App\Models\Category::where('parent_id', $category->id)->get() as $subcategory)
+                                <option value="{{ $subcategory->id }}">&nbsp; - {{ $subcategory->name }}</option>
+                                @endforeach
+                                @endforeach
+                              
                             </select>
                           </div>
                         <div class="mt-2">
@@ -37,3 +45,15 @@
     </div>
 </div>
 @endsection
+@if(Session::has("success"))
+@section("extra_script")
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script>
+    $( document ).ready(function() {
+    var message = "{{Session::get('success')}} ";
+    toastr.success(message);
+});
+</script>
+
+@endsection
+  @endif

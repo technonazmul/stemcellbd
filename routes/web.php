@@ -57,8 +57,9 @@ Route::prefix('admin')->group(function () {
 Route::get('/blog',[BackendPageController::class,'blog'])->name('admin.blog');
 Route::get('/add_blog',[BackendPageController::class,'add_blog'])->name('add_blog');
 //Category CRUD
-Route::get('/categories',[BackendPageController::class,'categories'])->name('admin.categories');
+Route::get('/categories',[CategoryController::class,'categories'])->name('admin.categories');
 Route::get('/categoryadd',[CategoryController::class,'add_category'])->name('add_category');
+Route::post('/categorysave',[CategoryController::class,'save_category'])->name('save_category');
 
 //Products
 Route::get('/product',[BackendPageController::class,'product'])->name('admin.product');
