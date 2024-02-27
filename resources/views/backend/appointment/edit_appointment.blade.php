@@ -25,19 +25,19 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Name</label>
-                            <input name="name" value="{{$data->name}}" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Name">
+                            <input name="name" value="{{$data->name}}" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Name" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Phone</label>
-                            <input name="phone" value="{{$data->phone}}" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Phone">
+                            <input name="phone" value="{{$data->phone}}" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Phone"required>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Email</label>
-                            <input name="email" value="{{$data->email}}" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Email">
+                            <input name="email" value="{{$data->email}}" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Email"required>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Gender</label>
-                            <select class="form-control" id="exampleFormControlSelect1" name="gender">
+                            <select class="form-control" id="exampleFormControlSelect1" name="gender"required>
                                 <option value="{{$data->gender}}" selected>{{$data->gender}}</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
@@ -46,7 +46,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Treatment Type</label>
-                            <select class="form-control" id="exampleFormControlSelect1" name="treatment_types">
+                            <select class="form-control" id="exampleFormControlSelect1" name="treatment_types"required>
                                 <option name="treatment_types" value="{{$data->treatment_types}}" secleted> {{$data->treatment_types}}</option>
                                 @foreach($data_2 as $data_2)
                                 <option name="treatment_types" value="{{$data_2->title}}">{{$data_2->title}}</option>
@@ -59,15 +59,15 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Message</label>
-                            <input name="message" value="{{$data->message}}" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Message">
+                            <input name="message" value="{{$data->message}}" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Message" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Status</label>
-                            <input name="status" value="{{$data->status}}" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Status">
+                            <input name="status" value="{{$data->status}}" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Status" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Note</label>
-                            <input name="notes" value="{{$data->notes}}" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Note">
+                            <input name="notes" value="{{$data->notes}}" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Note" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Update</button>
                     </div>
