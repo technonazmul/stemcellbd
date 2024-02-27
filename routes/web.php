@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\DoctorController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\BackendFormController;
@@ -32,6 +33,7 @@ Route::get('/service',[HomeController::class,'service'])->name('service');
 Route::get('/doctors',[FrontendPagesController::class,'doctors'])->name('doctors');
 Route::get('/single_doctor/{id}',[FrontendPagesController::class,'single_doctor'])->name('single_doctor');
 Route::get('/blog',[HomeController::class,'blog'])->name('blog');
+Route::get('/single_blog',[FrontendPagesController::class,'single_blog'])->name('single_blog');
 Route::get('/shop',[HomeController::class,'shop'])->name('shop');
 Route::get('/contact',[HomeController::class,'contact'])->name('contact');
 Route::get('/eb_registration',[HomeController::class,'eb_registration'])->name('eb_registration');
@@ -51,9 +53,15 @@ Route::prefix('admin')->group(function () {
     Route::get('/edit_doctor/{id}',[DoctorController::class,'edit_doctor'])->name('admin.edit_doctor');
     Route::post('/update_doctor/{id}',[DoctorController::class,'update_doctor'])->name('admin.update_doctor');
     Route::get('/delete_doctor/{id}',[DoctorController::class,'delete_doctor'])->name('admin.delete_doctor');
-//Blogs
+
+//Blogs start
 Route::get('/blog',[BackendPageController::class,'blog'])->name('admin.blog');
 Route::get('/add_blog',[BackendPageController::class,'add_blog'])->name('add_blog');
+Route::get('/blog_category',[BlogController::class,'blog_category'])->name('blog_category');
+
+//blog end
+
+
 //Category CRUD
 Route::get('/categories',[BackendPageController::class,'categories'])->name('admin.categories');
 Route::get('/categoryadd',[CategoryController::class,'add_category'])->name('add_category');
