@@ -674,7 +674,7 @@
                                     <input name="phone" type="text" placeholder="Phone Number" required>
                                 </div>
                                 <div class="col-12">
-                                    <input name="email" type="email" placeholder="email address">
+                                    <input name="email" type="email" placeholder="email address" required>
                                 </div>
                                 <div class="col-md-6 col-12">
                                     <select name="gender" required>
@@ -697,7 +697,7 @@
                                     </select>
                                 </div>
                                 <div class="col-12">
-                                    <textarea name="message" rows="4" placeholder="Message"></textarea>
+                                    <textarea name="message" rows="4" placeholder="Message" required></textarea>
                                 </div>
                             </div>
                             <button type="submit" class="lab-btn">take an appointment</button>
@@ -754,14 +754,3 @@
     </div>
     <!-- ==========contact Section Ends Here========== -->
 @endsection
-{{-- <script>
-    function validateDate() {
-      var inputDate = document.getElementById('datepicker').value;
-      var currentDate = new Date().toISOString().split('T')[0]; // Get current date in YYYY-MM-DD format
-      
-      if (inputDate < currentDate) {
-        alert('Please select a date equal to or after today.');
-        document.getElementById('datepicker').value = currentDate; // Reset input value to current date
-      }
-    }
-</script> --}}

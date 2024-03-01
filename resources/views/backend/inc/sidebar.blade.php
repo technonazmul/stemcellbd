@@ -110,6 +110,12 @@
                   <p>Add Blog</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{route('blog_category')}}" class="nav-link">
+                  <i class=""></i>
+                  <p>Blog Category</p>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="nav-item">
