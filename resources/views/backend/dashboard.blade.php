@@ -154,7 +154,7 @@
   </nav>
   <!-- /.navbar -->
 
-  @include('backend.b_pages.sidebar')
+  @include('backend.inc.sidebar')
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">

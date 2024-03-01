@@ -24,6 +24,7 @@ class PageController extends Controller
     function add_blog(){
         return view('backend.blog.add_blog');
      }
+ 
      function categories(){
         return view('backend.category.index');
    }
