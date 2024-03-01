@@ -57,7 +57,12 @@ Route::prefix('admin')->group(function () {
 //Blogs start
 Route::get('/blog',[BackendPageController::class,'blog'])->name('admin.blog');
 Route::get('/add_blog',[BackendPageController::class,'add_blog'])->name('add_blog');
+Route::post('/create_blog',[BlogController::class,'create_blog'])->name('admin.create_blog');
+//blog category
 Route::get('/blog_category',[BlogController::class,'blog_category'])->name('blog_category');
+Route::post('/add_blog_category',[BlogController::class,'add_blog_category'])->name('admin.add_blog_category');
+Route::get('/edit_blog_category/{id}',[BlogController::class,'edit_blog_category'])->name('admin.edit_blog_category');
+Route::post('/update_blog_category/{id}',[BlogController::class,'update_blog_category'])->name('admin.update_blog_category');
 
 //blog end
 
