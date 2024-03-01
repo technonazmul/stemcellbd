@@ -18,12 +18,13 @@
     <div class="row">
         <div class="col-md-4">
             <h3>Add Blog Category</h3>
-            <form method="POST" action="">
+            <form method="POST" action="{{route('admin.add_blog_category')}}">
                 @csrf
                 <div class="form-group">
                     <label for="title">Title</label>
-                    <input type="text" class="form-control" id="title" name="title" placeholder="Enter title"required>
+                    <input type="text" class="form-control" id="title" name="name" placeholder="Enter name"required>
                 </div>
+                <div></div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
@@ -33,19 +34,24 @@
             <thead>
                 <tr>
                     <th>Si.No</th>
-                    <th>Title</th>
+                    <th>Name</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 @php $i=0 @endphp
+                @php
+                $blog_categories = App\Models\BlogCategory::get();
+                @endphp
+                @foreach ($blog_categories as $blog_categories)
                 <tr>
                     @php $i++@endphp
                     <td> @php echo $i @endphp </td>
-                    <td></td>
-                    <td><a href=""><button type="button" class="btn btn-warning">Edit</button></a></td>
+                    <td>{{$blog_categories->name}}</td>
+                    <td><a href="{{route('admin.edit_blog_category',$blog_categories->id)}}"><button type="button" class="btn btn-warning">Edit</button></a></td>
                     <td> <a href=""><button class="btn btn-sm btn-danger">Delate</button></a></td>
                 </tr>
+                @endforeach
             </tbody>
         </table>                
     </div>
