@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\BlogCategory;
 use App\Models\Blog;
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -13,17 +14,31 @@ class BlogController extends Controller
         $validated = $request->validate([
             'title' => 'required|unique:blogs|max:255'
         ]);
-        $title = $request->title;
-        //$slug = Str::slug($title, '-');
+        if(Auth::check()) {
+            $user_id=Auth::user()->id;
+        }else {
+            $user_id=null;
+        }
         $blog= new Blog();
-        //$blog->slag = $slag;
-        $tags = $request->input('tags');
 
-        $blog->title = $request->input('title');
-        $blog->title = $request->input('title');
-        $blog->title = $request->input('title');
-        print_r($tags );
-        //return redirect()->back()->with('success','blog Create successfully');
+        $blog->title=$request->input('title');
+        $slug = Str::slug($request->input('title'), '-');
+        $blog->slug =$slug;
+        $blog->tags =$request->input('tags');
+        $blog->user_id =$user_id;
+        $blog->meta_title=$request->input('meta_title');
+        $blog->meta_description=$request->input('meta_description');
+        $blog->description=$request->input('description');
+        $blog->blog_category_id=$request->input('blog_category_id');
+        
+        if($request->hasFile('thumbnail')){
+        $thumbnail=$request->file('thumbnail');
+        $newFileName= time() . '.' . $thumbnail->getClientOriginalExtension();
+        $path = $thumbnail->storeAs('public/blog',$newFileName); // Store in the storage directory
+        $blog->thumbnail= $newFileName; // Save the image path to the database    
+        }
+        $blog->save();
+        return redirect()->back()->with('success','blog Create successfully');
     }
 
 
