@@ -24,12 +24,19 @@ class BlogController extends Controller
         $blog->title=$request->input('title');
         $slug = Str::slug($request->input('title'), '-');
         $blog->slug =$slug;
-        $blog->tags =$request->input('tags');
+
+        
+        // Decode the JSON string into an array
+        $tags = json_decode($request->input('tags'), true);
+
+        // Extract the 'value' from each item and join them with commas
+        $tags_as_string = collect($tags)->pluck('value')->implode(',');
+        $blog->tags =$tags_as_string;
         $blog->user_id =$user_id;
         $blog->meta_title=$request->input('meta_title');
         $blog->meta_description=$request->input('meta_description');
         $blog->description=$request->input('description');
-        $blog->blog_category_id=$request->input('blog_category_id');
+        $blog->blog_category_id=$request->blog_category_id;
         
         if($request->hasFile('thumbnail')){
         $thumbnail=$request->file('thumbnail');

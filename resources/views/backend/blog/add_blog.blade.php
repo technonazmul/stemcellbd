@@ -2,7 +2,7 @@
 @section("extra_css")
 <link rel="stylesheet" href="{{asset("backend/vendor/drug-drop-image-upload/image-uploader.css")}}">
 <link rel="stylesheet" href="{{asset("backend/libs/css/tagify.css")}}">
-@endsectiondrug
+@endsection
 @section('content')
 <div class="container">
     <div class="row ">
@@ -36,8 +36,8 @@
                         </div>
                         <div class="mt-2">
                             <label for="exampleFormControlInput1" class="form-label">Description</label>
-                            <textarea name="description" class="summernote" >
-                                Place <em>some</em> <u>text</u> <strong>here</strong>
+                            <textarea name="description" class="summernote"  >
+                               
                               </textarea>
                         </div>
                         <div class="mt-2">
@@ -46,23 +46,23 @@
                         </div>
                         <div class="mt-2">
                             <label class="form-label" for="exampleFormControlInput1">Blog Category</label>
-                            <select name="blog_category_id" class="form-control" id="exampleFormControlSelect1">
-                                <option>Select Blog Category</option>
+                            <select name="blog_category_id" class="form-control" id="exampleFormControlSelect1" required>
+                                <option value="1">Select Blog Category</option>
                                 @php
                                 $blog_category= App\Models\BlogCategory::get();
                                 @endphp
                                 @foreach($blog_category as $blog_category)
-                                <option name="blog_category_id" value="{{$blog_category->id}}">{{$blog_category->name}}</option>
+                                <option value="{{$blog_category->id}}">{{$blog_category->name}}</option>
                                 @endforeach
                             </select>
                         </div>
                           <div class="mt-2">
                             <label for="exampleFormControlInput1" class="form-label">Meta Title</label>
-                            <input name="meta_title" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Meta Title" required>
+                            <input name="meta_title" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Meta Title">
                           </div>
                           <div class="mt-2">
                             <label for="exampleFormControlInput1" class="form-label">Meta Description</label>
-                            <input name="meta_description" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Meta Description" required>
+                            <input name="meta_description" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Meta Description">
                           </div>
                         <div class="form-group mt-2">
                             <input type="submit" class="btn btn-success" value="Save Blog" id="submit">
@@ -81,7 +81,9 @@
 
 <script>
     $(document).ready(function() {
-  $('.summernote').summernote();
+  $('.summernote').summernote({
+    height: 250,   //set editable area's height
+  });
   //script for tags
 // Vanilla JavaScript
 var input = document.querySelector('input[name=tags]'),
