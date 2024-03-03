@@ -7,8 +7,22 @@
 <div class="container">
     <div class="row ">
         <div class="col-md-12 mx-auto">
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+            @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
             <h2>Add Blog</h2>
-            <form method="post" action="{{route('admin.create_blog')}}">
+            <form method="post" action="{{route('admin.create_blog')}}" enctype="multipart/form-data">
                 @csrf
                 <div class="card">
                     <div class="card-body">
@@ -27,27 +41,31 @@
                               </textarea>
                         </div>
                         <div class="mt-2">
-                            <label>Images</label>
-                            <div class="input-images"></div>
-                        </div>
-                        <div class="mt-2">
                             <label for="exampleFormControlInput1" class="form-label">Tags</label>
                             <input name="tags" placeholder="" value="">
                         </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1">Blog Category</label>
-                            <select class="form-control" id="exampleFormControlSelect1" required>
-                              <option>Select Category</option>
-                              @php 
-                              $blog_category=App\Models\BlogCategory::get();
-                              @endphp
-                              @foreach($blog_category as $blog_category)
-                              <option value="{{$blog_category->id}}" name="blog_category_id">{{$blog_category->name}}</option>
-                              @endforeach
+                        <div class="mt-2">
+                            <label class="form-label" for="exampleFormControlInput1">Blog Category</label>
+                            <select name="blog_category_id" class="form-control" id="exampleFormControlSelect1">
+                                <option>Select Blog Category</option>
+                                @php
+                                $blog_category= App\Models\BlogCategory::get();
+                                @endphp
+                                @foreach($blog_category as $blog_category)
+                                <option name="blog_category_id" value="{{$blog_category->id}}">{{$blog_category->name}}</option>
+                                @endforeach
                             </select>
+                        </div>
+                          <div class="mt-2">
+                            <label for="exampleFormControlInput1" class="form-label">Meta Title</label>
+                            <input name="meta_title" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Meta Title" required>
                           </div>
-                        <div class="form-group">
-                            <input type="submit" class="btn btn-success" value="Save Product" id="submit">
+                          <div class="mt-2">
+                            <label for="exampleFormControlInput1" class="form-label">Meta Description</label>
+                            <input name="meta_description" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Meta Description" required>
+                          </div>
+                        <div class="form-group mt-2">
+                            <input type="submit" class="btn btn-success" value="Save Blog" id="submit">
                         </div>
         
                     </div>

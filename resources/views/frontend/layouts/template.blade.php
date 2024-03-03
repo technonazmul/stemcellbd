@@ -48,7 +48,7 @@
                                 <ul>
                                     <li><a href="{{route('login')}}">Login</a></li>
                                     <li>/</li>
-                                    <li><a href="signup.html">Register</a></li>
+                                    <li><a href="{{route('register')}}"">Register</a></li>
                                 </ul>
                             </div>
                             <div class="langauge">
