@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Blog;
 use App\Models\Form;
 use App\Models\Contact;
 use App\Models\Appointment;
@@ -19,9 +20,11 @@ class PageController extends Controller
         return view('backend.doctor.add_doctor');
      }
      function blog(){
-        return view('backend.blog.blog');
+        $blog= Blog::all();
+        return view('backend.blog.blog',compact('blog'));
     }
     function add_blog(){
+        
         return view('backend.blog.add_blog');
      }
  

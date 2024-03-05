@@ -90,7 +90,7 @@ class DoctorController extends Controller
     // Redirect back with a success message
     return redirect()->route('admin.doctor')->with('success', 'Doctor updated successfully!');
     }
-
+//delete doctor
     public function delete_doctor($id) {
         // Find the doctor by ID
         $doctor = Doctor::find($id);
