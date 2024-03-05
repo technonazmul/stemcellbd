@@ -58,6 +58,9 @@ Route::prefix('admin')->group(function () {
 Route::get('/blog',[BackendPageController::class,'blog'])->name('admin.blog');
 Route::get('/add_blog',[BackendPageController::class,'add_blog'])->name('add_blog');
 Route::post('/create_blog',[BlogController::class,'create_blog'])->name('admin.create_blog');
+Route::get('/edit_blog/{id}',[BlogController::class,'edit_blog'])->name('admin.edit_blog');
+Route::post('/update_blog/{id}',[BlogController::class,'update_blog'])->name('admin.update_blog');
+Route::get('/delete_blog/{id}',[BlogController::class,'delete_blog'])->name('admin.delete_blog');
 //blog category
 Route::get('/blog_category',[BlogController::class,'blog_category'])->name('blog_category');
 Route::post('/add_blog_category',[BlogController::class,'add_blog_category'])->name('admin.add_blog_category');
@@ -92,6 +95,6 @@ Route::post('/update_treatmen_types/{id}',[BackendFormController::class,'update_
 Route::post('/take_appointment',[BackendFormController::class,'take_appointment'])->name('admin.take_appointment');
 Route::get('/edit_appointment/{id}',[BackendFormController::class,'edit_appointment'])->name('admin.edit_appointment');
 Route::post('/update_appointment/{id}',[BackendFormController::class,'update_appointment'])->name('admin.update_appointment');
-Route::post('/delete_appointment/{id}',[BackendFormController::class,'delete_appointment'])->name('admin.delete_appointment');
+Route::get('/delete_appointment/{id}',[BackendFormController::class,'delete_appointment'])->name('admin.delete_appointment');
 
 });
