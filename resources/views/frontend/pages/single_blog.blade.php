@@ -28,30 +28,21 @@
                             <div class="col-12">
                                 <div class="blog__item">
                                     <div class="blog__thumb">
-                                        <img src="{{asset('frontend/assets/images/blog/01.jpg')}}" alt="webcodeltd">
+                                        <img src="{{asset('storage/blog/'.$single_blog->thumbnail)}}" alt="webcodeltd" style="max-width: auto; height:500px;">
                                     </div>
                                     <div class="blog__content">
-                                        <h4>Take best qualitytreatment for Ultimate Wellness</h4>
+                                        <h4>{{$single_blog->title}}</h4>
                                         <ul>
-                                            <li><i class="fa-solid fa-calendar"></i> 08 October 2023</li>
-                                            <li><i class="fa-regular fa-folder"></i> Beautification</li>
+                                            @php
+                                            $date = date('Y-m-d', strtotime($single_blog->created_at));
+                                            @endphp
+                                            <li><i class="fa-solid fa-calendar"></i>@php echo $date @endphp</li>
+                                            <li><i class="fa-regular fa-folder"></i>{{$single_blog->blog_category->name}} </li>
                                         </ul>
-                                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus tenetur nulla quas assumenda ipsum odio tempore itaque incidunt eveniet quia mollitia deserunt dolorum culpa magnam cumque provident, sunt ipsa! Dolore commodi quas repellat impedit magnam ipsa, quo cum culpa alias vitae odit quia facere et iure repellendus, obcaecati ipsum facilis.</p>
-                                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus tenetur nulla quas assumenda ipsum odio tempore itaque incidunt eveniet quia mollitia deserunt dolorum culpa magnam cumque provident, sunt ipsa! Dolore commodi quas repellat impedit magnam ipsa, quo cum culpa alias vitae odit quia facere et iure repellendus, obcaecati ipsum facilis.</p>
-
-                                        <img src="{{asset('frontend/assets/images/blog/01')}}" alt="webcodeltd">
-
-                                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus tenetur nulla quas assumenda ipsum odio tempore itaque incidunt eveniet quia mollitia deserunt dolorum culpa magnam cumque provident, sunt ipsa! Dolore commodi quas repellat impedit magnam ipsa, quo cum culpa alias vitae odit quia facere et iure repellendus, obcaecati ipsum facilis.</p>
-                                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus tenetur nulla quas assumenda ipsum odio tempore itaque incidunt eveniet quia mollitia deserunt dolorum culpa magnam cumque provident, sunt ipsa! Dolore commodi quas repellat impedit magnam ipsa, quo cum culpa alias vitae odit quia facere et iure repellendus, obcaecati ipsum facilis.</p>
-
+                                       <p>{{$single_blog->description}} </p>
+                                        {{-- <img src="{{asset('storage/blog/'.$single_blog->thumbnail)}}" alt="webcodeltd"> --}}
                                         <video src="{{asset('frontend/assets/video/02.mp4')}}" muted="" loop="" autoplay=""></video>
-
-                                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus tenetur nulla quas assumenda ipsum odio tempore itaque incidunt eveniet quia mollitia deserunt dolorum culpa magnam cumque provident, sunt ipsa! Dolore commodi quas repellat impedit magnam ipsa, quo cum culpa alias vitae odit quia facere et iure repellendus, obcaecati ipsum facilis.</p>
-                                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus tenetur nulla quas assumenda ipsum odio tempore itaque incidunt eveniet quia mollitia deserunt dolorum culpa magnam cumque provident, sunt ipsa! Dolore commodi quas repellat impedit magnam ipsa, quo cum culpa alias vitae odit quia facere et iure repellendus, obcaecati ipsum facilis.</p>
-
                                         <iframe src="https://www.youtube.com/embed/S-CvC4BAIIo?si=69QFYU0dSBNLim8k" frameborder="0" allowfullscreen></iframe>
-
-                                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus tenetur nulla quas assumenda ipsum odio tempore itaque incidunt eveniet quia mollitia deserunt dolorum culpa magnam cumque provident, sunt ipsa! Dolore commodi quas repellat impedit magnam ipsa, quo cum culpa alias vitae odit quia facere et iure repellendus, obcaecati ipsum facilis.</p>
                                     </div>
                                 </div>
 
@@ -88,11 +79,20 @@
                                 </div>
 
                                 <div class="blog__comment">
+                                    @php
+                                    $total_comment=App\Models\Comment::where('status','1')->where('blog_post_id',$single_blog->id)->count();
+                                    @endphp
                                     <div class="head">
-                                        <h6>3 Replies to “Tips for Achieving Success”</h6>
+                                        <h6>@php echo $total_comment; @endphp Replies to “Tips for Achieving Success”</h6>
                                     </div>
+
                                     <div class="body">
                                         <ul>
+                                                @php
+                                                $show_comment=App\Models\Comment::where('status','1')->where('blog_post_id',$single_blog->id)->get();
+                                                $total_comment=App\Models\Comment::where('status','1')->count();
+                                                @endphp
+                                                @foreach($show_comment->take(2) as $comment)
                                             <li>
                                                 <div class="thumb">
                                                     <img src="{{asset('frontend/assets/images/team/01..jpg')}}" alt="webcode">
@@ -100,67 +100,122 @@
                                                 <div class="content">
                                                     <div class="content__top">
                                                         <div class="name">
-                                                            <h6><a href="team-single.html">Dr. Arlene McCoy</a></h6>
-                                                            <span>24 March 2023 , at 02:00 pm</span>
+                                                            <h6><a href="team-single.html">{{$comment->name}}</a></h6>
+                                                            @php
+                                                                $comment_date = date('j F Y, \a\t h:i a',strtotime($comment->created_at));
+                                                            @endphp
+                                                            <span>@php echo $comment_date; @endphp</span>
                                                         </div>
-                                                        <div class="reply"><a href="#">reply</a></div>
                                                     </div>
                                                     <div class="content__bottom">
-                                                        <p>Sedut perspicati und omnis istesre natu error sitilei voluptatem accusantium doloremque laudantium totam rem aperiam eaque</p>
+                                                        <p>{{$comment->comment}}</p>
+                                                    </div>
+                                                    {{-- reply comment --}}
+                                                    <a class="border border-warning reply p-1 rounded-1" data-bs-toggle="collapse" href="#collapseExample{{$comment->id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                        Reply
+                                                    </a>
+                                                    <div class="collapse mt-2" id="collapseExample{{$comment->id}}">
+                                                        <div class="card card-body blog__commentForm">
+                                                            <form method="post" action="{{route('admin.reply_comment')}}">
+                                                                @csrf
+                                                                <input type="hidden" name="parent_id" value="{{$comment->id}}" id="" >
+                                                                <input type="hidden" name="blog_post_id" value="{{$single_blog->id}}" id="" >
+                                                                <input name="name" type="text" placeholder="Your Name" required>
+                                                                <input name="email" type="email" placeholder="Your Email" required>
+                                                                <input name="phone" type="text" placeholder="Phone Number"required>
+                                                                <input name="subject" type="text" placeholder="Subject"required>
+                                                                <textarea name="comment" cols="30" rows="5" placeholder="Enter Your Message" required></textarea>
+                                                                <button type="submit" class="lab-btn">Reply comments</button>
+                                                            </form>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <ul>
+                                            </li><br>
+                                            @endforeach
+                                              @if($comment->count() > 2)
+                                                <button class="btn btn-outline-info" id="showMoreComments">Show more comments</button>
+                                                <div id="hiddenComments" style="display: none;">
+                                                    @php
+                                                        $show_comment = App\Models\Comment::where('status', '1')
+                                                                                            ->where('blog_post_id', $single_blog->id)
+                                                                                            ->where('parent_id','0')
+                                                                                            ->get();
+                                                    @endphp
+                                                    @foreach($show_comment->skip(2) as $comment)
                                                     <li>
                                                         <div class="thumb">
-                                                            <img src="{{asset('frontend/assets/images/team/02.jpg')}}" alt="webcode">
+                                                            <img src="{{asset('frontend/assets/images/team/01..jpg')}}" alt="webcode">
                                                         </div>
                                                         <div class="content">
                                                             <div class="content__top">
                                                                 <div class="name">
-                                                                    <h6>Dr. william Watson</h6>
-                                                                    <span>23 March 2023 , at 02:00 pm</span>
+                                                                    <h6><a href="team-single.html">{{$comment->name}}</a></h6>
+                                                                    @php
+                                                                        $comment_date = date('j F Y, \a\t h:i a',strtotime($comment->created_at));
+                                                                    @endphp
+                                                                    <span>@php echo $comment_date; @endphp</span>
                                                                 </div>
-                                                                <div class="reply"><a href="#">reply</a></div>
+                                                                
                                                             </div>
                                                             <div class="content__bottom">
-                                                                <p>Sedut perspicatis unde omnis istesre natus error sitilei voluptatem in accusantium doloremque laudantium totam rem aperiam eaque</p>
+                                                                <p>{{$comment->comment}}</p>
+                                                            </div>
+                                                            {{-- reply commett --}}
+                                                            <a class="border border-warning reply reply p-1 rounded-1" data-bs-toggle="collapse" href="#collapseExample{{$comment->id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                                Reply
+                                                            </a>
+                                                            hi
+                                                            <div class="collapse mt-2" id="collapseExample{{$comment->id}}">
+                                                                <div class="card card-body blog__commentForm">
+                                                                 <form method="post" action="{{route('admin.add_comment')}}">
+                                                                    @csrf
+                                                                    <input type="hidden" name="blog_post_id" value="{{$single_blog->id}}" id="" >
+                                                                    <input name="name" type="text" placeholder="Your Name" required>
+                                                                    <input name="email" type="email" placeholder="Your Email" required>
+                                                                    <input name="phone" type="text" placeholder="Phone Number"required>
+                                                                    <input name="subject" type="text" placeholder="Subject"required>
+                                                                    <textarea name="comment" cols="30" rows="5" placeholder="Enter Your Message" required></textarea>
+                                                                    <button type="submit" class="lab-btn">Reply comments</button>
+                                                                </form>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{{asset('frontend/assets/images/team/03.jpg')}}" alt="webcode">
+                                                    </li><br>
+                                                    @endforeach
                                                 </div>
-                                                <div class="content">
-                                                    <div class="content__top">
-                                                        <div class="name">
-                                                            <h6>Dr. Umme Nishat</h6>
-                                                            <span>26 March 2023 , at 02:00 pm</span>
-                                                        </div>
-                                                        <div class="reply"><a href="#">reply</a></div>
-                                                    </div>
-                                                    <div class="content__bottom">
-                                                        <p>Sedut perspicati und omnis istesre natu error sitilei voluptatem accusantium doloremque laudantium totam rem aperiam eaque</p>
-                                                    </div>
-                                                </div>
-                                            </li>
+                                                @else
+                                                <h2>no comment found</h2>
+                                             @endif
                                         </ul>
                                     </div>
                                 </div>
-
+                                @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                @endif
+                                @if(session('success'))
+                                    <div class="alert alert-success">
+                                        {{ session('success') }}
+                                    </div>
+                                @endif
                                 <div class="blog__commentForm">
                                     <div class="head">
                                         <h6>Leave A Comment</h6>
                                     </div>
                                     <div class="body">
-                                        <form action="#">
-                                            <input type="text" placeholder="Your Name">
-                                            <input type="email" placeholder="Your Email">
-                                            <input type="text" placeholder="Phone Number">
-                                            <input type="text" placeholder="Subject">
-                                            <textarea cols="30" rows="5" placeholder="Enter Your Message"></textarea>
+                                        <form method="post" action="{{route('admin.add_comment')}}">
+                                            @csrf
+                                            <input type="hidden" name="blog_post_id" value="{{$single_blog->id}}" id="" >
+                                            <input name="name" type="text" placeholder="Your Name" required>
+                                            <input name="email" type="email" placeholder="Your Email" required>
+                                            <input name="phone" type="text" placeholder="Phone Number"required>
+                                            <input name="subject" type="text" placeholder="Subject"required>
+                                            <textarea name="comment" cols="30" rows="5" placeholder="Enter Your Message" required></textarea>
                                             <button type="submit" class="lab-btn">post comments</button>
                                         </form>
                                     </div>
@@ -214,6 +269,9 @@
                                                 <div class="col-12">
                                                     <select required>
                                                         <option name="" value="">Need Appointment for</option>
+                                                        @php
+                                                        $data=App\Models\Treatment_type::get();
+                                                        @endphp
                                                         @foreach($data as $data)
                                                         <option name="treatment_type" value="{{$data->title}}">{{$data->title}}</option>
                                                         @endforeach
@@ -329,4 +387,16 @@
         </div>
     </div>
     <!-- ==========Blog Section Ends Here========== -->
+    {{-- show more comment --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#showMoreComments').click(function(){
+                $('#hiddenComments').toggle();
+                $(this).text(function(i, text){
+                    return text === "Show more comments" ? "Hide comments" : "Show more comments";
+                });
+            });
+        });
+    </script>
 @endsection

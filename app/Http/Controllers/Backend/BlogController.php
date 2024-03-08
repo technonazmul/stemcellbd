@@ -42,7 +42,7 @@ class BlogController extends Controller
         if($request->hasFile('thumbnail')){
         $thumbnail=$request->file('thumbnail');
         $newFileName= time() . '.' . $thumbnail->getClientOriginalExtension();
-        $path = $thumbnail->storeAs('public/blog/',$newFileName); // Store in the storage directory
+        $path = $thumbnail->storeAs('public/blog',$newFileName); // Store in the storage directory
         $blog->thumbnail= $newFileName; // Save the image path to the database    
         }
         $blog->save();
