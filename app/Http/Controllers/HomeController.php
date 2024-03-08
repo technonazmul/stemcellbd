@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Treatment_type;
+use App\Models\Blog;
 class HomeController extends Controller
 {
 
@@ -27,7 +28,8 @@ class HomeController extends Controller
         return view('frontend.pages.doctors');
     }
     function blog(){
-        return view('frontend.pages.blog');
+        $blog= Blog::all();
+        return view('frontend.pages.blog',compact('blog'));
     }
     function shop(){
         return view('frontend.pages.shop');

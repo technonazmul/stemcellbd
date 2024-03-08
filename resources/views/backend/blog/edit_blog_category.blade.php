@@ -20,7 +20,6 @@
             <h3>Edit Blog Category</h3>
             <form method="post" action="{{route('admin.update_blog_category',$blog_category->id)}}">
                 @csrf
-                {{-- <input type="hidden" name="" id=""> --}}
                 <div class="form-group">
                     <label for="title">Title</label>
                     <input type="text" class="form-control" id="title" name="name" value="{{$blog_category->name}}" placeholder="Enter name"required>
