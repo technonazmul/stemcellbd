@@ -9,13 +9,13 @@
         <div class="col-md-12 mx-auto">
            
             <h2>Edit Category</h2>
-            <form action="{{route('save_category')}}" method="POST">
+            <form action="{{route('update_product_category',$editcategory->id)}}" method="POST">
                 @csrf
                 <div class="card">
                     <div class="card-body">
                         <div class="mt-2">
                             <label for="name" class="form-label">Name</label>
-                            <input type="text" value="{{$editcategory->name}}" class="form-control" id="name" name="name">
+                            <input type="text" value="{{$editcategory->name}}" class="form-control" id="name" name="name" required>
                         </div>
                         <div class="form-group">
                             <label for="parent_category">Parent Category</label>

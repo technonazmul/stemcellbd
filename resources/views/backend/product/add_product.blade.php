@@ -12,52 +12,58 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="mt-2">
-                            <label for="exampleFormControlInput1" class="form-label">Title</label>
-                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Title">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" placeholder="Product Name" name="name" required>
                         </div>
                         <div class="mt-2">
-                            <label for="exampleFormControlInput1" class="form-label">Description</label>
-                            <textarea class="summernote">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="summernote" id="description" name="description" required>
                                
                               </textarea>
                         </div>
                         <div class="mt-2">
-                            <label for="exampleFormControlInput1" class="form-label">Specification</label>
-                            <textarea class="summernote">
+                            <label for="specification" class="form-label">Specification</label>
+                            <textarea class="summernote" id="specification" name="specification">
                                 
                               </textarea>
                         </div>
                         <div class="mt-2">
-                            <label for="exampleFormControlInput1" class="form-label">Price</label>
-                            <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Price" min=0>
+                            <label for="price" class="form-label">Price</label>
+                            <input type="number" class="form-control" id="price" min=1 required>
                         </div>
                         <div class="mt-2">
-                            <label for="exampleFormControlInput1" class="form-label">Offer Price</label>
-                            <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Price" min=0>
+                            <label for="offer_price" class="form-label">Offer Price</label>
+                            <input type="number" class="form-control" id="offer_price" min=1 name="offer_price" required>
                         </div>
                         <div class="mt-2">
-                            <label for="exampleFormControlInput1" class="form-label">Quantity</label>
-                            <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Price" min=0>
+                            <label for="quantity" class="form-label">Quantity</label>
+                            <input type="number" class="form-control" id="quantity" name="quantity"  placeholder="Price" min=1 required>
                         </div>
                         <div class="mt-2">
                             <label>Images</label>
                             <div class="input-images"></div>
                         </div>
                         <div class="mt-2">
-                            <label for="exampleFormControlInput1" class="form-label">SKU/ Product Code</label>
-                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+                            <label for="sku" class="form-label">SKU/ Product Code</label>
+                            <input type="text" class="form-control" id="sku" placeholder="" name="sku">
                         </div>
                         <div class="form-group">
-                            <label for="exampleFormControlSelect1">Example select</label>
-                            <select class="form-control" id="exampleFormControlSelect1">
-                              <option>1</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
-                              <option>5</option>
+                            <label for="exampleFormControlSelect1">Category</label>
+                            <select class="form-control" id="category" name="category">
+                                @php 
+                                $categories = App\Models\Category::where('parent_id', 0)->get();
+                                @endphp
+                                <option>Select Category</option>
+                                @foreach( $categories as $category )
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @foreach(App\Models\Category::where('parent_id', $category->id)->get() as $subcategory)
+                                <option value="{{ $subcategory->id }}">&nbsp; - {{ $subcategory->name }}</option>
+                                @endforeach
+                                @endforeach
+                              
                             </select>
                           </div>
-                        <div class="field_wrapper">
+                        {{-- <div class="field_wrapper">
                             <div class="form-group col-md-8" style="padding-left: 0">
                                 <label>Add Attribute</label><br>
                                 <label style="font-size: 13px;">Title (Ex Color)</label>
@@ -67,7 +73,7 @@
                                 <textarea name="attribute_option[]" class="form-control" placeholder="Attribute option must need to separate by ,"></textarea><br>
                                 <a href="javascript:void(0);" class="add_button btn btn-success" title="Add field">Add More</a>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="form-group">
                             <input type="submit" class="btn btn-success" value="Save Product" id="submit">
                         </div>
