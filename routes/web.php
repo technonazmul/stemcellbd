@@ -80,6 +80,7 @@ Route::get('/categories',[CategoryController::class,'categories'])->name('admin.
 Route::get('/categoryadd',[CategoryController::class,'add_category'])->name('add_category');
 Route::get('/categoryedit/{id}',[CategoryController::class,'edit_category'])->name('edit_category');
 Route::post('/categorysave',[CategoryController::class,'save_category'])->name('save_category');
+Route::post('/categoryedit/{id}',[CategoryController::class,'update_product_category'])->name('update_product_category');
 //End Products
 
 //eb_form_data

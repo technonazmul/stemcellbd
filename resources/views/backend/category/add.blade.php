@@ -15,7 +15,7 @@
                     <div class="card-body">
                         <div class="mt-2">
                             <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="name" name="name">
+                            <input type="text" class="form-control" id="name" name="name" required>
                         </div>
                         <div class="form-group">
                             <label for="parent_category">Parent Category</label>
