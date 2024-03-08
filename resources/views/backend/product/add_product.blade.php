@@ -18,13 +18,13 @@
                         <div class="mt-2">
                             <label for="exampleFormControlInput1" class="form-label">Description</label>
                             <textarea class="summernote">
-                                Place <em>some</em> <u>text</u> <strong>here</strong>
+                               
                               </textarea>
                         </div>
                         <div class="mt-2">
                             <label for="exampleFormControlInput1" class="form-label">Specification</label>
                             <textarea class="summernote">
-                                Place <em>some</em> <u>text</u> <strong>here</strong>
+                                
                               </textarea>
                         </div>
                         <div class="mt-2">
@@ -84,7 +84,9 @@
 
 <script>
     $(document).ready(function() {
-  $('.summernote').summernote();
+  $('.summernote').summernote({
+    height: 150
+  });
 });
 $('.input-images').imageUploader();
 $(document).ready(function(){

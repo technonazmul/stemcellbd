@@ -70,14 +70,17 @@ Route::post('/update_blog_category/{id}',[BlogController::class,'update_blog_cat
 //blog end
 
 
-//Category CRUD
-Route::get('/categories',[CategoryController::class,'categories'])->name('admin.categories');
-Route::get('/categoryadd',[CategoryController::class,'add_category'])->name('add_category');
-Route::post('/categorysave',[CategoryController::class,'save_category'])->name('save_category');
+
 
 //Products
 Route::get('/product',[BackendPageController::class,'product'])->name('admin.product');
 Route::get('/add_product',[BackendPageController::class,'add_product'])->name('add_product');
+// Products Category CRUD
+Route::get('/categories',[CategoryController::class,'categories'])->name('admin.categories');
+Route::get('/categoryadd',[CategoryController::class,'add_category'])->name('add_category');
+Route::get('/categoryedit/{id}',[CategoryController::class,'edit_category'])->name('edit_category');
+Route::post('/categorysave',[CategoryController::class,'save_category'])->name('save_category');
+//End Products
 
 //eb_form_data
 Route::get('/eb_form_data',[BackendPageController::class,'eb_form_data'])->name('admin.eb_form_data');
