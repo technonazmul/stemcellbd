@@ -8,14 +8,14 @@
     <div class="row ">
         <div class="col-md-12 mx-auto">
            
-            <h2>Add New Category</h2>
+            <h2>Edit Category</h2>
             <form action="{{route('save_category')}}" method="POST">
                 @csrf
                 <div class="card">
                     <div class="card-body">
                         <div class="mt-2">
                             <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="name" name="name">
+                            <input type="text" value="{{$editcategory->name}}" class="form-control" id="name" name="name">
                         </div>
                         <div class="form-group">
                             <label for="parent_category">Parent Category</label>
@@ -24,11 +24,11 @@
                                 @php 
                                 $categories = App\Models\Category::where('parent_id', 0)->get();
                                 @endphp
-                                <option value="0">Select Parent ID</option>
+                                <option value="0" @if($editcategory->id == 0) selected @endif >Select Parent ID</option>
                                 @foreach( $categories as $category )
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                                 @foreach(App\Models\Category::where('parent_id', $category->id)->get() as $subcategory)
-                                <option value="{{ $subcategory->id }}">&nbsp; - {{ $subcategory->name }}</option>
+                                <option value="{{ $subcategory->id }}" @if($editcategory->id == $subcategory->id) selected @endif>&nbsp; - {{ $subcategory->name }}</option>
                                 @endforeach
                                 @endforeach
                               
