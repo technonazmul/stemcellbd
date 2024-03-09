@@ -7,7 +7,7 @@
     <div class="row ">
         <div class="col-md-12 mx-auto">
             <h2>Add Products</h2>
-            <form action="">
+            <form action="{{route('save_product')}}" method="POST" enctype="multipart/form-data" >
                 @csrf
                 <div class="card">
                     <div class="card-body">
@@ -29,7 +29,7 @@
                         </div>
                         <div class="mt-2">
                             <label for="price" class="form-label">Price</label>
-                            <input type="number" class="form-control" id="price" min=1 required>
+                            <input type="number" class="form-control" id="price" min=1 required name="price">
                         </div>
                         <div class="mt-2">
                             <label for="offer_price" class="form-label">Offer Price</label>
@@ -37,7 +37,7 @@
                         </div>
                         <div class="mt-2">
                             <label for="quantity" class="form-label">Quantity</label>
-                            <input type="number" class="form-control" id="quantity" name="quantity"  placeholder="Price" min=1 required>
+                            <input type="number" class="form-control" id="quantity" name="quantity"  min=1 required>
                         </div>
                         <div class="mt-2">
                             <label>Images</label>
