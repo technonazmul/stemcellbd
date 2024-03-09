@@ -116,6 +116,12 @@
                   <p>Blog Category</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{route('admin.blog_comment')}}" class="nav-link">
+                  <i class=""></i>
+                  <p>Blog Comment</p>
+                </a>
+              </li>
             </ul>
           </li>
           

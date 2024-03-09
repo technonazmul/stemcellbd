@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Treatment_type;
+use App\Models\Blog;
 use App\Models\Doctor;
 
 class PagesController extends Controller
@@ -18,8 +19,8 @@ class PagesController extends Controller
         return view('frontend.pages.single_doctor',compact('doctor'));
     }
 
-    function single_blog(){
-        $data=Treatment_type::all();
-        return view('frontend.pages.single_blog',compact('data'));
+    public function single_blog($id){
+        $single_blog=Blog::find($id);
+        return view('frontend.pages.single_blog',compact('single_blog'));
      }
 }

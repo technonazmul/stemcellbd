@@ -20,20 +20,25 @@
         <div class="container">
             <div class="section__wrapper">
                 <div class="row g-4 justify-content-center">
-                    <div class="col-lg-4 col-sm-6 col-12">
-                        <div class="blog__item">
-                            <div class="blog__thumb">
-                                <a href="{{route('single_blog')}}"><img src="{{asset('frontend/assets/images/blog/01.jpg')}}" alt="webcodeltd"></a>
-                            </div>
-                            <div class="blog__content">
-                                <h4><a href="{{route('single_blog')}}">Take best qualitytreatment for Ultimate Wellness</a></h4>
-                                <ul>
-                                    <li><i class="fa-solid fa-calendar"></i> 08 October 2023</li>
-                                    <li><i class="fa-regular fa-folder"></i> Beautification</li>
-                                </ul>
+                    @foreach($blog as $blog)
+                        <div class="col-lg-4 col-sm-6 col-12">
+                            <div class="blog__item">
+                                <div class="blog__thumb">
+                                    <a href="{{route('single_blog',$blog->id)}}"><img src="{{asset('storage/blog/'.$blog->thumbnail)}}" alt="webcodeltd" style="max-width: auto; height:400px;"></a>
+                                </div>
+                                <div class="blog__content">
+                                    <h4><a href="{{route('single_blog',$blog->id)}}">{{$blog->title}} </a></h4>
+                                    <ul>
+                                        @php
+                                            $date = date('F j,Y', strtotime($blog->created_at));
+                                        @endphp
+                                        <li><i class="fa-solid fa-calendar"></i>@php echo $date @endphp</li>
+                                        <li><i class="fa-regular fa-folder"></i>{{$blog->blog_category->name}}</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endforeach
                 </div>
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center mt-5">
