@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\BackendFormController;
 use App\Http\Controllers\Backend\PageController as BackendPageController;
 use App\Http\Controllers\Frontend\PagesController as FrontendPagesController;
+use App\Http\Controllers\Backend\ProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -75,6 +76,7 @@ Route::post('/update_blog_category/{id}',[BlogController::class,'update_blog_cat
 //Products
 Route::get('/product',[BackendPageController::class,'product'])->name('admin.product');
 Route::get('/add_product',[BackendPageController::class,'add_product'])->name('add_product');
+Route::post('/save_product',[ProductController::class,'save_product'])->name('save_product');
 // Products Category CRUD
 Route::get('/categories',[CategoryController::class,'categories'])->name('admin.categories');
 Route::get('/categoryadd',[CategoryController::class,'add_category'])->name('add_category');
