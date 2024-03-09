@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\Backend\BlogController;
+use App\Http\Controllers\Backend\CommentController;
 use App\Http\Controllers\Backend\DoctorController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\BackendFormController;
@@ -34,7 +35,7 @@ Route::get('/service',[HomeController::class,'service'])->name('service');
 Route::get('/doctors',[FrontendPagesController::class,'doctors'])->name('doctors');
 Route::get('/single_doctor/{id}',[FrontendPagesController::class,'single_doctor'])->name('single_doctor');
 Route::get('/blog',[HomeController::class,'blog'])->name('blog');
-Route::get('/single_blog',[FrontendPagesController::class,'single_blog'])->name('single_blog');
+Route::get('/single_blog/{id}',[FrontendPagesController::class,'single_blog'])->name('single_blog');
 Route::get('/shop',[HomeController::class,'shop'])->name('shop');
 Route::get('/contact',[HomeController::class,'contact'])->name('contact');
 Route::get('/eb_registration',[HomeController::class,'eb_registration'])->name('eb_registration');
@@ -67,7 +68,12 @@ Route::get('/blog_category',[BlogController::class,'blog_category'])->name('blog
 Route::post('/add_blog_category',[BlogController::class,'add_blog_category'])->name('admin.add_blog_category');
 Route::get('/edit_blog_category/{id}',[BlogController::class,'edit_blog_category'])->name('admin.edit_blog_category');
 Route::post('/update_blog_category/{id}',[BlogController::class,'update_blog_category'])->name('admin.update_blog_category');
-
+//blog comments
+Route::post('/add_comment',[CommentController::class,'add_comment'])->name('admin.add_comment');
+Route::get('/blog_comment',[CommentController::class,'blog_comment'])->name('admin.blog_comment');
+Route::get('/aprouve_comment/{id}',[CommentController::class,'aprouve_comment'])->name('admin.aprouve_comment');
+Route::get('/delete_comment/{id}',[CommentController::class,'delete_comment'])->name('admin.delete_comment');
+Route::post('/reply_comment',[CommentController::class,'reply_comment'])->name('admin.reply_comment');
 //blog end
 
 
