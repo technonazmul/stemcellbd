@@ -119,7 +119,7 @@
                                                         Reply
                                                     </a>
                                                     <a class="border border-info reply p-1 rounded-1" data-bs-toggle="collapse" href="#collapseExample1{{$comment->id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                                       Total @php echo $total_reply; @endphp Reply
+                                                        @php echo $total_reply; @endphp Reply
                                                     </a>
                                                     {{-- reply comment form --}}
                                                     <div class="collapse mt-2" id="collapseExample{{$comment->id}}">
@@ -139,9 +139,16 @@
                                                     </div>
                                                     {{-- show reply --}}
                                                     <div class="collapse mt-2" id="collapseExample1{{$comment->id}}">
+
                                                         <div class="card card-body blog__commentForm">
-                                                            hi
+                                                            @php 
+                                                            $reply=App\Models\Comment::where('parent_id',$comment->id)->where('status','1')->where('parent_id', '!=', '0')->get();
+                                                            @endphp
+                                                            @foreach($reply as $reply)
+                                                            {{$reply->name}}
+                                                            @endforeach
                                                         </div>
+                                                        
                                                     </div>
                                                 </div>
                                             </li><br>
@@ -150,12 +157,14 @@
                                                 <button class="btn btn-outline-info" id="showMoreComments">Show more comments</button>
                                                 <div id="hiddenComments" style="display: none;">
                                                     @php
-                                                        $show_comment = App\Models\Comment::where('status', '1')
-                                                                                            ->where('blog_post_id', $single_blog->id)
-                                                                                            ->where('parent_id','0')
-                                                                                            ->get();
+                                                    $show_comment=App\Models\Comment::where('status','1')->where('blog_post_id',$single_blog->id)->where('parent_id','0')->get();
+                                                    $show_reply=App\Models\Comment::where('status','1')->where('blog_post_id',$single_blog->id)->where('parent_id', '!=', '0')->get();
+                                                    $total_comment=App\Models\Comment::where('status','1')->count();
                                                     @endphp
                                                     @foreach($show_comment->skip(2) as $comment)
+                                                    @php 
+                                                    $total_reply=App\Models\Comment::where('status','1')->where('parent_id', '!=', '0')->where('parent_id',$comment->id)->count();
+                                                    @endphp
                                                     <li>
                                                         <div class="thumb">
                                                             <img src="{{asset('frontend/assets/images/team/01..jpg')}}" alt="webcode">
@@ -180,12 +189,12 @@
                                                             </a>
                                                             {{-- show reply --}}
                                                             <a class="border border-info reply reply p-1 rounded-1" data-bs-toggle="collapse" href="#collapseExample1{{$comment->id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                                               Total Reply
+                                                               @php echo $total_reply @endphp Reply
                                                             </a>
                                                             {{-- reply comment --}}
                                                             <div class="collapse mt-2" id="collapseExample{{$comment->id}}">
                                                                 <div class="card card-body blog__commentForm">
-                                                                 <form method="post" action="{{route('admin.add_comment')}}">
+                                                                 <form method="post" action="{{route('admin.reply_comment')}}">
                                                                     @csrf
                                                                     <input type="hidden" name="parent_id" value="{{$comment->id}}" id="" >
                                                                     <input type="hidden" name="blog_post_id" value="{{$single_blog->id}}" id="" >
@@ -201,15 +210,30 @@
                                                             {{-- show reply comment --}}
                                                             <div class="collapse mt-2" id="collapseExample1{{$comment->id}}">
                                                                 <div class="card card-body blog__commentForm">
-                                                                 reply
+                                                                    @php 
+                                                                    $reply=App\Models\Comment::where('parent_id',$comment->id)->where('status','1')->where('parent_id', '!=', '0')->get();
+                                                                    @endphp
+                                                                    @foreach($reply as $reply)
+                                                                        <div class="name">
+                                                                            <h6><a href="team-single.html">{{$reply->name}}</a></h6>
+                                                                            @php
+                                                                                $reply_date = date('j F Y, \a\t h:i a',strtotime($reply->created_at));
+                                                                            @endphp
+                                                                            <span>@php echo $reply_date; @endphp</span>
+                                                                        </div>
+                                                                            <div class="content__bottom">
+                                                                                <p>{{$reply->comment}}</p>
+                                                                            </div>
+                                                                        </div>
+                                                            </div>
+                                                                        
+                                                                    @endforeach
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </li><br>
                                                     @endforeach
                                                 </div>
-                                                @else
-                                                <h2>no comment found</h2>
                                              @endif
                                         </ul>
                                     </div>
