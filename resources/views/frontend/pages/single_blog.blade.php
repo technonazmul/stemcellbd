@@ -80,7 +80,7 @@
 
                                 <div class="blog__comment">
                                     @php
-                                    $total_comment=App\Models\Comment::where('status','1')->where('blog_post_id',$single_blog->id)->count();
+                                    $total_comment=App\Models\Comment::where('status','1')->where('blog_post_id',$single_blog->id)->where('parent_id','0')->count();
                                     @endphp
                                     <div class="head">
                                         <h6>@php echo $total_comment; @endphp Replies to “Tips for Achieving Success”</h6>
@@ -89,10 +89,14 @@
                                     <div class="body">
                                         <ul>
                                                 @php
-                                                $show_comment=App\Models\Comment::where('status','1')->where('blog_post_id',$single_blog->id)->get();
+                                                $show_comment=App\Models\Comment::where('status','1')->where('blog_post_id',$single_blog->id)->where('parent_id','0')->get();
+                                                $show_reply=App\Models\Comment::where('status','1')->where('blog_post_id',$single_blog->id)->where('parent_id', '!=', '0')->get();
                                                 $total_comment=App\Models\Comment::where('status','1')->count();
                                                 @endphp
                                                 @foreach($show_comment->take(2) as $comment)
+                                                @php 
+                                                $total_reply=App\Models\Comment::where('status','1')->where('parent_id', '!=', '0')->where('parent_id',$comment->id)->count();
+                                                @endphp
                                             <li>
                                                 <div class="thumb">
                                                     <img src="{{asset('frontend/assets/images/team/01..jpg')}}" alt="webcode">
@@ -111,9 +115,13 @@
                                                         <p>{{$comment->comment}}</p>
                                                     </div>
                                                     {{-- reply comment --}}
-                                                    <a class="border border-warning reply p-1 rounded-1" data-bs-toggle="collapse" href="#collapseExample{{$comment->id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                    <a class="border border-warning reply p-1 rounded-1 mx-1" data-bs-toggle="collapse" href="#collapseExample{{$comment->id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
                                                         Reply
                                                     </a>
+                                                    <a class="border border-info reply p-1 rounded-1" data-bs-toggle="collapse" href="#collapseExample1{{$comment->id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                       Total @php echo $total_reply; @endphp Reply
+                                                    </a>
+                                                    {{-- reply comment form --}}
                                                     <div class="collapse mt-2" id="collapseExample{{$comment->id}}">
                                                         <div class="card card-body blog__commentForm">
                                                             <form method="post" action="{{route('admin.reply_comment')}}">
@@ -127,6 +135,12 @@
                                                                 <textarea name="comment" cols="30" rows="5" placeholder="Enter Your Message" required></textarea>
                                                                 <button type="submit" class="lab-btn">Reply comments</button>
                                                             </form>
+                                                        </div>
+                                                    </div>
+                                                    {{-- show reply --}}
+                                                    <div class="collapse mt-2" id="collapseExample1{{$comment->id}}">
+                                                        <div class="card card-body blog__commentForm">
+                                                            hi
                                                         </div>
                                                     </div>
                                                 </div>
@@ -161,14 +175,19 @@
                                                                 <p>{{$comment->comment}}</p>
                                                             </div>
                                                             {{-- reply commett --}}
-                                                            <a class="border border-warning reply reply p-1 rounded-1" data-bs-toggle="collapse" href="#collapseExample{{$comment->id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                            <a class="border border-warning reply reply p-1 mx-1 rounded-1" data-bs-toggle="collapse" href="#collapseExample{{$comment->id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
                                                                 Reply
                                                             </a>
-                                                            hi
+                                                            {{-- show reply --}}
+                                                            <a class="border border-info reply reply p-1 rounded-1" data-bs-toggle="collapse" href="#collapseExample1{{$comment->id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                               Total Reply
+                                                            </a>
+                                                            {{-- reply comment --}}
                                                             <div class="collapse mt-2" id="collapseExample{{$comment->id}}">
                                                                 <div class="card card-body blog__commentForm">
                                                                  <form method="post" action="{{route('admin.add_comment')}}">
                                                                     @csrf
+                                                                    <input type="hidden" name="parent_id" value="{{$comment->id}}" id="" >
                                                                     <input type="hidden" name="blog_post_id" value="{{$single_blog->id}}" id="" >
                                                                     <input name="name" type="text" placeholder="Your Name" required>
                                                                     <input name="email" type="email" placeholder="Your Email" required>
@@ -177,6 +196,12 @@
                                                                     <textarea name="comment" cols="30" rows="5" placeholder="Enter Your Message" required></textarea>
                                                                     <button type="submit" class="lab-btn">Reply comments</button>
                                                                 </form>
+                                                                </div>
+                                                            </div>
+                                                            {{-- show reply comment --}}
+                                                            <div class="collapse mt-2" id="collapseExample1{{$comment->id}}">
+                                                                <div class="card card-body blog__commentForm">
+                                                                 reply
                                                                 </div>
                                                             </div>
                                                         </div>
