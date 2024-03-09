@@ -99,7 +99,8 @@
                                                 @endphp
                                             <li>
                                                 <div class="thumb">
-                                                    <img src="{{asset('frontend/assets/images/team/01..jpg')}}" alt="webcode">
+                                                    {{-- <img src="{{asset('frontend/assets/images/team/01..jpg')}}" alt="webcode"> --}}
+                                                    <i class="icofont-ui-user" style="font-size: 60px;"></i>
                                                 </div>
                                                 <div class="content">
                                                     <div class="content__top">
@@ -146,7 +147,7 @@
                                                 </div>
                                             </li><br>
                                             @endforeach
-                                              @if($comment->count() > 2)
+                                              @if($show_comment->count() >= 1)
                                                 <button class="btn btn-outline-info" id="showMoreComments">Show more comments</button>
                                                 <div id="hiddenComments" style="display: none;">
                                                     @php

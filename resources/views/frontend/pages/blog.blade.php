@@ -20,6 +20,7 @@
         <div class="container">
             <div class="section__wrapper">
                 <div class="row g-4 justify-content-center">
+                    @if(!empty($blog))
                     @foreach($blog as $blog)
                         <div class="col-lg-4 col-sm-6 col-12">
                             <div class="blog__item">
@@ -39,6 +40,7 @@
                             </div>
                         </div>
                     @endforeach
+                    @endif
                 </div>
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center mt-5">
