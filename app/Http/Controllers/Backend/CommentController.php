@@ -30,7 +30,7 @@ class CommentController extends Controller
 
     //blog comment
     public function blog_comment(){
-        $blog_comment= Comment::all();
+        $blog_comment= Comment::orderBy('created_at', 'desc')->get();
         return view('backend.blog.blog_comment',compact('blog_comment'));
     }
     //aprouve_comment 
@@ -66,7 +66,7 @@ class CommentController extends Controller
         $reply_comment->comment =$request->input('comment');
         $reply_comment->blog_post_id=$request->input('blog_post_id');
         $reply_comment->save();
-        return redirect()->back()->with('success', 'Reply on Comment succesfull');
+        return redirect()->back()->with('success', 'Reply on Comment succesfull. The comment will be published once it is approved.');
 
     }
 }

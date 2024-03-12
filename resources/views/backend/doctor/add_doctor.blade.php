@@ -80,7 +80,15 @@
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label">About</label>
-                            <textarea name="about" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            <textarea name="about" class="form-control @section('extra_script')
+                            <script>
+                                 $(document).ready(function() {
+                              $('.summernote').summernote({
+                                height: 150
+                              });
+                            });
+                            </script>
+                            @endsection" id="exampleFormControlTextarea1" rows="3"></textarea>
                         </div>
                       <button class="btn btn-lg btn-primary"> Add Doctor</button>
                   </div>
@@ -89,4 +97,13 @@
       </div>
     </form>
 </div>
+@endsection
+@section('extra_script')
+<script>
+     $(document).ready(function() {
+  $('.summernote').summernote({
+    height: 150
+  });
+});
+</script>
 @endsection

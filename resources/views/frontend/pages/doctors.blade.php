@@ -24,7 +24,7 @@
                     <div class="col-xl-3 col-lg-4 col-sm-6 col-12">
                         <div class="team__item">
                             <div class="team__thumb">
-                                <img src="{{asset('storage/doctors/'.$doctor->image)}}" alt="webcodeltd">
+                                <img src="{{asset('storage/doctors/'.$doctor->image)}}" alt="webcodeltd" style="height:400px"  >
                             </div>
                             <div class="team__content">
                                 <h6><a href="{{route('single_doctor',$doctor->id)}}">{{$doctor->name}}</a></h6>

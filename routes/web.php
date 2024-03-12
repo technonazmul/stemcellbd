@@ -40,12 +40,12 @@ Route::get('/shop',[HomeController::class,'shop'])->name('shop');
 Route::get('/contact',[HomeController::class,'contact'])->name('contact');
 Route::get('/eb_registration',[HomeController::class,'eb_registration'])->name('eb_registration');
 
-
 Route::post('/eb_form_submit',[FormController::class,'eb_form_submit'])->name('eb_form_submit');
 Route::post('/contact_form',[FormController::class,'contact_form'])->name('contact_form');
+
 // Admin route start, will make group and middleware later
 
-// Admin route end
+// Admin route end   middleware(['auth'])->
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard',[BackendPageController::class,'dashboard'])->name('admin.dashboard');
     // Doctors
@@ -75,9 +75,6 @@ Route::get('/aprouve_comment/{id}',[CommentController::class,'aprouve_comment'])
 Route::get('/delete_comment/{id}',[CommentController::class,'delete_comment'])->name('admin.delete_comment');
 Route::post('/reply_comment',[CommentController::class,'reply_comment'])->name('admin.reply_comment');
 //blog end
-
-
-
 
 //Products
 Route::get('/product',[BackendPageController::class,'product'])->name('admin.product');
