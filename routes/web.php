@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\FormController;
+use App\Http\Controllers\Frontend\FormController;
 use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\CommentController;
 use App\Http\Controllers\Backend\DoctorController;
@@ -44,7 +44,6 @@ Route::post('/eb_form_submit',[FormController::class,'eb_form_submit'])->name('e
 Route::post('/contact_form',[FormController::class,'contact_form'])->name('contact_form');
 
 // Admin route start, will make group and middleware later
-
 // Admin route end   middleware(['auth'])->
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard',[BackendPageController::class,'dashboard'])->name('admin.dashboard');
@@ -74,6 +73,7 @@ Route::get('/blog_comment',[CommentController::class,'blog_comment'])->name('adm
 Route::get('/aprouve_comment/{id}',[CommentController::class,'aprouve_comment'])->name('admin.aprouve_comment');
 Route::get('/delete_comment/{id}',[CommentController::class,'delete_comment'])->name('admin.delete_comment');
 Route::post('/reply_comment',[CommentController::class,'reply_comment'])->name('admin.reply_comment');
+Route::get('/show_reply',[CommentController::class,'show_reply'])->name('admin.show_reply');
 //blog end
 
 //Products

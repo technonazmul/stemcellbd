@@ -195,6 +195,52 @@
               </li>
             </ul>
           </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class=""></i>
+              <p>
+                Contact us
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('admin.contact_data')}}" class="nav-link">
+                  <i class=""></i>
+                  <p>Contact Form Data</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="" class="nav-link">
+                  <i class=""></i>
+                  <p>extra</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class=""></i>
+              <p>
+                Early Bird Registration
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('admin.eb_form_data')}}" class="nav-link">
+                  <i class=""></i>
+                  <p>E.B Form Data</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="" class="nav-link">
+                  <i class=""></i>
+                  <p>E</p>
+                </a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

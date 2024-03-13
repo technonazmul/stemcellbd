@@ -1,6 +1,6 @@
 <?php
 namespace App\Http\Controllers\Frontend;
-namespace App\Http\Controllers;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Form;
@@ -61,36 +61,5 @@ class FormController extends Controller
         $data->message = $request->input('message');
         $data->save();
         return redirect()->back()->with('success','Message send Successfull');
-    }
-
-
-    //appointment
-    public function take_appointment(Request $request)
-    {
-       // Validate the incoming request data
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'phone' => 'nullable|string|max:20',
-            'email' => 'nullable|email',
-            'gender' => 'nullable|in:male,female,other',
-            'date' => 'nullable|date',
-            'appointment_for' => 'required|string|max:255',
-            'message' => 'nullable|string',
-        ]);
-
-        // Create a new appointment instance
-        $appointment = new Appointment();
-        $appointment->name = $request->name;
-        $appointment->phone = $request->phone;
-        $appointment->email = $request->email;
-        $appointment->gender = $request->gender;
-        $appointment->date = $request->date;
-        $appointment->treatment_types = $request->treatment_types;
-        $appointment->message = $request->message;
-
-        // Save the appointment
-        $appointment->save();
-        // Optionally, you can return a response indicating success or redirect to another page
-        return redirect()->back()->with('success', 'Appointment has been scheduled successfully!');
     }
 }
