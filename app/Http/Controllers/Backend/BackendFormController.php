@@ -80,7 +80,7 @@ class BackendFormController extends Controller
     $appointment->status = $request->input('status');
     $appointment->notes = $request->input('notes');
     $appointment->save();
-    return redirect()->back()->with('success', 'Appointment updated successfully');
+    return redirect()->route('admin.appointment')->with('success', 'Appointment updated successfully');
 }
 
 

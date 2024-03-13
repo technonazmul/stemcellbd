@@ -61,7 +61,7 @@ class BlogController extends Controller
         if(Auth::check()) {
             $user_id=Auth::user()->id;
         }else {
-            $user_id=null;
+            $user_id='1';
         }
         $blog->title=$request->input('title');
         $slug = Str::slug($request->input('title'), '-');
