@@ -16,13 +16,13 @@ class HomeController extends Controller
         return view('frontend.pages.service');
     }
     function stemcell(){
-        return view('frontend.pages.stemcell');
+        return view('frontend.pages.service.stemcell');
     }
     function cosmetic(){
-        return view('frontend.pages.cosmetic');
+        return view('frontend.pages.service.cosmetic');
     }
     function training(){
-        return view('frontend.pages.training');
+        return view('frontend.pages.service.training');
     }
     function doctors(){
         return view('frontend.pages.doctors');
