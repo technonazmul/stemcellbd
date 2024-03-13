@@ -70,10 +70,10 @@ Route::post('/update_blog_category/{id}',[BlogController::class,'update_blog_cat
 //blog comments
 Route::post('/add_comment',[CommentController::class,'add_comment'])->name('admin.add_comment');
 Route::get('/blog_comment',[CommentController::class,'blog_comment'])->name('admin.blog_comment');
-Route::get('/aprouve_comment/{id}',[CommentController::class,'aprouve_comment'])->name('admin.aprouve_comment');
+Route::get('/approve_comment/{id}',[CommentController::class,'approve_comment'])->name('admin.approve_comment');
 Route::get('/delete_comment/{id}',[CommentController::class,'delete_comment'])->name('admin.delete_comment');
 Route::post('/reply_comment',[CommentController::class,'reply_comment'])->name('admin.reply_comment');
-Route::get('/show_reply',[CommentController::class,'show_reply'])->name('admin.show_reply');
+Route::get('/show_reply/{id}',[CommentController::class,'show_reply'])->name('admin.show_reply');
 //blog end
 
 //Products
