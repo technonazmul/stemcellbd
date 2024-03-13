@@ -33,11 +33,11 @@ class CommentController extends Controller
         $blog_comment= Comment::orderBy('created_at', 'desc')->where('parent_id','0')->get();
         return view('backend.blog.blog_comment',compact('blog_comment'));
     }
-    //aprouve_comment 
-    public function aprouve_comment($id){
-        $aprouve_comment= Comment::find($id);
-        $aprouve_comment->status='1';
-        $aprouve_comment->save();
+    //approve_comment 
+    public function approve_comment($id){
+        $approve_comment= Comment::find($id);
+        $approve_comment->status='1';
+        $approve_comment->save();
         return redirect()->back()->with('success', 'Comment approved');
 
     }
@@ -71,7 +71,7 @@ class CommentController extends Controller
     }
     // show reply in backend
     public function show_reply($id){
-        $show_reply=Comment::find($id);
-        return view('backend.blog.show_reply',compact('show_reply'));
+        $show_comment=Comment::find($id);
+        return view('backend.blog.show_reply',compact('show_comment'));
     }
 }
