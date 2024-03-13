@@ -66,7 +66,7 @@
                     <div class="col-lg-4 col-sm-6 col-12">
                         <div class="service__item">
                             <div class="service__thumb">
-                                <a href="service-single.html">
+                                <a href="">
                                     <img src="{{asset('frontend/assets/images/service/04.jpg')}}" alt="webcodeltd">
                                 </a>
                             </div>
