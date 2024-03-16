@@ -4,40 +4,43 @@
     <div class="pageheader bg-img" style="background-image: url({{asset('frontend/assets/images/bg/04.jpg')}});">
         <div class="container">
             <div class="pageheader__content">
-                <h2>All Team Members</h2>
+                <h2>{{$show_services->name}}</h2>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Team Members</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{$show_services->name}}</li>
                     </ol>
                 </nav>
             </div>
         </div>
     </div>
-    <!-- ==========Page Header Section Ends Here========== --> 
-    <!-- ==========Team Section Start Here========== -->
-    <div class="team padding-tb section-bg" id="team">
+    <!-- ==========Page Header Section Ends Here========== -->
+
+ <!-- ==========Service Section Start Here========== -->
+ <div class="service padding-tb section-bg" id="service">
         <div class="container">
             <div class="section__wrapper">
                 <div class="row g-4 justify-content-center">
-                    @foreach($doctor as $doctor)
-                    <div class="col-xl-3 col-lg-4 col-sm-6 col-12">
-                        <div class="team__item">
-                            <div class="team__thumb">
-                                <img src="{{asset('storage/doctors/'.$doctor->image)}}" alt="webcodeltd" style="height:400px"  >
+                    @php
+                        $services=App\Models\Service::where('service_category_id')get();
+                    @endphp
+                    @foreach($services as $services)
+                    <div class="col-lg-4 col-sm-6 col-12">
+                        <div class="service__item">
+                            <div class="service__thumb">
+                                <a href="service-single.html">
+                                    <img src="{{asset('storage/service/'.$services->thumbnail)}}" alt="webcodeltd">
+                                </a>
                             </div>
-                            <div class="team__content">
-                                <h6><a href="{{route('single_doctor',$doctor->id)}}">{{$doctor->name}}</a></h6>
-                                <span>{{$doctor->specialization}}</span>
-                                <ul>
-                                    <li><a href="#"><i class="fa-regular fa-paper-plane"></i></a></li>
-                                    <li><a href=""><i class="fa-solid fa-phone"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                                </ul>
+                            <div class="service__content">
+                                <h5><a href="service-single.html">{{$services->title}}</a></h5>
+                                <p>{!! $services->description !!}</p>
+                                <a href="service-single.html" class="text-btn">Details<i class="fa-solid fa-angles-right"></i></a>
                             </div>
                         </div>
                     </div>
                     @endforeach
+
                 </div>
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center mt-5">
@@ -58,6 +61,6 @@
                 </nav>
             </div>
         </div>
-    </div>
-    <!-- ==========Team Section Ends Here========== -->
-@endsection 
+</div>
+    <!-- ==========Service Section Ends Here========== -->
+@endsection

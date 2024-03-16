@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\FormController;
+use App\Http\Controllers\Frontend\FormController;
+use App\Http\Controllers\Backend\ServiceController;
 use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\CommentController;
 use App\Http\Controllers\Backend\DoctorController;
@@ -27,11 +28,10 @@ Auth::routes();
 
 Route::get('/',[HomeController::class,'index'])->name('index');
 Route::get('/home', [AuthController::class, 'index'])->name('home');
-Route::get('/service',[HomeController::class,'service'])->name('service');
-Route::get('/stemcell',[HomeController::class,'stemcell'])->name('stemcell');
+Route::get('/service/{id}',[HomeController::class,'service'])->name('service');
+Route::get('/show_services/{id}',[HomeController::class,'show_services'])->name('show_services');
 Route::get('/cosmetic',[HomeController::class,'cosmetic'])->name('cosmetic');
 Route::get('/training',[HomeController::class,'training'])->name('training');
-Route::get('/service',[HomeController::class,'service'])->name('service');
 Route::get('/doctors',[FrontendPagesController::class,'doctors'])->name('doctors');
 Route::get('/single_doctor/{id}',[FrontendPagesController::class,'single_doctor'])->name('single_doctor');
 Route::get('/blog',[HomeController::class,'blog'])->name('blog');
@@ -40,14 +40,22 @@ Route::get('/shop',[HomeController::class,'shop'])->name('shop');
 Route::get('/contact',[HomeController::class,'contact'])->name('contact');
 Route::get('/eb_registration',[HomeController::class,'eb_registration'])->name('eb_registration');
 
-
 Route::post('/eb_form_submit',[FormController::class,'eb_form_submit'])->name('eb_form_submit');
 Route::post('/contact_form',[FormController::class,'contact_form'])->name('contact_form');
-// Admin route start, will make group and middleware later
 
-// Admin route end
+// Admin route start, will make group and middleware later
+// Admin route end   middleware(['auth'])->
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard',[BackendPageController::class,'dashboard'])->name('admin.dashboard');
+    //service category
+    Route::get('/service_category',[ServiceController::class,'service_category'])->name('admin.service_category');
+    Route::post('/add_service_category',[ServiceController::class,'add_service_category'])->name('admin.add_service_category');
+    Route::get('/edit_service_category/{id}',[ServiceController::class,'edit_service_category'])->name('admin.edit_service_category');
+    Route::post('/update_service_category/{id}',[ServiceController::class,'update_service_category'])->name('admin.update_service_category');
+    Route::get('/show_service/{id}',[ServiceController::class,'show_service'])->name('admin.show_service');
+    Route::get('/add_service',[ServiceController::class,'add_service'])->name('admin.add_service');
+    Route::post('/create_service',[ServiceController::class,'create_service'])->name('admin.create_service');
+
     // Doctors
     Route::get('/add_doctor',[BackendPageController::class,'add_doctor'])->name('add_doctor');
     Route::post('/save_doctor',[DoctorController::class,'save_doctor'])->name('save_doctor');
@@ -71,13 +79,11 @@ Route::post('/update_blog_category/{id}',[BlogController::class,'update_blog_cat
 //blog comments
 Route::post('/add_comment',[CommentController::class,'add_comment'])->name('admin.add_comment');
 Route::get('/blog_comment',[CommentController::class,'blog_comment'])->name('admin.blog_comment');
-Route::get('/aprouve_comment/{id}',[CommentController::class,'aprouve_comment'])->name('admin.aprouve_comment');
+Route::get('/approve_comment/{id}',[CommentController::class,'approve_comment'])->name('admin.approve_comment');
 Route::get('/delete_comment/{id}',[CommentController::class,'delete_comment'])->name('admin.delete_comment');
 Route::post('/reply_comment',[CommentController::class,'reply_comment'])->name('admin.reply_comment');
+Route::get('/show_reply/{id}',[CommentController::class,'show_reply'])->name('admin.show_reply');
 //blog end
-
-
-
 
 //Products
 Route::get('/products',[ProductController::class,'show_products'])->name('admin.product');

@@ -1,6 +1,21 @@
 @extends('backend.dashboard')
 @section('content')
 <div class="container">
+    <h2 class="text-center mb-5">Appointments</h2>
+    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                                @endforeach
+                        </ul>
+                    </div>
+                @endif
+                @if(session('success'))
+                    <div class="alert alert-success">
+                    {{ session('success') }}
+                    </div>
+                @endif
     <table id="example" class="display" style="width:100%">
         <thead>
             <tr>
