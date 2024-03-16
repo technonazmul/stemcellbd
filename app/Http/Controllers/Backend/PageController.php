@@ -45,7 +45,7 @@ class PageController extends Controller
     }
     function contact_data(){
         $contact_data= Contact::orderBy('id','desc')->get();
-        return view('backend.contact_form_data',compact('contact_data'));
+        return view('backend.contact.contact_form_data',compact('contact_data'));
     }
     function appointment_data(){
         $appointmet_data= Appointment::orderBy('id','desc')->get();
