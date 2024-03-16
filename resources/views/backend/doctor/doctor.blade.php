@@ -75,7 +75,7 @@
                                 <p>Telegram: {{$doctor->telegram}}</p>
                                 <p>LinkedIn: {{$doctor->linkedin}}</p>
                                 <p>Twitter: {{$doctor->twitter}}</p>
-                                <p>About: {{$doctor->about}}</p>
+                                <p>About: {!!$doctor->about!!}</p>
                             </div>
                         </div>
                         <div class="modal-footer">

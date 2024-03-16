@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Treatment_type;
 use App\Models\Blog;
 use App\Models\ServiceCategory;
+use App\Models\Service;
 class HomeController extends Controller
 {
 
@@ -20,8 +21,9 @@ class HomeController extends Controller
         $show_services=ServiceCategory::find($id);
         return view('frontend.pages.service.show_services',compact('show_services'));
     }
-    function cosmetic(){
-        return view('frontend.pages.service.cosmetic');
+    function single_service($id){
+        $single_service=Service::find($id);
+        return view('frontend.pages.service.single_service',compact('single_service'));
     }
     function training(){
         return view('frontend.pages.service.training');
