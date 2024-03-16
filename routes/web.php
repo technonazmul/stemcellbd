@@ -80,9 +80,10 @@ Route::post('/reply_comment',[CommentController::class,'reply_comment'])->name('
 
 
 //Products
-Route::get('/product',[BackendPageController::class,'product'])->name('admin.product');
+Route::get('/products',[ProductController::class,'show_products'])->name('admin.product');
 Route::get('/add_product',[BackendPageController::class,'add_product'])->name('add_product');
 Route::post('/save_product',[ProductController::class,'save_product'])->name('save_product');
+Route::get('/product_edit/{id}',[ProductController::class,'product_edit'])->name('product_edit');
 // Products Category CRUD
 Route::get('/categories',[CategoryController::class,'categories'])->name('admin.categories');
 Route::get('/categoryadd',[CategoryController::class,'add_category'])->name('add_category');
