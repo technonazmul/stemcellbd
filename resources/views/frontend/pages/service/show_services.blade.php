@@ -21,90 +21,26 @@
         <div class="container">
             <div class="section__wrapper">
                 <div class="row g-4 justify-content-center">
+                    @php
+                        $services=App\Models\Service::where('service_category_id')get();
+                    @endphp
+                    @foreach($services as $services)
                     <div class="col-lg-4 col-sm-6 col-12">
                         <div class="service__item">
                             <div class="service__thumb">
                                 <a href="service-single.html">
-                                    <img src="{{asset('frontend/assets/images/service/01.jpg')}}" alt="webcodeltd">
+                                    <img src="{{asset('storage/service/'.$services->thumbnail)}}" alt="webcodeltd">
                                 </a>
                             </div>
                             <div class="service__content">
-                                <h5><a href="service-single.html">Beautification (Anti-aging)</a></h5>
-                                <p>Get started swiftly and easily importing in demo of professionally designed pre-built website are in concepts to choose from.</p>
+                                <h5><a href="service-single.html">{{$services->title}}</a></h5>
+                                <p>{!! $services->description !!}</p>
                                 <a href="service-single.html" class="text-btn">Details<i class="fa-solid fa-angles-right"></i></a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-sm-6 col-12">
-                        <div class="service__item">
-                            <div class="service__thumb">
-                                <a href="service-single.html">
-                                    <img src="{{asset('frontend/assets/images/service/02.jpg')}}" alt="webcodeltd">
-                                </a>
-                            </div>
-                            <div class="service__content">
-                                <h5><a href="service-single.html">Diabetes</a></h5>
-                                <p>Get started swiftly and easily importing in demo of professionally designed pre-built website are in concepts to choose from.</p>
-                                <a href="service-single.html" class="text-btn">Details<i class="fa-solid fa-angles-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6 col-12">
-                        <div class="service__item">
-                            <div class="service__thumb">
-                                <a href="service-single.html">
-                                    <img src="{{asset('frontend/assets/images/service/03.jpg')}}" alt="webcodeltd">
-                                </a>
-                            </div>
-                            <div class="service__content">
-                                <h5><a href="service-single.html">Nephrology</a></h5>
-                                <p>Get started swiftly and easily importing in demo of professionally designed pre-built website are in concepts to choose from.</p>
-                                <a href="service-single.html" class="text-btn">Details<i class="fa-solid fa-angles-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6 col-12">
-                        <div class="service__item">
-                            <div class="service__thumb">
-                                <a href="service-single.html">
-                                    <img src="{{asset('frontend/assets/images/service/04.jpg')}}" alt="webcodeltd">
-                                </a>
-                            </div>
-                            <div class="service__content">
-                                <h5><a href="service-single.html">Neurosurgery</a></h5>
-                                <p>Get started swiftly and easily importing in demo of professionally designed pre-built website are in concepts to choose from.</p>
-                                <a href="service-single.html" class="text-btn">Details<i class="fa-solid fa-angles-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6 col-12">
-                        <div class="service__item">
-                            <div class="service__thumb">
-                                <a href="service-single.html">
-                                    <img src="{{asset('frontend/assets/images/service/05.jpg')}}" alt="webcodeltd">
-                                </a>
-                            </div>
-                            <div class="service__content">
-                                <h5><a href="service-single.html">Orthopedic (Pain Management)</a></h5>
-                                <p>Get started swiftly and easily importing in demo of professionally designed pre-built website are in concepts to choose from.</p>
-                                <a href="service-single.html" class="text-btn">Details<i class="fa-solid fa-angles-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6 col-12">
-                        <div class="service__item">
-                            <div class="service__thumb">
-                                <a href="service-single.html">
-                                    <img src="{{asset('frontend/assets/images/service/06.jpg')}}" alt="webcodeltd">
-                                </a>
-                            </div>
-                            <div class="service__content">
-                                <h5><a href="service-single.html">Burn and Plastic Surgery</a></h5>
-                                <p>Get started swiftly and easily importing in demo of professionally designed pre-built website are in concepts to choose from.</p>
-                                <a href="service-single.html" class="text-btn">Details<i class="fa-solid fa-angles-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
+
                 </div>
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center mt-5">
