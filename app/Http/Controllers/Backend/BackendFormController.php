@@ -14,7 +14,7 @@ class BackendFormController extends Controller
     }
     public function add_treatmen_types(Request $request){
         $request->validate([
-            'title' => ['required', 'string', 'max:255'],
+            'title' => ['required', 'string', 'max:255','unique:treatment_types'],
         ]);
     // Create new treatment type
     $data = new Treatment_type();

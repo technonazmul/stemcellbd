@@ -64,6 +64,35 @@
               </li>
             </ul>
           </li>
+          {{-- service --}}
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class=""></i>
+              <p>
+                Services
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              @php
+              $service_category=App\Models\ServiceCategory::get();
+              @endphp
+              @foreach($service_category as $service_category)
+              <li class="nav-item">
+                <a href="{{route('admin.show_service',$service_category->id)}}" class="nav-link">
+                  <i class=""></i>
+                  <p>{{ucfirst($service_category->name)}}</p>
+                </a>
+              </li>
+              @endforeach
+              <li class="nav-item">
+                <a href="{{route('admin.service_category')}}" class="nav-link">
+                  <i class=""></i>
+                  <p>service Category</p>
+                </a>
+              </li>
+            </ul>
+          </li>
           {{-- doctor --}}
           <li class="nav-item">
             <a href="#" class="nav-link">
