@@ -88,12 +88,17 @@
                             <ul>
                                 <li><a href="{{route('index')}}" class="active">Home</a></li>
                                 <li>
-                                    <a href="{{route('stemcell')}}">Service</a>
+                                    <a href="">Service</a>
+                                    @php
+                                    $service_category = App\Models\ServiceCategory::all();
+                                    @endphp
+                                    
                                     <ul>
-                                        <li><a href="{{route('stemcell')}}">Stem Cell</a></li>
-                                        <li><a href="{{route('cosmetic')}}">Cosmetic</a></li>
-                                        <li><a href="{{route('training')}}">Training</a></li>
+                                        @foreach($service_category as $service_category)
+                                        <li><a href="{{route('show_services',$service_category)}}">{{ucfirst($service_category->name)}}</a></li>
+                                        @endforeach
                                     </ul>
+                                    
                                 </li>
                                 <li><a href="{{route('doctors')}}">Doctors</a></li>
                                 <li><a href="{{route('blog')}}">Blog</a></li>
@@ -278,4 +283,21 @@
     <!-- All Scripts -->
     @include('frontend.layouts.inc.script')
 </body>
+<script>
+    window.onload = function() {
+    // Get the scroll position from the session storage
+    var scrollPos = sessionStorage.getItem('scrollPos');
+    if (scrollPos) {
+        // Set the scroll position
+        window.scrollTo(0, scrollPos);
+        // Clear the session storage
+        sessionStorage.removeItem('scrollPos');
+    }
+};
+
+window.onbeforeunload = function() {
+    // Save the scroll position in session storage
+    sessionStorage.setItem('scrollPos', window.scrollY);
+};
+</script>
 </html>

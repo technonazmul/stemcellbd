@@ -4,11 +4,11 @@
     <div class="pageheader bg-img" style="background-image: url({{asset('frontend/assets/images/bg/04.jpg')}});">
         <div class="container">
             <div class="pageheader__content">
-                <h2>Take best qualitytreatment....</h2>
+                <h2>{{$single_blog->title}}</h2>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Take best qualitytreatment</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{$single_blog->title}}</li>
                     </ol>
                 </nav>
             </div>
@@ -39,7 +39,7 @@
                                             <li><i class="fa-solid fa-calendar"></i>@php echo $date @endphp</li>
                                             <li><i class="fa-regular fa-folder"></i>{{$single_blog->blog_category->name}} </li>
                                         </ul>
-                                       <p>{{$single_blog->description}} </p>
+                                       <p>{!! $single_blog->description !!} </p>
                                         {{-- <img src="{{asset('storage/blog/'.$single_blog->thumbnail)}}" alt="webcodeltd"> --}}
                                         <video src="{{asset('frontend/assets/video/02.mp4')}}" muted="" loop="" autoplay=""></video>
                                         <iframe src="https://www.youtube.com/embed/S-CvC4BAIIo?si=69QFYU0dSBNLim8k" frameborder="0" allowfullscreen></iframe>
@@ -63,15 +63,15 @@
 
                                 <div class="blog__author">
                                     <div class="thumb">
-                                        <img src="{{asset('frontend/assets/images/team/01.jpg')}}" alt="webcodeltd">
+                                        <img src="{{asset('storage/doctors/'.$single_blog->blog_post_user->image)}}" alt="webcodeltd">
                                     </div>
                                     <div class="content">
-                                        <h6><a href="team-single.html">Dr. Arlene McCoy</a></h6>
-                                        <span>Dermatologist</span>
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, fugit consequatur? Quos voluptatem dolore dolores non dignissimos deserunt doloribus expedita reiciendis magnam! Magni fugit dignissimos a, iste consectetur odit.</p>
+                                        <h6><a href="{{url('single_doctor/'. $single_blog->blog_post_user->id)}}">{{$single_blog->blog_post_user->name}}</a></h6>
+                                        <span>{{$single_blog->blog_post_user->specialization}}</span>
+                                        <p>{!! $single_blog->blog_post_user->about !!}</p>
                                         <ul class="social-link-list d-flex flex-wrap">
-                                            <li><a href="#" class="facebook"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                            <li><a href="#" class="instagram"><i class="fa-brands fa-instagram"></i></a></li>
+                                            <li><a href="{{$single_blog->blog_post_user->facebook}}" target="blank" class="facebook"><i class="fa-brands fa-facebook-f"></i></a></li>
+                                            <li><a href="{{$single_blog->blog_post_user->instagram}}" target="blank" class="instagram"><i class="fa-brands fa-instagram"></i></a></li>
                                             <li><a href="#" class="twitter"><i class="fa-brands fa-twitter"></i></a></li>
                                             <li><a href="#" class="linkedin"><i class="fa-brands fa-linkedin-in"></i></a></li>
                                         </ul>
@@ -141,12 +141,28 @@
                                                     {{-- show reply --}}
                                                     <div class="collapse mt-2" id="collapseExample1{{$comment->id}}">
 
-                                                        <div class="card card-body blog__commentForm">
+                                                        <div class="card card-body">
                                                             @php 
                                                             $reply=App\Models\Comment::where('parent_id',$comment->id)->where('status','1')->where('parent_id', '!=', '0')->get();
                                                             @endphp
                                                             @foreach($reply as $reply)
-                                                            {{$reply->name}}
+                                                            <div class="thumb">
+                                                                {{-- <img src="{{asset('frontend/assets/images/team/01..jpg')}}" alt="webcode"> --}}
+                                                                <i class="icofont-ui-user" style="font-size: 60px;"></i>
+                                                            </div>
+                                                            <div class="">
+                                                                <div class="">
+                                                                    <div class="name">
+                                                                        <h6><a href="team-single.html">{{$reply->name}}</a></h6>
+                                                                        @php
+                                                                            $reply_date = date('j F Y, \a\t h:i a',strtotime($reply->created_at));
+                                                                        @endphp
+                                                                        <span>@php echo $reply_date; @endphp</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="content__bottom">
+                                                                    <p>{{$reply->comment}}</p>
+                                                                </div>
                                                             @endforeach
                                                         </div>
                                                         
@@ -168,7 +184,8 @@
                                                     @endphp
                                                     <li>
                                                         <div class="thumb">
-                                                            <img src="{{asset('frontend/assets/images/team/01..jpg')}}" alt="webcode">
+                                                            {{-- <img src="{{asset('frontend/assets/images/team/01..jpg')}}" alt="webcode"> --}}
+                                                            <i class="icofont-ui-user" style="font-size: 60px;"></i>
                                                         </div>
                                                         <div class="content">
                                                             <div class="content__top">
@@ -215,19 +232,23 @@
                                                                     $reply=App\Models\Comment::where('parent_id',$comment->id)->where('status','1')->where('parent_id', '!=', '0')->get();
                                                                     @endphp
                                                                     @foreach($reply as $reply)
-                                                                        <div class="name">
-                                                                            <h6><a href="team-single.html">{{$reply->name}}</a></h6>
-                                                                            @php
-                                                                                $reply_date = date('j F Y, \a\t h:i a',strtotime($reply->created_at));
-                                                                            @endphp
-                                                                            <span>@php echo $reply_date; @endphp</span>
-                                                                        </div>
-                                                                            <div class="content__bottom">
-                                                                                <p>{{$reply->comment}}</p>
+                                                                    <div class="thumb">
+                                                                        {{-- <img src="{{asset('frontend/assets/images/team/01..jpg')}}" alt="webcode"> --}}
+                                                                        <i class="icofont-ui-user" style="font-size: 60px;"></i>
+                                                                    </div>
+                                                                    <div class="content">
+                                                                        <div class="content__top">
+                                                                            <div class="name">
+                                                                                <h6><a href="team-single.html">{{$reply->name}}</a></h6>
+                                                                                @php
+                                                                                    $reply_date = date('j F Y, \a\t h:i a',strtotime($reply->created_at));
+                                                                                @endphp
+                                                                                <span>@php echo $reply_date; @endphp</span>
                                                                             </div>
                                                                         </div>
-                                                            </div>
-                                                                        
+                                                                        <div class="content__bottom">
+                                                                            <p>{{$reply->comment}}</p>
+                                                                        </div>
                                                                     @endforeach
                                                                 </div>
                                                             </div>

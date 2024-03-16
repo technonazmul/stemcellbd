@@ -64,6 +64,41 @@
               </li>
             </ul>
           </li>
+          {{-- service --}}
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class=""></i>
+              <p>
+                Services
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              @php
+              $service_category=App\Models\ServiceCategory::get();
+              @endphp
+              @foreach($service_category as $service_category)
+              <li class="nav-item">
+                <a href="{{route('admin.show_service',$service_category->id)}}" class="nav-link">
+                  <i class=""></i>
+                  <p>{{ucfirst($service_category->name)}}</p>
+                </a>
+              </li>
+              @endforeach
+              <li class="nav-item">
+                <a href="{{route('admin.service_category')}}" class="nav-link">
+                  <i class=""></i>
+                  <p>service Category</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('admin.add_service')}}" class="nav-link">
+                  <i class=""></i>
+                  <p>Create Service post</p>
+                </a>
+              </li>
+            </ul>
+          </li>
           {{-- doctor --}}
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -191,6 +226,52 @@
                 <a href="{{route('admin.treatment_types')}}" class="nav-link">
                   <i class=""></i>
                   <p>Treatment type</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class=""></i>
+              <p>
+                Contact us
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('admin.contact_data')}}" class="nav-link">
+                  <i class=""></i>
+                  <p>Contact Form Data</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="" class="nav-link">
+                  <i class=""></i>
+                  <p>extra</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class=""></i>
+              <p>
+                Early Bird Registration
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('admin.eb_form_data')}}" class="nav-link">
+                  <i class=""></i>
+                  <p>E.B Form Data</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="" class="nav-link">
+                  <i class=""></i>
+                  <p>E</p>
                 </a>
               </li>
             </ul>
