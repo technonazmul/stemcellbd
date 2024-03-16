@@ -74,4 +74,15 @@ class ProductController extends Controller
     	//return back();
         
     }
+
+    function show_products() {
+        $products = Product::orderBy('id','desc')->paginate(15);
+        return view('backend.product.products', compact('products'));
+    }
+    function product_edit($id) {
+
+        return view('backend.product.edit_product');
+    }
+    
+    
 }
