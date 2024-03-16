@@ -4,11 +4,11 @@
     <div class="pageheader bg-img" style="background-image: url({{asset('frontend/assets/images/bg/04.jpg')}});">
         <div class="container">
             <div class="pageheader__content">
-                <h2>Cosmetic</h2>
+                <h2>Stem Cell</h2>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Cosmetic</li>
+                        <li class="breadcrumb-item active" aria-current="page">Stem Cell</li>
                     </ol>
                 </nav>
             </div>
@@ -66,7 +66,7 @@
                     <div class="col-lg-4 col-sm-6 col-12">
                         <div class="service__item">
                             <div class="service__thumb">
-                                <a href="service-single.html">
+                                <a href="">
                                     <img src="{{asset('frontend/assets/images/service/04.jpg')}}" alt="webcodeltd">
                                 </a>
                             </div>

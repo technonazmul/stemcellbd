@@ -99,50 +99,7 @@
                 </div>
                 <div class="col-12">
                     <div class="team__content">
-                        <h5>Personal Experience</h5>
-                        <p>Since joining Integrio in 2009, Chriss More has helped turn the company from a group of bright technolog minds working with startups into a globa In Chriss’s time as President and CEO of compan the company has experienced explosive growth in size and revenue all while developing is culture that fosters engaged employees around innovation.</p>
-                        <p>Chriss is a frequent speaker on the topics of global innovation and digital disruption. He is also an avid cook and histor buff you can find him dining late at night with the chefs of the hotels where he stays during his travels, or reading in his home library.</p>
-                        <div class="row g-4 mb-4">
-                            <div class="col-lg-6 col-12">
-                                <h5>Early Years</h5>
-                                <p>Since joining Integrio info 2002 in chriss more has helped turn company from a group of brght technolog minds working with starups into global experience explosive growth in size and revenue all while developin are</p>
-                                <p class="mb-0">Qhris is a frequen speaker on the topics of global innovation and digital he is also an avid cook and histor buiff yous can find him dining late are atreading in his home library.</p>
-                            </div>
-                            <div class="col-lg-6 col-12">
-                                <h5>Professional Skills</h5>
-                                <ul class="progressbararea">
-                                    <li>
-                                        <div class="title">
-                                            <p>our experience</p>
-                                            <p><span>70%</span></p>
-                                        </div>
-                                        <div class="progress">
-                                            <div class="progress-bar" role="progressbar" aria-label="Example with label" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="title">
-                                            <p>our experience</p>
-                                            <p><span>56%</span></p>
-                                        </div>
-                                        <div class="progress">
-                                            <div class="progress-bar" role="progressbar" aria-label="Example with label" style="width: 56%;" aria-valuenow="56" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="title">
-                                            <p>our experience</p>
-                                            <p><span>85%</span></p>
-                                        </div>
-                                        <div class="progress">
-                                            <div class="progress-bar" role="progressbar" aria-label="Example with label" style="width: 85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <h5>Career Guidelines</h5>
-                        <p class="mb-0">Since joining Integrio in 2009, chriss more has helped turn the company from a group of bright technolog minds working with startups into a globa In chriss’s time as President and CEO of compan the company has experienced explosive growth in size and revenue all while developing a culture that fosters engaged employees around innovation.</p>
+                        {!! $doctor->about !!}
                     </div>
                 </div>
             </div>

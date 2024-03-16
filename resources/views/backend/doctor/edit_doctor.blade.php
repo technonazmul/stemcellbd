@@ -85,7 +85,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label">About</label>
-                            <textarea name="about" value="{{$doctor->about}}" class="form-control" id="exampleFormControlTextarea1" rows="3">{{$doctor->about}}</textarea>
+                            <textarea name="about"  class="form-control summernote" id="exampleFormControlTextarea1" rows="3">{!! $doctor->about !!}</textarea>
                         </div>
                       <button class="btn btn-lg btn-primary">Update</button>
                   </div>
@@ -94,4 +94,13 @@
       </div>
     </form>
 </div>
+@endsection
+@section('extra_script')
+<script>
+     $(document).ready(function() {
+  $('.summernote').summernote({
+    height: 150
+  });
+});
+</script>
 @endsection
