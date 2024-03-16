@@ -91,6 +91,12 @@
                   <p>service Category</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{route('admin.add_service')}}" class="nav-link">
+                  <i class=""></i>
+                  <p>Create Service post</p>
+                </a>
+              </li>
             </ul>
           </li>
           {{-- doctor --}}

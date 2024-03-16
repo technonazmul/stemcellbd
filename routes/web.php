@@ -53,6 +53,9 @@ Route::prefix('admin')->group(function () {
     Route::get('/edit_service_category/{id}',[ServiceController::class,'edit_service_category'])->name('admin.edit_service_category');
     Route::post('/update_service_category/{id}',[ServiceController::class,'update_service_category'])->name('admin.update_service_category');
     Route::get('/show_service/{id}',[ServiceController::class,'show_service'])->name('admin.show_service');
+    Route::get('/add_service',[ServiceController::class,'add_service'])->name('admin.add_service');
+    Route::post('/create_service',[ServiceController::class,'create_service'])->name('admin.create_service');
+
     // Doctors
     Route::get('/add_doctor',[BackendPageController::class,'add_doctor'])->name('add_doctor');
     Route::post('/save_doctor',[DoctorController::class,'save_doctor'])->name('save_doctor');
