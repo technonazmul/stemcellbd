@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Frontend\FormController;
+use App\Http\Controllers\Backend\ServiceController;
 use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\CommentController;
 use App\Http\Controllers\Backend\DoctorController;
@@ -27,11 +28,10 @@ Auth::routes();
 
 Route::get('/',[HomeController::class,'index'])->name('index');
 Route::get('/home', [AuthController::class, 'index'])->name('home');
-Route::get('/service',[HomeController::class,'service'])->name('service');
-Route::get('/stemcell',[HomeController::class,'stemcell'])->name('stemcell');
+Route::get('/service/{id}',[HomeController::class,'service'])->name('service');
+Route::get('/show_services/{id}',[HomeController::class,'show_services'])->name('show_services');
 Route::get('/cosmetic',[HomeController::class,'cosmetic'])->name('cosmetic');
 Route::get('/training',[HomeController::class,'training'])->name('training');
-Route::get('/service',[HomeController::class,'service'])->name('service');
 Route::get('/doctors',[FrontendPagesController::class,'doctors'])->name('doctors');
 Route::get('/single_doctor/{id}',[FrontendPagesController::class,'single_doctor'])->name('single_doctor');
 Route::get('/blog',[HomeController::class,'blog'])->name('blog');
@@ -47,6 +47,12 @@ Route::post('/contact_form',[FormController::class,'contact_form'])->name('conta
 // Admin route end   middleware(['auth'])->
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard',[BackendPageController::class,'dashboard'])->name('admin.dashboard');
+    //service category
+    Route::get('/service_category',[ServiceController::class,'service_category'])->name('admin.service_category');
+    Route::post('/add_service_category',[ServiceController::class,'add_service_category'])->name('admin.add_service_category');
+    Route::get('/edit_service_category/{id}',[ServiceController::class,'edit_service_category'])->name('admin.edit_service_category');
+    Route::post('/update_service_category/{id}',[ServiceController::class,'update_service_category'])->name('admin.update_service_category');
+    Route::get('/show_service/{id}',[ServiceController::class,'show_service'])->name('admin.show_service');
     // Doctors
     Route::get('/add_doctor',[BackendPageController::class,'add_doctor'])->name('add_doctor');
     Route::post('/save_doctor',[DoctorController::class,'save_doctor'])->name('save_doctor');

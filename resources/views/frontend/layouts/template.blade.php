@@ -88,12 +88,17 @@
                             <ul>
                                 <li><a href="{{route('index')}}" class="active">Home</a></li>
                                 <li>
-                                    <a href="{{route('stemcell')}}">Service</a>
+                                    <a href="">Service</a>
+                                    @php
+                                    $service_category = App\Models\ServiceCategory::all();
+                                    @endphp
+                                    
                                     <ul>
-                                        <li><a href="{{route('stemcell')}}">Stem Cell</a></li>
-                                        <li><a href="{{route('cosmetic')}}">Cosmetic</a></li>
-                                        <li><a href="{{route('training')}}">Training</a></li>
+                                        @foreach($service_category as $service_category)
+                                        <li><a href="{{route('show_services',$service_category)}}">{{ucfirst($service_category->name)}}</a></li>
+                                        @endforeach
                                     </ul>
+                                    
                                 </li>
                                 <li><a href="{{route('doctors')}}">Doctors</a></li>
                                 <li><a href="{{route('blog')}}">Blog</a></li>
