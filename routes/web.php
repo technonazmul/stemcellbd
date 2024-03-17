@@ -28,9 +28,13 @@ Auth::routes();
 
 Route::get('/',[HomeController::class,'index'])->name('index');
 Route::get('/home', [AuthController::class, 'index'])->name('home');
+// Show Service 
 Route::get('/service/{id}',[HomeController::class,'service'])->name('service');
+//Show Services under Parent Service 
 Route::get('/show_services/{id}',[HomeController::class,'show_services'])->name('show_services');
-Route::get('/cosmetic',[HomeController::class,'cosmetic'])->name('cosmetic');
+//Show single service details
+Route::get('/single_service/{id}',[HomeController::class,'single_service'])->name('single_service');
+
 Route::get('/training',[HomeController::class,'training'])->name('training');
 Route::get('/doctors',[FrontendPagesController::class,'doctors'])->name('doctors');
 Route::get('/single_doctor/{id}',[FrontendPagesController::class,'single_doctor'])->name('single_doctor');
