@@ -22,7 +22,7 @@
             <div class="section__wrapper">
                 <div class="row g-4 justify-content-center">
                     @php
-                        $services=App\Models\Service::where('service_category_id')get();
+                        $services=App\Models\Service::where('service_category_id',$show_services->id)->get();
                     @endphp
                     @foreach($services as $services)
                     <div class="col-lg-4 col-sm-6 col-12">
@@ -33,9 +33,9 @@
                                 </a>
                             </div>
                             <div class="service__content">
-                                <h5><a href="service-single.html">{{$services->title}}</a></h5>
+                                <h5><a href="{{route('single_service',$services->id)}}">{{$services->title}}</a></h5>
                                 <p>{!! $services->description !!}</p>
-                                <a href="service-single.html" class="text-btn">Details<i class="fa-solid fa-angles-right"></i></a>
+                                <a href="{{route('single_service',$services->id)}}" class="text-btn">Details<i class="fa-solid fa-angles-right"></i></a>
                             </div>
                         </div>
                     </div>
