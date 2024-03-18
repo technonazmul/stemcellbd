@@ -48,7 +48,7 @@
                                 <ul>
                                     <li><a href="{{route('login')}}">Login</a></li>
                                     <li>/</li>
-                                    <li><a href="{{route('register')}}"">Register</a></li>
+                                    <li><a href="{{route('register')}}">Register</a></li>
                                 </ul>
                             </div>
                             <div class="langauge">
@@ -95,7 +95,7 @@
                                     
                                     <ul>
                                         @foreach($service_category as $service_category)
-                                        <li><a href="{{route('show_services',$service_category)}}">{{ucfirst($service_category->name)}}</a></li>
+                                        <li><a href="{{route('show_services',$service_category->id)}}">{{ucfirst($service_category->name)}}</a></li>
                                         @endforeach
                                     </ul>
                                     

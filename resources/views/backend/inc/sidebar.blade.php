@@ -74,17 +74,12 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              @php
-              $service_category=App\Models\ServiceCategory::get();
-              @endphp
-              @foreach($service_category as $service_category)
-              <li class="nav-item">
-                <a href="{{route('admin.show_service',$service_category->id)}}" class="nav-link">
+              {{-- <li class="nav-item">
+                <a href="{{route('admin.all_service')}}" class="nav-link">
                   <i class=""></i>
-                  <p>{{ucfirst($service_category->name)}}</p>
+                  <p>All Service</p>
                 </a>
-              </li>
-              @endforeach
+              </li> --}}
               <li class="nav-item">
                 <a href="{{route('admin.service_category')}}" class="nav-link">
                   <i class=""></i>
