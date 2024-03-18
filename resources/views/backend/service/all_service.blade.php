@@ -5,16 +5,19 @@
 @endsection
 @section('content')
 <div class="container">
-    <h2 class="text-center">All Services Category</h2>
+    <h2 class="text-center">All Category</h2><hr>
     <div class="row">
-
-        @foreach($service_category as $service_category)
-        <div class="col-md-2">
-            <a href="{{route('admin.show_service',$service_category)}}" class="btn btn-sm card card-body">{{ucfirst($service_category->name)}}</a>
-        </div>
-        @endforeach
+       @foreach($service_category as $category)
+       <div class="col-md-2 text-center">
+            <div class="card card-body">
+                <a class="btn btn-sm" href="{{route('admin.show_service',$category->id)}}">{{$category->name}}</a>
+            </div>
+       </div>
+       @endforeach
     </div>
-    @yield('content')
-</div>
+        @foreach($all_service as $service)
 
+        @endforeach
+        
+</div>
 @endsection

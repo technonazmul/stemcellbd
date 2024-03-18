@@ -74,12 +74,12 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              {{-- <li class="nav-item">
+              <li class="nav-item">
                 <a href="{{route('admin.all_service')}}" class="nav-link">
                   <i class=""></i>
                   <p>All Service</p>
                 </a>
-              </li> --}}
+              </li>
               <li class="nav-item">
                 <a href="{{route('admin.service_category')}}" class="nav-link">
                   <i class=""></i>
