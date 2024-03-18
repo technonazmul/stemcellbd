@@ -52,11 +52,10 @@ Route::post('/contact_form',[FormController::class,'contact_form'])->name('conta
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard',[BackendPageController::class,'dashboard'])->name('admin.dashboard');
     //service category
-    Route::get('/service_category',[ServiceController::class,'service_category'])->name('admin.service_category');
+    Route::get('/show_service_category',[ServiceController::class,'service_category'])->name('admin.service_category');
     Route::post('/add_service_category',[ServiceController::class,'add_service_category'])->name('admin.add_service_category');
     Route::get('/edit_service_category/{id}',[ServiceController::class,'edit_service_category'])->name('admin.edit_service_category');
     Route::post('/update_service_category/{id}',[ServiceController::class,'update_service_category'])->name('admin.update_service_category');
-    Route::get('/show_service/{id}',[ServiceController::class,'show_service'])->name('admin.show_service');
     Route::get('/add_service',[ServiceController::class,'add_service'])->name('admin.add_service');
     Route::post('/create_service',[ServiceController::class,'create_service'])->name('admin.create_service');
 
