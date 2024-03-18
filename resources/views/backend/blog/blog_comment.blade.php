@@ -48,7 +48,7 @@
                     <td><img src="{{asset('storage/blog/'.$blog_comment->blog_post->thumbnail)}}" alt="" style="max-width:90px;height:120px;"></td>
                     <td>
                         @if($blog_comment->status==0)
-                        <a href="{{route('admin.aprouve_comment',$blog_comment->id)}}" class="btn btn-info btn-sm">Approve</a>
+                        <a href="{{route('admin.approve_comment',$blog_comment->id)}}" class="btn btn-info btn-sm">Approve</a>
                         @else
                         <a class="btn btn-success btn-sm">Approved</a>
                         @endif
