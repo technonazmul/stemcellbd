@@ -28,7 +28,7 @@
                     <div class="col-lg-4 col-sm-6 col-12">
                         <div class="service__item">
                             <div class="service__thumb">
-                                <a href="service-single.html">
+                                <a href="{{route('single_service',$services->id)}}">
                                     <img src="{{asset('storage/service/'.$services->thumbnail)}}" style="height:200px;width:auto;" alt="webcodeltd">
                                 </a>
                             </div>

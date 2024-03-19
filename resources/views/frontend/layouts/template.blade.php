@@ -71,7 +71,7 @@
             <div class="container">
                 <div class="header__bottom--area">
                     <div class="logo">
-                        <a href="index.html"><img src="{{asset('frontend/assets/images/header/logo.png')}}" alt="logo"></a>
+                        <a href="#"><img src="{{asset('frontend/assets/images/header/logo.png')}}" alt="logo"></a>
                     </div>
                     <div class="header__bararea">
                         <div class="header__bar d-xl-none">
@@ -88,7 +88,7 @@
                             <ul>
                                 <li><a href="{{route('index')}}" class="active">Home</a></li>
                                 <li>
-                                    <a href="">Service</a>
+                                    <a>Service</a>
                                     @php
                                     $service_category = App\Models\ServiceCategory::all();
                                     @endphp
