@@ -76,7 +76,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Image</label>
-                            <input name="image" type="file" class="form-control" id="exampleFormControlInput1" placeholder="" >
+                            <input name="image" type="file" class="form-control" id="exampleFormControlInput1" placeholder="" required>
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label">About</label>

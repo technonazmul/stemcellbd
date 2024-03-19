@@ -21,15 +21,16 @@
                     {{ session('success') }}
                 </div>
             @endif
-            <h2 class="text-center">Add service</h2>
-            <form method="post" action="{{route('admin.create_service')}}" enctype="multipart/form-data">
+            <h2 class="text-center">Edit service</h2>
+            <form method="post" action="{{route('admin.update_service',$edit_service->id)}}" enctype="multipart/form-data">
                 @csrf
                 <div class="card">
                     <div class="card-body">
                         <div class="mt-2">
                             <label for="exampleFormControlInput1" class="form-label">Title</label>
-                            <input name="title" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Title" required>
+                            <input value="{{$edit_service->title}}" name="title" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Title" required>
                         </div>
+                        <img class="mt-1" src="{{asset('storage/service/'.$edit_service->thumbnail)}}" style="max-width: 190px; height:190px;" alt="">
                         <div class="mt-2">
                             <label for="exampleFormControlInput1" class="form-label">Image</label>
                                 <input type="file" name="thumbnail" id="">
@@ -37,35 +38,35 @@
                         <div class="mt-2">
                             <label for="exampleFormControlInput1" class="form-label">Description</label>
                             <textarea name="description" class="summernote"  >
-                               
+                                {{$edit_service->description}}
                               </textarea>
                         </div>
                         <div class="mt-2">
                             <label for="exampleFormControlInput1" class="form-label">Tags</label>
-                            <input name="tags" placeholder="" value="">
+                            <input name="tags" placeholder="" value="{{$edit_service->tags}}">
                         </div>
                         <div class="mt-2">
                             <label class="form-label" for="exampleFormControlInput1">service Category</label>
                             <select name="service_category_id" class="form-control" id="exampleFormControlSelect1" required>
-                                <option value="">Select service Category</option>
+                                <option value="1">Select service Category</option>
                                 @php
                                 $service_category= App\Models\ServiceCategory::get();
                                 @endphp
                                 @foreach($service_category as $service_category)
-                                <option value="{{$service_category->id}}">{{$service_category->name}}</option>
+                                <option value="{{$service_category->id}}"@if($service_category->id == $edit_service->service_category_id) selected @endif>{{$service_category->name}}</option>
                                 @endforeach
                             </select>
                         </div>
                           <div class="mt-2">
                             <label for="exampleFormControlInput1" class="form-label">Meta Title</label>
-                            <input name="meta_title" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Meta Title">
+                            <input value=" {{$edit_service->meta_title}}" name="meta_title" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Meta Title">
                           </div>
                           <div class="mt-2">
                             <label for="exampleFormControlInput1" class="form-label">Meta Description</label>
-                            <input name="meta_description" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Meta Description">
+                            <input value=" {{$edit_service->meta_description}}" name="meta_description" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Meta Description">
                           </div>
                         <div class="form-group mt-2">
-                            <input type="submit" class="btn btn-success" value="Save service" id="submit">
+                            <input type="submit" class="btn btn-success" value="Update service" id="submit">
                         </div>
         
                     </div>
