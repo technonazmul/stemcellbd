@@ -31,7 +31,6 @@
         </thead>
         @php 
         $i=0;
-        
         @endphp
         @foreach($blog_comment as $blog_comment)
             <tbody>

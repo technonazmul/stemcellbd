@@ -30,6 +30,7 @@
         </thead>
         </thead>
         @php $i=0 @endphp
+        @if(!empty( $doctor))
         @foreach($doctor as $doctor)
         <tbody>
             <tr>
@@ -75,7 +76,7 @@
                                 <p>Telegram: {{$doctor->telegram}}</p>
                                 <p>LinkedIn: {{$doctor->linkedin}}</p>
                                 <p>Twitter: {{$doctor->twitter}}</p>
-                                <p>About: {!!$doctor->about!!}</p>
+                                <p>About: {!! Illuminate\Support\Str::limit(strip_tags($doctor->about),90)!!}</p>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -88,6 +89,7 @@
             </tr>
         </tbody>
         @endforeach
+        @endif
     </table>
 </div>
 @endsection

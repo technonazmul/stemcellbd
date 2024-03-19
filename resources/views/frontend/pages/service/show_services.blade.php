@@ -29,12 +29,15 @@
                         <div class="service__item">
                             <div class="service__thumb">
                                 <a href="service-single.html">
-                                    <img src="{{asset('storage/service/'.$services->thumbnail)}}" alt="webcodeltd">
+                                    <img src="{{asset('storage/service/'.$services->thumbnail)}}" style="height:200px;width:auto;" alt="webcodeltd">
                                 </a>
                             </div>
                             <div class="service__content">
                                 <h5><a href="{{route('single_service',$services->id)}}">{{$services->title}}</a></h5>
-                                <p>{!! $services->description !!}</p>
+                                <p>
+                                    {!! Illuminate\Support\Str::limit(strip_tags($services->description), 150) !!}
+                                </p>
+                                
                                 <a href="{{route('single_service',$services->id)}}" class="text-btn">Details<i class="fa-solid fa-angles-right"></i></a>
                             </div>
                         </div>
