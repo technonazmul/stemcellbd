@@ -13,31 +13,31 @@
                     <div class="card-body">
                         <div class="mt-2">
                             <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="name" placeholder="Product Name" name="name" required>
+                            <input type="text" value="{{$product->name}}" class="form-control" id="name" placeholder="Product Name" name="name" required>
                         </div>
                         <div class="mt-2">
                             <label for="description" class="form-label">Description</label>
                             <textarea class="summernote" id="description" name="description" required>
-                               
+                                {{$product->description}}
                               </textarea>
                         </div>
                         <div class="mt-2">
                             <label for="specification" class="form-label">Specification</label>
                             <textarea class="summernote" id="specification" name="specification">
-                                
+                                {{$product->specification}}
                               </textarea>
                         </div>
                         <div class="mt-2">
                             <label for="price" class="form-label">Price</label>
-                            <input type="number" class="form-control" id="price" min=1 required name="price">
+                            <input type="number" class="form-control" id="price" min=1 required name="price" value="{{$product->price}}">
                         </div>
                         <div class="mt-2">
                             <label for="offer_price" class="form-label">Offer Price</label>
-                            <input type="number" class="form-control" id="offer_price" min=1 name="offer_price" required>
+                            <input type="number" class="form-control" id="offer_price" min=1 name="offer_price" required value="{{$product->offer_price}}">
                         </div>
                         <div class="mt-2">
                             <label for="quantity" class="form-label">Quantity</label>
-                            <input type="number" class="form-control" id="quantity" name="quantity"  min=1 required>
+                            <input type="number" class="form-control" id="quantity" name="quantity"  min=1 required value="{{$product->quantity}}">
                         </div>
                         <div class="mt-2">
                             <label>Images</label>
@@ -45,7 +45,7 @@
                         </div>
                         <div class="mt-2">
                             <label for="sku" class="form-label">SKU/ Product Code</label>
-                            <input type="text" class="form-control" id="sku" placeholder="" name="sku">
+                            <input type="text" class="form-control" id="sku" placeholder="" name="sku" value="{{$product->sku}}">
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Category</label>
@@ -84,6 +84,7 @@
         </div>
     </div>
 </div>
+{{$product->images}}
 @endsection
 @section("extra_script")
 <script src="{{asset("backend/vendor/drug-drop-image-upload/product-image-uploader.js")}}"></script>
@@ -94,7 +95,12 @@
     height: 150
   });
 });
-$('.input-images').imageUploader();
+let preloaded = [
+    {!! $preload_images !!}
+];
+$('.input-images').imageUploader(
+    {preloaded: preloaded}
+);
 $(document).ready(function(){
     var maxField = 10; //Input fields increment limitation
     var addButton = $('.add_button'); //Add button selector

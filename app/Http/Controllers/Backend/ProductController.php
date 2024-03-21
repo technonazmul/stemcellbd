@@ -80,8 +80,22 @@ class ProductController extends Controller
         return view('backend.product.products', compact('products'));
     }
     function product_edit($id) {
+        $product = Product::findOrFail($id);
+        $preload_images = "";
+        if(!is_null($product->images)) {
+            $images_for_uploder_preload = explode(',',$product->images);
+            
+            $countr = 1;
+            for($i=0; $i < count($images_for_uploder_preload); $i++) {
 
-        return view('backend.product.edit_product');
+                $preload_images .= "{id:.$countr, src:'".asset('storage/products/'.$images_for_uploder_preload[$i])."'},";
+                $countr++;
+            }
+            
+        }
+        
+
+        return view('backend.product.edit_product',compact('product','preload_images'));
     }
     
     
