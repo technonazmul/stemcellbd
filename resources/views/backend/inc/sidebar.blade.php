@@ -64,6 +64,24 @@
               </li>
             </ul>
           </li>
+          {{-- general info --}}
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class=""></i>
+              <p>
+                General Information
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('admin.general_info')}}" class="nav-link">
+                  <i class=""></i>
+                  <p>General Info</p>
+                </a>
+              </li>
+            </ul>
+          </li>
           {{-- service --}}
           <li class="nav-item">
             <a href="#" class="nav-link">

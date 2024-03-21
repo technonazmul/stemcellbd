@@ -1,3 +1,6 @@
+@php
+$general_info=App\Models\GeneralInfo::findOrFail(1);
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,11 +33,11 @@
                             <ul>
                                 <li>
                                     <i class="fa-solid fa-envelope"></i>
-                                    <span>adminstemcell@gmail.com</span>
+                                    <span>{{$general_info->email}}</span>
                                 </li>
                                 <li>
                                     <i class="fa-solid fa-phone"></i>
-                                    <span>Hotline - 01987-851647</span>
+                                    <span>Hotline - {{$general_info->hotline}}</span>
                                 </li>
                             </ul>
                         </div>
@@ -152,7 +155,7 @@
                             <div class="footer__title">
                                 <h5>about us</h5>
                             </div>
-                            <p>We believe that boutque practice we are beter placed info respond quickly client bespoke service</p>
+                            <p>{{$general_info->about_us}}</p>
                             <h6>follow us</h6>
                             <ul>
                                 <li>
@@ -266,7 +269,7 @@
         <div class="footer__bottom">
             <div class="container">
                 <div class="text-center">
-                    <p>&copy; 2023 All Rights Reserved. ।। design & develop By <a href="https://doctorsdigitalbranding.com/">WebCode</a></p>
+                    <p>{{$general_info->copyright}}<a href="https://doctorsdigitalbranding.com/">WebCode</a></p>
                 </div>
             </div>
         </div>
