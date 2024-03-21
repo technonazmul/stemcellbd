@@ -1,3 +1,6 @@
+@php
+$general_info=App\Models\GeneralInfo::findOrFail(1);
+@endphp
 @extends('frontend.layouts.template')
 
 @section("content")
@@ -721,7 +724,7 @@
                             <img src="{{asset('frontend/assets/images/info/01.jpg')}}" alt="webcodeltd">
                         </div>
                         <div class="contact__content">
-                            <p>69/M/1, GH Tower (5th Floor), Panthapath, Opposite to Bashundhara City Shopping Complex, Dhaka-1205</p>
+                            <p>{{$general_info->address}}</p>
                         </div>
                     </div>
                 </div>
@@ -732,8 +735,8 @@
                         </div>
                         <div class="contact__content">
                             <p>Platinum Hospital Stem Cell Centre</p>
-                            <p>Enquiry: 01234-567890</p>
-                            <p>Appointment: 01234-567890</p>
+                            <p>Enquiry: {{$general_info->enquiry_number}}</p>
+                            <p>Appointment: {{$general_info->appointment_number}}</p>
                         </div>
                     </div>
                 </div>
@@ -743,8 +746,8 @@
                             <img src="{{asset('frontend/assets/images/info/03.jpg')}}" alt="webcodeltd">
                         </div>
                         <div class="contact__content">
-                            <p><a href="#">help@adminstemcellcentre</a></p>
-                            <p><a href="#">support@adminstemcellcentre</a></p>
+                            <p><a href="#">{{$general_info->help_email}}</a></p>
+                            <p><a href="#"></a></p>
                             <p><a href="#">www.stemcellcentre</a></p>
                         </div>
                     </div>

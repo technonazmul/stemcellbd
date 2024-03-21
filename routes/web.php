@@ -13,6 +13,7 @@ use App\Http\Controllers\Backend\BackendFormController;
 use App\Http\Controllers\Backend\PageController as BackendPageController;
 use App\Http\Controllers\Frontend\PagesController as FrontendPagesController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\GeneralInfoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,6 +52,9 @@ Route::post('/contact_form',[FormController::class,'contact_form'])->name('conta
 // Admin route end   middleware(['auth'])->
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard',[BackendPageController::class,'dashboard'])->name('admin.dashboard');
+    //general info
+    Route::get('/geleral_info',[GeneralInfoController::class,'geleral_info'])->name('admin.general_info');
+    Route::post('/update_general_info/{id}',[GeneralInfoController::class,'update_general_info'])->name('admin.update_general_info');
     //service category
     Route::get('/show_service_category',[ServiceController::class,'service_category'])->name('admin.service_category');
     Route::post('/add_service_category',[ServiceController::class,'add_service_category'])->name('admin.add_service_category');
