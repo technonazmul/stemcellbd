@@ -31,23 +31,23 @@
                             <input name="title" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Title" required>
                         </div>
                         <div class="mt-2">
-                            <label for="exampleFormControlInput1" class="form-label">Image</label>
+                            <label for="exampleFormControlInput1" class="form-label" required>Image</label>
                                 <input type="file" name="thumbnail" id="">
                         </div>
                         <div class="mt-2">
-                            <label for="exampleFormControlInput1" class="form-label">Description</label>
+                            <label for="exampleFormControlInput1" class="form-label" required>Description</label>
                             <textarea name="description" class="summernote"  >
                                
                               </textarea>
                         </div>
                         <div class="mt-2">
                             <label for="exampleFormControlInput1" class="form-label">Tags</label>
-                            <input name="tags" placeholder="" value="">
+                            <input name="tags" placeholder="" value=""required>
                         </div>
                         <div class="mt-2">
                             <label class="form-label" for="exampleFormControlInput1">Blog Category</label>
                             <select name="blog_category_id" class="form-control" id="exampleFormControlSelect1" required>
-                                <option value="1">Select Blog Category</option>
+                                <option value="">Select Blog Category</option>
                                 @php
                                 $blog_category= App\Models\BlogCategory::get();
                                 @endphp
@@ -58,11 +58,11 @@
                         </div>
                           <div class="mt-2">
                             <label for="exampleFormControlInput1" class="form-label">Meta Title</label>
-                            <input name="meta_title" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Meta Title">
+                            <input name="meta_title" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Meta Title"required>
                           </div>
                           <div class="mt-2">
                             <label for="exampleFormControlInput1" class="form-label">Meta Description</label>
-                            <input name="meta_description" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Meta Description">
+                            <input name="meta_description" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Meta Description"required>
                           </div>
                         <div class="form-group mt-2">
                             <input type="submit" class="btn btn-success" value="Save Blog" id="submit">

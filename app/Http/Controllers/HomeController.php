@@ -32,8 +32,8 @@ class HomeController extends Controller
         return view('frontend.pages.doctors');
     }
     function blog(){
-        $blog= Blog::all();
-        return view('frontend.pages.blog',compact('blog'));
+        $blogs= Blog::paginate(3);
+        return view('frontend.pages.blog',compact('blogs'));
     }
     function shop(){
         return view('frontend.pages.shop');

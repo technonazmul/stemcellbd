@@ -11,8 +11,8 @@ use App\Models\Doctor;
 class PagesController extends Controller
 {
     public function doctors() {
-        $doctor = Doctor::all();  
-        return view('frontend.pages.doctors', compact('doctor'));
+        $doctors = Doctor::paginate(1);  
+        return view('frontend.pages.doctors', compact('doctors'));
     }
     public function single_doctor($id){
         $doctor=Doctor::find($id);

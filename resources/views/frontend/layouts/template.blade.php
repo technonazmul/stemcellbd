@@ -74,7 +74,7 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
             <div class="container">
                 <div class="header__bottom--area">
                     <div class="logo">
-                        <a href="#"><img src="{{asset('frontend/assets/images/header/logo.png')}}" alt="logo"></a>
+                        <a href="{{route('index')}}"><img src="{{asset('frontend/assets/images/header/logo.png')}}" alt="logo"></a>
                     </div>
                     <div class="header__bararea">
                         <div class="header__bar d-xl-none">
@@ -159,13 +159,13 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                             <h6>follow us</h6>
                             <ul>
                                 <li>
-                                    <a href="#" class="facebook"><i class="fa-brands fa-facebook-f"></i> <span>Facebook</span></a>
+                                    <a href="{{$general_info->facebook}}" target="blank" class="facebook"><i class="fa-brands fa-facebook-f"></i> <span>Facebook</span></a>
                                 </li>
                                 <li>
-                                    <a href="#" class="linkedin"><i class="fa-brands fa-linkedin-in"></i> <span>linkedin</span></a>
+                                    <a href="{{$general_info->linkedin}}" target="blank" class="linkedin"><i class="fa-brands fa-linkedin-in"></i> <span>linkedin</span></a>
                                 </li>
                                 <li>
-                                    <a href="#" class="twitter"><i class="fa-brands fa-twitter"></i> <span>twitter</span></a>
+                                    <a href="{{$general_info->twitter}}" target="blank" class="twitter"><i class="fa-brands fa-twitter"></i> <span>twitter</span></a>
                                 </li>
                             </ul>
                         </div>

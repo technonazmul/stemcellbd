@@ -1,6 +1,7 @@
 @extends('backend.dashboard')
 @section('content')
 <div class="container">
+    @if(!@empty($general_info))
     <form action="{{route('admin.update_general_info',$general_info)}}" method="post">
         @csrf
         <div class="row">
@@ -16,7 +17,6 @@
                         {{ Session::get('error') }}
                     </div>
                 @endif
-
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Email</label>
                     <input value="{{$general_info->email}}" name="email" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Email">
@@ -72,27 +72,27 @@
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Facebook</label>
-                    <input name="facebook" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Facebook" >
+                    <input value="{{$general_info->facebook}}" name="facebook" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Facebook" >
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Instagram</label>
-                    <input name="instagram" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Instagram" >
+                    <input value="{{$general_info->instagram}}" name="instagram" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Instagram" >
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Youtube</label>
-                    <input name="youtube" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Youtube" >
+                    <input value="{{$general_info->youtube}}" name="youtube" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Youtube" >
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Twitter</label>
-                    <input name="twitter" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Twitter" >
+                    <input value="{{$general_info->twitter}}" name="twitter" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Twitter" >
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Linkedin</label>
-                    <input name="linkedin" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Linkedin" >
+                    <input value="{{$general_info->linkedin}}" name="linkedin" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Linkedin" >
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Telegram</label>
-                    <input name="telegram" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Telegram" >
+                    <input value="{{$general_info->telegram}}" name="telegram" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Telegram" >
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">CopyRight</label>
@@ -103,5 +103,6 @@
         </div>
         <button class="btn btn-info btn-lg my-2">Update</button>
     </form>
+    @endif
 </div>
 @endsection

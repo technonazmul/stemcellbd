@@ -113,7 +113,7 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                         <h2>Rejuvenate yourself by your own stem cell</h2>
                         <h6>Get started swiftly & easily by importing a demo of your choice in single click. Over 30 high quality professionally designed per-built website concepts to choose from.</h6>
                         <p>Spiro is a modern business theme, that lets you build stunning high performance  websites using a fully visual interface. Start with any of the demos below or build modern business theme, that lets you build stunning high performance websites using fully visual interface. start with an of the demos below or build one on your own. Exponent is a perfect blend of spacious layouts</p>
-                        <a href="#" class="lab-btn">take an appointment</a>
+                        <a href="{{route('index')}}#appointment" class="lab-btn">take an appointment</a>
                     </div>
                 </div>
             </div>
@@ -340,14 +340,19 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
             </div>
             <div class="section__wrapper">
                 <div class="row g-4 justify-content-center">
+                    @php
+                    $doctor=App\Models\Doctor::get();
+                    @endphp
+                    @foreach($doctor as $doctor)
+                    @if(!empty($doctor))
                     <div class="col-xl-3 col-lg-4 col-sm-6 col-12">
                         <div class="team__item">
                             <div class="team__thumb">
-                                <img src="{{asset('frontend/assets/images/team/01.jpg')}}" alt="webcodeltd">
+                                <img src="{{asset('storage/doctors/'.$doctor->image)}}" alt="webcodeltd">
                             </div>
                             <div class="team__content">
-                                <h6><a href="team-single.html">Dr. Arlene McCoy</a></h6>
-                                <span>Dermatologist</span>
+                                <h6><a href="team-single.html">{{$doctor->name}}</a></h6>
+                                <span>{{$doctor->specialization}}</span>
                                 <ul>
                                     <li><a href="#"><i class="fa-regular fa-paper-plane"></i></a></li>
                                     <li><a href="#"><i class="fa-solid fa-phone"></i></a></li>
@@ -356,118 +361,8 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-lg-4 col-sm-6 col-12">
-                        <div class="team__item">
-                            <div class="team__thumb">
-                                <img src="{{asset('frontend/assets/images/team/02.jpg')}}" alt="webcodeltd">
-                            </div>
-                            <div class="team__content">
-                                <h6><a href="team-single.html">Dr. Arlene McCoy</a></h6>
-                                <span>Dermatologist</span>
-                                <ul>
-                                    <li><a href="#"><i class="fa-regular fa-paper-plane"></i></a></li>
-                                    <li><a href="#"><i class="fa-solid fa-phone"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-sm-6 col-12">
-                        <div class="team__item">
-                            <div class="team__thumb">
-                                <img src="{{asset('frontend/assets/images/team/03.jpg')}}" alt="webcodeltd">
-                            </div>
-                            <div class="team__content">
-                                <h6><a href="team-single.html">Dr. Arlene McCoy</a></h6>
-                                <span>Dermatologist</span>
-                                <ul>
-                                    <li><a href="#"><i class="fa-regular fa-paper-plane"></i></a></li>
-                                    <li><a href="#"><i class="fa-solid fa-phone"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-sm-6 col-12">
-                        <div class="team__item">
-                            <div class="team__thumb">
-                                <img src="{{asset('frontend/assets/images/team/04.jpg')}}" alt="webcodeltd">
-                            </div>
-                            <div class="team__content">
-                                <h6><a href="team-single.html">Dr. Arlene McCoy</a></h6>
-                                <span>Dermatologist</span>
-                                <ul>
-                                    <li><a href="#"><i class="fa-regular fa-paper-plane"></i></a></li>
-                                    <li><a href="#"><i class="fa-solid fa-phone"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-sm-6 col-12">
-                        <div class="team__item">
-                            <div class="team__thumb">
-                                <img src="{{asset('frontend/assets/images/team/05.jpg')}}" alt="webcodeltd">
-                            </div>
-                            <div class="team__content">
-                                <h6><a href="team-single.html">Dr. Arlene McCoy</a></h6>
-                                <span>Dermatologist</span>
-                                <ul>
-                                    <li><a href="#"><i class="fa-regular fa-paper-plane"></i></a></li>
-                                    <li><a href="#"><i class="fa-solid fa-phone"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-sm-6 col-12">
-                        <div class="team__item">
-                            <div class="team__thumb">
-                                <img src="{{asset('frontend/assets/images/team/06.jpg')}}" alt="webcodeltd">
-                            </div>
-                            <div class="team__content">
-                                <h6><a href="team-single.html">Dr. Arlene McCoy</a></h6>
-                                <span>Dermatologist</span>
-                                <ul>
-                                    <li><a href="#"><i class="fa-regular fa-paper-plane"></i></a></li>
-                                    <li><a href="#"><i class="fa-solid fa-phone"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-sm-6 col-12">
-                        <div class="team__item">
-                            <div class="team__thumb">
-                                <img src="{{asset('frontend/assets/images/team/07.jpg')}}" alt="webcodeltd">
-                            </div>
-                            <div class="team__content">
-                                <h6><a href="team-single.html">Dr. Arlene McCoy</a></h6>
-                                <span>Dermatologist</span>
-                                <ul>
-                                    <li><a href="#"><i class="fa-regular fa-paper-plane"></i></a></li>
-                                    <li><a href="#"><i class="fa-solid fa-phone"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-sm-6 col-12">
-                        <div class="team__item">
-                            <div class="team__thumb">
-                                <img src="{{asset('frontend/assets/images/team/08.jpg')}}" alt="webcodeltd">
-                            </div>
-                            <div class="team__content">
-                                <h6><a href="team-single.html">Dr. Arlene McCoy</a></h6>
-                                <span>Dermatologist</span>
-                                <ul>
-                                    <li><a href="#"><i class="fa-regular fa-paper-plane"></i></a></li>
-                                    <li><a href="#"><i class="fa-solid fa-phone"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    @endif
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -723,6 +618,7 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                         <div class="contact__thumb">
                             <img src="{{asset('frontend/assets/images/info/01.jpg')}}" alt="webcodeltd">
                         </div>
+                        @if(!@empty($general_info))
                         <div class="contact__content">
                             <p>{{$general_info->address}}</p>
                         </div>
@@ -750,6 +646,7 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                             <p><a href="#"></a>{{$general_info->support_email}}</p>
                             <p><a href="#">www.stemcellcentre</a></p>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>
