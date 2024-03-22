@@ -747,7 +747,7 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                         </div>
                         <div class="contact__content">
                             <p><a href="#">{{$general_info->help_email}}</a></p>
-                            <p><a href="#"></a></p>
+                            <p><a href="#"></a>{{$general_info->support_email}}</p>
                             <p><a href="#">www.stemcellcentre</a></p>
                         </div>
                     </div>
