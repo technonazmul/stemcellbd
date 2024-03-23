@@ -44,8 +44,12 @@ class PageController extends Controller
         return view('backend.eb_form_data',compact('eb_data'));
     }
     function contact_data(){
-        $contact_data= Contact::orderBy('id','desc')->get();
-        return view('backend.contact.contact_form_data',compact('contact_data'));
+        $contact_data= Contact::orderBy('id','desc')->where('message_type','0')->get();
+        return view('backend.contact.contact_form_data',compact('contact_data',));
+    }
+    function free_consultancy(){
+        $free_consultancy= Contact::orderBy('id','desc')->where('message_type','1')->get();
+        return view('backend.contact.free_consultancy',compact('free_consultancy'));
     }
     function appointment_data(){
         $appointmet_data= Appointment::orderBy('id','desc')->get();

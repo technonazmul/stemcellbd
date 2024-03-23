@@ -50,9 +50,10 @@
                             </div>
                         </div> --}}
                         
-
+                        @include('frontend.flashmessage')
                         <h5 class="mb-4">Get A Free Consultancy</h5>
-                        <form action="#" id="contact-form" method="POST">
+                        <form action="{{route('free_consulatancy')}}" id="contact-form" method="post">
+                            @csrf
                             <div class="row g-3">
                                 <div class="col-sm-6 col-12">
                                     <input type="text" placeholder="Your Name*" name="name" id="name" required>
@@ -67,7 +68,7 @@
                                     <input type="text" placeholder="Subject" name="subject" id="subject">
                                 </div>
                                 <div class="col-12">
-                                    <textarea name="massage" id="massage" rows="5" placeholder="Massage*" required></textarea>
+                                    <textarea name="message" id="massage" rows="5" placeholder="Massage*" required></textarea>
                                 </div>
                                 <div class="col-12">
                                     <button type="submit" class="lab-btn">send your massage</button>

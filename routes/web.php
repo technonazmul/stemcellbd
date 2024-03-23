@@ -47,6 +47,7 @@ Route::get('/eb_registration',[HomeController::class,'eb_registration'])->name('
 
 Route::post('/eb_form_submit',[FormController::class,'eb_form_submit'])->name('eb_form_submit');
 Route::post('/contact_form',[FormController::class,'contact_form'])->name('contact_form');
+Route::post('/free_consultancy',[FormController::class,'free_consultancy'])->name('free_consultancy');
 
 // Admin route start, will make group and middleware later
 // Admin route end   middleware(['auth'])->
@@ -114,6 +115,8 @@ Route::post('/categoryedit/{id}',[CategoryController::class,'update_product_cate
 Route::get('/eb_form_data',[BackendPageController::class,'eb_form_data'])->name('admin.eb_form_data');
 //contact us form data
 Route::get('/contact_data',[BackendPageController::class,'contact_data'])->name('admin.contact_data');
+
+Route::get('/free_consultancy',[BackendPageController::class,'free_consultancy'])->name('admin.free_consultancy');
 //appoitment data
 Route::get('/appointment_data',[BackendPageController::class,'appointment_data'])->name('admin.appointment');
 
