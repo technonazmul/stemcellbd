@@ -99,42 +99,45 @@
                                 <div class="appointment__content">
                                     <div class="head">
                                         <h6>Take an Appointment</h6>
+                                        @include('frontend.flashmessage')
                                     </div>
-                                    <form action="#">
+                                    <form action="{{route('admin.take_appointment')}}" method="post">
+                                        @csrf
                                         <div class="row g-4">
                                             <div class="col-12">
-                                                <input type="text" placeholder="full name*" required>
+                                                <input name="name" type="text" placeholder="full name*" required>
                                             </div>
                                             <div class="col-12">
-                                                <input type="text" placeholder="Phone Number">
+                                                <input name="phone" type="text" placeholder="Phone Number" required>
                                             </div>
                                             <div class="col-12">
-                                                <input type="email" placeholder="email address">
+                                                <input name="email" type="email" placeholder="email address" required>
                                             </div>
                                             <div class="col-12">
-                                                <select>
-                                                    <option value="1">Sex</option>
-                                                    <option value="2">Male</option>
-                                                    <option value="3">Female</option>
-                                                    <option value="4">Other</option>
+                                                <select required>
+                                                    <option value="">Sex</option>
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
+                                                    <option value="Other">Other</option>
                                                 </select>
                                             </div>
                                             <div class="col-12">
-                                                <input type="date" >
+                                                <input type="date" min="<?php echo date('Y-m-d'); ?>" required >
                                             </div>
                                             <div class="col-12">
-                                                <select>
-                                                    <option value="1">need treatment for</option>
-                                                    <option value="2">need treatment for</option>
-                                                    <option value="3">need treatment for</option>
-                                                    <option value="4">need treatment for</option>
-                                                    <option value="5">need treatment for</option>
-                                                    <option value="6">need treatment for</option>
-                                                    <option value="7">need treatment for</option>
+                                                @php
+                                                $data=App\Models\treatment_type::all();
+                                                @endphp
+                                                <select name="treatment_types" required> <!-- Added the name attribute here -->
+                                                    <option value="">Need Appointment for</option>
+                                                    @foreach($data as $data)
+                                                    <option value="{{$data->title}}">{{$data->title}}</option>
+                                                    @endforeach
+                                                    <!-- Add more options as needed -->
                                                 </select>
                                             </div>
                                             <div class="col-12">
-                                                <textarea rows="4" placeholder="Message"></textarea>
+                                                <textarea name="message" rows="4" placeholder="Message" required></textarea>
                                             </div>
                                         </div>
                                         <button type="submit" class="lab-btn">take an appointment</button>

@@ -341,9 +341,9 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
             <div class="section__wrapper">
                 <div class="row g-4 justify-content-center">
                     @php
-                    $doctor=App\Models\Doctor::get();
+                    $doctors=App\Models\Doctor::paginate(1);
                     @endphp
-                    @foreach($doctor as $doctor)
+                    @foreach($doctors as $doctor)
                     @if(!empty($doctor))
                     <div class="col-xl-3 col-lg-4 col-sm-6 col-12">
                         <div class="team__item">
@@ -352,7 +352,7 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                             </div>
                             <div class="team__content">
                                 <h6><a href="team-single.html">{{$doctor->name}}</a></h6>
-                                <span>{{$doctor->specialization}}</span>
+                                <span>{{$doctor->speciali}}</span>
                                 <ul>
                                     <li><a href="#"><i class="fa-regular fa-paper-plane"></i></a></li>
                                     <li><a href="#"><i class="fa-solid fa-phone"></i></a></li>
@@ -363,6 +363,11 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                     </div>
                     @endif
                     @endforeach
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center mt-5">
+                           {{ $doctors->links('pagination::bootstrap-4') }}
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
