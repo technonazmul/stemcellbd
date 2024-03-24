@@ -24,7 +24,9 @@ use App\Http\Controllers\Backend\GeneralInfoController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+Route::get('/storage/{file}', function ($file) {
+    return response()->file(Storage::path($file));
+})->where('file', '.*');
 Auth::routes();
 
 Route::get('/',[HomeController::class,'index'])->name('index');

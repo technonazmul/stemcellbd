@@ -351,7 +351,7 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                                 <img src="{{asset('storage/doctors/'.$doctor->image)}}" alt="webcodeltd">
                             </div>
                             <div class="team__content">
-                                <h6><a href="team-single.html">{{$doctor->name}}</a></h6>
+                                <h6><a href="{{route('single_doctor',$doctor->id)}}">{{$doctor->name}}</a></h6>
                                 <span>{{$doctor->speciali}}</span>
                                 <ul>
                                     <li><a href="#"><i class="fa-regular fa-paper-plane"></i></a></li>
@@ -530,7 +530,7 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                     </div>
                 </div>
                 <div class="text-center mt-5">
-                    <a href="blog.html" class="lab-btn">view all blog</a>
+                    <a href="{{route('blog')}}" class="lab-btn">view all blog</a>
                 </div>
             </div>
         </div>
