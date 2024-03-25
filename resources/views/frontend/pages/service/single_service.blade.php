@@ -52,7 +52,7 @@
                         
                         @include('frontend.flashmessage')
                         <h5 class="mb-4">Get A Free Consultancy</h5>
-                        <form action="{{route('free_consulatancy')}}" id="contact-form" method="post">
+                        <form action="{{route('free_consultancy')}}" id="contact-form" method="post">
                             @csrf
                             <div class="row g-3">
                                 <div class="col-sm-6 col-12">

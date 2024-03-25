@@ -31,7 +31,7 @@ Auth::routes();
 
 Route::get('/',[HomeController::class,'index'])->name('index');
 Route::get('/home', [AuthController::class, 'index'])->name('home');
-// Show Service 
+// Show Service
 Route::get('/service/{id}',[HomeController::class,'service'])->name('service');
 //Show Services under Parent Service 
 Route::get('/show_services/{id}',[HomeController::class,'show_services'])->name('show_services');

@@ -131,90 +131,25 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
             </div>
             <div class="section__wrapper">
                 <div class="row g-4 justify-content-center">
+                    @php
+                    $services=App\Models\Service::take(6)->get();
+                    @endphp
+                    @foreach($services as $service)
                     <div class="col-lg-4 col-sm-6 col-12">
                         <div class="service__item">
                             <div class="service__thumb">
-                                <a href="service-single.html">
-                                    <img src="{{asset('frontend/assets/images/service/01.jpg')}}" alt="webcodeltd">
+                                <a href="{{route('single_service',$service->id)}}">
+                                    <img src="{{asset('storage/service/'.$service->thumbnail)}}" alt="webcodeltd" style="width:auto;height:300px;">
                                 </a>
                             </div>
                             <div class="service__content">
-                                <h5><a href="service-single.html">Beautification (Anti-aging)</a></h5>
-                                <p>Get started swiftly and easily importing in demo of professionally designed pre-built website are in concepts to choose from.</p>
+                                <h5><a href="{{route('single_service',$service->id)}}">{{$service->title}}</a></h5>
+                                <p>{!! Illuminate\Support\Str::limit(strip_tags($service->description), 100) !!}</p>
                                 <a href="service-single.html" class="text-btn">Details<i class="fa-solid fa-angles-right"></i></a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-sm-6 col-12">
-                        <div class="service__item">
-                            <div class="service__thumb">
-                                <a href="service-single.html">
-                                    <img src="{{asset('frontend/assets/images/service/02.jpg')}}" alt="webcodeltd">
-                                </a>
-                            </div>
-                            <div class="service__content">
-                                <h5><a href="service-single.html">Diabetes</a></h5>
-                                <p>Get started swiftly and easily importing in demo of professionally designed pre-built website are in concepts to choose from.</p>
-                                <a href="service-single.html" class="text-btn">Details<i class="fa-solid fa-angles-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6 col-12">
-                        <div class="service__item">
-                            <div class="service__thumb">
-                                <a href="service-single.html">
-                                    <img src="{{asset('frontend/assets/images/service/03.jpg')}}" alt="webcodeltd">
-                                </a>
-                            </div>
-                            <div class="service__content">
-                                <h5><a href="service-single.html">Nephrology</a></h5>
-                                <p>Get started swiftly and easily importing in demo of professionally designed pre-built website are in concepts to choose from.</p>
-                                <a href="service-single.html" class="text-btn">Details<i class="fa-solid fa-angles-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6 col-12">
-                        <div class="service__item">
-                            <div class="service__thumb">
-                                <a href="service-single.html">
-                                    <img src="{{asset('frontend/assets/images/service/04.jpg')}}" alt="webcodeltd">
-                                </a>
-                            </div>
-                            <div class="service__content">
-                                <h5><a href="service-single.html">Neurosurgery</a></h5>
-                                <p>Get started swiftly and easily importing in demo of professionally designed pre-built website are in concepts to choose from.</p>
-                                <a href="service-single.html" class="text-btn">Details<i class="fa-solid fa-angles-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6 col-12">
-                        <div class="service__item">
-                            <div class="service__thumb">
-                                <a href="service-single.html">
-                                    <img src="{{asset('frontend/assets/images/service/05.jpg')}}" alt="webcodeltd">
-                                </a>
-                            </div>
-                            <div class="service__content">
-                                <h5><a href="service-single.html">Orthopedic (Pain Management)</a></h5>
-                                <p>Get started swiftly and easily importing in demo of professionally designed pre-built website are in concepts to choose from.</p>
-                                <a href="service-single.html" class="text-btn">Details<i class="fa-solid fa-angles-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6 col-12">
-                        <div class="service__item">
-                            <div class="service__thumb">
-                                <a href="service-single.html">
-                                    <img src="{{asset('frontend/assets/images/service/06.jpg')}}" alt="webcodeltd">
-                                </a>
-                            </div>
-                            <div class="service__content">
-                                <h5><a href="service-single.html">Burn and Plastic Surgery</a></h5>
-                                <p>Get started swiftly and easily importing in demo of professionally designed pre-built website are in concepts to choose from.</p>
-                                <a href="service-single.html" class="text-btn">Details<i class="fa-solid fa-angles-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -486,13 +421,17 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
             </div>
             <div class="section__wrapper">
                 <div class="row g-4 justify-content-center">
+                    @php
+                    $blogs=App\Models\Blog::take(3)->get();
+                    @endphp
+                    @foreach($blogs as $blog)
                     <div class="col-lg-4 col-sm-6 col-12">
                         <div class="blog__item">
                             <div class="blog__thumb">
-                                <a href="#"><img src="{{asset('frontend/assets/images/blog/01.jpg')}}" alt="webcodeltd"></a>
+                                <a href="#"><img src="{{asset('storage/blog/'.$blog->thumbnail)}}" alt="webcodeltd" style="width: auto; height: 300px;"></a>
                             </div>
                             <div class="blog__content">
-                                <h4><a href="blog-single.html">Take best qualitytreatment for Ultimate Wellness</a></h4>
+                                <h4><a href="blog-single.html">{{$blog->title}}</a></h4>
                                 <ul>
                                     <li><i class="fa-solid fa-calendar"></i> 08 October 2023</li>
                                     <li><i class="fa-regular fa-folder"></i> Beautification</li>
@@ -500,34 +439,7 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-sm-6 col-12">
-                        <div class="blog__item">
-                            <div class="blog__thumb">
-                                <a href="#"><img src="{{asset('frontend/assets/images/blog/02.jpg')}}" alt="webcodeltd"></a>
-                            </div>
-                            <div class="blog__content">
-                                <h4><a href="blog-single.html">Take best qualitytreatment for Ultimate Wellness</a></h4>
-                                <ul>
-                                    <li><i class="fa-solid fa-calendar"></i> 08 October 2023</li>
-                                    <li><i class="fa-regular fa-folder"></i> Beautification</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6 col-12">
-                        <div class="blog__item">
-                            <div class="blog__thumb">
-                                <a href="#"><img src="{{asset('frontend/assets/images/blog/03.jpg')}}" alt="webcodeltd"></a>
-                            </div>
-                            <div class="blog__content">
-                                <h4><a href="blog-single.html">Take best qualitytreatment for Ultimate Wellness</a></h4>
-                                <ul>
-                                    <li><i class="fa-solid fa-calendar"></i> 08 October 2023</li>
-                                    <li><i class="fa-regular fa-folder"></i> Beautification</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
                 <div class="text-center mt-5">
                     <a href="{{route('blog')}}" class="lab-btn">view all blog</a>
