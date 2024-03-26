@@ -24,12 +24,14 @@ use App\Http\Controllers\Backend\GeneralInfoController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+Route::get('/storage/{file}', function ($file) {
+    return response()->file(Storage::path($file));
+})->where('file', '.*');
 Auth::routes();
 
 Route::get('/',[HomeController::class,'index'])->name('index');
 Route::get('/home', [AuthController::class, 'index'])->name('home');
-// Show Service 
+// Show Service
 Route::get('/service/{id}',[HomeController::class,'service'])->name('service');
 //Show Services under Parent Service 
 Route::get('/show_services/{id}',[HomeController::class,'show_services'])->name('show_services');
@@ -47,6 +49,7 @@ Route::get('/eb_registration',[HomeController::class,'eb_registration'])->name('
 
 Route::post('/eb_form_submit',[FormController::class,'eb_form_submit'])->name('eb_form_submit');
 Route::post('/contact_form',[FormController::class,'contact_form'])->name('contact_form');
+Route::post('/free_consultancy',[FormController::class,'free_consultancy'])->name('free_consultancy');
 
 // Admin route start, will make group and middleware later
 // Admin route end   middleware(['auth'])->
@@ -117,6 +120,8 @@ Route::post('/categoryedit/{id}',[CategoryController::class,'update_product_cate
 Route::get('/eb_form_data',[BackendPageController::class,'eb_form_data'])->name('admin.eb_form_data');
 //contact us form data
 Route::get('/contact_data',[BackendPageController::class,'contact_data'])->name('admin.contact_data');
+
+Route::get('/free_consultancy',[BackendPageController::class,'free_consultancy'])->name('admin.free_consultancy');
 //appoitment data
 Route::get('/appointment_data',[BackendPageController::class,'appointment_data'])->name('admin.appointment');
 

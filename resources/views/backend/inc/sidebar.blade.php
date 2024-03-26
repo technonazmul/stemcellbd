@@ -259,9 +259,9 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="{{route('admin.free_consultancy')}}" class="nav-link">
                   <i class=""></i>
-                  <p>extra</p>
+                  <p>Free Consultancy</p>
                 </a>
               </li>
             </ul>
@@ -284,7 +284,7 @@
               <li class="nav-item">
                 <a href="" class="nav-link">
                   <i class=""></i>
-                  <p>E</p>
+                  <p>e</p>
                 </a>
               </li>
             </ul>

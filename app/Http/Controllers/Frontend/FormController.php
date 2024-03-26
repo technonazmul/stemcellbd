@@ -59,6 +59,24 @@ class FormController extends Controller
         $data->company = $request->input('company');
         $data->subject = $request->input('subject');
         $data->message = $request->input('message');
+        $data->message_type = '0';
+        $data->save();
+        return redirect()->back()->with('success','Message send Successfull');
+    }
+     //free_consulatancy
+     public function free_consultancy(Request $request){
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|max:255',
+            'message' => 'required|string',
+        ]);
+        $data= new Contact();
+        $data->name = $request->input('name');
+        $data->email = $request->input('email');
+        $data->company = $request->input('company');
+        $data->subject = $request->input('subject');
+        $data->message = $request->input('message');
+        $data->message_type = '1';
         $data->save();
         return redirect()->back()->with('success','Message send Successfull');
     }

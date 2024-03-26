@@ -286,21 +286,4 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
     <!-- All Scripts -->
     @include('frontend.layouts.inc.script')
 </body>
-<script>
-    window.onload = function() {
-    // Get the scroll position from the session storage
-    var scrollPos = sessionStorage.getItem('scrollPos');
-    if (scrollPos) {
-        // Set the scroll position
-        window.scrollTo(0, scrollPos);
-        // Clear the session storage
-        sessionStorage.removeItem('scrollPos');
-    }
-};
-
-window.onbeforeunload = function() {
-    // Save the scroll position in session storage
-    sessionStorage.setItem('scrollPos', window.scrollY);
-};
-</script>
 </html>
