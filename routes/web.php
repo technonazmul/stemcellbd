@@ -102,6 +102,9 @@ Route::get('/products',[ProductController::class,'show_products'])->name('admin.
 Route::get('/add_product',[BackendPageController::class,'add_product'])->name('add_product');
 Route::post('/save_product',[ProductController::class,'save_product'])->name('save_product');
 Route::get('/product_edit/{id}',[ProductController::class,'product_edit'])->name('product_edit');
+Route::post('/product_update/{id}',[ProductController::class,'product_update'])->name('product_update');
+Route::get('/product_make_feature/{id}',[ProductController::class,'product_make_feature'])->name('product_make_feature');
+Route::get('/product_add_footer/{id}',[ProductController::class,'product_add_footer'])->name('product_add_footer');
 // Products Category CRUD
 Route::get('/categories',[CategoryController::class,'categories'])->name('admin.categories');
 Route::get('/categoryadd',[CategoryController::class,'add_category'])->name('add_category');

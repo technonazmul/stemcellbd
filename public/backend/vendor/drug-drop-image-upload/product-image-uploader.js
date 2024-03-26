@@ -147,10 +147,12 @@
                 $container.attr('data-preloaded', true);
 
                 // Create the preloaded input and append it to the container
+                const matches = src.match(/\/([^/]+)$/);
+                const imageName = matches ? matches[1] : null;
                 let $preloaded = $('<input>', {
                     type: 'hidden',
                     name: plugin.settings.preloadedInputName + '[]',
-                    value: id
+                    value: imageName
                 }).appendTo($container)
 
             } else {

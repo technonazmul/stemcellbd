@@ -40,16 +40,26 @@
           @php
               $images = explode(',',$item->images);
           @endphp
-          <img src="{{asset('storage/products/'.$images[0])}}" alt="" width="150">
+          <img src="{{asset('storage/products/'.$images[0])}}" alt="" width="100">
           @else
-          <img src="{{asset('storage/products/'.$item->images)}}" alt="" width="150">
+          <img src="{{asset('storage/products/'.$item->images)}}" alt="" width="100">
           @endif
           </td>
         <td><a href="#">View</a></td>
         
         <td>
-          <a href="#" class="btn btn-primary btn-sm mr-2">Make Feature</a> 
-          <a href="#" class="btn btn-secondary btn-sm">Add to Footer</a>
+          @if ($item->make_feature == 1)
+          <a href="{{route('product_make_feature',$item->id)}}" class="btn btn-success btn-sm mr-2">Featured</a> 
+          @else
+          <a href="{{route('product_make_feature',$item->id)}}" class="btn btn-primary btn-sm mr-2">Make Feature</a> 
+          @endif
+
+          @if ($item->show_footer == 1)
+          <a href="{{route('product_add_footer',$item->id)}}" class="btn btn-success btn-sm mr-2">Added Footer</a> 
+          @else
+          <a href="{{route('product_add_footer',$item->id)}}" class="btn btn-primary btn-sm mr-2">Add to Footer</a> 
+          @endif
+          
         </td>
         <td><a href="{{route('product_edit', $item->id)}}" class="btn btn-primary btn-sm mr-2">Edit</a> 
           <a href="#" class="btn btn-danger btn-sm">Delete</a></td>

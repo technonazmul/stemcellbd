@@ -7,7 +7,7 @@
     <div class="row ">
         <div class="col-md-12 mx-auto">
             <h2>Add Products</h2>
-            <form action="{{route('save_product')}}" method="POST" enctype="multipart/form-data" >
+            <form action="{{route('product_update', $product->id)}}" method="POST" enctype="multipart/form-data" >
                 @csrf
                 <div class="card">
                     <div class="card-body">
@@ -43,6 +43,7 @@
                             <label>Images</label>
                             <div class="input-images"></div>
                         </div>
+                        
                         <div class="mt-2">
                             <label for="sku" class="form-label">SKU/ Product Code</label>
                             <input type="text" class="form-control" id="sku" placeholder="" name="sku" value="{{$product->sku}}">
@@ -53,11 +54,11 @@
                                 @php 
                                 $categories = App\Models\Category::where('parent_id', 0)->get();
                                 @endphp
-                                <option>Select Category</option>
+                                <option value="0">Select Category</option>
                                 @foreach( $categories as $category )
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                <option value="{{ $category->id }}" @if($category->id == $product->category_id) selected @endif>{{ $category->name }}</option>
                                 @foreach(App\Models\Category::where('parent_id', $category->id)->get() as $subcategory)
-                                <option value="{{ $subcategory->id }}">&nbsp; - {{ $subcategory->name }}</option>
+                                <option value="{{ $subcategory->id }}" @if($subcategory->id == $product->category_id) selected @endif >&nbsp; - {{ $subcategory->name }}</option>
                                 @endforeach
                                 @endforeach
                               
