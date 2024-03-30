@@ -285,5 +285,6 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
 
     <!-- All Scripts -->
     @include('frontend.layouts.inc.script')
+    @yield('extra_script')
 </body>
 </html>

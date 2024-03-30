@@ -62,7 +62,7 @@
           
         </td>
         <td><a href="{{route('product_edit', $item->id)}}" class="btn btn-primary btn-sm mr-2">Edit</a> 
-          <a href="#" class="btn btn-danger btn-sm">Delete</a></td>
+          <a href="{{route('product_delete', $item->id)}}" class="btn btn-danger btn-sm"  onclick="return confirm('Are you sure you want to delete this item')">Delete</a></td>
       </tr>
       @php
           $i++;

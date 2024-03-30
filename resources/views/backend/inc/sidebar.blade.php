@@ -217,6 +217,12 @@
                   </li>
                 </ul>
               </li>
+              <li class="nav-item">
+                <a href="{{route('admin.product_reviews')}}" class="nav-link">
+                  <i class=""></i>
+                  <p>Product Reviews</p>
+                </a>
+              </li>
             </ul>
             
           </li>

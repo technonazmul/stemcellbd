@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\ProductReview;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use File;
@@ -12,13 +13,13 @@ use Illuminate\Support\Facades\Storage;
 class ProductController extends Controller
 {
     function save_product(Request $request) {
-        // $request->validate([
-    	// 	'name' => 'required|max:150',
-    	// 	'description' => 'required',
-    	// 	'price' => 'required',
-    	// 	'quantity' => 'required',
+        $request->validate([
+    		'name' => 'required|max:150',
+    		'description' => 'required',
+    		'price' => 'required',
+    		'quantity' => 'required',
     		
-    	// ]);
+    	]);
     	
     	$product = new Product;
 
@@ -27,7 +28,7 @@ class ProductController extends Controller
         $product->specification = $request->specification;
     	$product->price = $request->price;
         $product->offer_price = $request->offer_price;
-    	//$product->slug = Str::slug($request->title,'-');
+    	
 
         $new_slug= Str::slug($request->name,'-');
 
@@ -49,7 +50,7 @@ class ProductController extends Controller
     		$i = 1;
     		foreach ($request->product_image as $image) {
     			//make image name
-    			$img = $image->getClientOriginalName().'-'.time().$i.'.'.$image->getClientOriginalExtension();
+    			$img = Str::slug($image->getClientOriginalName(),'-').'-'.time().$i.'.'.$image->getClientOriginalExtension();
     			//image location
     			//$location = public_path('images/'.$img);
                 $path = $image->storeAs('public/products',$img); // Store in the storage directory
@@ -142,7 +143,7 @@ class ProductController extends Controller
     		$i = 1;
     		foreach ($request->product_image as $image) {
     			//make image name
-    			$img = $image->getClientOriginalName().'-'.time().$i.'.'.$image->getClientOriginalExtension();
+    			$img = Str::slug($image->getClientOriginalName(),'-').'-'.time().$i.'.'.$image->getClientOriginalExtension();
     			//image location
     			//$location = public_path('images/'.$img);
                 $path = $image->storeAs('public/products',$img); // Store in the storage directory
@@ -214,6 +215,46 @@ class ProductController extends Controller
         return back();
 
     }
+
+    function product_delete($id) { 
+        $product = Product::findOrFail($id);
+        if(!is_null($product)) {
+            if(!is_null($product->images)) {
+                $database_image_to_array = explode(',',$product->images);
+                foreach ($database_image_to_array as $value) {
+                    Storage::delete('public/products/' . $value);
+                }
+            }
+        }
+        $product->delete();
+        session()->flash('success', 'Product has been deleted successfully!!');
+
+    	return back();
+
+    }
     
-    
+    function product_reviews() {
+        $reviews = ProductReview::orderBy('id','desc')->paginate(2);
+        return view('backend.product.product_reviews', compact('reviews'));
+    }
+    function product_reviews_approve($id) {
+        $review = ProductReview::findOrFail($id);
+        if($review->status == 0) {
+            $review->status = 1;
+        }else {
+            $review->status = 0;
+        }
+        $review->save();
+        return back();
+
+    }
+    function product_reviews_delete($id) { 
+        $item = ProductReview::findOrFail($id);
+        
+        $item->delete();
+        session()->flash('success', 'Review has been deleted successfully!!');
+
+    	return back();
+
+    }
 }

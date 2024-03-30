@@ -43,7 +43,12 @@ Route::get('/doctors',[FrontendPagesController::class,'doctors'])->name('doctors
 Route::get('/single_doctor/{id}',[FrontendPagesController::class,'single_doctor'])->name('single_doctor');
 Route::get('/blog',[HomeController::class,'blog'])->name('blog');
 Route::get('/single_blog/{id}',[FrontendPagesController::class,'single_blog'])->name('single_blog');
+//frontend shop start
 Route::get('/shop',[HomeController::class,'shop'])->name('shop');
+Route::get('/shop_single/{slug}',[HomeController::class,'shop_single'])->name('shop_single');
+Route::post('/product_review',[HomeController::class,'product_review'])->name('product.review.save');
+
+//frontend shop end
 Route::get('/contact',[HomeController::class,'contact'])->name('contact');
 Route::get('/eb_registration',[HomeController::class,'eb_registration'])->name('eb_registration');
 
@@ -108,12 +113,17 @@ Route::get('/product_edit/{id}',[ProductController::class,'product_edit'])->name
 Route::post('/product_update/{id}',[ProductController::class,'product_update'])->name('product_update');
 Route::get('/product_make_feature/{id}',[ProductController::class,'product_make_feature'])->name('product_make_feature');
 Route::get('/product_add_footer/{id}',[ProductController::class,'product_add_footer'])->name('product_add_footer');
+Route::get('/product_delete/{id}',[ProductController::class,'product_delete'])->name('product_delete');
 // Products Category CRUD
 Route::get('/categories',[CategoryController::class,'categories'])->name('admin.categories');
 Route::get('/categoryadd',[CategoryController::class,'add_category'])->name('add_category');
 Route::get('/categoryedit/{id}',[CategoryController::class,'edit_category'])->name('edit_category');
 Route::post('/categorysave',[CategoryController::class,'save_category'])->name('save_category');
 Route::post('/categoryedit/{id}',[CategoryController::class,'update_product_category'])->name('update_product_category');
+// Product Reviews
+Route::get('/product_reviews',[ProductController::class,'product_reviews'])->name('admin.product_reviews');
+Route::get('/product_reviews_approve/{id}',[ProductController::class,'product_reviews_approve'])->name('admin.product_reviews_approve');
+Route::get('/product_reviews_delete/{id}',[ProductController::class,'product_reviews_delete'])->name('admin.product_reviews_delete');
 //End Products
 
 //eb_form_data

@@ -6,7 +6,11 @@
   <title>Dashboard</title>
   @include('backend.inc.css')
   @yield("extra_css")
-  
+  <style>
+    nav svg {
+      width: 10px;
+    }
+  </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
