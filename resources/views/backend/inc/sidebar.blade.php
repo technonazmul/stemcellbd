@@ -69,7 +69,7 @@
             <a href="#" class="nav-link">
               <i class=""></i>
               <p>
-                General Information
+                General Info / Testimonial
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -78,6 +78,12 @@
                 <a href="{{route('admin.general_info')}}" class="nav-link">
                   <i class=""></i>
                   <p>General Info</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('admin.testimonial')}}" class="nav-link">
+                  <i class=""></i>
+                  <p>Testimonial</p>
                 </a>
               </li>
             </ul>

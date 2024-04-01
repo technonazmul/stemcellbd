@@ -11,7 +11,7 @@ class GeneralInfoController extends Controller
     //edit
     public function geleral_info() {
         $general_info= GeneralInfo::findOrFail(1);
-        return view('backend.general_info',compact('general_info'));
+        return view('backend.generalinfo.general_info',compact('general_info'));
     }
     //update
     public function update_general_info(Request $request,$id){
@@ -35,5 +35,10 @@ class GeneralInfoController extends Controller
 
         $general_info->save();
         return redirect()->back()->with('success','Info Update Successfull');
+    }
+
+    //testimonails
+    public function testimonial(){
+        return view('backend.generalinfo.testimonial');
     }
 }
