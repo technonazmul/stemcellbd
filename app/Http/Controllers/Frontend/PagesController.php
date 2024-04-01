@@ -23,4 +23,8 @@ class PagesController extends Controller
         $single_blog=Blog::find($id);
         return view('frontend.pages.single_blog',compact('single_blog'));
      }
+    //add testimonial
+    public function testimonial(){
+        
+    }
 }
