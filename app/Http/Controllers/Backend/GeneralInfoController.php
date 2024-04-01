@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\GeneralInfo;
+use App\Models\Testimonial;
 
 class GeneralInfoController extends Controller
 {
@@ -40,5 +41,34 @@ class GeneralInfoController extends Controller
     //testimonails
     public function testimonial(){
         return view('backend.generalinfo.testimonial');
+    }
+    public function add_testimonial(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string',
+            'author' => 'required|string',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust image validation as needed
+            'text' => 'required|string',
+            'rating' => 'required|integer|min:1|max:5',
+        ]);
+
+        //Save data to the database
+        $testimonial = new Testimonial();
+        $testimonial->name = $request->input('name');
+        $testimonial->author = $request->input('author');
+        $testimonial->text = $request->input('text');
+        //save image
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time().'.'.$image->extension();
+            $image->storeAs('public/testimonail', $imageName);
+        } else {
+            $imageName = null; // No image uploaded
+        }
+        $testimonial->image = $imageName;
+        $testimonial->rating = $request->input('rating');
+        $testimonial->save();
+        //Redirect or return a response
+        return redirect()->back()->with('success', 'Testimonial added successfully');
     }
 }

@@ -65,6 +65,7 @@ Route::prefix('admin')->group(function () {
     Route::post('/update_general_info/{id}',[GeneralInfoController::class,'update_general_info'])->name('admin.update_general_info');
     //testimonial
     Route::get('/testimonial',[GeneralInfoController::class,'testimonial'])->name('admin.testimonial');
+    Route::post('/add_testimonial',[GeneralInfoController::class,'add_testimonial'])->name('admin.add_testimonial');
     //service category
     Route::get('/show_service_category',[ServiceController::class,'service_category'])->name('admin.service_category');
     Route::post('/add_service_category',[ServiceController::class,'add_service_category'])->name('admin.add_service_category');
