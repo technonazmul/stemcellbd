@@ -61,7 +61,7 @@ class GeneralInfoController extends Controller
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time().'.'.$image->extension();
-            $image->storeAs('public/testimonail', $imageName);
+            $image->storeAs('public/testimonial', $imageName);
         } else {
             $imageName = null; // No image uploaded
         }
@@ -70,5 +70,10 @@ class GeneralInfoController extends Controller
         $testimonial->save();
         //Redirect or return a response
         return redirect()->back()->with('success', 'Testimonial added successfully');
+    }
+    //show testimonail
+    public function show_testimonial(){
+        $testimonial= Testimonial::all();
+        return view('backend.generalinfo.show_testimonial',compact('testimonial'));
     }
 }

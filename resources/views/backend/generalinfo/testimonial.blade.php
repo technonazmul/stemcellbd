@@ -16,7 +16,7 @@
     @include('backend.flashmessage')
     <div class="row ">
         <div class="card col-md-8 mx-auto">
-            <div class="card-body">
+            <div class="card-body ">
                 <form action="{{route('admin.add_testimonial')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">

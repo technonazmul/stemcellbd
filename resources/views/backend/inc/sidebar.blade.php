@@ -83,6 +83,12 @@
               <li class="nav-item">
                 <a href="{{route('admin.testimonial')}}" class="nav-link">
                   <i class=""></i>
+                  <p>Add Testimonial</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('admin.show_testimonial')}}" class="nav-link">
+                  <i class=""></i>
                   <p>Testimonial</p>
                 </a>
               </li>

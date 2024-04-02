@@ -321,62 +321,38 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
             <div class="section__wrapper">
                 <div class="testimonial__slider overflow-hidden">
                     <div class="swiper-wrapper">
+                        @foreach( App\Models\Testimonial::all() as $testimonial )
                         <div class="swiper-slide">
                             <div class="testimonial__item">
                                 <div class="testimonial__thumb">
-                                    <img src="{{asset('frontend/assets/images/testimonial/01.jpg')}}" alt="webcodeltd">
+                                    <img src="{{asset('storage/testimonial/'.$testimonial->image)}}" alt="webcodeltd">
                                     <div class="testimonial__thumb--quote">
                                         <i class="fa-solid fa-quote-right"></i>
                                     </div>
                                 </div>
                                 <div class="testimonial__content">
-                                    <p>Praised idea and masa cusp veena gelatin turf supine gaseous mustier dictums effacer users edams create pharetra meatilus aquept nullary nullify acre numbers Atenean handwrit laborites</p>
+                                    <p>{{$testimonial->text}}</p>
                                     <div class="testimonial__content--bottom">
                                         <div class="left">
-                                            <h6>William Thomas</h6>
-                                            <span>customer</span>
+                                            <h6>{{$testimonial->name}}</h6>
+                                            <span>{{$testimonial->author}}</span>
                                         </div>
                                         <div class="right">
                                             <ul>
-                                                <li><i class="fa-solid fa-star"></i></li>
-                                                <li><i class="fa-solid fa-star"></i></li>
-                                                <li><i class="fa-solid fa-star"></i></li>
-                                                <li><i class="fa-solid fa-star"></i></li>
-                                                <li><i class="fa-solid fa-star"></i></li>
+                                                @for ($i = 1; $i <= 5; $i++)
+                                                    @if ($i <= $testimonial->rating)
+                                                        <li><i class="fa-solid fa-star"></i></li>
+                                                    @else
+                                                        <li><i class="fa-regular fa-star"></i></li>
+                                                    @endif
+                                                @endfor
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="swiper-slide">
-                            <div class="testimonial__item">
-                                <div class="testimonial__thumb">
-                                    <img src="{{asset('frontend/assets/images/testimonial/02.jpg')}}" alt="webcodeltd">
-                                    <div class="testimonial__thumb--quote">
-                                        <i class="fa-solid fa-quote-right"></i>
-                                    </div>
-                                </div>
-                                <div class="testimonial__content">
-                                    <p>Praised idea and masa cusp veena gelatin turf supine gaseous mustier dictums effacer users edams create pharetra meatilus aquept nullary nullify acre numbers Atenean handwrit laborites</p>
-                                    <div class="testimonial__content--bottom">
-                                        <div class="left">
-                                            <h6>William Thomas</h6>
-                                            <span>customer</span>
-                                        </div>
-                                        <div class="right">
-                                            <ul>
-                                                <li><i class="fa-solid fa-star"></i></li>
-                                                <li><i class="fa-solid fa-star"></i></li>
-                                                <li><i class="fa-solid fa-star"></i></li>
-                                                <li><i class="fa-solid fa-star"></i></li>
-                                                <li><i class="fa-solid fa-star"></i></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
                 <div class="text-center mt-5">
