@@ -30,8 +30,8 @@
                 <td>{!! Illuminate\Support\Str::limit(strip_tags($testimonial->text),30) !!}</td>
                 <td> <img src="{{asset('storage/testimonial/'.$testimonial->image)}}" style="height:80px;width:auto;"> </td>
                 <td>
-                    <a class="btn btn-info btn-sm" href="">Edit</a>
-                    <a class="btn btn-danger btn-sm" href="">Delete</a>
+                    <a class="btn btn-info btn-sm" href="{{route('admin.edit_testimonial',$testimonial->id)}}">Edit</a>
+                    <a class="btn btn-danger btn-sm" href="{{route('admin.delete_testimonial',$testimonial->id)}}">Delete</a>
                 </td>
                 <tbody>
             @endforeach

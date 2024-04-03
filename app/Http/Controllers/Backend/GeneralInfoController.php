@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\GeneralInfo;
 use App\Models\Testimonial;
+use Illuminate\Support\Facades\Storage;
 
 class GeneralInfoController extends Controller
 {
@@ -76,4 +77,62 @@ class GeneralInfoController extends Controller
         $testimonial= Testimonial::all();
         return view('backend.generalinfo.show_testimonial',compact('testimonial'));
     }
+    //edit testmonial
+    public function edit_testimonial($id){
+        $testimonial=Testimonial::find($id);
+        return view('backend.generalinfo.edit_testimonial',compact('testimonial'));
+    }
+    //update testimonial
+    public function update_testimonial(Request $request ,$id){
+        $request->validate([
+            'name' => 'required|string',
+            'author' => 'required|string',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust image validation as needed
+            'text' => 'required|string',
+            'rating' => 'required|integer|min:1|max:5',
+        ]);
+
+        //update data to the database
+        $testimonial =Testimonial::find($id);
+        $testimonial->name = $request->input('name');
+        $testimonial->author = $request->input('author');
+        $testimonial->text = $request->input('text');
+         // Check if a new image is uploaded
+        if ($request->hasFile('image')) {
+            // Delete old image if it exists
+            if ($testimonial->image) {
+                Storage::delete('public/testimonial/' . $testimonial->image);
+            }
+        }
+        //update image
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time().'.'.$image->extension();
+            $image->storeAs('public/testimonial', $imageName);
+        } else {
+            $imageName = null; // No image uploaded
+        }
+        
+        $testimonial->image = $imageName;
+        $testimonial->rating = $request->input('rating');
+        $testimonial->save();
+        //Redirect or return a response
+        return redirect()->back()->with('success', 'Testimonial added successfully');
+    }
+    //delete testimonial
+    public function delete_testimonial($id) {
+        $testimonial = Testimonial::find($id);
+    
+        if (!$testimonial) {
+            return redirect()->back()->with('error', 'Testimonial not found');
+        }
+    
+        // Delete the image from storage
+        if ($testimonial->image) {
+            Storage::delete('public/testimonial/' . $testimonial->image);
+        }
+        $testimonial->delete();
+        return redirect()->back()->with('success', 'Testimonial deleted successfully');
+    }
+
 }
