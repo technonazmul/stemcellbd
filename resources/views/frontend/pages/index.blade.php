@@ -6,7 +6,7 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
 @section("content")
     <!-- ==========Banner Section Start Here========== -->
     <div class="banner bg-img" id="banner" style="background: url({{asset('frontend/assets/images/bg/04.jpg')}}) rgba(0,0,0,.5);">
-        <video src="{{asset('frontend/assets/video/01.mp4')}}" muted="" loop="" autoplay=""></video>
+        {{-- <video src="{{asset('frontend/assets/video/01.mp4')}}" muted="" loop="" autoplay=""></video> --}}
         <div class="container">
             <div class="banner__content">
                 <h2>Rejuvenate yourself by your own stem cell</h2>
@@ -24,7 +24,7 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
 
     <!-- ==========Feture Section Start Here========== -->
     <div class="feature bg-img" id="feature" style="background-image: url({{asset('frontend/assets/images/bg/05.jpg')}});">
-        <div class="feature__top">
+        <div class="feature__top d-none">
             <div class="container">
                 <div class="feature__top--area">
                     <div class="feature__top--left">
@@ -389,10 +389,10 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
 
 
     <!-- ==========Blog Section Start Here========== -->
-    <div class="blog padding-tb" id="blog">
+    {{-- <div class="blog padding-tb" id="blog">
         <div class="container">
             <div class="section__header text-center">
-                <h2>Our treatment options</h2>
+                <h2>Our blogs</h2>
                 <p>The art of medicine consists in amusing the patient-while nature cures the disease. Treatment without prevention is simply unsustainable.</p>
             </div>
             <div class="section__wrapper">
@@ -422,7 +422,7 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- ==========Blog Section Ends Here========== -->
 
 

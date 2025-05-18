@@ -1,0 +1,44 @@
+.contact {
+    background: #F5F5F5;
+    @include padding(50px 0 120px);
+    &__item {
+        @extend %text-center, %bg-white;
+        @include padding(50px 30px);
+        @include border-radius(4px);
+        @include transition($transition);
+        &:hover {
+            @include transform(translateY(-10px));
+        }
+    }
+    &__thumb {
+        @include margin-bottom(30px);
+    }
+    &__content {
+        p {
+            @include margin-bottom(0);
+            a {
+                &:hover {
+                    @extend %theme-color;
+                }
+            }
+        }
+    }
+    &--two {
+        @include padding(120px 0 120px);
+    }
+}
+
+.contactform {
+    @extend %bg-white;
+    &__area {
+        form {
+            input, textarea {
+                border: 1px solid $border-color;
+            }
+            .lab-btn {
+                border: none;
+                box-shadow: none;
+            }
+        }
+    }
+}
