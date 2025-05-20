@@ -28,7 +28,7 @@
                             <div class="col-12">
                                 <div class="blog__item">
                                     <div class="blog__thumb">
-                                        <img src="{{asset('storage/blog/'.$single_blog->thumbnail)}}" alt="webcodeltd" style="max-width: auto; height:500px;">
+                                        <img src="{{asset('storage/public/blog/'.$single_blog->thumbnail)}}">
                                     </div>
                                     <div class="blog__content">
                                         <h4>{{$single_blog->title}}</h4>
@@ -40,28 +40,60 @@
                                             <li><i class="fa-regular fa-folder"></i>{{$single_blog->blog_category->name}} </li>
                                         </ul>
                                        <p>{!! $single_blog->description !!} </p>
-                                        {{-- <img src="{{asset('storage/blog/'.$single_blog->thumbnail)}}" alt="webcodeltd"> --}}
-                                        <video src="{{asset('frontend/assets/video/02.mp4')}}" muted="" loop="" autoplay=""></video>
-                                        <iframe src="https://www.youtube.com/embed/S-CvC4BAIIo?si=69QFYU0dSBNLim8k" frameborder="0" allowfullscreen></iframe>
+                                        
+                                        
                                     </div>
                                 </div>
 
                                 <div class="tags-section">
                                     <ul class="tags">
                                         <li><span><i class="fa-solid fa-share-nodes"></i></span></li>
-                                        <li><a href="#">cosmix</a></li>
-                                        <li><a href="#">X-ray</a></li>
-                                        <li><a href="#">therapy</a></li>
+                                        <?php
+                                            if(!is_null($single_blog->tags)):
+                                                $arrayoftags = explode(',',$single_blog->tags);
+                                                foreach($arrayoftags as $tag):
+                                                ?>
+                                                <li><a href="{{route('blog.tag.search', $tag)}}">{{$tag}}</a></li>
+                                                <?php
+                                                endforeach;
+                                               
+                                            endif;
+                                        ?>
+                                        
+                                        
                                     </ul>
+                                    @php
+                                        $postUrl = url()->current(); // Full URL of current post
+                                        $postTitle = urlencode($single_blog->title); // Title for social media
+                                    @endphp
+
                                     <ul class="social-link-list d-flex flex-wrap">
-                                        <li><a href="#" class="facebook"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                        <li><a href="#" class="instagram"><i class="fa-brands fa-instagram"></i></a></li>
-                                        <li><a href="#" class="twitter"><i class="fa-brands fa-twitter"></i></a></li>
-                                        <li><a href="#" class="linkedin"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                                        <li>
+                                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ $postUrl }}" target="_blank" class="facebook">
+                                                <i class="fa-brands fa-facebook-f"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://twitter.com/intent/tweet?url={{ $postUrl }}&text={{ $postTitle }}" target="_blank" class="twitter">
+                                                <i class="fa-brands fa-twitter"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ $postUrl }}&title={{ $postTitle }}" target="_blank" class="linkedin">
+                                                <i class="fa-brands fa-linkedin-in"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.instagram.com/" target="_blank" class="instagram">
+                                                <i class="fa-brands fa-instagram"></i>
+                                            </a>
+                                            <!-- Instagram does not support direct post sharing via URL, only profile or manual share -->
+                                        </li>
                                     </ul>
+
                                 </div>
 
-                                <div class="blog__author">
+                                {{-- <div class="blog__author">
                                     <div class="thumb">
                                         <img src="{{asset('storage/doctors/'.$single_blog->blog_post_user->image)}}" alt="webcodeltd">
                                     </div>
@@ -76,14 +108,14 @@
                                             <li><a href="#" class="linkedin"><i class="fa-brands fa-linkedin-in"></i></a></li>
                                         </ul>
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 <div class="blog__comment">
                                     @php
                                     $total_comment=App\Models\Comment::where('status','1')->where('blog_post_id',$single_blog->id)->where('parent_id','0')->count();
                                     @endphp
                                     <div class="head">
-                                        <h6>@php echo $total_comment; @endphp Replies to “Tips for Achieving Success”</h6>
+                                        <h6>@php echo $total_comment; @endphp Comments</h6>
                                     </div>
 
                                     <div class="body">
@@ -301,13 +333,13 @@
                                     <h6>Search Your Keywords</h6>
                                 </div>
                                 <div class="body">
-                                    <form action="#">
-                                        <input type="text" placeholder="Search Here">
+                                    <form action="{{route('blog.search')}}">
+                                        <input type="text" placeholder="Search Here" name="search">
                                         <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                                     </form>
                                 </div>
                             </div>
-
+                            
                             <div class="sidebar__appointment">
                                 <div class="appointment">
                                     <div class="appointment__content">
@@ -358,99 +390,7 @@
                                 </div>
                             </div>
 
-                            <div class="sidebar__recentpost">
-                                <div class="head">
-                                    <h6>Most Popular Post</h6>
-                                </div>
-                                <div class="body">
-                                    <ul>
-                                        <li>
-                                            <div class="thumb">
-                                                <a href="blog-single.html"><img src="{{asset('frontend/assets/images/blog/01.jpg')}}" alt="webcode"></a>
-                                            </div>
-                                            <div class="content">
-                                                <h6><a href="blog-single.html">Consulting reportng qounc arei could more.</a></h6>
-                                                <span>June 20, 2023</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="thumb">
-                                                <a href="blog-single.html"><img src="{{asset('frontend/assets/images/blog/02.jpg')}}" alt="webcode"></a>
-                                            </div>
-                                            <div class="content">
-                                                <h6><a href="blog-single.html">Find the right path for your group course online</a></h6>
-                                                <span>June 22, 2023</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="thumb">
-                                                <a href="blog-single.html"><img src="{{asset('frontend/assets/images/blog/03.jpg')}}" alt="webcode"></a>
-                                            </div>
-                                            <div class="content">
-                                                <h6><a href="blog-single.html">Learn doing with real world projects other countries</a></h6>
-                                                <span>June 24, 2023</span>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="sidebar__categorie">
-                                <div class="head">
-                                    <h6>all Categories</h6>
-                                </div>
-                                <div class="body">
-                                    <div class="content">
-                                        <ul>
-                                            <li>
-                                                <a href="#"><i class="fa-solid fa-folder-closed"></i> Advices</a>
-                                                <span>02</span>
-                                            </li>
-                                            <li>
-                                                <a href="#"><i class="fa-solid fa-folder-closed"></i> Business</a>
-                                                <span>04</span>
-                                            </li>
-                                            <li>
-                                                <a href="#"><i class="fa-solid fa-folder-closed"></i> Consulting</a>
-                                                <span>06</span>
-                                            </li>
-                                            <li>
-                                                <a href="#"><i class="fa-solid fa-folder-closed"></i> Marketing</a>
-                                                <span>08</span>
-                                            </li>
-                                            <li>
-                                                <a href="#"><i class="fa-solid fa-folder-closed"></i> Personal</a>
-                                                <span>03</span>
-                                            </li>
-                                            <li>
-                                                <a href="#"><i class="fa-solid fa-folder-closed"></i> Strategy</a>
-                                                <span>07</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="sidebar__tags">
-                                <div class="head">
-                                    <h6>Our Popular Tags</h6>
-                                </div>
-                                <div class="body">
-                                    <div class="content">
-                                        <ul>
-                                            <li><a href="#">Advices</a></li>
-                                            <li><a href="#">business</a></li>
-                                            <li><a href="#">strategy</a></li>
-                                            <li><a href="#">consulting</a></li>
-                                            <li><a href="#">marketing</a></li>
-                                            <li><a href="#">invest</a></li>
-                                            <li><a href="#">Advices</a></li>
-                                            <li><a href="#">social</a></li>
-                                            <li><a href="#">strategy</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>

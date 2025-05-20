@@ -50,21 +50,10 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                                 </div>
                                 <ul>
                                     <li><a href="{{route('login')}}">Login</a></li>
-                                    <li>/</li>
-                                    <li><a href="{{route('register')}}">Register</a></li>
+                                    
                                 </ul>
                             </div>
-                            <div class="langauge">
-                                <div class="langauge__icon">
-                                    <i class="fa-solid fa-globe"></i>
-                                </div>
-                                <select class="form-select">
-                                    <option value="1">English</option>
-                                    <option value="2">Bangla</option>
-                                    <option value="3">Hindi</option>
-                                    <option value="4">Urdu</option>
-                                </select>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -105,7 +94,7 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                                 </li>
                                 <li><a href="{{route('doctors')}}">Doctors</a></li>
                                 <li><a href="{{route('blog')}}">Blog</a></li>
-                                <li><a href="{{route('shop')}}">Shop</a></li>
+                                {{-- <li><a href="{{route('shop')}}">Shop</a></li> --}}
                                 <li><a href="{{route('contact')}}">Contact</a></li>
                                 <li><a href="{{route('eb_registration')}}">E.B Registration</a></li>
                             </ul>
@@ -128,7 +117,7 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
     @yield("content")
     <!-- ==========Footer Section Ends Here========== -->
     <footer class="footer bg-img" style="background-image: url({{asset('frontend/assets/images/bg/03.jpg')}});">
-        <div class="footer__top">
+        {{-- <div class="footer__top">
             <div class="container">
                 <div class="row g-4 align-items-center">
                     <div class="col-lg-6 col-12">
@@ -145,9 +134,9 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
-        <div class="footer__middile">
+        {{-- <div class="footer__middile">
             <div class="container">
                 <div class="row justify-content-center g-4">
                     <div class="col-xl-3 col-sm-6 col-12">
@@ -265,11 +254,11 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="footer__bottom">
             <div class="container">
                 <div class="text-center">
-                    <p>{{$general_info->copyright}}<a href="https://doctorsdigitalbranding.com/">WebCode</a></p>
+                    <p>{{$general_info->copyright}}<a href="https://advancellhealth.com">Advancell Health</a></p>
                 </div>
             </div>
         </div>

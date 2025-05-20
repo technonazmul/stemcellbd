@@ -29,10 +29,19 @@ class CommentController extends Controller
     }
 
     //blog comment
-    public function blog_comment(){
-        $blog_comment= Comment::orderBy('created_at', 'desc')->where('parent_id','0')->get();
-        return view('backend.blog.blog_comment',compact('blog_comment'));
-    }
+    public function blog_comment() {
+    $blog_comment = Comment::with('blog_post') // eager load blog_post
+        ->where('parent_id', '0')
+        ->orderBy('created_at', 'desc')
+        ->get()
+        ->filter(function ($comment) {
+            return $comment->blog_post !== null;
+        })
+        ->values(); // reset the collection keys
+
+    return view('backend.blog.blog_comment', compact('blog_comment'));
+}
+
     //approve_comment 
     public function approve_comment($id){
         $approve_comment= Comment::find($id);

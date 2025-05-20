@@ -62,7 +62,8 @@ class GeneralInfoController extends Controller
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time().'.'.$image->extension();
-            $image->storeAs('public/testimonial', $imageName);
+            $image->storeAs('testimonial', $imageName, 'public');
+           
         } else {
             $imageName = null; // No image uploaded
         }
@@ -108,7 +109,7 @@ class GeneralInfoController extends Controller
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time().'.'.$image->extension();
-            $image->storeAs('public/testimonial', $imageName);
+            $image->storeAs('testimonial', $imageName, 'public');
         } else {
             $imageName = null; // No image uploaded
         }

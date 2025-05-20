@@ -30,7 +30,7 @@
                             <label for="exampleFormControlInput1" class="form-label">Title</label>
                             <input value="{{$edit_service->title}}" name="title" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Title" required>
                         </div>
-                        <img class="mt-1" src="{{asset('storage/service/'.$edit_service->thumbnail)}}" style="max-width: 190px; height:190px;" alt="">
+                        <img class="mt-1" src="{{asset('storage/public/service/'.$edit_service->thumbnail)}}" style="max-width: 190px; height:190px;" alt="">
                         <div class="mt-2">
                             <label for="exampleFormControlInput1" class="form-label">Image</label>
                                 <input type="file" name="thumbnail" id="">

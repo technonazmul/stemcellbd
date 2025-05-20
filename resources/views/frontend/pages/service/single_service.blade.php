@@ -22,7 +22,7 @@
             <div class="row flex-row-reverse g-4">
                 <div class="col-lg-8 col-12">
                     <div class="service__maincontent">
-                        <img src="{{asset('storage/service/'.$single_service->thumbnail)}}" alt="webcode" class="mb-4 w-100">
+                        <img src="{{asset('storage/public/service/'.$single_service->thumbnail)}}" alt="webcode" class="mb-4 w-100">
                         <h5>{{$single_service->title}}</h5>
                         <p>{!!$single_service->description !!}</p>
                         {{-- <div class="row g-4 mb-4 mt-3">

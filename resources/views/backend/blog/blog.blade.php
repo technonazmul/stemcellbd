@@ -34,13 +34,13 @@
             @php $i++@endphp
             <td>@php echo $i @endphp </td>
             <td>{{$blog->title}}</td>
-            <td><img src="{{ asset('storage/blog/' . $blog->thumbnail) }}" class="card-img-top" alt="..." width="800" height="200"></td>
+            <td><img src="{{ asset('storage/public/blog/' . $blog->thumbnail) }}" class="card-img-top" alt="..." style="width: 200px;"></td>
             <td>{{$blog->tags}} </td>
             <td>@if($blog->user){{$blog->user->name}}@endif </td>
             <td>
                 <a href="" class="btn btn-sm btn-info">View</a>
                 <a href="{{route('admin.edit_blog',$blog->id)}}" class="btn btn-warning btn-sm">Edit</a>
-                <a href="{{route('admin.delete_blog', $blog->id)}}" class="btn btn-sm btn-danger">Delete</a>
+                <a href="{{route('admin.delete_blog', $blog->id)}}" onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-sm btn-danger">Delete</a>
             </td>
           </tr>
         </tbody>

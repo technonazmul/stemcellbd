@@ -23,8 +23,39 @@ class PagesController extends Controller
         $single_blog=Blog::find($id);
         return view('frontend.pages.single_blog',compact('single_blog'));
      }
-    //add testimonial
-    public function testimonial(){
+    
+     public function blogSearch(Request $request) {
+        $searchTerm = $request->input('search');
+
+        $blogs = Blog::where('title', 'LIKE', '%' . $searchTerm . '%')
+            ->orWhere('description', 'LIKE', '%' . $searchTerm . '%')
+            ->orWhere('tags', 'LIKE', '%' . $searchTerm . '%')
+            ->paginate(10); // You can change pagination number as needed
+
+        
+        if (count($blogs) > 0) {
+            return view('frontend.pages.blog',compact('blogs'));
+        }
+
+        return view('frontend.pages.noresult');
         
     }
+
+    public function blogSearchByTags($search) {
+        $searchTerm = $search;
+
+        $blogs = Blog::where('title', 'LIKE', '%' . $searchTerm . '%')
+            ->orWhere('description', 'LIKE', '%' . $searchTerm . '%')
+            ->orWhere('tags', 'LIKE', '%' . $searchTerm . '%')
+            ->paginate(10); // You can change pagination number as needed
+
+        
+        if (count($blogs) > 0) {
+            return view('frontend.pages.blog',compact('blogs'));
+        }
+
+        return view('frontend.pages.noresult');
+        
+    }
+
 }

@@ -14,6 +14,7 @@ use App\Http\Controllers\Backend\PageController as BackendPageController;
 use App\Http\Controllers\Frontend\PagesController as FrontendPagesController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\GeneralInfoController;
+use App\Http\Controllers\Auth\LoginController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,7 +28,11 @@ use App\Http\Controllers\Backend\GeneralInfoController;
 Route::get('/storage/{file}', function ($file) {
     return response()->file(Storage::path($file));
 })->where('file', '.*');
-Auth::routes();
+
+// Login Routes
+Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('login', [LoginController::class, 'login']);
+Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/',[HomeController::class,'index'])->name('index');
 Route::get('/home', [AuthController::class, 'index'])->name('home');
@@ -43,6 +48,9 @@ Route::get('/doctors',[FrontendPagesController::class,'doctors'])->name('doctors
 Route::get('/single_doctor/{id}',[FrontendPagesController::class,'single_doctor'])->name('single_doctor');
 Route::get('/blog',[HomeController::class,'blog'])->name('blog');
 Route::get('/single_blog/{id}',[FrontendPagesController::class,'single_blog'])->name('single_blog');
+Route::get('/blog/search',[FrontendPagesController::class,'blogSearch'])->name('blog.search');
+Route::get('/blog/search/tags/{search}',[FrontendPagesController::class,'blogSearchByTags'])->name('blog.tag.search');
+
 //frontend shop start
 Route::get('/shop',[HomeController::class,'shop'])->name('shop');
 Route::get('/shop_single/{slug}',[HomeController::class,'shop_single'])->name('shop_single');
@@ -58,7 +66,7 @@ Route::post('/free_consultancy',[FormController::class,'free_consultancy'])->nam
 
 // Admin route start, will make group and middleware later
 // Admin route end   middleware(['auth'])->
-Route::prefix('admin')->group(function () {
+Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/dashboard',[BackendPageController::class,'dashboard'])->name('admin.dashboard');
     //general info
     Route::get('/geleral_info',[GeneralInfoController::class,'geleral_info'])->name('admin.general_info');

@@ -30,10 +30,12 @@
                             <label for="exampleFormControlInput1" class="form-label">Title</label>
                             <input name="title" value="{{$edit_blog->title}}" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Title" required>
                         </div>
+                        <br>
                         <div>
                             <label for="exampleFormControlInput1" class="form-label">Old Image</label>
-                            <img height="330" width="250" src="{{asset('storage/blog/'.$edit_blog->thumbnail)}}" class="card-img-top" alt="...">
+                            <img style="max-width: 500px;" src="{{asset('storage/public/blog/'.$edit_blog->thumbnail)}}" class="card-img-top" alt="...">
                         </div>
+                        <br>
                         <div class="mt-2">
                             <label for="exampleFormControlInput1" class="form-label">Image</label>
                                 <input type="file" name="thumbnail" id="">

@@ -39,7 +39,7 @@
                 <td>{{$doctor->name}}</td>
                 <td>{{$doctor->phone}}</td>
                 <td>{{$doctor->specialization}}</td>
-                <td> <img height="200" width="80" src="{{asset('storage/doctors/'.$doctor->image)}}" class="card-img-top" alt="..."></td>
+                <td> <img height="200" width="80" src="{{asset('storage/public/doctors/'.$doctor->image)}}" class="card-img-top" alt="..."></td>
                 <td>
                     {{-- popup button --}}
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{$doctor->id}}">
@@ -48,7 +48,7 @@
                     <a href="{{ route('admin.edit_doctor', ['id' => $doctor->id]) }}">
                         <button class="btn btn-info btn-sm">Edit</button>
                     </a>
-                    <a href="{{ route('admin.delete_doctor', ['id' => $doctor->id]) }}">
+                    <a onclick="return confirm('Are you sure you want to delete this item?');" href="{{ route('admin.delete_doctor', ['id' => $doctor->id]) }}">
                         <button class="btn btn-danger btn-sm">Delete</button>
                     </a>
                 </td>

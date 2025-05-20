@@ -11,7 +11,7 @@ use App\Models\Appointment;
 class PageController extends Controller
 {
     function dashboard() {
-        return view('backend.dashboard');
+        return view('backend.main');
     }
     function doctor(){
         return view('backend.doctor.doctor');

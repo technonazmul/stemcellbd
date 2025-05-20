@@ -51,10 +51,10 @@
             <td scope="row">{{ $i }}</td>
             <td>{{$service->title}}</td>
             <td>{!! Illuminate\Support\Str::limit(strip_tags($service->description),80) !!}</td>
-            <td><img src="{{asset('storage/service/'.$service->thumbnail)}}" style="max-width: 90px; height:90px;" alt=""></td>
+            <td><img src="{{ asset('storage/public/service/'.$service->thumbnail) }}" style="max-width: 90px; height:90px;" alt=""></td>
             <td>
                 <a class="btn btn-sm btn-warning mb-1" href="{{route('admin.edit_service',$service->id)}}">Edit</a>
-                <a class="btn btn-sm btn-danger" href="{{route('admin.delete_service',$service->id)}}">Delete</a>
+                <a class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this item?');" href="{{route('admin.delete_service',$service->id)}}">Delete</a>
             </td>
         </tr>
     </tbody>

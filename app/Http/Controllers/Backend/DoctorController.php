@@ -11,7 +11,7 @@ class DoctorController extends Controller
     function save_doctor(Request $request){
         $request->validate([
             'name' => 'required|string|max:255',
-            'phone' => 'required|string|max:20',
+            
         ]);
         $doctor = new Doctor();
     $doctor->name = $request->input('name');
@@ -31,8 +31,11 @@ class DoctorController extends Controller
     if ($request->hasFile('image')) {
         $image = $request->file('image');
         $newFilename = time() . '.' . $image->getClientOriginalExtension();
-        $path = $image->storeAs('public/doctors',$newFilename); // Store in the storage directory
-        $doctor->image= $newFilename; // Save the image path to the database
+        
+        // Store the file and save the correct path
+        $image->storeAs('doctors', $newFilename, 'public');
+        $doctor->image = $newFilename;
+        
     }
 
     $doctor->save();
@@ -52,8 +55,7 @@ class DoctorController extends Controller
     $doctor=Doctor::find($id);
     $request->validate([
         'name' => 'required|string|max:255',
-        'phone' => 'required|string|max:20',
-        'email' => 'required|string|max:255',
+        
     ]);
 
     // Update doctor's information
@@ -81,7 +83,7 @@ class DoctorController extends Controller
     if ($request->hasFile('image')) {
         $image = $request->file('image');
         $newFilename = time() . '.' . $image->getClientOriginalExtension();
-        $path = $image->storeAs('public/doctors', $newFilename); // Store in the storage directory
+        $image->storeAs('doctors', $newFilename, 'public');
         $doctor->image = $newFilename; // Save the new image path to the database
     }
 

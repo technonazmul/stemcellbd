@@ -15,7 +15,7 @@
 
     <!-- Scripts -->
     <link rel="stylesheet" href="{{asset('assets/app-lhA9k1qk.css')}}">
-    <script src="assets/app-Y_MuImAH.js"></script>
+    <script src="assets/aapp-Y_MuImAH.js"></script>
     
 </head>
 <body>

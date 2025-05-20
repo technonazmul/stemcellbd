@@ -31,12 +31,12 @@
                           <input name="name" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Your name" required>
                       </div>
                       <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Phone</label> <span style="color:red">*</span>
-                        <input name="phone" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Your Phone" required>
+                        <label for="exampleFormControlInput1" class="form-label">Phone</label> 
+                        <input name="phone" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Your Phone" >
                       </div>
                       <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Email</label><span style="color:red">*</span>
-                        <input name="email" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Your email" required>
+                        <label for="exampleFormControlInput1" class="form-label">Email</label>
+                        <input name="email" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Your email" >
                       </div>
                       <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Specialization</label>

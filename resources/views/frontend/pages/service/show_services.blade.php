@@ -30,7 +30,7 @@
                         <div class="service__item">
                             <div class="service__thumb">
                                 <a href="{{route('single_service',$service->id)}}">
-                                    <img src="{{asset('storage/service/'.$service->thumbnail)}}" style="height:200px;width:auto;" alt="webcodeltd">
+                                    <img src="{{asset('storage/public/service/'.$service->thumbnail)}}" style="height:200px;width:auto;" alt="webcodeltd">
                                 </a>
                             </div>
                             <div class="service__content">

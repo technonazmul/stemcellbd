@@ -42,7 +42,7 @@ class BlogController extends Controller
         if($request->hasFile('thumbnail')){
         $thumbnail=$request->file('thumbnail');
         $newFileName= time() . '.' . $thumbnail->getClientOriginalExtension();
-        $path = $thumbnail->storeAs('public/blog',$newFileName); // Store in the storage directory
+        $thumbnail->storeAs('blog', $newFileName, 'public');
         $blog->thumbnail= $newFileName; // Save the image path to the database    
         }
         $blog->save();
@@ -56,7 +56,7 @@ class BlogController extends Controller
     public function update_blog(Request $request , $id){
         $blog=Blog::find($id);
         $validated = $request->validate([
-            'title' => 'required|unique:blogs|max:255'
+            'title' => 'required|max:255'
         ]);
         if(Auth::check()) {
             $user_id=Auth::user()->id;
@@ -64,8 +64,7 @@ class BlogController extends Controller
             $user_id='1';
         }
         $blog->title=$request->input('title');
-        $slug = Str::slug($request->input('title'), '-');
-        $blog->slug =$slug;
+       
 
         // Decode the JSON string into an array
         $tags = json_decode($request->input('tags'), true);
@@ -87,7 +86,7 @@ class BlogController extends Controller
         if($request->hasFile('thumbnail')){
         $thumbnail=$request->file('thumbnail');
         $newFileName= time() . '.' . $thumbnail->getClientOriginalExtension();
-        $path = $thumbnail->storeAs('public/blog/',$newFileName); // Store in the storage directory
+        $thumbnail->storeAs('blog', $newFileName, 'public');
         $blog->thumbnail= $newFileName; // Save the image path to the database    
         }
         $blog->save();

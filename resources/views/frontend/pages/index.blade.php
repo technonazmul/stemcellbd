@@ -12,7 +12,7 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                 <h2>Rejuvenate yourself by your own stem cell</h2>
                 <p>We help clean all your needs with our various skills and range of awesome services.</p>
                 <ul>
-                    <li><a href="#" class="lab-btn">our services</a></li>
+                    <li><a href="./#service" class="lab-btn">our services</a></li>
                     <li><a href="#" class="lab-btn bg-white">Discover more</a></li>
                 </ul>
             </div>
@@ -139,13 +139,13 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                         <div class="service__item">
                             <div class="service__thumb">
                                 <a href="{{route('single_service',$service->id)}}">
-                                    <img src="{{asset('storage/service/'.$service->thumbnail)}}" alt="webcodeltd" style="width:auto;height:300px;">
+                                    <img src="{{asset('storage/public/service/'.$service->thumbnail)}}" alt="webcodeltd" style="width:auto;height:300px;">
                                 </a>
                             </div>
                             <div class="service__content">
                                 <h5><a href="{{route('single_service',$service->id)}}">{{$service->title}}</a></h5>
                                 <p>{!! Illuminate\Support\Str::limit(strip_tags($service->description), 100) !!}</p>
-                                <a href="service-single.html" class="text-btn">Details<i class="fa-solid fa-angles-right"></i></a>
+                                <a href="{{route('single_service',$service->id)}}" class="text-btn">Details<i class="fa-solid fa-angles-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -283,7 +283,7 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                     <div class="col-xl-3 col-lg-4 col-sm-6 col-12">
                         <div class="team__item">
                             <div class="team__thumb">
-                                <img src="{{asset('storage/doctors/'.$doctor->image)}}" alt="webcodeltd">
+                                <img src="{{asset('storage/public/doctors/'.$doctor->image)}}" alt="webcodeltd">
                             </div>
                             <div class="team__content">
                                 <h6><a href="{{route('single_doctor',$doctor->id)}}">{{$doctor->name}}</a></h6>
@@ -325,7 +325,7 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                         <div class="swiper-slide">
                             <div class="testimonial__item">
                                 <div class="testimonial__thumb">
-                                    <img src="{{asset('storage/testimonial/'.$testimonial->image)}}" alt="webcodeltd">
+                                    <img src="{{asset('storage/public/testimonial/'.$testimonial->image)}}" alt="webcodeltd">
                                     <div class="testimonial__thumb--quote">
                                         <i class="fa-solid fa-quote-right"></i>
                                     </div>

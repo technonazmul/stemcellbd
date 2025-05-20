@@ -25,7 +25,7 @@
                         <div class="col-lg-4 col-sm-6 col-12">
                             <div class="blog__item">
                                 <div class="blog__thumb">
-                                    <a href="{{route('single_blog',$blog->id)}}"><img src="{{asset('storage/blog/'.$blog->thumbnail)}}" alt="webcodeltd" style="max-width: auto; height:400px;"></a>
+                                    <a href="{{route('single_blog',$blog->id)}}"><img src="{{asset('storage/public/blog/'.$blog->thumbnail)}}"></a>
                                 </div>
                                 <div class="blog__content">
                                     <h4><a href="{{route('single_blog',$blog->id)}}">{{$blog->title}} </a></h4>

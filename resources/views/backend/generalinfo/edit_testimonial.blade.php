@@ -29,7 +29,7 @@
                     </div>
                     <div class="form-group">
                         <label for="formGroupExampleInput">Old Image</label>
-                        <img src="{{asset('storage/testimonial/'. $testimonial->image)}}" style="height: 100px;width:auto;" alt="">
+                        <img src="{{asset('storage/public/testimonial/'. $testimonial->image)}}" style="height: 100px;width:auto;" alt="">
                     </div>
                     <div class="form-group">
                         <label for="formGroupExampleInput">Image</label>

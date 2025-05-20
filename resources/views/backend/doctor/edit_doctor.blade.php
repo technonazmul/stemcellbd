@@ -32,12 +32,12 @@
                           <input name="name" value="{{$doctor->name}}" type="text" class="form-control" id="exampleFormControlInput1" placeholder="" required>
                       </div>
                       <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Phone</label> <span style="color:red">*</span>
-                        <input name="phone" value="{{$doctor->phone}}" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Your Phone" required>
+                        <label for="exampleFormControlInput1" class="form-label">Phone</label> 
+                        <input name="phone" value="{{$doctor->phone}}" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Your Phone" >
                       </div>
                       <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Email</label><span style="color:red">*</span>
-                        <input name="email" value="{{$doctor->email}}" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Your email" required>
+                        <label for="exampleFormControlInput1" class="form-label">Email</label>
+                        <input name="email" value="{{$doctor->email}}" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Your email" >
                       </div>
                       <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Specialization</label>
@@ -76,11 +76,11 @@
                             <input name="twitter" value="{{$doctor->twitter}}" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Your Twitter Profile Link" >
                         </div>
                         <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Image</label>
-                            <img style="width:200px;height:150px;" src="{{asset('storage/doctors/'.$doctor->image)}}" class="card-img-top" alt="...">
+                            <label for="exampleFormControlInput1" class="form-label">Old Image</label><br>
+                            <img style="width:200px;height:150px;" src="{{asset('storage/public/doctors/'.$doctor->image)}}" class="card-img-top" alt="...">
                         </div>
                         <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Image</label>
+                            <label for="exampleFormControlInput1" class="form-label">Select New Image</label>
                             <input name="image" type="file" class="form-control" id="exampleFormControlInput1" placeholder="" >
                         </div>
                         <div class="mb-3">

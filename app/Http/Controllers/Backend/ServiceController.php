@@ -9,12 +9,14 @@ use App\Models\Service;
 use App\Models\ServiceCategory;
 use Auth;
 use Illuminate\Support\Facades\Storage;
+
 class ServiceController extends Controller
 {
     //service category
     public function service_category(){
         return view('backend.service.service_category');
     }
+
     public function add_service_category(Request $request) {
         $validated = $request->validate([
             'name' => 'required|unique:service_categories|max:255'
@@ -52,107 +54,154 @@ class ServiceController extends Controller
 
         return redirect()->route('admin.service_category')->with('success','Service Category updated successfully');
     }
+
     //show service 
     public function all_service(){
-        $all_service= Service::all();
-        $service_category= ServiceCategory::all();
+        $all_service = Service::all();
+        $service_category = ServiceCategory::all();
         return view('backend.service.all_service',compact('all_service','service_category'));
     }
+
     public function show_service($id){
-        $service_category= ServiceCategory::find($id);
+        $service_category = ServiceCategory::find($id);
         return view('backend.service.show_service',compact('service_category'));
     }
+
     //create services
     public function add_service(){
         return view('backend.service.add_service');
     }
+
     public function create_service(Request $request){
         $validated = $request->validate([
-            'title' => 'required|unique:services|max:255'
+            'title' => 'required|max:255' // Removed unique constraint
         ]);
+        
         if(Auth::check()) {
-            $user_id=Auth::user()->id;
-        }else {
-            $user_id='1';
+            $user_id = Auth::user()->id;
+        } else {
+            $user_id = '1';
         }
-        $service=new Service();
-
-        $service->title=$request->input('title');
-        $slug = Str::slug($request->input('title'), '-');
-        $service->slug =$slug;
-
+        
+        $service = new Service();
+        $service->title = $request->input('title');
+        
+        // Generate a unique slug
+        $baseSlug = Str::slug($request->input('title'), '-');
+        $slug = $baseSlug;
+        $counter = 1;
+        
+        // Check if the slug exists and increment counter until we find a unique one
+        while (Service::where('slug', $slug)->exists()) {
+            $slug = $baseSlug . '-' . $counter;
+            $counter++;
+        }
+        
+        $service->slug = $slug;
         
         // Decode the JSON string into an array
         $tags = json_decode($request->input('tags'), true);
-
-        // Extract the 'value' from each item and join them with commas
-        $tags_as_string = collect($tags)->pluck('value')->implode(',');
-        $service->tags =$tags_as_string;
-        $service->user_id =$user_id;
-        $service->meta_title=$request->input('meta_title');
-        $service->meta_description=$request->input('meta_description');
-        $service->description=$request->input('description');
-        $service->service_category_id=$request->service_category_id;
         
-        if($request->hasFile('thumbnail')){
-        $thumbnail=$request->file('thumbnail');
-        $newFileName= time() . '.' . $thumbnail->getClientOriginalExtension();
-        $path = $thumbnail->storeAs('public/service',$newFileName); // Store in the storage directory
-        $service->thumbnail= $newFileName; // Save the image path to the database    
+        // Extract the 'value' from each item and join them with commas (with null check)
+        if (is_array($tags)) {
+            $tags_as_string = collect($tags)->pluck('value')->implode(',');
+            $service->tags = $tags_as_string;
         }
+        
+        $service->user_id = $user_id;
+        $service->meta_title = $request->input('meta_title');
+        $service->meta_description = $request->input('meta_description');
+        $service->description = $request->input('description');
+        $service->service_category_id = $request->service_category_id;
+        
+        // Handle file upload
+        if ($request->hasFile('thumbnail')) {
+            $thumbnail = $request->file('thumbnail');
+            $newFileName = time() . '.' . $thumbnail->getClientOriginalExtension();
+            
+            // Store the file and save the correct path
+            $thumbnail->storeAs('service', $newFileName, 'public');
+            $service->thumbnail = $newFileName;
+        }
+        
         $service->save();
-        return redirect()->back()->with('success','service Create successfully');
+        return redirect()->back()->with('success', 'Service created successfully');
     }
+
     //edit service
     public function edit_service($id){
-        $edit_service=Service::find($id);
+        $edit_service = Service::find($id);
         return view('backend.service.edit_service',compact('edit_service'));
     }
+
     //update service
-    public function update_service(Request $request,$id){
+    public function update_service(Request $request, $id){
         $validated = $request->validate([
-            'title' => 'required|unique:services|max:255'
+            'title' => 'required|max:255|unique:services,title,'.$id // Allow updating the same title
         ]);
+        
         if(Auth::check()) {
-            $user_id=Auth::user()->id;
-        }else {
-            $user_id='1';
+            $user_id = Auth::user()->id;
+        } else {
+            $user_id = '1';
         }
-        $service=service::find($id);
+        
+        $service = Service::find($id);
 
-        $service->title=$request->input('title');
-        $slug = Str::slug($request->input('title'), '-');
-        $service->slug =$slug;
-
+        // Only update the title if it has changed
+        if ($service->title != $request->input('title')) {
+            $service->title = $request->input('title');
+            
+            // Generate a unique slug
+            $baseSlug = Str::slug($request->input('title'), '-');
+            $slug = $baseSlug;
+            $counter = 1;
+            
+            // Check if the slug exists and increment counter until we find a unique one
+            while (Service::where('slug', $slug)->where('id', '!=', $id)->exists()) {
+                $slug = $baseSlug . '-' . $counter;
+                $counter++;
+            }
+            
+            $service->slug = $slug;
+        }
         
         // Decode the JSON string into an array
         $tags = json_decode($request->input('tags'), true);
-
-        // Extract the 'value' from each item and join them with commas
-        $tags_as_string = collect($tags)->pluck('value')->implode(',');
-        $service->tags =$tags_as_string;
-        $service->user_id =$user_id;
-        $service->meta_title=$request->input('meta_title');
-        $service->meta_description=$request->input('meta_description');
-        $service->description=$request->input('description');
-        $service->service_category_id=$request->service_category_id;
-        $oldImage = $service->thumbnail;
-    // If a new image is uploaded, delete the old image and save the new image
-    if ($request->hasFile('thumbnail')) {
-        // Delete the old image from storage
-        if ($oldImage) {
-            Storage::delete('public/service/' . $oldImage);
-        }}
         
-        if($request->hasFile('thumbnail')){
-        $thumbnail=$request->file('thumbnail');
-        $newFileName= time() . '.' . $thumbnail->getClientOriginalExtension();
-        $path = $thumbnail->storeAs('public/service',$newFileName); // Store in the storage directory
-        $service->thumbnail= $newFileName; // Save the image path to the database    
+        // Extract the 'value' from each item and join them with commas (with null check)
+        if (is_array($tags)) {
+            $tags_as_string = collect($tags)->pluck('value')->implode(',');
+            $service->tags = $tags_as_string;
         }
+        
+        $service->user_id = $user_id;
+        $service->meta_title = $request->input('meta_title');
+        $service->meta_description = $request->input('meta_description');
+        $service->description = $request->input('description');
+        $service->service_category_id = $request->service_category_id;
+        
+        // If a new image is uploaded, delete the old image and save the new image
+        if ($request->hasFile('thumbnail')) {
+            $oldImage = $service->thumbnail;
+            
+            // Delete the old image from storage
+            if ($oldImage) {
+                Storage::delete('public/service/' . $oldImage);
+            }
+            
+            $thumbnail = $request->file('thumbnail');
+            $newFileName = time() . '.' . $thumbnail->getClientOriginalExtension();
+            
+            // Store the file and save the correct path - consistent with create_service
+            $thumbnail->storeAs('service', $newFileName, 'public');
+            $service->thumbnail = $newFileName;
+        }
+        
         $service->save();
-        return redirect()->back()->with('success','service Update successfully');
+        return redirect()->back()->with('success', 'Service updated successfully');
     }
+
     //delete service
     public function delete_service($id) {
         // Find the service by ID
@@ -160,10 +209,10 @@ class ServiceController extends Controller
         
         // Check if the service exists
         if (!$service) {
-            return redirect()->back()->withError('service not found');
+            return redirect()->back()->with('error', 'Service not found');
         }
     
-        //Delete the associated image file from storage
+        // Delete the associated image file from storage
         if ($service->thumbnail) {
             Storage::delete('public/service/' . $service->thumbnail);
         }
@@ -172,6 +221,6 @@ class ServiceController extends Controller
         $service->delete();
     
         // Redirect back with a success message
-        return redirect()->back()->with('success', 'service and associated image deleted successfully!');
+        return redirect()->back()->with('success', 'Service and associated image deleted successfully!');
     }
 }
