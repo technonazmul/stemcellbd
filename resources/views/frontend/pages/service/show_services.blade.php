@@ -22,7 +22,7 @@
             <div class="section__wrapper">
                 <div class="row g-4 justify-content-center">
                     @php
-                        $services=App\Models\Service::where('service_category_id',$show_services->id)->paginate(2);
+                        $services=App\Models\Service::where('service_category_id',$show_services->id)->paginate(6);
                     @endphp
                     @if(!empty($services))
                     @foreach($services as $service)
@@ -30,7 +30,7 @@
                         <div class="service__item">
                             <div class="service__thumb">
                                 <a href="{{route('single_service',$service->id)}}">
-                                    <img src="{{asset('storage/public/service/'.$service->thumbnail)}}" style="height:200px;width:auto;" alt="webcodeltd">
+                                    <img src="{{asset('storage/public/service/'.$service->thumbnail)}}" alt="webcodetechnology">
                                 </a>
                             </div>
                             <div class="service__content">
