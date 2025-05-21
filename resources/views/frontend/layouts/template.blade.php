@@ -117,7 +117,7 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
     @yield("content")
     <!-- ==========Footer Section Ends Here========== -->
     <footer class="footer bg-img" style="background-image: url({{asset('frontend/assets/images/bg/03.jpg')}});">
-        {{-- <div class="footer__top">
+         <div class="footer__top">
             <div class="container">
                 <div class="row g-4 align-items-center">
                     <div class="col-lg-6 col-12">
@@ -134,9 +134,9 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                         </div>
                     </div>
                 </div>
-            </div> --}}
+            </div> 
         </div>
-        {{-- <div class="footer__middile">
+        <div class="footer__middile">
             <div class="container">
                 <div class="row justify-content-center g-4">
                     <div class="col-xl-3 col-sm-6 col-12">
@@ -254,7 +254,7 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                     </div>
                 </div>
             </div>
-        </div> --}}
+        </div> 
         <div class="footer__bottom">
             <div class="container">
                 <div class="text-center">

@@ -257,7 +257,7 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                                 </div>
                             </li>
                         </ul>
-                        <a href="#" class="lab-btn">take an appointment</a>
+                        <a href="<?php echo e(route('index')); ?>#appointment" class="lab-btn">take an appointment</a>
                     </div>
                 </div>
             </div>
