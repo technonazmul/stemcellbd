@@ -1,0 +1,12 @@
+    <script src="<?php echo e(asset('frontend/assets/js/jquery.js')); ?>"></script>
+    <script src="<?php echo e(asset('frontend/assets/js/bootstrap.bundle.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('frontend/assets/js/waypoints.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('frontend/assets/js/swiper.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('frontend/assets/js/jquery.counterup.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('frontend/assets/js/circularProgressBar.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('frontend/assets/js/wow.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('frontend/assets/js/isotope.pkgd.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('frontend/assets/js/viewport.jquery.js')); ?>"></script>
+    <script src="<?php echo e(asset('frontend/assets/js/odometer.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('frontend/assets/js/lightcase.js')); ?>"></script>
+    <script src="<?php echo e(asset('frontend/assets/js/functions.js')); ?>"></script><?php /**PATH /Users/macbookair/Desktop/Laravel/stemcellbd/resources/views/frontend/layouts/inc/script.blade.php ENDPATH**/ ?>

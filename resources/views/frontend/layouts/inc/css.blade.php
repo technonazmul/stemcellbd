@@ -13,4 +13,4 @@
 <link rel="stylesheet" href="{{ asset('frontend/assets/css/lightcase.css') }}?v=1.0.1">
 <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}?v=1.0.1">
 
-    <title>Platinum</title>
+    <title></title>
