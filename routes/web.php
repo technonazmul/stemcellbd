@@ -71,6 +71,10 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     //general info
     Route::get('/geleral_info',[GeneralInfoController::class,'geleral_info'])->name('admin.general_info');
     Route::post('/update_general_info/{id}',[GeneralInfoController::class,'update_general_info'])->name('admin.update_general_info');
+    //banner section
+
+    Route::get('/banner',[GeneralInfoController::class,'banner'])->name('admin.banner');
+    Route::post('/update_banner/{id}',[GeneralInfoController::class,'update_banner'])->name('admin.update_banner');
     //testimonial
     Route::get('/testimonial',[GeneralInfoController::class,'testimonial'])->name('admin.testimonial');
     Route::post('/add_testimonial',[GeneralInfoController::class,'add_testimonial'])->name('admin.add_testimonial');

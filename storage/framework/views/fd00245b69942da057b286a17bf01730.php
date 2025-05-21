@@ -1,5 +1,6 @@
 <?php
 $general_info=App\Models\GeneralInfo::findOrFail(1);
+$banner=App\Models\Banner::findOrFail(1);
 ?>
 
 
@@ -9,7 +10,7 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
         
         <div class="container">
             <div class="banner__content">
-                <h2>Rejuvenate yourself by your own stem cell</h2>
+                <h2><?php echo e($banner->title); ?></h2>
                 <p>We help clean all your needs with our various skills and range of awesome services.</p>
                 <ul>
                     <li><a href="./#service" class="lab-btn">our services</a></li>

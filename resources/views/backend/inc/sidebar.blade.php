@@ -42,6 +42,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="{{route('admin.banner')}}" class="nav-link">
+                  <i class=""></i>
+                  <p>Banner</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="{{route('admin.testimonial')}}" class="nav-link">
                   <i class=""></i>
                   <p>Add Testimonial</p>

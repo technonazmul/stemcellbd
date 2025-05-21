@@ -1,5 +1,6 @@
 @php
 $general_info=App\Models\GeneralInfo::findOrFail(1);
+$banner=App\Models\Banner::findOrFail(1);
 @endphp
 @extends('frontend.layouts.template')
 
@@ -9,7 +10,7 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
         {{-- <video src="{{asset('frontend/assets/video/01.mp4')}}" muted="" loop="" autoplay=""></video> --}}
         <div class="container">
             <div class="banner__content">
-                <h2>Rejuvenate yourself by your own stem cell</h2>
+                <h2>{{$banner->title}}</h2>
                 <p>We help clean all your needs with our various skills and range of awesome services.</p>
                 <ul>
                     <li><a href="./#service" class="lab-btn">our services</a></li>

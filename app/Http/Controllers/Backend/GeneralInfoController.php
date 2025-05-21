@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\GeneralInfo;
+use App\Models\Banner;
 use App\Models\Testimonial;
 use Illuminate\Support\Facades\Storage;
 
@@ -38,6 +39,54 @@ class GeneralInfoController extends Controller
         $general_info->save();
         return redirect()->back()->with('success','Info Update Successfull');
     }
+//Banner section 
+public function banner(){
+        $banner=Banner::findorFail(1);
+        return view('backend.generalinfo.banner',compact('banner'));
+    }
+
+public function update_banner(Request $request, $id)
+{
+    // $request->validate([
+    //     'title' => 'required|string|max:255',
+    //     'subtitle' => 'nullable|string',
+    //     'button1_text' => 'nullable|string|max:100',
+    //     'button1_url' => 'nullable|string|max:255',
+    //     'button2_text' => 'nullable|string|max:100',
+    //     'button2_url' => 'nullable|string|max:255',
+    //     'background_image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+    //     'video' => 'nullable|mimetypes:video/mp4|max:10240', // 10MB
+    // ]);
+
+    $banner = \App\Models\Banner::findOrFail($id);
+
+    $banner->title = $request->title;
+    // $banner->subtitle = $request->subtitle;
+    // $banner->button1_text = $request->button1_text;
+    // $banner->button1_url = $request->button1_url;
+    // $banner->button2_text = $request->button2_text;
+    // $banner->button2_url = $request->button2_url;
+
+    // // Update image if new one uploaded
+    // if ($request->hasFile('background_image')) {
+    //     if ($banner->background_image) {
+    //         \Storage::delete('public/' . $banner->background_image);
+    //     }
+    //     $banner->background_image = $request->file('background_image')->store('banners', 'public');
+    // }
+
+    // // Update video if new one uploaded
+    // if ($request->hasFile('video')) {
+    //     if ($banner->video) {
+    //         \Storage::delete('public/' . $banner->video);
+    //     }
+    //     $banner->video = $request->file('video')->store('banners', 'public');
+    // }
+
+    $banner->save();
+
+    return redirect()->back()->with('success', 'Banner updated successfully.');
+}
 
     //testimonails
     public function testimonial(){
