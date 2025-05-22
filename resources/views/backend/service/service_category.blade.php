@@ -50,7 +50,7 @@
                     <td>{{$service_category->name}}</td>
                     <td>
                         <a href="{{route('admin.edit_service_category',$service_category->id)}}"><button type="button" class="btn btn-warning btn-sm">Edit</button></a>
-                        <a href=""><button class="btn btn-sm btn-danger">Delate</button></a>
+                        <a href="{{route('admin.delete_service_category', $service_category->id)}}" onclick="return confirm('Are you sure?')"><button class="btn btn-sm btn-danger">Delate</button></a>
                     </td>
                 </tr>
                 @endforeach

@@ -62,22 +62,22 @@
             <input type="file" name="background_image" id="background_image" class="form-control">
             @if (!empty($banner->background_image))
                 <div class="mt-2">
-                    <img src="{{ asset('storage/' . $banner->background_image) }}" alt="Banner Background"
+                    <img src="{{ asset('storage/public/' . $banner->background_image) }}" alt="Banner Background"
                          class="img-thumbnail" style="max-width: 300px;">
                 </div>
             @endif
         </div>
 
         {{-- Optional Video --}}
-        <div class="mb-3">
+        {{-- <div class="mb-3">
             <label for="video" class="form-label">Background Video (optional)</label>
             <input type="file" name="video" id="video" class="form-control">
             @if (!empty($banner->video))
                 <div class="mt-2">
-                    <video src="{{ asset('storage/' . $banner->video) }}" controls style="max-width: 300px;"></video>
+                    <video src="{{ asset('storage/public/' . $banner->video) }}" controls style="max-width: 300px;"></video>
                 </div>
             @endif
-        </div>
+        </div> --}}
 
         <button type="submit" class="btn btn-primary">Update Banner</button>
     </form>

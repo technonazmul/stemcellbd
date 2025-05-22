@@ -100,9 +100,7 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                             </ul>
                         </div>
                         <div class="cartbtn">
-                            <div class="cart">
-                                <a href="cart.html"><i class="fa-solid fa-basket-shopping"></i></a>
-                            </div>
+                            
                             <div class="headerbtn">
                                 <a href="<?php echo e(route('index')); ?>#appointment" class="lab-btn">appointment <i class="fa-solid fa-border-all"></i></a>
                             </div>
@@ -201,27 +199,29 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                     <div class="col-xl-3 col-sm-6 col-12">
                         <div class="footer__post">
                             <div class="footer__title">
-                                <h5>Recent news</h5>
+                                <h5>Blogs</h5>
                             </div>
                             <ul>
+                                <?php
+                                $blogs=App\Models\Blog::take(3)->get();
+                                ?>
+                                <?php $__currentLoopData = $blogs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $blog): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <li>
                                     <div class="footer__post--thumb">
-                                        <a href="blog-single.html"><img src="<?php echo e(asset('frontend/assets/images/footer/post/01.jpg')); ?>" alt="webcodeltd"></a>
+                                        <a href="<?php echo e(route('single_blog',$blog->id)); ?>"><img src="<?php echo e(asset('storage/public/blog/'.$blog->thumbnail)); ?>" alt="webcodeltd"></a>
                                     </div>
                                     <div class="footer__post--content">
-                                        <h6><a href="blog-single.html">industry leaders soften change their.</a></h6>
-                                        <span>15 July 2023</span>
+                                        <h6><a href="<?php echo e(route('single_blog',$blog->id)); ?>"><?php echo e($blog->title); ?></a></h6>
+                                        <?php
+                                            $date = date('F j,Y', strtotime($blog->created_at));
+                                        ?>
+                                        <span><?php echo $date ?></span>
                                     </div>
                                 </li>
-                                <li>
-                                    <div class="footer__post--thumb">
-                                        <a href="blog-single.html"><img src="<?php echo e(asset('frontend/assets/images/footer/post/02.jpg')); ?>" alt="webcodeltd"></a>
-                                    </div>
-                                    <div class="footer__post--content">
-                                        <h6><a href="blog-single.html">Food industry leaders soften change their promoter.</a></h6>
-                                        <span>19 July 2023</span>
-                                    </div>
-                                </li>
+                                
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                                
                             </ul>
                         </div>
                     </div>
@@ -231,34 +231,24 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                                 <h5>Our photo gallery</h5>
                             </div>
                             <ul>
-                                <li>
-                                    <a href="<?php echo e(asset('frontend/assets/images/footer/gallery/01.jpg')); ?>" data-rel="lightcase"><img src="<?php echo e(asset('frontend/assets/images/footer/gallery/01.jpg')); ?>" alt="webcodeltd"></a>
-                                </li>
-                                <li>
-                                    <a href="<?php echo e(asset('frontend/assets/images/footer/gallery/02.jpg')); ?>" data-rel="lightcase"><img src="<?php echo e(asset('frontend/assets/images/footer/gallery/02.jpg')); ?>" alt="webcodeltd"></a>
-                                </li>
-                                <li>
-                                    <a href="<?php echo e(asset('frontend/assets/images/footer/gallery/03.jpg')); ?>" data-rel="lightcase"><img src="<?php echo e(asset('frontend/assets/images/footer/gallery/03.jpg')); ?>" alt="webcodeltd"></a>
-                                </li>
-                                <li>
-                                    <a href="<?php echo e(asset('frontend/assets/images/footer/gallery/04.jpg')); ?>" data-rel="lightcase"><img src="<?php echo e(asset('frontend/assets/images/footer/gallery/04.jpg')); ?>" alt="webcodeltd"></a>
-                                </li>
-                                <li>
-                                    <a href="<?php echo e(asset('frontend/assets/images/footer/gallery/05.jpg')); ?>" data-rel="lightcase"><img src="<?php echo e(asset('frontend/assets/images/footer/gallery/05.jpg')); ?>" alt="webcodeltd"></a>
-                                </li>
-                                <li>
-                                    <a href="<?php echo e(asset('frontend/assets/images/footer/gallery/06.jpg')); ?>" data-rel="lightcase"><img src="<?php echo e(asset('frontend/assets/images/footer/gallery/06.jpg')); ?>" alt="webcodeltd"></a>
-                                </li>
+                                <?php $__currentLoopData = App\Models\Gallery::all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $gallery): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <li>
+                                        <a href="<?php echo e(asset('storage/public/gallery/' . $gallery->image)); ?>" data-rel="lightcase">
+                                            <img src="<?php echo e(asset('storage/public/gallery/' . $gallery->image)); ?>" alt="gallery image">
+                                        </a>
+                                    </li>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </ul>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div> 
         <div class="footer__bottom">
             <div class="container">
                 <div class="text-center">
-                    <p><?php echo e($general_info->copyright); ?><a href="https://advancellhealth.com">Advancell Health</a></p>
+                    <p><?php echo e($general_info->copyright); ?></p>
                 </div>
             </div>
         </div>

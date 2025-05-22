@@ -1,19 +1,26 @@
 <?php
 $general_info=App\Models\GeneralInfo::findOrFail(1);
+$banner=App\Models\Banner::findOrFail(1);
+$hospitalInfos = App\Models\HospitalInfo::latest()->take(3)->get();
+$about = App\Models\About::first();
+$steps = \App\Models\Step::all();
+$stepsection = \App\Models\StepSection::first();
+$video = \App\Models\VideoSection::latest()->first();
+$secondvideo = \App\Models\VideoSection::findOrFail(2);
 ?>
 
 
 <?php $__env->startSection("content"); ?>
     <!-- ==========Banner Section Start Here========== -->
-    <div class="banner bg-img" id="banner" style="background: url(<?php echo e(asset('frontend/assets/images/bg/04.jpg')); ?>) rgba(0,0,0,.5);">
+    <div class="banner bg-img" id="banner" style="background: url(<?php echo e(asset('storage/public/' . $banner->background_image)); ?>) rgba(0,0,0,.5);">
         
         <div class="container">
             <div class="banner__content">
-                <h2>Rejuvenate yourself by your own stem cell</h2>
-                <p>We help clean all your needs with our various skills and range of awesome services.</p>
+                <h2><?php echo e($banner->title); ?></h2>
+                <p><?php echo e($banner->subtitle); ?></p>
                 <ul>
-                    <li><a href="./#service" class="lab-btn">our services</a></li>
-                    <li><a href="#" class="lab-btn bg-white">Discover more</a></li>
+                    <li><a href="<?php echo e(old('button1_url', $banner->button1_url ?? '')); ?>" class="lab-btn"><?php echo e(old('button1_text', $banner->button1_text ?? '')); ?></a></li>
+                    <li><a href="<?php echo e(old('button2_url', $banner->button2_url ?? '')); ?>" class="lab-btn bg-white"><?php echo e(old('button2_text', $banner->button2_text ?? '')); ?></a></li>
                 </ul>
             </div>
         </div>
@@ -24,64 +31,26 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
 
     <!-- ==========Feture Section Start Here========== -->
     <div class="feature bg-img" id="feature" style="background-image: url(<?php echo e(asset('frontend/assets/images/bg/05.jpg')); ?>);">
-        <div class="feature__top d-none">
-            <div class="container">
-                <div class="feature__top--area">
-                    <div class="feature__top--left">
-                        <div class="content">
-                            <h5>Association With :</h5>
-                        </div>
-                        <div class="thumb">
-                            <img src="<?php echo e(asset('frontend/assets/images/feature/logo/01.png')); ?>" alt="feature">
-                        </div>
-                    </div>
-                    <div class="feature__top--right">
-                        <div class="content">
-                            <h5>SVF Procedure fDA certified :</h5>
-                        </div>
-                        <div class="thumb">
-                            <img src="<?php echo e(asset('frontend/assets/images/feature/logo/02.png')); ?>" alt="feature">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
         <div class="feature__bottom">
             <div class="container">
                 <div class="row g-4">
-                    <div class="col-lg-4 col-sm-6 col-12">
-                        <div class="feature__item">
-                            <div class="feature__thumb">
-                                <img src="<?php echo e(asset('frontend/assets/images/feature/01.jpg')); ?>" alt="feature">
-                            </div>
-                            <div class="feature__content">
-                                <h5>2M+ People Treated</h5>
-                                <p>Get started swiftly and easily importing in demo of professionally designed pre-built website are in concepts to choose from.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6 col-12">
-                        <div class="feature__item">
-                            <div class="feature__thumb">
-                                <img src="<?php echo e(asset('frontend/assets/images/feature/02.jpg')); ?>" alt="feature">
-                            </div>
-                            <div class="feature__content">
-                                <h5>40+ Expert Doctor</h5>
-                                <p>Get started swiftly and easily importing in demo of professionally designed pre-built website are in concepts to choose from.</p>
+
+                    <?php $__currentLoopData = $hospitalInfos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $info): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <div class="col-lg-4 col-sm-6 col-12">
+                            <div class="feature__item">
+                                <div class="feature__thumb">
+                                    <img src="<?php echo e(asset('storage/public/hospitalinfos/' . $info->image)); ?>" alt="<?php echo e($info->title); ?>">
+                                </div>
+                                <div class="feature__content">
+                                    <h5><?php echo e($info->title); ?></h5>
+                                    <p><?php echo e($info->description); ?></p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6 col-12">
-                        <div class="feature__item">
-                            <div class="feature__thumb">
-                                <img src="<?php echo e(asset('frontend/assets/images/feature/03.jpg')); ?>" alt="feature">
-                            </div>
-                            <div class="feature__content">
-                                <h5>99% Success Rate</h5>
-                                <p>Get started swiftly and easily importing in demo of professionally designed pre-built website are in concepts to choose from.</p>
-                            </div>
-                        </div>
-                    </div>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                    
                 </div>
             </div>
         </div>
@@ -96,29 +65,33 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
             <div class="row g-lg-0 g-5 align-items-center">
                 <div class="col-lg-6 col-12">
                     <div class="about__thumb">
-                        <img src="<?php echo e(asset('frontend/assets/images/about/01.jpg')); ?>" alt="webcodeltd">
+                        <img src="<?php echo e(asset('storage/public/about/' . $about->image)); ?>" alt="about image">
                         <div class="about__thumb--content">
                             <div class="icon">
-                                <img src="<?php echo e(asset('frontend/assets/images/about/icon/01.jpg')); ?>" alt="webcodeltd">
+                                <img src="<?php echo e(asset('storage/public/about/' . $about->icon)); ?>" alt="about icon">
                             </div>
                             <div class="text">
-                                <h2><span class="odometer" data-odometer-final="14">0</span><sup>+</sup></h2>
-                                <p>Years of Experiences</p>
+                                <h2><span class="odometer" data-odometer-final="<?php echo e($about->experience_years); ?>">0</span><sup>+</sup></h2>
+                                <p><?php echo e($about->experience_text); ?></p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6 col-12">
                     <div class="about__content">
-                        <h2>Rejuvenate yourself by your own stem cell</h2>
-                        <h6>Get started swiftly & easily by importing a demo of your choice in single click. Over 30 high quality professionally designed per-built website concepts to choose from.</h6>
-                        <p>Spiro is a modern business theme, that lets you build stunning high performance  websites using a fully visual interface. Start with any of the demos below or build modern business theme, that lets you build stunning high performance websites using fully visual interface. start with an of the demos below or build one on your own. Exponent is a perfect blend of spacious layouts</p>
-                        <a href="<?php echo e(route('index')); ?>#appointment" class="lab-btn">take an appointment</a>
+                        <h2><?php echo e($about->headline); ?></h2>
+                        <h6><?php echo e($about->sub_headline); ?></h6>
+                        <p><?php echo e($about->description); ?></p>
+                        <a href="<?php echo e(route('index')); ?><?php echo e($about->button_link ?? '#appointment'); ?>" class="lab-btn">
+                            <?php echo e($about->button_text ?? 'take an appointment'); ?>
+
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     <!-- ==========About Section Ends Here========== -->
 
 
@@ -159,110 +132,82 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
 
     <!-- ==========Step Section Start Here========== -->
     <div class="step padding-tb bg-img" id="step" style="background-image: url(<?php echo e(asset('frontend/assets/images/bg/02.jpg')); ?>);">
-        <div class="container">
-            <div class="section__header text-center">
-                <h2>Our great 3 steps for treatment</h2>
-                <p>The art of medicine consists in amusing the patient-while nature cures the disease. Treatment without prevention is simply unsustainable.</p>
-            </div>
-            <div class="section__wrapper">
-                <div class="row g-4 justify-content-center">
+    <div class="container">
+        <?php if($stepsection): ?>
+        <div class="section__header text-center">
+            <h2><?php echo e($stepsection->title); ?></h2>
+            <p><?php echo e($stepsection->subtitle); ?></p>
+        </div>
+        <?php endif; ?>
+        <div class="section__wrapper">
+            <div class="row g-4 justify-content-center">
+                <?php $__currentLoopData = $steps; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $step): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="col-xl-3 col-lg-4 col-sm-6 col-12">
                         <div class="step__item">
                             <div class="step__thumb">
-                                <img src="<?php echo e(asset('frontend/assets/images/step/01.jpg')); ?>" alt="webcodeltd">
+                                <img src="<?php echo e(asset('storage/public/step/' . $step->image)); ?>" alt="step">
                             </div>
                             <div class="step__content">
-                                <span>Step: 01</span>
-                                <h5>Doctor Consultation</h5>
-                                <p>Get started swiftly and easily by importing demo of your choice in single click</p>
+                                <span><?php echo e($step->step_number); ?></span>
+                                <h5><?php echo e($step->title); ?></h5>
+                                <p><?php echo e($step->description); ?></p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-lg-4 col-sm-6 col-12">
-                        <div class="step__item">
-                            <div class="step__thumb">
-                                <img src="<?php echo e(asset('frontend/assets/images/step/02.jpg')); ?>" alt="webcodeltd">
-                            </div>
-                            <div class="step__content">
-                                <span>Step: 02</span>
-                                <h5>Digital Diagnosis</h5>
-                                <p>Get started swiftly and easily by importing demo of your choice in single click</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-sm-6 col-12">
-                        <div class="step__item">
-                            <div class="step__thumb">
-                                <img src="<?php echo e(asset('frontend/assets/images/step/03.jpg')); ?>" alt="webcodeltd">
-                            </div>
-                            <div class="step__content">
-                                <span>Step: 03</span>
-                                <h5>Doctor Holistic Treatment</h5>
-                                <p>Get started swiftly and easily by importing demo of your choice in single click</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-sm-6 col-12">
-                        <div class="step__item">
-                            <div class="step__thumb">
-                                <img src="<?php echo e(asset('frontend/assets/images/step/03.jpg')); ?>" alt="webcodeltd">
-                            </div>
-                            <div class="step__content">
-                                <span>Step: 04</span>
-                                <h5>Follow Up</h5>
-                                <p>Get started swiftly and easily by importing demo of your choice in single click</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
         </div>
     </div>
+</div>
     <!-- ==========Step Section Ends Here========== -->
 
 
     <!-- ==========Video Section Start Here========== -->
+    <?php if($video): ?>
     <div class="video padding-tb" id="video">
         <div class="container">
             <div class="row g-lg-0 g-5 justify-content-center align-items-center">
                 <div class="col-lg-6 col-12">
                     <div class="video__thumb">
-                        <img src="<?php echo e(asset('frontend/assets/images/video/01.jpg')); ?>" alt="webcodeltd">
+                        <img src="<?php echo e(asset('storage/public/' . $video->thumb_image)); ?>" alt="video thumb">
                         <div class="video__thumb--icon">
-                            <a href="<?php echo e(asset('frontend/assets/video/01.mp4')); ?>" data-rel="lightcase"><i class="fa-solid fa-play"></i></a>
+                            <a href="<?php echo e(asset('storage/public/' . $video->video_url)); ?>" data-rel="lightcase">
+                                <i class="fa-solid fa-play"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6 col-12">
                     <div class="video__content">
-                        <h2>World's most advanced stem cell system</h2>
-                        <p>Spiro is a modern business theme, that lets you build stunning high performance websites using a fully visual interface. Start with any of the demos below or build modern business theme, that lets you build stunning high performance websites using fully visual interface. start with an of the demos below or build one on your own. Exponent is a perfect blend of spacious layouts</p>
+                        <h2><?php echo e($video->title); ?></h2>
+                        <p><?php echo e($video->description); ?></p>
                         <ul>
                             <li>
                                 <div class="thumb">
-                                    <img src="<?php echo e(asset('frontend/assets/images/video/icon/01.jpg')); ?>" alt="webcodeltd">
+                                    <img src="<?php echo e(asset('storage/public/' . $video->stat1_icon)); ?>" alt="icon1">
                                 </div>
                                 <div class="content">
-                                    <span>480+</span>
-                                    <p>Expert Doctor</p>
+                                    <span><?php echo e($video->stat1_number); ?></span>
+                                    <p><?php echo e($video->stat1_text); ?></p>
                                 </div>
                             </li>
                             <li>
                                 <div class="thumb">
-                                    <img src="<?php echo e(asset('frontend/assets/images/video/icon/02.jpg')); ?>" alt="webcodeltd">
+                                    <img src="<?php echo e(asset('storage/public/' . $video->stat2_icon)); ?>" alt="icon2">
                                 </div>
                                 <div class="content">
-                                    <span>6.8K+</span>
-                                    <p>Happy Patient</p>
+                                    <span><?php echo e($video->stat2_number); ?></span>
+                                    <p><?php echo e($video->stat2_text); ?></p>
                                 </div>
                             </li>
                         </ul>
-                        <a href="<?php echo e(route('index')); ?>#appointment" class="lab-btn">take an appointment</a>
+                        <a href="<?php echo e($video->button_url); ?>" class="lab-btn"><?php echo e($video->button_text); ?></a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <?php endif; ?>
     <!-- ==========Video Section Ends Here========== -->
 
 
@@ -372,14 +317,14 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
             <div class="row g-lg-0 g-5 align-items-center">
                 <div class="col-xl-6 col-12">
                     <div class="result__content">
-                        <h2>99% Proven results! See the difference</h2>
-                        <p>Spiro is a modern business theme, that lets you build stunning high performance websites using a fully visual interface. Start with any of the demos below or build modern business theme, that lets you build stunning high performance websites using fully visual interface. start with an of the demos below or build one on your own. Exponent is a perfect blend of spacious layouts</p>
-                        <a href="<?php echo e(asset('frontend/assets/video/02.mp4')); ?>" class="lab-btn" data-rel="lightcase">view all story <i class="fa-solid fa-play"></i></a>
+                        <h2><?php echo e($secondvideo->title); ?></h2>
+                        <p><?php echo e($secondvideo->description); ?></p>
+                        <a href="<?php echo e(asset('storage/public/' . $secondvideo->video_url)); ?>" class="lab-btn" data-rel="lightcase"><?php echo e($secondvideo->button_text); ?> <i class="fa-solid fa-play"></i></a>
                     </div>
                 </div>
                 <div class="col-xl-6 col-12">
                     <div class="result__thumb">
-                        <img src="<?php echo e(asset('frontend/assets/images/result/01.jpg')); ?>" alt="webcodeltd">
+                        <img src="<?php echo e(asset('storage/public/' . $secondvideo->thumb_image)); ?>" alt="webcodeltd">
                     </div>
                 </div>
             </div>
@@ -390,7 +335,43 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
 
 
     <!-- ==========Blog Section Start Here========== -->
-    
+    <div class="blog padding-tb" id="blog">
+        <div class="container">
+            <div class="section__header text-center">
+                <h2>Our blogs</h2>
+                <p>The art of medicine consists in amusing the patient-while nature cures the disease. Treatment without prevention is simply unsustainable.</p>
+            </div>
+            <div class="section__wrapper">
+                <div class="row g-4 justify-content-center">
+                    <?php
+                    $blogs=App\Models\Blog::take(3)->get();
+                    ?>
+                    <?php $__currentLoopData = $blogs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $blog): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <div class="col-lg-4 col-sm-6 col-12">
+                        <div class="blog__item">
+                                <div class="blog__thumb">
+                                    <a href="<?php echo e(route('single_blog',$blog->id)); ?>"><img src="<?php echo e(asset('storage/public/blog/'.$blog->thumbnail)); ?>"></a>
+                                </div>
+                                <div class="blog__content">
+                                    <h4><a href="<?php echo e(route('single_blog',$blog->id)); ?>"><?php echo e($blog->title); ?> </a></h4>
+                                    <ul>
+                                        <?php
+                                            $date = date('F j,Y', strtotime($blog->created_at));
+                                        ?>
+                                        <li><i class="fa-solid fa-calendar"></i><?php echo $date ?></li>
+                                        <li><i class="fa-regular fa-folder"></i><?php echo e($blog->blog_category->name); ?></li>
+                                    </ul>
+                                </div>
+                            </div>
+                    </div>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </div>
+                <div class="text-center mt-5">
+                    <a href="<?php echo e(route('blog')); ?>" class="lab-btn">view all blog</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- ==========Blog Section Ends Here========== -->
 
 
@@ -400,7 +381,7 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
             <div class="row g-lg-0 g-5 align-items-center">
                 <div class="col-lg-6 col-12">
                     <div class="appointment__thumb">
-                        <img src="<?php echo e(asset('frontend/assets/images/appointment/01.jpg')); ?>" alt="webcodeltd">
+                        <img src="<?php echo e(asset('storage/public/banners/' . $general_info->appointment_banner)); ?>" alt="webcodeltd">
                     </div>
                 </div>
                 <div class="col-lg-6 col-12">
@@ -492,7 +473,7 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                             <img src="<?php echo e(asset('frontend/assets/images/info/02.jpg')); ?>" alt="webcodeltd">
                         </div>
                         <div class="contact__content">
-                            <p>Platinum Hospital Stem Cell Centre</p>
+                            <p><?php echo e($general_info->title); ?></p>
                             <p>Enquiry: <?php echo e($general_info->enquiry_number); ?></p>
                             <p>Appointment: <?php echo e($general_info->appointment_number); ?></p>
                         </div>

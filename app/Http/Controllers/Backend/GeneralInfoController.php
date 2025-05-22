@@ -20,6 +20,9 @@ class GeneralInfoController extends Controller
     public function update_general_info(Request $request,$id){
         $general_info= GeneralInfo::findOrFail(1);
         $general_info->email = $request->input('email');
+        $general_info->title = $request->input('title');
+        $general_info->meta_name = $request->input('meta_name');
+        $general_info->meta_description = $request->input('meta_description');
         $general_info->hotline = $request->input('hotline');
         $general_info->address = $request->input('address');
         $general_info->enquiry_number = $request->input('enquiry_number');
@@ -47,41 +50,42 @@ public function banner(){
 
 public function update_banner(Request $request, $id)
 {
-    // $request->validate([
-    //     'title' => 'required|string|max:255',
-    //     'subtitle' => 'nullable|string',
-    //     'button1_text' => 'nullable|string|max:100',
-    //     'button1_url' => 'nullable|string|max:255',
-    //     'button2_text' => 'nullable|string|max:100',
-    //     'button2_url' => 'nullable|string|max:255',
-    //     'background_image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-    //     'video' => 'nullable|mimetypes:video/mp4|max:10240', // 10MB
-    // ]);
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'subtitle' => 'nullable|string',
+        'button1_text' => 'nullable|string|max:100',
+        'button1_url' => 'nullable|string|max:255',
+        'button2_text' => 'nullable|string|max:100',
+        'button2_url' => 'nullable|string|max:255',
+        'background_image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        'video' => 'nullable|mimetypes:video/mp4|max:10240', // 10MB
+    ]);
 
     $banner = \App\Models\Banner::findOrFail($id);
 
     $banner->title = $request->title;
-    // $banner->subtitle = $request->subtitle;
-    // $banner->button1_text = $request->button1_text;
-    // $banner->button1_url = $request->button1_url;
-    // $banner->button2_text = $request->button2_text;
-    // $banner->button2_url = $request->button2_url;
+    $banner->subtitle = $request->subtitle;
+    $banner->button1_text = $request->button1_text;
+    $banner->button1_url = $request->button1_url;
+    $banner->button2_text = $request->button2_text;
+    $banner->button2_url = $request->button2_url;
 
-    // // Update image if new one uploaded
-    // if ($request->hasFile('background_image')) {
-    //     if ($banner->background_image) {
-    //         \Storage::delete('public/' . $banner->background_image);
-    //     }
-    //     $banner->background_image = $request->file('background_image')->store('banners', 'public');
-    // }
+    // Update image if new one uploaded
+    if ($request->hasFile('background_image')) {
+        if ($banner->background_image) {
+            \Storage::delete('public/' . $banner->background_image);
+        }
+        $banner->background_image = $request->file('background_image')->store('banners', 'public');
+    }
 
-    // // Update video if new one uploaded
-    // if ($request->hasFile('video')) {
-    //     if ($banner->video) {
-    //         \Storage::delete('public/' . $banner->video);
-    //     }
-    //     $banner->video = $request->file('video')->store('banners', 'public');
-    // }
+    // Update video if new one uploaded
+    if ($request->hasFile('video')) {
+        if ($banner->video) {
+            
+            \Storage::delete('public/' . $banner->video);
+        }
+        $banner->video = $request->file('video')->store('banners', 'public');
+    }
 
     $banner->save();
 
@@ -184,5 +188,44 @@ public function update_banner(Request $request, $id)
         $testimonial->delete();
         return redirect()->back()->with('success', 'Testimonial deleted successfully');
     }
+
+    //return to appointment banner edit page on backend with id 1
+    public function appointmentBanner()
+    {
+        $banner = GeneralInfo::findOrFail(1);
+        return view('backend.generalinfo.edit_appointment_banner', compact('banner'));
+    }
+
+    public function updateAppointmentBanner(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg',
+        ]);
+
+        $banner = GeneralInfo::findOrFail(1);
+
+        // Delete old image if it exists
+        if ($banner->appointment_banner) {
+            Storage::delete('public/banners/' . $banner->appointment_banner);
+        }
+
+        // Store new image with custom filename
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $newFilename = time() . '.' . $image->getClientOriginalExtension();
+
+            // Store the file in 'banners' folder with public visibility
+            $image->storeAs('banners', $newFilename, 'public');
+
+            // Save only the filename
+            $banner->appointment_banner = $newFilename;
+        }
+
+        $banner->save();
+
+        return redirect()->back()->with('success', 'Appointment banner updated successfully.');
+    }
+
+
 
 }

@@ -15,6 +15,12 @@ use App\Http\Controllers\Frontend\PagesController as FrontendPagesController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\GeneralInfoController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Backend\HospitalInfoController;
+use App\Http\Controllers\Backend\AboutController;
+use App\Http\Controllers\Backend\StepController;
+use App\Http\Controllers\Backend\StepSectionController;
+use App\Http\Controllers\Backend\VideoSectionController;
+use App\Http\Controllers\Backend\GalleryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -75,6 +81,32 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
     Route::get('/banner',[GeneralInfoController::class,'banner'])->name('admin.banner');
     Route::post('/update_banner/{id}',[GeneralInfoController::class,'update_banner'])->name('admin.update_banner');
+
+    //hospital info
+    Route::prefix('hospitalinfo')->group(function () {
+    Route::get('/', [HospitalInfoController::class, 'index'])->name('hospitalinfo.index');
+    Route::get('/create', [HospitalInfoController::class, 'create'])->name('hospitalinfo.create');
+    Route::post('/', [HospitalInfoController::class, 'store'])->name('hospitalinfo.store');
+    Route::get('/{id}/edit', [HospitalInfoController::class, 'edit'])->name('hospitalinfo.edit');
+    Route::put('/{id}', [HospitalInfoController::class, 'update'])->name('hospitalinfo.update');
+    Route::delete('/{id}', [HospitalInfoController::class, 'destroy'])->name('hospitalinfo.destroy');
+    });
+
+    Route::prefix('about')->group(function () {
+    Route::get('/', [AboutController::class, 'index'])->name('about.index');
+    Route::get('/{id}/edit', [AboutController::class, 'edit'])->name('about.edit');
+    Route::post('/{id}', [AboutController::class, 'update'])->name('about.update');
+    });
+    Route::resource('steps', StepController::class);
+     Route::get('step-section', [StepSectionController::class, 'edit'])->name('step-section.edit');
+    Route::post('step-section', [StepSectionController::class, 'update'])->name('step-section.update');
+     Route::resource('video', VideoSectionController::class);
+    Route::get('appointment-banner', [GeneralInfoController::class, 'appointmentBanner'])->name('appointment-banner');
+    Route::post('appointment-banner-update', [GeneralInfoController::class, 'updateAppointmentBanner'])->name('update-appointment-banner');
+    
+    //gallery
+    Route::resource('gallery', GalleryController::class)->except(['edit', 'update', 'show']);
+
     //testimonial
     Route::get('/testimonial',[GeneralInfoController::class,'testimonial'])->name('admin.testimonial');
     Route::post('/add_testimonial',[GeneralInfoController::class,'add_testimonial'])->name('admin.add_testimonial');
@@ -87,6 +119,10 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::post('/add_service_category',[ServiceController::class,'add_service_category'])->name('admin.add_service_category');
     Route::get('/edit_service_category/{id}',[ServiceController::class,'edit_service_category'])->name('admin.edit_service_category');
     Route::post('/update_service_category/{id}',[ServiceController::class,'update_service_category'])->name('admin.update_service_category');
+    //delete service category
+    Route::get('/delete_service_category/{id}',[ServiceController::class,'delete_service_category'])->name('admin.delete_service_category');
+
+
     Route::get('/add_service',[ServiceController::class,'add_service'])->name('admin.add_service');
     Route::post('/create_service',[ServiceController::class,'create_service'])->name('admin.create_service');
     //show service to backend

@@ -79,23 +79,9 @@
                 </div>
                 <div class="col-lg-4 col-12">
                     <div class="sidebar">
-                        <div class="sidebar__service">
-                            <div class="head">
-                                <h6>Our best services</h6>
-                            </div>
-                            <div class="body">
-                                <ul>
-                                    <li><a href="service-single.html">Beautification (Anti-aging)</a></li>
-                                    <li><a href="service-single.html">Diabetes</a></li>
-                                    <li><a href="service-single.html">Nephrology</a></li>
-                                    <li><a href="service-single.html">Neurosurgery</a></li>
-                                    <li><a href="service-single.html">Orthopedic (Pain Management)</a></li>
-                                    <li><a href="service-single.html">Burn and Plastic Surgery</a></li>
-                                </ul>
-                            </div>
-                        </div>
+                        
 
-                        <div class="sidebar__appointment">
+                        <div class="sidebar__appointment mt-0">
                             <div class="appointment">
                                 <div class="appointment__content">
                                     <div class="head">
@@ -127,7 +113,7 @@
                                             </div>
                                             <div class="col-12">
                                                 @php
-                                                $data=App\Models\treatment_type::all();
+                                                $data=App\Models\Treatment_type::all();
                                                 @endphp
                                                 <select name="treatment_types" required> <!-- Added the name attribute here -->
                                                     <option value="">Need Appointment for</option>

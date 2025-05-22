@@ -13,4 +13,4 @@
 <link rel="stylesheet" href="<?php echo e(asset('frontend/assets/css/lightcase.css')); ?>?v=1.0.1">
 <link rel="stylesheet" href="<?php echo e(asset('frontend/assets/css/style.css')); ?>?v=1.0.1">
 
-    <title>Platinum</title><?php /**PATH /Applications/MAMP/htdocs/Advancellhealth/resources/views/frontend/layouts/inc/css.blade.php ENDPATH**/ ?>
+    <title></title><?php /**PATH /Applications/MAMP/htdocs/Advancellhealth/resources/views/frontend/layouts/inc/css.blade.php ENDPATH**/ ?>

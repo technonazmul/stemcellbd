@@ -133,14 +133,14 @@
                     <div class="card-body">
                         <label for="exampleFormControlInput1" class="form-label">Treatment of Interest &nbsp;</label>
                         <div class="form-check">
-                            <input name="treatment_of_interest[]" value="Stem Cell Therapy" class="form-check-input" type="checkbox" id="checkButton">
-                            <label class="form-check-label" for="checkButton">
+                            <input name="treatment_of_interest[]" value="Stem Cell Therapy" class="form-check-input" type="checkbox" id="therapy">
+                            <label class="form-check-label" for="therapy">
                                 Stem Cell Therapy
                             </label>
                           </div>
                           <div class="form-check">
-                            <input name="treatment_of_interest[]" value="Conventional/Traditional Treatment" class="form-check-input" type="checkbox"id="checkButton">
-                            <label class="form-check-label" for="checkButton">
+                            <input name="treatment_of_interest[]" value="Conventional/Traditional Treatment" class="form-check-input" type="checkbox"id="traditional">
+                            <label class="form-check-label" for="traditional">
                                 Conventional/Traditional Treatment
                             </label>
                           </div>
@@ -216,8 +216,8 @@
                           <label for="exampleFormControlInput1" class="form-label"><u>Consent</u></label><span class="float-end" style="color:red">*</span>
                           <p>I am giving permissions to Platinum Hospital stem Cell Centre to collect & store my data for further communication.</p>
                           <div class="form-check">
-                              <input class="form-check-input" type="radio" name="i_agreed" id="exampleRadio1" value="i agreed" required>
-                              <label class="form-check-label" for="exampleRadio1">
+                              <input class="form-check-input" type="radio" name="i_agreed" id="i_agreed" value="i agreed" required>
+                              <label class="form-check-label" for="i_agreed">
                                   I Agree
                               </label>
                             </div>

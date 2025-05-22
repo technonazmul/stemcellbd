@@ -11,7 +11,7 @@ use App\Models\Doctor;
 class PagesController extends Controller
 {
     public function doctors() {
-        $doctors = Doctor::paginate(1);  
+        $doctors = Doctor::paginate(8);  
         return view('frontend.pages.doctors', compact('doctors'));
     }
     public function single_doctor($id){

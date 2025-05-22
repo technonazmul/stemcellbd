@@ -30,7 +30,7 @@
             <a href="#" class="nav-link">
               <i class=""></i>
               <p>
-                General Info / Testimonial
+                Settings
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -44,9 +44,35 @@
               <li class="nav-item">
                 <a href="{{route('admin.banner')}}" class="nav-link">
                   <i class=""></i>
-                  <p>Banner</p>
+                  <p>Main Banner</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{route('hospitalinfo.index')}}" class="nav-link">
+                  <i class=""></i>
+                  <p>Hospital infos</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="{{route('about.index')}}" class="nav-link">
+                  <i class=""></i>
+                  <p>About Setting</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('step-section.edit')}}" class="nav-link">
+                  <i class=""></i>
+                  <p>Step Setting Heading</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('steps.index')}}" class="nav-link">
+                  <i class=""></i>
+                  <p>Step Setting</p>
+                </a>
+              </li>
+
               <li class="nav-item">
                 <a href="{{route('admin.testimonial')}}" class="nav-link">
                   <i class=""></i>

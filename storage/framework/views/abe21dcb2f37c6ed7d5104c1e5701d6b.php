@@ -19,6 +19,18 @@
                     </div>
                 <?php endif; ?>
                 <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Company Name</label>
+                    <input value="<?php echo e($general_info->title); ?>" name="title" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Company Name">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Meta Name</label>
+                    <input value="<?php echo e($general_info->meta_name); ?>" name="meta_name" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Meta Name">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Meta Description</label>
+                    <input value="<?php echo e($general_info->meta_description); ?>" name="meta_description" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Meta Description">
+                </div>
+                <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Email</label>
                     <input value="<?php echo e($general_info->email); ?>" name="email" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Email">
                 </div>

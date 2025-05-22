@@ -55,6 +55,34 @@ class ServiceController extends Controller
         return redirect()->route('admin.service_category')->with('success','Service Category updated successfully');
     }
 
+    //delete service category
+    public function delete_service_category($id) {
+        // Find the service category by ID
+        $service_category = ServiceCategory::find($id);
+
+        // check if the service category has any associated services
+        $services = Service::where('service_category_id', $id)->get();
+        foreach ($services as $service) {
+            // Delete the associated image file from storage
+            if ($service->thumbnail) {
+                Storage::delete('public/service/' . $service->thumbnail);
+            }
+            // Delete the service record from the database
+            $service->delete();
+        }
+        
+        // Check if the service category exists
+        if (!$service_category) {
+            return redirect()->back()->with('error', 'Service Category not found');
+        }
+    
+        // Delete the service category record from the database
+        $service_category->delete();
+    
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'Service Category deleted successfully!');
+    }
+
     //show service 
     public function all_service(){
         $all_service = Service::all();

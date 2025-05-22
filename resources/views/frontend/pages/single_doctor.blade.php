@@ -25,7 +25,7 @@
             <div class="row justify-content-center align-items-center g-4">
                 <div class="col-lg-5 col-12">
                     <div class="team__thumb">
-                        <img  src="{{asset('storage/doctors/'.$doctor->image)}}" alt="webcode">
+                        <img  src="{{asset('storage/public/doctors/'.$doctor->image)}}" alt="webcode">
                     </div>
                 </div>
                 <div class="col-lg-7 col-12">
