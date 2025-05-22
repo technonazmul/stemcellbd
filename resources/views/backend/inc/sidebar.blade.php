@@ -72,6 +72,25 @@
                   <p>Step Setting</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{route('video.index')}}" class="nav-link">
+                  <i class=""></i>
+                  <p>Video Banner</p>
+                </a>
+              </li>
+               <li class="nav-item">
+                <a href="{{route('appointment-banner')}}" class="nav-link">
+                  <i class=""></i>
+                  <p>Appointment Banner</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="{{route('gallery.index')}}" class="nav-link">
+                  <i class=""></i>
+                  <p>Image Gallery</p>
+                </a>
+              </li>
 
               <li class="nav-item">
                 <a href="{{route('admin.testimonial')}}" class="nav-link">

@@ -5,7 +5,7 @@ $hospitalInfos = App\Models\HospitalInfo::latest()->take(3)->get();
 $about = App\Models\About::first();
 $steps = \App\Models\Step::all();
 $stepsection = \App\Models\StepSection::first();
-$video = \App\Models\VideoSection::latest()->first();
+$video = \App\Models\VideoSection::findOrFail(1);
 $secondvideo = \App\Models\VideoSection::findOrFail(2);
 @endphp
 @extends('frontend.layouts.template')
