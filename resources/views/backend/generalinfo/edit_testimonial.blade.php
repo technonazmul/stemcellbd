@@ -33,7 +33,7 @@
                     </div>
                     <div class="form-group">
                         <label for="formGroupExampleInput">Image</label>
-                        <input type="file" name="image" id="" required>
+                        <input type="file" name="image" id="">
                     </div>
                     <div class="form-group">
                         <label for="content">Text</label>

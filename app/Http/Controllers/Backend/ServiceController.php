@@ -14,75 +14,153 @@ class ServiceController extends Controller
 {
     //service category
     public function service_category(){
-        return view('backend.service.service_category');
+    return view('backend.service.service_category');
+}
+
+public function add_service_category(Request $request) {
+    $validated = $request->validate([
+        'name' => 'required|unique:service_categories|max:255',
+        'short_description' => 'nullable|string|max:500',
+        'parent_id' => 'nullable|exists:service_categories,id',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+    ]);
+
+    $name = $request->name;
+    $slug = Str::slug($name, '-');
+    
+    // Handle image upload
+    $imageName = null;
+    if ($request->hasFile('image')) {
+        $image = $request->file('image');
+        $imageName = time() . '_' . Str::slug($name) . '.' . $image->getClientOriginalExtension();
+        $image->storeAs('public/service_categories', $imageName);
     }
 
-    public function add_service_category(Request $request) {
-        $validated = $request->validate([
-            'name' => 'required|unique:service_categories|max:255'
-        ]);
+    $service_category = new ServiceCategory;
+    $service_category->name = $name;
+    $service_category->slug = $slug;
+    $service_category->short_description = $request->short_description;
+    $service_category->parent_id = $request->parent_id;
+    $service_category->image = $imageName;
+    $service_category->save();
 
-        $name = $request->name;
-        $slug = Str::slug($name, '-');
+    return redirect()->back()->with('success','Service Category added successfully');
+}
 
-        $service_category = new ServiceCategory;
-        $service_category->name = $name;
-        $service_category->slug = $slug;
-        $service_category->save();
-
-        return redirect()->back()->with('success','Service Category added successfully');
+public function edit_service_category($id){
+    $service_category = ServiceCategory::with('parent')->find($id);
+    
+    if (!$service_category) {
+        return redirect()->route('admin.service_category')->with('error', 'Service Category not found');
     }
+    
+    return view('backend.service.edit_service_category', compact('service_category'));
+}
 
-    public function edit_service_category($id){
-        $service_category = ServiceCategory::find($id);
-        return view('backend.service.edit_service_category',compact('service_category'));
-    }
-
-    public function update_service_category(Request $request,$id){
+    public function update_service_category(Request $request, $id){
         $service_category = ServiceCategory::find($id);
         
+        if (!$service_category) {
+            return redirect()->route('admin.service_category')->with('error', 'Service Category not found');
+        }
+        
         $validated = $request->validate([
-            'name' => 'required|unique:service_categories,name,'.$id.'|max:255' // Update validation to allow updating the same name
+            'name' => 'required|unique:service_categories,name,'.$id.'|max:255',
+            'short_description' => 'nullable|string|max:500',
+            'parent_id' => 'nullable|exists:service_categories,id|not_in:'.$id, // Prevent self-reference
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
         
         $name = $request->name;
         $slug = Str::slug($name, '-');
+        
+        // Handle image upload
+        $imageName = $service_category->image; // Keep existing image by default
+        if ($request->hasFile('image')) {
+            // Delete old image if exists
+            if ($service_category->image) {
+                Storage::delete('public/service_categories/' . $service_category->image);
+            }
+            
+            // Upload new image
+            $image = $request->file('image');
+            $imageName = time() . '_' . Str::slug($name) . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/service_categories', $imageName);
+        }
 
         $service_category->name = $name;
         $service_category->slug = $slug;
+        $service_category->short_description = $request->short_description;
+        $service_category->parent_id = $request->parent_id;
+        $service_category->image = $imageName;
         $service_category->save();
 
         return redirect()->route('admin.service_category')->with('success','Service Category updated successfully');
     }
 
-    //delete service category
     public function delete_service_category($id) {
-        // Find the service category by ID
         $service_category = ServiceCategory::find($id);
 
-        // check if the service category has any associated services
+        if (!$service_category) {
+            return redirect()->back()->with('error', 'Service Category not found');
+        }
+
+        // Get all subcategories (children) of this category
+        $subcategories = ServiceCategory::where('parent_id', $id)->get();
+        
+        // Delete all subcategories and their associated services
+        foreach ($subcategories as $subcategory) {
+            $this->deleteServicesAndCategory($subcategory);
+        }
+        
+        // Delete services directly associated with this category
         $services = Service::where('service_category_id', $id)->get();
         foreach ($services as $service) {
             // Delete the associated image file from storage
             if ($service->thumbnail) {
                 Storage::delete('public/service/' . $service->thumbnail);
             }
-            // Delete the service record from the database
             $service->delete();
         }
         
-        // Check if the service category exists
-        if (!$service_category) {
-            return redirect()->back()->with('error', 'Service Category not found');
+        // Delete category image if exists
+        if ($service_category->image) {
+            Storage::delete('public/service_categories/' . $service_category->image);
         }
-    
+        
         // Delete the service category record from the database
         $service_category->delete();
-    
-        // Redirect back with a success message
-        return redirect()->back()->with('success', 'Service Category deleted successfully!');
+
+        return redirect()->back()->with('success', 'Service Category and all subcategories deleted successfully!');
     }
 
+    // Helper method to recursively delete categories and their services
+    private function deleteServicesAndCategory($category) {
+        // Get subcategories of this category
+        $subcategories = ServiceCategory::where('parent_id', $category->id)->get();
+        
+        // Recursively delete subcategories
+        foreach ($subcategories as $subcategory) {
+            $this->deleteServicesAndCategory($subcategory);
+        }
+        
+        // Delete services associated with this category
+        $services = Service::where('service_category_id', $category->id)->get();
+        foreach ($services as $service) {
+            if ($service->thumbnail) {
+                Storage::delete('public/service/' . $service->thumbnail);
+            }
+            $service->delete();
+        }
+        
+        // Delete category image if exists
+        if ($category->image) {
+            Storage::delete('public/service_categories/' . $category->image);
+        }
+        
+        // Delete the category
+        $category->delete();
+    }
     //show service 
     public function all_service(){
         $all_service = Service::all();

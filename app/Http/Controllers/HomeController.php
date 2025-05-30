@@ -46,8 +46,12 @@ class HomeController extends Controller
     }
     function shop_single($slug){
         $item = Product::where('slug',$slug)->firstOrFail();
-
-        return view('frontend.pages.shop_single', compact('item'));
+        $relatedProducts = Product::where('category_id', $item->category_id)
+        ->where('id', '!=', $item->id)
+        ->latest()
+        ->take(4)
+        ->get();
+        return view('frontend.pages.shop_single', compact('item','relatedProducts'));
     }
     function product_review(Request $request){
         $request->validate([

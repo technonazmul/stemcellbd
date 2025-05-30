@@ -91,7 +91,7 @@ class ProductController extends Controller
             for($i=0; $i < count($images_for_uploder_preload); $i++) {
                 if(!empty($images_for_uploder_preload[$i])) {
                     
-                    $preload_images .= "{id:.$countr, src:'".asset('storage/products/'.$images_for_uploder_preload[$i])."'},";
+                    $preload_images .= "{id:.$countr, src:'".asset('storage/public/products/'.$images_for_uploder_preload[$i])."'},";
                 }
                
                 $countr++;

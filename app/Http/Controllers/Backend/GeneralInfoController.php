@@ -31,7 +31,10 @@ class GeneralInfoController extends Controller
         $general_info->support_email = $request->input('support_email');
         $general_info->website = $request->input('website');
         $general_info->about_us = $request->input('about_us');
+        $general_info->map = $request->input('map');
         $general_info->facebook = $request->input('facebook');
+        $general_info->office_day = $request->input('office_day');
+        $general_info->official_hour = $request->input('official_hour');
         $general_info->instagram = $request->input('instagram');
         $general_info->youtube = $request->input('youtube');
         $general_info->twitter = $request->input('twitter');

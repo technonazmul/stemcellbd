@@ -40,37 +40,36 @@
 
                                 @endphp
                                 <div class="col-xl-3 col-lg-4 col-sm-6 col-12">
+                                    
+                                    
                                     <div class="shop__item">
                                         <div class="shop__thumb">
-                                            <img src="{{asset('storage/products/'.$image_to_array[0])}}" alt="webcode">
-                                            <div class="shop__link">
-                                                <a href="#"><i class="fa-regular fa-heart"></i></a>
-                                                <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
-                                            </div>
+                                            <a href="{{route('shop_single', $item->slug)}}">
+                                            <img src="{{asset('storage/public/products/'.$image_to_array[0])}}" alt="webcode">
+                                            </a>
+                                           
                                         </div>
+                                        <a href="{{route('shop_single', $item->slug)}}">
                                         <div class="shop__content">
-                                            <h6><a href="{{route('shop_single', $item->slug)}}">{{$item->name}}</a></h6>
+                                            <h6>{{$item->name}}</h6>
                                             <p class="price"><span>Price:</span> ৳{{$item->offer_price}} <small style="font-size: 10px;"><del>৳{{$item->price}}</del></small> </p>
+                                            <div class="rating">
+                                                @php
+                                                    $rating = round($item->reviews()->where('status', 1)->avg('rating'));
+                                                @endphp
+                                                <p>Rating:</p>
+                                                @for ($i = 1; $i <= 5; $i++)
+                                                    <span>
+                                                        <i class="{{ $i <= $rating ? 'fa-solid' : 'fa-regular' }} fa-star"></i>
+                                                    </span>
+                                                @endfor
+                                            </div>
                                             
                                         </div>
+                                        </a>
                                     </div>
-                                    <div class="shop__item shop__item--list">
-                                        <div class="shop__inner">
-                                            <div class="shop__thumb">
-                                                <img src="{{asset('storage/products/'.$image_to_array[0])}}" alt="webcode">
-                                                <div class="shop__link">
-                                                    <a href="#"><i class="fa-regular fa-heart"></i></a>
-                                                    <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="shop__content">
-                                                <h6><a href="shop-single.html">product title text here</a></h6>
-                                                <p class="price"><span>Price:</span> $100.99</p>
-                                                
-                                                <p>{{$item->description}}</p>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
+                                    
                                 </div>
                                 @endforeach
                                 

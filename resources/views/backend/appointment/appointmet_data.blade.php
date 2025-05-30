@@ -20,12 +20,14 @@
         <thead>
             <tr>
                 <th>Si.No</th>
+                <th>Doctor</th>
                 <th>Name</th>
                 <th>Phone</th>
                 <th>Email</th>
                 <th>Gender</th>
-                <th>Date</th>
+                <th>Birth Date</th>
                 <th>Treatment Types</th>
+                <th>Week Day</th>
                 <th>Message</th>
                 <th>Notes</th>
                 <th>Status</th>
@@ -40,12 +42,26 @@
             <tr>
                 @php $i++@endphp
                 <td> @php echo $i @endphp </td>
+                @if($data->doctor_id != null)
+                    @php
+                    $doctor = \App\Models\Doctor::where('id', $data->doctor_id)->first();
+                    @endphp
+                    @if($doctor)
+                    <td>{{$doctor->name}}</td>
+                    @else
+                    <td>Not Assigned</td>
+                    @endif
+                @else
+                    <td>Not Assigned</td>
+                @endif
+                
                 <td>{{$data->name}}</td>
                 <td>{{$data->phone}}</td>
                 <td>{{$data->email}}</td>
                 <td>{{$data->gender}}</td>
                 <td>{{$data->date}}</td>
                 <td>{{$data->treatment_types}}</td>
+                <td>{{$data->day}}</td>
                 <td>{{$data->message}}</td>
                 <td>{{$data->notes}}</td>
                 <td>{{$data->status}}</td>

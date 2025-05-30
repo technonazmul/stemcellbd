@@ -45,7 +45,7 @@
                     <td> @php echo $i @endphp </td>
                     <td>{{ $data->title }}</td>
                     <td><a href="{{route('admin.edit_treatment_types',$data->id)}}"><button type="button" class="btn btn-warning">Edit</button></a></td>
-                    <td> <a href=""><button class="btn btn-sm btn-danger">Delate</button></a></td>
+                    <td> <a href="{{route('admin.delete_treatmen_types', $data->id)}}" onclick="return confirm('Are you sure you want to delete this item?');"><button class="btn btn-sm btn-danger">Delate</button></a></td>
                 </tr>
                 @endforeach
             </tbody>

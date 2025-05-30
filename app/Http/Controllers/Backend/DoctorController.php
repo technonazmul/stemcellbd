@@ -27,6 +27,8 @@ class DoctorController extends Controller
     $doctor->linkedin = $request->input('linkedin');
     $doctor->twitter = $request->input('twitter');
     $doctor->about = $request->input('about');
+    $availableDays = $request->input('available_days'); // returns an array
+    $doctor->available_days = implode(',', $availableDays); // store as comma-separated string
 
     if ($request->hasFile('image')) {
         $image = $request->file('image');
@@ -73,6 +75,8 @@ class DoctorController extends Controller
     $doctor->twitter = $request->input('twitter');
     $doctor->about = $request->input('about');
     $oldImage = $doctor->image;
+    $availableDays = $request->input('available_days'); // returns an array
+    $doctor->available_days = implode(',', $availableDays); // store as comma-separated string
     // If a new image is uploaded, delete the old image and save the new image
     if ($request->hasFile('image')) {
         // Delete the old image from storage
@@ -90,7 +94,7 @@ class DoctorController extends Controller
     $doctor->save();
 
     // Redirect back with a success message
-    return redirect()->route('admin.doctor')->with('success', 'Doctor updated successfully!');
+    return redirect()->back()->with('success', 'Doctor updated successfully!');
     }
 //delete doctor
     public function delete_doctor($id) {

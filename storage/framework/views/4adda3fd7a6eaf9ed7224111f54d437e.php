@@ -6,6 +6,7 @@
   <title>Dashboard</title>
   <?php echo $__env->make('backend.inc.css', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
   <?php echo $__env->yieldContent("extra_css"); ?>
+   <?php echo $__env->yieldPushContent('styles'); ?>
   <style>
     nav svg {
       width: 10px;
@@ -81,5 +82,6 @@
 
 <?php echo $__env->make('backend.inc.script', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php echo $__env->yieldContent('extra_script'); ?>
+<?php echo $__env->yieldPushContent('scripts'); ?>
 </body>
 </html><?php /**PATH /Applications/MAMP/htdocs/Advancellhealth/resources/views/backend/dashboard.blade.php ENDPATH**/ ?>

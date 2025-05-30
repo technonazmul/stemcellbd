@@ -6,6 +6,7 @@
   <title>Dashboard</title>
   @include('backend.inc.css')
   @yield("extra_css")
+   @stack('styles')
   <style>
     nav svg {
       width: 10px;
@@ -83,5 +84,6 @@
 
 @include('backend.inc.script')
 @yield('extra_script')
+@stack('scripts')
 </body>
 </html>

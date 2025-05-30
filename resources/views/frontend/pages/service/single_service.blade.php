@@ -1,5 +1,87 @@
+@php
+    $general_info=App\Models\GeneralInfo::findOrFail(1);
+    $doctors = App\Models\Doctor::all(); // Get all doctors for appointment form
+    $services = App\Models\Treatment_type::all(); // For appointment form services
+@endphp
 @extends('frontend.layouts.template')
 @section("content")
+<style>
+    .form-container {
+        position: relative;
+        margin-bottom: 1rem;
+    }
+    
+    .form-container label {
+        position: absolute;
+        top: -12px;
+        left: 8px;
+        color: #333;
+        font-size: 12px;
+        font-weight: 600;
+        background: white;
+        padding: 0 4px;
+        pointer-events: none;
+        transition: 0.2s;
+        z-index: 1;
+    }
+    
+    .form-container input,
+    .form-container select,
+    .form-container textarea {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #e9ecef;
+        border-radius: 4px;
+        font-size: 14px;
+        background: white;
+        transition: border-color 0.2s;
+    }
+    
+    .form-container input:focus,
+    .form-container select:focus,
+    .form-container textarea:focus {
+        outline: none;
+        border-color: #2196f3;
+    }
+    
+    .form-container input:focus + label,
+    .form-container select:focus + label,
+    .form-container textarea:focus + label {
+        color: #2196f3;
+    }
+    
+    .form-container textarea {
+        resize: vertical;
+        min-height: 100px;
+    }
+    
+    .available-days {
+        font-size: 12px;
+        color: #666;
+        margin-top: 5px;
+    }
+    
+    .available-days span {
+        background: #e8f5e8;
+        color: #2d5a2d;
+        padding: 2px 6px;
+        border-radius: 10px;
+        margin-right: 4px;
+        font-size: 10px;
+    }
+    
+    .sidebar__appointment .appointment__content {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+    }
+    
+    .sidebar__appointment .head h6 {
+        margin-bottom: 15px;
+        color: #333;
+        font-weight: 600;
+    }
+</style>
     <!-- ==========Page Header Section Start Here========== -->
     <div class="pageheader bg-img" style="background-image: url({{asset('frontend/assets/images/bg/04.jpg')}});">
         <div class="container">
@@ -7,7 +89,7 @@
                 <h2>{{$single_service->title}}</h2>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('index')}}">Home</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{$single_service->title}}</li>
                     </ol>
                 </nav>
@@ -15,7 +97,7 @@
         </div>
     </div>
     <!-- ==========Page Header Section Ends Here========== -->
-
+    @include('frontend.flashmessage')
     <!-- ==========Service Section Start Here========== -->
     <div class="service service--details section-bg padding-tb">
         <div class="container">
@@ -25,32 +107,9 @@
                         <img src="{{asset('storage/public/service/'.$single_service->thumbnail)}}" alt="webcode" class="mb-4 w-100">
                         <h5>{{$single_service->title}}</h5>
                         <p>{!!$single_service->description !!}</p>
-                        {{-- <div class="row g-4 mb-4 mt-3">
-                            <div class="col-xl-6 col-12">
-                                <video src="assets/video/02.mp4" muted="" loop="" autoplay="" class="w-100"></video>
-                            </div>
-                            <div class="col-xl-6 col-12">
-                                <p>Holistic are empowe ethca mperatives through distinctivey ncubate best of breed that solution cent focusd customer service through website</p>
-
-                                <p>Holistic are empowe ethca mperatives through distinctivey ncubate best of breed that solution cent focusd customer service through website.</p>
-                            </div>
-                        </div>
-                        <h5>Experienced People can help you more.</h5>
-                        <p>Our consultants believe the value that you manage your reguator compliance poice procedure we have specialis for managed employee performance and comparable interna advice unction train people quickly well with e-business so they highy efficien manufactured products we are</p>
-
-                        <div class="row g-4 mb-4 mt-3 flex-row-reverse">
-                            <div class="col-xl-6 col-12">
-                                <iframe src="https://www.youtube.com/embed/S-CvC4BAIIo?si=69QFYU0dSBNLim8k" frameborder="0" allowfullscreen height="250px" class="w-100"></iframe>
-                            </div>
-                            <div class="col-xl-6 col-12">
-                                <h5>Quality We Ensure</h5>
-                                <p>Holistc are empower ethcal imperatv thrugh distinctvely incubate best breed that solutns clents focused customer servce thru website</p>
-
-                                <p>Holistc are empower ethcal imperatv thrugh distinctvely incubate best breed that solutns focused customer thru website</p>
-                            </div>
-                        </div> --}}
                         
-                        @include('frontend.flashmessage')
+                        
+                        
                         <h5 class="mb-4">Get A Free Consultancy</h5>
                         <form action="{{route('free_consultancy')}}" id="contact-form" method="post">
                             @csrf
@@ -86,45 +145,85 @@
                                 <div class="appointment__content">
                                     <div class="head">
                                         <h6>Take an Appointment</h6>
-                                        @include('frontend.flashmessage')
+                                        @if ($errors->any())
+                                            <div class="alert alert-danger">
+                                                <ul>
+                                                    @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @endif
+                                        @if(session('success'))
+                                            <div class="alert alert-success">
+                                                {{ session('success') }}
+                                            </div>
+                                        @endif
                                     </div>
                                     <form action="{{route('admin.take_appointment')}}" method="post">
                                         @csrf
                                         <div class="row g-4">
-                                            <div class="col-12">
-                                                <input name="name" type="text" placeholder="full name*" required>
+                                            <div class="col-12 form-container">
+                                                <input name="name" type="text" placeholder=" " required>
+                                                <label for="name">Full Name *</label>
                                             </div>
-                                            <div class="col-12">
-                                                <input name="phone" type="text" placeholder="Phone Number" required>
+                                            <div class="col-12 form-container">
+                                                <input name="phone" type="text" placeholder=" " required>
+                                                <label for="phone">Phone Number *</label>
                                             </div>
-                                            <div class="col-12">
-                                                <input name="email" type="email" placeholder="email address" required>
+                                            <div class="col-12 form-container">
+                                                <input name="email" type="email" placeholder=" " required>
+                                                <label for="email">Email Address *</label>
                                             </div>
-                                            <div class="col-12">
-                                                <select required>
-                                                    <option value="">Sex</option>
-                                                    <option value="Male">Male</option>
-                                                    <option value="Female">Female</option>
-                                                    <option value="Other">Other</option>
+                                            <div class="col-12 form-container">
+                                                <select name="gender" required>
+                                                    <option value="">Select Gender</option>
+                                                    <option value="male">Male</option>
+                                                    <option value="female">Female</option>
+                                                    <option value="other">Other</option>
                                                 </select>
+                                                <label for="gender">Gender *</label>
                                             </div>
-                                            <div class="col-12">
-                                                <input type="date" min="<?php echo date('Y-m-d'); ?>" required >
+                                            <div class="col-12 form-container">
+                                                <input name="date" type="date" min="<?php echo date('Y-m-d'); ?>" required placeholder=" ">
+                                                <label for="date">Birthdate *</label>
                                             </div>
-                                            <div class="col-12">
-                                                @php
-                                                $data=App\Models\Treatment_type::all();
-                                                @endphp
-                                                <select name="treatment_types" required> <!-- Added the name attribute here -->
-                                                    <option value="">Need Appointment for</option>
-                                                    @foreach($data as $data)
-                                                    <option value="{{$data->title}}">{{$data->title}}</option>
+                                            <div class="col-12 form-container">
+                                                <select name="doctor_id" id="doctor-select">
+                                                    <option value="">Select Doctor (Optional)</option>
+                                                    @foreach($doctors as $doctor)
+                                                        <option value="{{ $doctor->id }}" 
+                                                                data-specialty="{{ $doctor->speciali }}"
+                                                                data-available-days="{{ $doctor->available_days }}">
+                                                            Dr. {{ $doctor->name }} - {{ $doctor->speciali }}
+                                                        </option>
                                                     @endforeach
-                                                    <!-- Add more options as needed -->
                                                 </select>
+                                                <label for="doctor-select">Choose Doctor</label>
                                             </div>
-                                            <div class="col-12">
-                                                <textarea name="message" rows="4" placeholder="Message" required></textarea>
+                                            <div class="col-12 form-container" id="available-days-container" style="display: none;">
+                                                <select name="appointment_day" id="appointment-day-select">
+                                                    <option value="">Choose a day</option>
+                                                </select>
+                                                <label for="appointment-day-select">Available Days</label>
+                                            </div>
+                                            <div class="col-12 form-container">
+                                                <select name="treatment_types" required>
+                                                    <option value="">Select Treatment</option>
+                                                    @if(isset($single_service))
+                                                        <option value="{{$single_service->title}}" selected>{{$single_service->title}}</option>
+                                                    @endif
+                                                    @foreach($services as $service)
+                                                        @if(!isset($single_service) || $service->title !== $single_service->title)
+                                                            <option value="{{$service->title}}">{{$service->title}}</option>
+                                                        @endif
+                                                    @endforeach
+                                                </select>
+                                                <label for="treatment_types">Need Appointment For *</label>
+                                            </div>
+                                            <div class="col-12 form-container">
+                                                <textarea name="message" rows="4" placeholder=" " required></textarea>
+                                                <label for="message">Message *</label>
                                             </div>
                                         </div>
                                         <button type="submit" class="lab-btn">take an appointment</button>
@@ -138,33 +237,33 @@
                                 <h6>Need any Help?</h6>
                             </div>
                             <div class="body">
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3652.2272993019737!2d90.3865760744707!3d23.73927258920508!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b99cc3c9ec8d%3A0x8e45044745bdba5e!2sWebCode%20Ltd.!5e0!3m2!1sen!2sbd!4v1697023353911!5m2!1sen!2sbd" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                <iframe src="{{$general_info->map}}" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                                 <ul>
                                     <li>
                                         <div class="icon">
-                                            <img src="assets/images/sidebar/icon/01.png" alt="webcode">
+                                            <img src="{{asset('assets/images/sidebar/icon/01.png')}}" alt="webcode">
                                         </div>
                                         <div class="content">
-                                            <p>Monday - Friday</p>
-                                            <p><b>8:00 AM - 6: 00 PM</b></p>
+                                            <p>{{$general_info->office_day}}</p>
+                                            <p><b>{{$general_info->official_hour}}</b></p>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="icon">
-                                            <img src="assets/images/sidebar/icon/02.png" alt="webcode">
+                                            <img src="{{asset('assets/images/sidebar/icon/02.png')}}" alt="webcode">
                                         </div>
                                         <div class="content">
                                             <p>Email Address</p>
-                                            <p><b>yourmail@gmail.com</b></p>
+                                            <p><b>{{$general_info->email}}</b></p>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="icon">
-                                            <img src="assets/images/sidebar/icon/03.png" alt="webcode">
+                                            <img src="{{asset('assets/images/sidebar/icon/03.png')}}" alt="webcode">
                                         </div>
                                         <div class="content">
-                                            <p>Donato Parkway</p>
-                                            <p><b>12 Tottina United State 1200</b></p>
+                                            <p>Address</p>
+                                            <p><b>{{$general_info->address}}</b></p>
                                         </div>
                                     </li>
                                 </ul>
@@ -176,4 +275,73 @@
         </div>
     </div>
     <!-- ==========Service Section Ends Here========== -->
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const doctorSelect = document.getElementById('doctor-select');
+    const availableDaysContainer = document.getElementById('available-days-container');
+    const appointmentDaySelect = document.getElementById('appointment-day-select');
+    
+    // Function to handle label animations for selects
+    function handleSelectLabels() {
+        const selects = document.querySelectorAll('.form-container select');
+        selects.forEach(select => {
+            const label = select.nextElementSibling;
+            if (label && label.tagName === 'LABEL') {
+                if (select.value && select.value !== '') {
+                    label.classList.add('active');
+                } else {
+                    label.classList.remove('active');
+                }
+            }
+        });
+    }
+    
+    // Function to populate available days
+    function populateAvailableDays(availableDaysString) {
+        if (!availableDaysString) {
+            availableDaysContainer.style.display = 'none';
+            return;
+        }
+        
+        const days = availableDaysString.split(',').map(day => day.trim());
+        appointmentDaySelect.innerHTML = '<option value="">Choose a day</option>';
+        
+        days.forEach(day => {
+            if (day) {
+                const option = document.createElement('option');
+                option.value = day;
+                option.textContent = day;
+                appointmentDaySelect.appendChild(option);
+            }
+        });
+        
+        availableDaysContainer.style.display = 'block';
+        handleSelectLabels(); // Update label positions after showing container
+    }
+    
+    // Handle doctor selection change
+    doctorSelect.addEventListener('change', function() {
+        const selectedOption = this.options[this.selectedIndex];
+        const availableDays = selectedOption.getAttribute('data-available-days');
+        
+        if (this.value) {
+            populateAvailableDays(availableDays);
+        } else {
+            availableDaysContainer.style.display = 'none';
+        }
+        handleSelectLabels();
+    });
+    
+    // Handle all select changes for label animation
+    document.querySelectorAll('.form-container select').forEach(select => {
+        select.addEventListener('change', handleSelectLabels);
+        select.addEventListener('focus', handleSelectLabels);
+        select.addEventListener('blur', handleSelectLabels);
+    });
+    
+    // Initial label check on page load
+    handleSelectLabels();
+});
+</script>
 @endsection

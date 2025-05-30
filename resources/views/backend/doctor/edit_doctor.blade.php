@@ -84,9 +84,27 @@
                             <input name="image" type="file" class="form-control" id="exampleFormControlInput1" placeholder="" >
                         </div>
                         <div class="mb-3">
+                            <label for="available_days" class="form-label">Available Days</label>
+                            <div class="form-check">
+                                @php
+                                    $available_days = explode(',', $doctor->available_days);
+                                @endphp
+                                
+                                @foreach(['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'] as $day)
+                                <div>
+                                    
+                                    <input class="form-check-input" type="checkbox" name="available_days[]" value="{{ $day }}" 
+                                        {{ in_array($day, $available_days) ? 'checked' : '' }}>
+                                    <label class="form-check-label">{{ $day }}</label>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label">About</label>
                             <textarea name="about"  class="form-control summernote" id="exampleFormControlTextarea1" rows="3">{!! $doctor->about !!}</textarea>
                         </div>
+
                       <button class="btn btn-lg btn-primary">Update</button>
                   </div>
               </div>

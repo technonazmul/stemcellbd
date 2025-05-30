@@ -79,6 +79,38 @@
                             <input name="image" type="file" class="form-control" id="exampleFormControlInput1" placeholder="" required>
                         </div>
                         <div class="mb-3">
+                            <label class="form-label">Available Days</label><br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="available_days[]" value="Saturday" id="daySaturday">
+                                <label class="form-check-label" for="daySaturday">Saturday</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="available_days[]" value="Sunday" id="daySunday">
+                                <label class="form-check-label" for="daySunday">Sunday</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="available_days[]" value="Monday" id="dayMonday">
+                                <label class="form-check-label" for="dayMonday">Monday</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="available_days[]" value="Tuesday" id="dayTuesday">
+                                <label class="form-check-label" for="dayTuesday">Tuesday</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="available_days[]" value="Wednesday" id="dayWednesday">
+                                <label class="form-check-label" for="dayWednesday">Wednesday</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="available_days[]" value="Thursday" id="dayThursday">
+                                <label class="form-check-label" for="dayThursday">Thursday</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="available_days[]" value="Friday" id="dayFriday">
+                                <label class="form-check-label" for="dayFriday">Friday</label>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label">About</label>
                             <textarea name="about" class="form-control @section('extra_script')
                             <script>

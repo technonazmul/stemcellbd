@@ -14,7 +14,7 @@
                 <h2>Early Bird Registration</h2>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('index')}}">Home</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Early Bird Registration</li>
                     </ol>
                 </nav>
@@ -214,7 +214,7 @@
                   <div class="card ">
                       <div class="card-body">
                           <label for="exampleFormControlInput1" class="form-label"><u>Consent</u></label><span class="float-end" style="color:red">*</span>
-                          <p>I am giving permissions to Platinum Hospital stem Cell Centre to collect & store my data for further communication.</p>
+                          <p>I am giving permissions to Advancell to collect & store my data for further communication.</p>
                           <div class="form-check">
                               <input class="form-check-input" type="radio" name="i_agreed" id="i_agreed" value="i agreed" required>
                               <label class="form-check-label" for="i_agreed">

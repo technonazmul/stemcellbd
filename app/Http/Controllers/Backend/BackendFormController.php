@@ -36,6 +36,16 @@ class BackendFormController extends Controller
         $data->save();
         return redirect()->route('admin.treatment_types')->with('success', 'Data updated successfully.');
     }
+    public function delete_treatmen_types ($id)
+    {
+        $data = Treatment_type::find($id);
+        if ($data) {
+            $data->delete();
+            return redirect()->back()->with('success', 'Treatment type deleted successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Treatment type not found.');
+        }
+    }
     //appointment
     public function take_appointment(Request $request)
     {
@@ -56,6 +66,8 @@ class BackendFormController extends Controller
         $appointment->message = $request->message;
         $appointment->status = $request->status;
         $appointment->notes = $request->notes;
+        $appointment->day = $request->appointment_day;
+        $appointment->doctor_id = $request->doctor_id;
 
         // Save the appointment
         $appointment->save();

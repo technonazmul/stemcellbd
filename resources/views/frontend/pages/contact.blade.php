@@ -1,3 +1,6 @@
+<?php
+$general_info = App\Models\GeneralInfo::findOrFail(1);
+?>
 @extends('frontend.layouts.template')
 @section("content")
             <!-- ==========Page Header Section Start Here========== -->
@@ -11,7 +14,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="index.html">Home</a>
+                                <a href="{{route('index')}}">Home</a>
                             </li>
                             <li
                                 class="breadcrumb-item active"
@@ -28,75 +31,73 @@
    
         <!-- ==========Contact Section Start Here========== -->
         <div class="contact contact--two" id="contact">
-            <div class="container">
-                <div class="section__header text-center">
-                    <h2>Find Us On Google Map</h2>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Illo saepe fugiat, quisquam est sint tempore.
-                    </p>
+    <div class="container">
+        <div class="section__header text-center">
+            <h2>Contact Us</h2>
+            <p>
+                {{ $general_info->contact_description ?? 'Reach out today—we’re ready to support you on your journey to better health with science you can trust.' }}
+            </p>
+        </div>
+
+        @if(!empty($general_info))
+        <div class="row g-4 justify-content-center">
+            {{-- Address Section --}}
+            <div class="col-lg-4 col-sm-6 col-12">
+                <div class="contact__item">
+                    <div class="contact__thumb">
+                        <img src="{{ asset('frontend/assets/images/info/01.jpg') }}" alt="webcodeltd" />
+                    </div>
+                    <div class="contact__content">
+                        <p>{{ $general_info->address }}</p>
+                    </div>
                 </div>
-                <div class="row g-4 justify-content-center">
-                    <div class="col-lg-4 col-sm-6 col-12">
-                        <div class="contact__item">
-                            <div class="contact__thumb">
-                                <img
-                                    src="{{asset('frontend/assets/images/info/01.jpg')}}"
-                                    alt="webcodeltd"
-                                />
-                            </div>
-                            <div class="contact__content">
-                                <p>
-                                    69/M/1, GH Tower (5th Floor), Panthapath,
-                                    Opposite to Bashundhara City Shopping
-                                    Complex, Dhaka-1205
-                                </p>
-                            </div>
-                        </div>
+            </div>
+
+            {{-- Phone Section --}}
+            <div class="col-lg-4 col-sm-6 col-12">
+                <div class="contact__item">
+                    <div class="contact__thumb">
+                        <img src="{{ asset('frontend/assets/images/info/02.jpg') }}" alt="webcodeltd" />
                     </div>
-                    <div class="col-lg-4 col-sm-6 col-12">
-                        <div class="contact__item">
-                            <div class="contact__thumb">
-                                <img
-                                    src="{{asset('frontend/assets/images/info/02.jpg')}}"
-                                    alt="webcodeltd"
-                                />
-                            </div>
-                            <div class="contact__content">
-                                <p>Platinum Hospital Stem Cell Centre</p>
-                                <p>Enquiry: 01234-567890</p>
-                                <p>Appointment: 01234-567890</p>
-                            </div>
-                        </div>
+                    <div class="contact__content">
+                        <p>{{ $general_info->title }}</p>
+                        <p>Enquiry: {{ $general_info->enquiry_number }}</p>
+                        <p>Appointment: {{ $general_info->appointment_number }}</p>
                     </div>
-                    <div class="col-lg-4 col-sm-6 col-12">
-                        <div class="contact__item">
-                            <div class="contact__thumb">
-                                <img
-                                    src="{{asset('frontend/assets/images/info/03.jpg')}}"
-                                    alt="webcodeltd"
-                                />
-                            </div>
-                            <div class="contact__content">
-                                <p><a href="#">help@adminstemcellcentre</a></p>
-                                <p>
-                                    <a href="#">support@adminstemcellcentre</a>
-                                </p>
-                                <p><a href="#">www.stemcellcentre</a></p>
-                            </div>
-                        </div>
+                </div>
+            </div>
+
+            {{-- Email/Website Section --}}
+            <div class="col-lg-4 col-sm-6 col-12">
+                <div class="contact__item">
+                    <div class="contact__thumb">
+                        <img src="{{ asset('frontend/assets/images/info/03.jpg') }}" alt="webcodeltd" />
+                    </div>
+                    <div class="contact__content">
+                        <p>
+                            <a href="mailto:{{ $general_info->help_email }}">{{ $general_info->help_email }}</a>
+                        </p>
+                        <p>
+                            <a href="mailto:{{ $general_info->support_email }}">{{ $general_info->support_email }}</a>
+                        </p>
+                        <p>
+                            <a href="{{ $general_info->website }}" target="_blank">{{ $general_info->website }}</a>
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
+        @endif
+    </div>
+</div>
+
 
         <div class="contactform padding-tb">
             <div class="container">
                 <div class="section__header text-center">
                     <h2>Feel Free To Ask Something We Are Here</h2>
                     <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Unde veritatis magnam porro, temporibus perferendis eum.
+                        Feel free to reach out—our team is ready to assist you with any inquiries or support you need.
                     </p>
                 </div>
                 {{-- message --}}

@@ -82,6 +82,23 @@
                                 {{$general_info->about_us}}
                     </textarea>
                 </div>
+
+                 <div class="mb-3">
+                    <label for="map" class="form-label">Map Iframe Url</label>
+                    <input value="{{$general_info->map}}" name="map" type="text" class="form-control" id="official_hour" placeholder="Google Map Url" >
+                </div>
+
+                <div class="mb-3">
+                    <label for="office_day" class="form-label">Official Day</label>
+                    <input value="{{$general_info->office_day}}" name="office_day" type="text" class="form-control" id="office_day" placeholder="Sat - Thu" >
+                </div>
+
+                <div class="mb-3">
+                    <label for="official_hour" class="form-label">Office Hour</label>
+                    <input value="{{$general_info->official_hour}}" name="official_hour" type="text" class="form-control" id="official_hour" placeholder="8:00 AM - 6: 00 PM" >
+                </div>
+
+
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Facebook</label>
                     <input value="{{$general_info->facebook}}" name="facebook" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Facebook" >

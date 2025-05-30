@@ -314,6 +314,24 @@
               
             </ul>
           </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class=""></i>
+              <p>
+                Pages
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('pages.index')}}" class="nav-link">
+                  <i class=""></i>
+                  <p>Page Management</p>
+                </a>
+              </li>
+              
+            </ul>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

@@ -7,10 +7,111 @@ $steps = \App\Models\Step::all();
 $stepsection = \App\Models\StepSection::first();
 $video = \App\Models\VideoSection::findOrFail(1);
 $secondvideo = \App\Models\VideoSection::findOrFail(2);
+$doctors = App\Models\Doctor::all(); // Get all doctors for appointment form
+$services = App\Models\Service::all(); // For appointment form services
 ?>
 
 
 <?php $__env->startSection("content"); ?>
+<style>
+    .form-container {
+        position: relative;
+        margin-bottom: 1rem;
+    }
+    
+    .form-container label {
+        position: absolute;
+        top: -12px;
+        left: 8px;
+        color: #333;
+        font-size: 12px;
+        font-weight: 600;
+        background: white;
+        padding: 0 4px;
+        pointer-events: none;
+        transition: 0.2s;
+        z-index: 1;
+    }
+    
+    .form-container input,
+    .form-container select,
+    .form-container textarea {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #e9ecef;
+        border-radius: 4px;
+        font-size: 14px;
+        background: white;
+        transition: border-color 0.2s;
+    }
+    
+    .form-container input:focus,
+    .form-container select:focus,
+    .form-container textarea:focus {
+        outline: none;
+        border-color: #2196f3;
+    }
+    
+    .form-container input:focus + label,
+    .form-container select:focus + label,
+    .form-container textarea:focus + label {
+        color: #2196f3;
+    }
+    
+    .form-container textarea {
+        resize: vertical;
+        min-height: 100px;
+    }
+    
+    .available-days {
+        font-size: 12px;
+        color: #666;
+        margin-top: 5px;
+    }
+    
+    .available-days span {
+        background: #e8f5e8;
+        color: #2d5a2d;
+        padding: 2px 6px;
+        border-radius: 10px;
+        margin-right: 4px;
+        font-size: 10px;
+    }
+    
+    .available-days-selector {
+        margin-top: 15px;
+    }
+    
+    .available-days-selector label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #333;
+    }
+    
+    .day-option {
+        background: #f8f9fa;
+        border: 2px solid #e9ecef;
+        padding: 8px 12px;
+        margin: 5px;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: inline-block;
+        font-size: 14px;
+    }
+    
+    .day-option:hover {
+        background: #e3f2fd;
+        border-color: #2196f3;
+    }
+    
+    .day-option.selected {
+        background: #2196f3;
+        color: white;
+        border-color: #1976d2;
+    }
+</style>
     <!-- ==========Banner Section Start Here========== -->
     <div class="banner bg-img" id="banner" style="background: url(<?php echo e(asset('storage/public/' . $banner->background_image)); ?>) rgba(0,0,0,.5);">
         
@@ -26,8 +127,6 @@ $secondvideo = \App\Models\VideoSection::findOrFail(2);
         </div>
     </div>
     <!-- ==========Banner Section Ends Here========== -->
-
-
 
     <!-- ==========Feture Section Start Here========== -->
     <div class="feature bg-img" id="feature" style="background-image: url(<?php echo e(asset('frontend/assets/images/bg/05.jpg')); ?>);">
@@ -56,8 +155,6 @@ $secondvideo = \App\Models\VideoSection::findOrFail(2);
         </div>
     </div>
     <!-- ==========Feture Section Ends Here========== -->
-
-
 
     <!-- ==========About Section Start Here========== -->
     <div class="about padding-tb" id="about">
@@ -94,7 +191,6 @@ $secondvideo = \App\Models\VideoSection::findOrFail(2);
 
     <!-- ==========About Section Ends Here========== -->
 
-
     <!-- ==========Service Section Start Here========== -->
     <div class="service padding-tb" id="service">
         <div class="container">
@@ -105,20 +201,20 @@ $secondvideo = \App\Models\VideoSection::findOrFail(2);
             <div class="section__wrapper">
                 <div class="row g-4 justify-content-center">
                     <?php
-                    $services=App\Models\Service::take(6)->get();
+                    $serviceCategories=App\Models\ServiceCategory::get();
                     ?>
-                    <?php $__currentLoopData = $services; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $service): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php $__currentLoopData = $serviceCategories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $single_category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="col-lg-4 col-sm-6 col-12">
                         <div class="service__item">
                             <div class="service__thumb">
-                                <a href="<?php echo e(route('single_service',$service->id)); ?>">
-                                    <img src="<?php echo e(asset('storage/public/service/'.$service->thumbnail)); ?>" alt="webcodeltd" style="width:auto;height:300px;">
+                                <a href="<?php echo e(route('show_services',$single_category->id)); ?>">
+                                    <img src="<?php echo e(asset('storage/public/service_categories/'.$single_category->image)); ?>" alt="webcodeltd" style="width:auto;height:300px;">
                                 </a>
                             </div>
                             <div class="service__content">
-                                <h5><a href="<?php echo e(route('single_service',$service->id)); ?>"><?php echo e($service->title); ?></a></h5>
-                                <p><?php echo Illuminate\Support\Str::limit(strip_tags($service->description), 100); ?></p>
-                                <a href="<?php echo e(route('single_service',$service->id)); ?>" class="text-btn">Details<i class="fa-solid fa-angles-right"></i></a>
+                                <h5><a href="<?php echo e(route('show_services',$single_category->id)); ?>"><?php echo e($single_category->name); ?></a></h5>
+                                <p><?php echo Illuminate\Support\Str::limit(strip_tags($single_category->short_description), 100); ?></p>
+                                
                             </div>
                         </div>
                     </div>
@@ -128,7 +224,6 @@ $secondvideo = \App\Models\VideoSection::findOrFail(2);
         </div>
     </div>
     <!-- ==========Service Section Ends Here========== -->
-
 
     <!-- ==========Step Section Start Here========== -->
     <div class="step padding-tb bg-img" id="step" style="background-image: url(<?php echo e(asset('frontend/assets/images/bg/02.jpg')); ?>);">
@@ -160,7 +255,6 @@ $secondvideo = \App\Models\VideoSection::findOrFail(2);
     </div>
 </div>
     <!-- ==========Step Section Ends Here========== -->
-
 
     <!-- ==========Video Section Start Here========== -->
     <?php if($video): ?>
@@ -210,7 +304,6 @@ $secondvideo = \App\Models\VideoSection::findOrFail(2);
     <?php endif; ?>
     <!-- ==========Video Section Ends Here========== -->
 
-
     <!-- ==========Team Section Start Here========== -->
     <div class="team padding-tb" id="team">
         <div class="container">
@@ -221,9 +314,9 @@ $secondvideo = \App\Models\VideoSection::findOrFail(2);
             <div class="section__wrapper">
                 <div class="row g-4 justify-content-center">
                     <?php
-                    $doctors=App\Models\Doctor::paginate(1);
+                    $doctors_display = App\Models\Doctor::paginate(8);
                     ?>
-                    <?php $__currentLoopData = $doctors; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $doctor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php $__currentLoopData = $doctors_display; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $doctor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <?php if(!empty($doctor)): ?>
                     <div class="col-xl-3 col-lg-4 col-sm-6 col-12">
                         <div class="team__item">
@@ -233,11 +326,17 @@ $secondvideo = \App\Models\VideoSection::findOrFail(2);
                             <div class="team__content">
                                 <h6><a href="<?php echo e(route('single_doctor',$doctor->id)); ?>"><?php echo e($doctor->name); ?></a></h6>
                                 <span><?php echo e($doctor->speciali); ?></span>
-                                <ul>
-                                    <li><a href="#"><i class="fa-regular fa-paper-plane"></i></a></li>
-                                    <li><a href="#"><i class="fa-solid fa-phone"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                                </ul>
+                                
+                                
+                                
+                                <div class="mt-3">
+                                    <a href="#appointment" class="lab-btn btn-sm doctor-appointment-btn" 
+                                       data-doctor-id="<?php echo e($doctor->id); ?>" 
+                                       data-doctor-name="<?php echo e($doctor->name); ?>"
+                                       data-doctor-specialty="<?php echo e($doctor->speciali); ?>">
+                                        Get Appointment
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -245,7 +344,7 @@ $secondvideo = \App\Models\VideoSection::findOrFail(2);
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-center mt-5">
-                           <?php echo e($doctors->links('pagination::bootstrap-4')); ?>
+                           <?php echo e($doctors_display->links('pagination::bootstrap-4')); ?>
 
                         </ul>
                     </nav>
@@ -254,8 +353,6 @@ $secondvideo = \App\Models\VideoSection::findOrFail(2);
         </div>
     </div>
     <!-- ==========Team Section Ends Here========== -->
-
-
 
     <!-- ==========Testmonial Section Start Here========== -->
     <div class="testimonial padding-tb bg-img" id="testimonial" style="background-image: url(<?php echo e(asset('frontend/assets/images/bg/01.jpg')); ?>);">
@@ -309,8 +406,6 @@ $secondvideo = \App\Models\VideoSection::findOrFail(2);
     </div>
     <!-- ==========Testmonial Section Ends Here========== -->
 
-
-
     <!-- ==========Result Section Start Here========== -->
     <div class="result padding-tb" id="result">
         <div class="container">
@@ -331,8 +426,6 @@ $secondvideo = \App\Models\VideoSection::findOrFail(2);
         </div>
     </div>
     <!-- ==========Result Section Ends Here========== -->
-
-
 
     <!-- ==========Blog Section Start Here========== -->
     <div class="blog padding-tb" id="blog">
@@ -374,7 +467,6 @@ $secondvideo = \App\Models\VideoSection::findOrFail(2);
     </div>
     <!-- ==========Blog Section Ends Here========== -->
 
-
     <!-- ==========Appointment Section Start Here========== -->
     <div class="appointment padding-tb">
         <div class="container">
@@ -408,37 +500,63 @@ $secondvideo = \App\Models\VideoSection::findOrFail(2);
                         <form action="<?php echo e(route('admin.take_appointment')); ?>" method="post">
                             <?php echo csrf_field(); ?>
                             <div class="row g-4">
-                                <div class="col-md-6 col-12">
-                                    <input name="name" type="text" placeholder="full name*" required>
+                                <div class="col-md-6 col-12 form-container">
+                                    <input name="name" type="text" placeholder=" " required>
+                                    <label for="name">Full Name *</label>
                                 </div>
-                                <div class="col-md-6 col-12">
-                                    <input name="phone" type="text" placeholder="Phone Number" required>
+                                <div class="col-md-6 col-12 form-container">
+                                    <input name="phone" type="text" placeholder=" " required>
+                                    <label for="phone">Phone Number *</label>
                                 </div>
-                                <div class="col-12">
-                                    <input name="email" type="email" placeholder="email address" required>
+                                <div class="col-12 form-container">
+                                    <input name="email" type="email" placeholder=" " required>
+                                    <label for="email">Email Address *</label>
                                 </div>
-                                <div class="col-md-6 col-12">
+                                <div class="col-md-6 col-12 form-container">
                                     <select name="gender" required>
-                                        <option value="">Sex</option>
-                                        <option name="gender" value="male">Male</option>
-                                        <option name="gender" value="female">Female</option>
-                                        <option name="gender" value="other">Other</option>
+                                        <option value="">Select Gender</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="other">Other</option>
                                     </select>
+                                    <label for="gender">Gender *</label>
                                 </div>
-                                <div class="col-md-6 col-12">
-                                    <input id="datepicker" name="date" type="date" min="<?php echo date('Y-m-d'); ?>" required>
+                               <div class="col-md-6 col-12 form-container">
+                                    <input id="datepicker" name="date" type="date" required placeholder=" ">
+                                    <label for="datepicker">Birthdate *</label>
                                 </div>
-                                <div class="col-12">
-                                    <select name="treatment_types" required> <!-- Added the name attribute here -->
-                                        <option value="">Need Appointment for</option>
-                                        <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <option value="<?php echo e($data->title); ?>"><?php echo e($data->title); ?></option>
+                                <div class="col-12 form-container">
+                                    <select name="doctor_id" id="doctor-select">
+                                        <option value="">Select Doctor (Optional)</option>
+                                        <?php $__currentLoopData = $doctors; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $doctor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <option value="<?php echo e($doctor->id); ?>" 
+                                                    data-specialty="<?php echo e($doctor->speciali); ?>"
+                                                    data-available-days="<?php echo e($doctor->available_days); ?>">
+                                                Dr. <?php echo e($doctor->name); ?> - <?php echo e($doctor->speciali); ?>
+
+                                            </option>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                        <!-- Add more options as needed -->
                                     </select>
+                                    <label for="doctor-select">Choose Doctor</label>
                                 </div>
-                                <div class="col-12">
-                                    <textarea name="message" rows="4" placeholder="Message" required></textarea>
+                                <div class="col-12 form-container" id="available-days-container" style="display: none;">
+                                    <select name="appointment_day" id="appointment-day-select">
+                                        <option value="">Choose a day</option>
+                                    </select>
+                                    <label for="appointment-day-select">Available Days</label>
+                                </div>
+                                <div class="col-12 form-container">
+                                    <select name="treatment_types" required>
+                                        <option value="">Select Treatment</option>
+                                        <?php $__currentLoopData = $services; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $service): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($service->title); ?>"><?php echo e($service->title); ?></option>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    </select>
+                                    <label for="treatment_types">Need Appointment For *</label>
+                                </div>
+                                <div class="col-12 form-container">
+                                    <textarea name="message" rows="4" placeholder=" " required></textarea>
+                                    <label for="message">Message *</label>
                                 </div>
                             </div>
                             <button type="submit" class="lab-btn">take an appointment</button>
@@ -449,8 +567,6 @@ $secondvideo = \App\Models\VideoSection::findOrFail(2);
         </div>
     </div>
     <!-- ==========Appointment Section Ends Here========== -->
-
-
 
     <!-- ==========contact Section start Here========== -->
     <div class="contact" id="contact">
@@ -487,7 +603,7 @@ $secondvideo = \App\Models\VideoSection::findOrFail(2);
                         <div class="contact__content">
                             <p><a href="#"><?php echo e($general_info->help_email); ?></a></p>
                             <p><a href="#"></a><?php echo e($general_info->support_email); ?></p>
-                            <p><a href="#">www.stemcellcentre</a></p>
+                            <p><a href="#"><?php echo $_SERVER['HTTP_HOST']; ?></a></p>
                         </div>
                         <?php endif; ?>
                     </div>
@@ -496,5 +612,115 @@ $secondvideo = \App\Models\VideoSection::findOrFail(2);
         </div>
     </div>
     <!-- ==========contact Section Ends Here========== -->
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle doctor appointment button clicks
+    const doctorAppointmentBtns = document.querySelectorAll('.doctor-appointment-btn');
+    const doctorSelect = document.getElementById('doctor-select');
+    const availableDaysContainer = document.getElementById('available-days-container');
+    const appointmentDaySelect = document.getElementById('appointment-day-select');
+    
+    // Function to handle label animations for selects
+    function handleSelectLabels() {
+        const selects = document.querySelectorAll('.form-container select');
+        selects.forEach(select => {
+            const label = select.nextElementSibling;
+            if (label && label.tagName === 'LABEL') {
+                if (select.value && select.value !== '') {
+                    label.classList.add('active');
+                } else {
+                    label.classList.remove('active');
+                }
+            }
+        });
+    }
+    
+    // Function to populate available days
+    function populateAvailableDays(availableDaysString) {
+        if (!availableDaysString) {
+            availableDaysContainer.style.display = 'none';
+            return;
+        }
+        
+        const days = availableDaysString.split(',').map(day => day.trim());
+        appointmentDaySelect.innerHTML = '<option value="">Choose a day</option>';
+        
+        days.forEach(day => {
+            if (day) {
+                const option = document.createElement('option');
+                option.value = day;
+                option.textContent = day;
+                appointmentDaySelect.appendChild(option);
+            }
+        });
+        
+        availableDaysContainer.style.display = 'block';
+        handleSelectLabels(); // Update label positions after showing container
+    }
+    
+    // Handle doctor selection change
+    doctorSelect.addEventListener('change', function() {
+        const selectedOption = this.options[this.selectedIndex];
+        const availableDays = selectedOption.getAttribute('data-available-days');
+        
+        if (this.value) {
+            populateAvailableDays(availableDays);
+        } else {
+            availableDaysContainer.style.display = 'none';
+        }
+        handleSelectLabels();
+    });
+    
+    // Handle all select changes for label animation
+    document.querySelectorAll('.form-container select').forEach(select => {
+        select.addEventListener('change', handleSelectLabels);
+        select.addEventListener('focus', handleSelectLabels);
+        select.addEventListener('blur', handleSelectLabels);
+    });
+    
+    // Handle doctor appointment button clicks
+    doctorAppointmentBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const doctorId = this.getAttribute('data-doctor-id');
+            const doctorName = this.getAttribute('data-doctor-name');
+            const doctorSpecialty = this.getAttribute('data-doctor-specialty');
+            
+            // Select the doctor in the dropdown
+            if (doctorSelect) {
+                doctorSelect.value = doctorId;
+                
+                // Trigger change event to show available days
+                const selectedOption = doctorSelect.options[doctorSelect.selectedIndex];
+                const availableDays = selectedOption.getAttribute('data-available-days');
+                populateAvailableDays(availableDays);
+            }
+            
+            // Smooth scroll to appointment form
+            document.getElementById('appointment').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+            
+            // Optional: Show a notification that doctor is selected
+            const appointmentTitle = document.querySelector('.appointment__content .title h2');
+            if (appointmentTitle) {
+                const originalText = appointmentTitle.textContent;
+                appointmentTitle.textContent = `Book Appointment with Dr. ${doctorName}`;
+                
+                // Reset after 3 seconds
+                setTimeout(() => {
+                    appointmentTitle.textContent = originalText;
+                }, 3000);
+            }
+        });
+    });
+    
+    // Initial label check on page load
+    handleSelectLabels();
+});
+</script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('frontend.layouts.template', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Applications/MAMP/htdocs/Advancellhealth/resources/views/frontend/pages/index.blade.php ENDPATH**/ ?>

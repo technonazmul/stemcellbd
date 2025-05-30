@@ -21,6 +21,8 @@ use App\Http\Controllers\Backend\StepController;
 use App\Http\Controllers\Backend\StepSectionController;
 use App\Http\Controllers\Backend\VideoSectionController;
 use App\Http\Controllers\Backend\GalleryController;
+use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Backend\DynamicPageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -61,6 +63,21 @@ Route::get('/blog/search/tags/{search}',[FrontendPagesController::class,'blogSea
 Route::get('/shop',[HomeController::class,'shop'])->name('shop');
 Route::get('/shop_single/{slug}',[HomeController::class,'shop_single'])->name('shop_single');
 Route::post('/product_review',[HomeController::class,'product_review'])->name('product.review.save');
+
+// Dynamic Pages
+Route::get('/page/{page:slug}', [DynamicPageController::class, 'showPublic'])->name('pages.public');
+
+
+Route::prefix('cart')->name('cart.')->group(function () {
+    Route::get('/', [CartController::class, 'index'])->name('index');
+    Route::post('/add', [CartController::class, 'add'])->name('add');
+    Route::put('/update', [CartController::class, 'update'])->name('update');
+    Route::delete('/remove', [CartController::class, 'destroy'])->name('remove');
+    Route::post('/apply-coupon', [CartController::class, 'applyCoupon'])->name('applyCoupon');
+    Route::get('/count', [CartController::class, 'getCartCount'])->name('count');
+    Route::get('/total', [CartController::class, 'getCartTotal'])->name('total');
+});
+
 
 //frontend shop end
 Route::get('/contact',[HomeController::class,'contact'])->name('contact');
@@ -195,10 +212,14 @@ Route::get('/treatment_types',[BackendFormController::class,'treatment_types'])-
 Route::post('/add_treatmen_types',[BackendFormController::class,'add_treatmen_types'])->name('admin.add_treatmen_types');
 Route::get('/edit_treatment_types/{id}',[BackendFormController::class,'edit_treatment_types'])->name('admin.edit_treatment_types');
 Route::post('/update_treatmen_types/{id}',[BackendFormController::class,'update_treatmen_types'])->name('admin.update_treatmen_types');
+Route::get('/delete_treatmen_types/{id}',[BackendFormController::class,'delete_treatmen_types'])->name('admin.delete_treatmen_types');
 //Appoinment
 Route::post('/take_appointment',[BackendFormController::class,'take_appointment'])->name('admin.take_appointment');
 Route::get('/edit_appointment/{id}',[BackendFormController::class,'edit_appointment'])->name('admin.edit_appointment');
 Route::post('/update_appointment/{id}',[BackendFormController::class,'update_appointment'])->name('admin.update_appointment');
 Route::get('/delete_appointment/{id}',[BackendFormController::class,'delete_appointment'])->name('admin.delete_appointment');
 
+
+// Page management
+    Route::resource('pages', DynamicPageController::class);
 });
