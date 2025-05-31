@@ -167,12 +167,24 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                             <ul>
                                 <li>
                                     <i class="fa-solid fa-envelope"></i>
-                                    <span><?php echo e($general_info->email); ?></span>
+                                    <span>
+                                        <a href="mailto:<?php echo e($general_info->email); ?>" style="color: white;">
+                                            <?php echo e($general_info->email); ?>
+
+                                        </a>
+                                    </span>
                                 </li>
                                 <li>
                                     <i class="fa-solid fa-phone"></i>
-                                    <span>Hotline - <?php echo e($general_info->hotline); ?></span>
+                                    <span>
+                                        Hotline - 
+                                        <a href="tel:<?php echo e($general_info->hotline); ?>" style="color: white;">
+                                            <?php echo e($general_info->hotline); ?>
+
+                                        </a>
+                                    </span>
                                 </li>
+
                             </ul>
                         </div>
                     </div>
@@ -221,13 +233,25 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                                     
                                     <ul>
                                         <?php $__currentLoopData = $service_category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $service_category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <li><a href="<?php echo e(route('show_services',$service_category->id)); ?>"><?php echo e(ucfirst($service_category->name)); ?></a></li>
+                                        <?php if($service_category->name == 'Pharmacy'): ?> 
+                                        <li><a href="<?php echo e(route('pharmacy')); ?>">Pharmacy</a></li>
+                                        <?php continue; ?>
+                                        <?php endif; ?>
+                                        <?php if($service_category->name == 'Pathology Sample Collection'): ?> 
+                                        <li><a href="<?php echo e(route('pathology')); ?>">Pathology Sample Collection</a></li>
+                                        <?php continue; ?>
+                                        <?php endif; ?>
+                                        <?php if($service_category->name == 'Ambulance Call Service'): ?> 
+                                        <li><a href="<?php echo e(route('ambulance')); ?>">Ambulance Call Service</a></li>
+                                        <?php continue; ?>
+                                        <?php endif; ?>
+                                        <li><a href="<?php echo e(route('show_services',$service_category->slug)); ?>"><?php echo e(ucfirst($service_category->name)); ?></a></li>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </ul>
                                     
                                 </li>
                                 <li><a href="<?php echo e(route('doctors')); ?>">Doctors</a></li>
-                                <li><a href="<?php echo e(route('blog')); ?>">Blog</a></li>
+                                
                                 <li><a href="<?php echo e(route('shop')); ?>">Shop</a></li>
                                 <li><a href="<?php echo e(route('pages.public', 'about-us')); ?>">About Us</a></li>
                                 <li><a href="<?php echo e(route('contact')); ?>">Contact</a></li>
@@ -235,7 +259,9 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                             </ul>
                         </div>
                         <div class="cartbtn">
-                            
+                            <div class="cart">
+                                <a href="<?php echo e(route('cart.index')); ?>"><i class="fa-solid fa-basket-shopping"></i></a>
+                            </div>
                             <div class="headerbtn">
                                 <a href="<?php echo e(route('index')); ?>#appointment" class="lab-btn">appointment <i class="fa-solid fa-border-all"></i></a>
                             </div>
@@ -333,10 +359,10 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                                 <?php $__currentLoopData = $blogs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $blog): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <li>
                                     <div class="footer__post--thumb">
-                                        <a href="<?php echo e(route('single_blog',$blog->id)); ?>"><img src="<?php echo e(asset('storage/public/blog/'.$blog->thumbnail)); ?>" alt="webcodeltd"></a>
+                                        <a href="<?php echo e(route('single_blog',$blog->slug)); ?>"><img src="<?php echo e(asset('storage/public/blog/'.$blog->thumbnail)); ?>" alt="webcodeltd"></a>
                                     </div>
                                     <div class="footer__post--content">
-                                        <h6><a href="<?php echo e(route('single_blog',$blog->id)); ?>"><?php echo e($blog->title); ?></a></h6>
+                                        <h6><a href="<?php echo e(route('single_blog',$blog->slug)); ?>"><?php echo e($blog->title); ?></a></h6>
                                         <?php
                                             $date = date('F j,Y', strtotime($blog->created_at));
                                         ?>

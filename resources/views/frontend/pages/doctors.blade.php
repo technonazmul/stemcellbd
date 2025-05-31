@@ -22,18 +22,21 @@
                 <div class="row g-4 justify-content-center">
                     @foreach($doctors as $doctor)
                     <div class="col-xl-3 col-lg-4 col-sm-6 col-12">
-                        <div class="team__item">
+                        <div class="team__item h-100">
                             <div class="team__thumb">
                                 <img src="{{asset('storage/public/doctors/'.$doctor->image)}}" alt="webcodeltd"  >
                             </div>
                             <div class="team__content">
                                 <h6><a href="{{route('single_doctor',$doctor->id)}}">{{$doctor->name}}</a></h6>
                                 <span>{{$doctor->specialization}}</span>
-                                <ul>
-                                    <li><a href="#"><i class="fa-regular fa-paper-plane"></i></a></li>
-                                    <li><a href=""><i class="fa-solid fa-phone"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                                </ul>
+                                <div class="mt-3">
+                                    <a href="https://advancellhealth.com/#appointment" class="lab-btn doctor-appointment-btn" 
+                                       data-doctor-id="{{ $doctor->id }}" 
+                                       data-doctor-name="{{ $doctor->name }}"
+                                       data-doctor-specialty="{{ $doctor->speciali }}">
+                                        Get Appointment
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -49,4 +52,4 @@
         </div>
     </div>
     <!-- ==========Team Section Ends Here========== -->
-@endsection 
+@endsection

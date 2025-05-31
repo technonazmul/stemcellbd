@@ -42,7 +42,7 @@
                                             <td class="cart__item">
                                                 <div class="cart__thumb">
                                                     <a href="{{ route('shop_single', $id) }}">
-                                                        <img src="{{ asset('storage/' . $details['image']) }}" 
+                                                        <img src="{{ asset('storage/public/products/' . $details['image']) }}" 
                                                              alt="{{ $details['name'] }}"
                                                              onerror="this.src='{{ asset('assets/images/shop/default.jpg') }}'">
                                                     </a>
@@ -139,24 +139,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="sidebar__calculate">
-                            <p>Calculate Shipping</p>
-                            <form id="shipping-calculator">
-                                <select id="country" name="country">
-                                    <option value="">Select Country</option>
-                                    <option value="Afghanistan">Afghanistan</option>
-                                    <option value="Albania">Albania</option>
-                                    <option value="Algeria">Algeria</option>
-                                    <option value="Bangladesh" selected>Bangladesh</option>
-                                    <option value="Canada">Canada</option>
-                                    <option value="United States of America">United States of America</option>
-                                    <option value="United Kingdom">United Kingdom</option>
-                                    <!-- Add more countries as needed -->
-                                </select>
-                                <input type="text" name="postcode" placeholder="Postcode/ZIP">
-                                <button type="button" class="lab-btn" onclick="calculateShipping()">Update Cart</button>
-                            </form>
-                        </div>
+                       
                         <div class="sidebar__totalamaunt">
                             <div class="top">
                                 <p>Total</p>

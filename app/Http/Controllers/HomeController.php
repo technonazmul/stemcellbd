@@ -20,12 +20,13 @@ class HomeController extends Controller
     function service(){
         return view('frontend.pages.service');
     }
-    function show_services($id){
-        $show_services=ServiceCategory::find($id);
+    function show_services($slug){
+        $show_services = ServiceCategory::where('slug', $slug)->first();
+        //print_r($show_services);
         return view('frontend.pages.service.show_services',compact('show_services'));
     }
-    function single_service($id){
-        $single_service=Service::find($id);
+    function single_service($slug){
+        $single_service=Service::where('slug', $slug)->first();
         return view('frontend.pages.service.single_service',compact('single_service'));
     }
     function training(){

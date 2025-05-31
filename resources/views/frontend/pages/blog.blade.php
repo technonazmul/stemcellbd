@@ -25,16 +25,18 @@
                         <div class="col-lg-4 col-sm-6 col-12">
                             <div class="blog__item">
                                 <div class="blog__thumb">
-                                    <a href="{{route('single_blog',$blog->id)}}"><img src="{{asset('storage/public/blog/'.$blog->thumbnail)}}"></a>
+                                    <a href="{{route('single_blog',$blog->slug)}}"><img src="{{asset('storage/public/blog/'.$blog->thumbnail)}}"></a>
                                 </div>
                                 <div class="blog__content">
-                                    <h4><a href="{{route('single_blog',$blog->id)}}">{{$blog->title}} </a></h4>
+                                    <h4><a href="{{route('single_blog',$blog->slug)}}">{{$blog->title}} </a></h4>
                                     <ul>
                                         @php
                                             $date = date('F j,Y', strtotime($blog->created_at));
                                         @endphp
+                                        <a href="{{route('single_blog',$blog->slug)}}">
                                         <li><i class="fa-solid fa-calendar"></i>@php echo $date @endphp</li>
-                                        <li><i class="fa-regular fa-folder"></i>{{$blog->blog_category->name}}</li>
+                                        
+                                        </a>
                                     </ul>
                                 </div>
                             </div>

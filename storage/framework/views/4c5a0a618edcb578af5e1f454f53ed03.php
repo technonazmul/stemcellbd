@@ -6,7 +6,7 @@
                 <h2>Take best qualitytreatment....</h2>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item"><a href="<?php echo e(route('index')); ?>">Home</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Take best qualitytreatment</li>
                     </ol>
                 </nav>
@@ -40,7 +40,7 @@
                                             <td class="cart__item">
                                                 <div class="cart__thumb">
                                                     <a href="<?php echo e(route('shop_single', $id)); ?>">
-                                                        <img src="<?php echo e(asset('storage/' . $details['image'])); ?>" 
+                                                        <img src="<?php echo e(asset('storage/public/products/' . $details['image'])); ?>" 
                                                              alt="<?php echo e($details['name']); ?>"
                                                              onerror="this.src='<?php echo e(asset('assets/images/shop/default.jpg')); ?>'">
                                                     </a>
@@ -137,24 +137,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="sidebar__calculate">
-                            <p>Calculate Shipping</p>
-                            <form id="shipping-calculator">
-                                <select id="country" name="country">
-                                    <option value="">Select Country</option>
-                                    <option value="Afghanistan">Afghanistan</option>
-                                    <option value="Albania">Albania</option>
-                                    <option value="Algeria">Algeria</option>
-                                    <option value="Bangladesh" selected>Bangladesh</option>
-                                    <option value="Canada">Canada</option>
-                                    <option value="United States of America">United States of America</option>
-                                    <option value="United Kingdom">United Kingdom</option>
-                                    <!-- Add more countries as needed -->
-                                </select>
-                                <input type="text" name="postcode" placeholder="Postcode/ZIP">
-                                <button type="button" class="lab-btn" onclick="calculateShipping()">Update Cart</button>
-                            </form>
-                        </div>
+                       
                         <div class="sidebar__totalamaunt">
                             <div class="top">
                                 <p>Total</p>

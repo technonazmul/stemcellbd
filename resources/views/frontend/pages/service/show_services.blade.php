@@ -22,24 +22,24 @@
             <div class="section__wrapper">
                 <div class="row g-4 justify-content-center">
                     @php
-                        $services=App\Models\Service::where('service_category_id',$show_services->id)->paginate(6);
+                        $services=App\Models\Service::where('service_category_id',$show_services->id)->paginate(12);
                     @endphp
                     @if(!empty($services))
                     @foreach($services as $service)
                     <div class="col-lg-4 col-sm-6 col-12">
                         <div class="service__item">
                             <div class="service__thumb">
-                                <a href="{{route('single_service',$service->id)}}">
+                                <a href="{{route('single_service',$service->slug)}}">
                                     <img src="{{asset('storage/public/service/'.$service->thumbnail)}}" alt="webcodetechnology">
                                 </a>
                             </div>
                             <div class="service__content">
-                                <h5><a href="{{route('single_service',$service->id)}}">{{$service->title}}</a></h5>
+                                <h5><a href="{{route('single_service',$service->slug)}}">{{$service->title}}</a></h5>
                                 <p>
                                     {!! Illuminate\Support\Str::limit(strip_tags($service->description), 150) !!}
                                 </p>
                                 
-                                <a href="{{route('single_service',$service->id)}}" class="text-btn">Details<i class="fa-solid fa-angles-right"></i></a>
+                                <a href="{{route('single_service',$service->slug)}}" class="text-btn">Details<i class="fa-solid fa-angles-right"></i></a>
                             </div>
                         </div>
                     </div>

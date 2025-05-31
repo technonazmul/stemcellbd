@@ -167,12 +167,22 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                             <ul>
                                 <li>
                                     <i class="fa-solid fa-envelope"></i>
-                                    <span>{{$general_info->email}}</span>
+                                    <span>
+                                        <a href="mailto:{{ $general_info->email }}" style="color: white;">
+                                            {{ $general_info->email }}
+                                        </a>
+                                    </span>
                                 </li>
                                 <li>
                                     <i class="fa-solid fa-phone"></i>
-                                    <span>Hotline - {{$general_info->hotline}}</span>
+                                    <span>
+                                        Hotline - 
+                                        <a href="tel:{{ $general_info->hotline }}" style="color: white;">
+                                            {{ $general_info->hotline }}
+                                        </a>
+                                    </span>
                                 </li>
+
                             </ul>
                         </div>
                     </div>
@@ -221,13 +231,25 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                                     
                                     <ul>
                                         @foreach($service_category as $service_category)
-                                        <li><a href="{{route('show_services',$service_category->id)}}">{{ucfirst($service_category->name)}}</a></li>
+                                        @if($service_category->name == 'Pharmacy') 
+                                        <li><a href="{{route('pharmacy')}}">Pharmacy</a></li>
+                                        @php continue; @endphp
+                                        @endif
+                                        @if($service_category->name == 'Pathology Sample Collection') 
+                                        <li><a href="{{route('pathology')}}">Pathology Sample Collection</a></li>
+                                        @php continue; @endphp
+                                        @endif
+                                        @if($service_category->name == 'Ambulance Call Service') 
+                                        <li><a href="{{route('ambulance')}}">Ambulance Call Service</a></li>
+                                        @php continue; @endphp
+                                        @endif
+                                        <li><a href="{{route('show_services',$service_category->slug)}}">{{ucfirst($service_category->name)}}</a></li>
                                         @endforeach
                                     </ul>
                                     
                                 </li>
                                 <li><a href="{{route('doctors')}}">Doctors</a></li>
-                                <li><a href="{{route('blog')}}">Blog</a></li>
+                                {{-- <li><a href="{{route('blog')}}">Blog</a></li> --}}
                                 <li><a href="{{route('shop')}}">Shop</a></li>
                                 <li><a href="{{route('pages.public', 'about-us')}}">About Us</a></li>
                                 <li><a href="{{route('contact')}}">Contact</a></li>
@@ -235,9 +257,9 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                             </ul>
                         </div>
                         <div class="cartbtn">
-                            {{-- <div class="cart">
+                            <div class="cart">
                                 <a href="{{route('cart.index')}}"><i class="fa-solid fa-basket-shopping"></i></a>
-                            </div> --}}
+                            </div>
                             <div class="headerbtn">
                                 <a href="{{route('index')}}#appointment" class="lab-btn">appointment <i class="fa-solid fa-border-all"></i></a>
                             </div>
@@ -335,10 +357,10 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                                 @foreach($blogs as $blog)
                                 <li>
                                     <div class="footer__post--thumb">
-                                        <a href="{{route('single_blog',$blog->id)}}"><img src="{{asset('storage/public/blog/'.$blog->thumbnail)}}" alt="webcodeltd"></a>
+                                        <a href="{{route('single_blog',$blog->slug)}}"><img src="{{asset('storage/public/blog/'.$blog->thumbnail)}}" alt="webcodeltd"></a>
                                     </div>
                                     <div class="footer__post--content">
-                                        <h6><a href="{{route('single_blog',$blog->id)}}">{{$blog->title}}</a></h6>
+                                        <h6><a href="{{route('single_blog',$blog->slug)}}">{{$blog->title}}</a></h6>
                                         @php
                                             $date = date('F j,Y', strtotime($blog->created_at));
                                         @endphp

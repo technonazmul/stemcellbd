@@ -19,8 +19,8 @@ class PagesController extends Controller
         return view('frontend.pages.single_doctor',compact('doctor'));
     }
 
-    public function single_blog($id){
-        $single_blog=Blog::find($id);
+    public function single_blog($slug){
+        $single_blog=Blog::where('slug', $slug)->first();
         return view('frontend.pages.single_blog',compact('single_blog'));
      }
     
@@ -56,6 +56,16 @@ class PagesController extends Controller
 
         return view('frontend.pages.noresult');
         
+    }
+
+    public function pharmacy() {
+        return view('frontend.pages.pharmacy');
+    }
+    public function pathology() {
+        return view('frontend.pages.pathology');
+    }
+    public function ambulance() {
+        return view('frontend.pages.ambulance');
     }
 
 }

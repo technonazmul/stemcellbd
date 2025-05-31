@@ -206,12 +206,32 @@ $services = App\Models\Service::all(); // For appointment form services
                     <div class="col-lg-4 col-sm-6 col-12">
                         <div class="service__item">
                             <div class="service__thumb">
-                                <a href="{{route('show_services',$single_category->id)}}">
+                                <a href='
+                                        @if($single_category->name == "Pharmacy") 
+                                            {{ route('pharmacy') }}
+                                        @elseif($single_category->name == "Pathology Sample Collection") 
+                                            {{ route('pathology') }}
+                                        @elseif($single_category->name == "Ambulance Call Service") 
+                                            {{ route('ambulance') }}
+                                        @else
+                                            {{ route('show_services', $single_category->slug) }}
+                                        @endif
+                                        '>
                                     <img src="{{asset('storage/public/service_categories/'.$single_category->image)}}" alt="webcodeltd" style="width:auto;height:300px;">
                                 </a>
                             </div>
                             <div class="service__content">
-                                <h5><a href="{{route('show_services',$single_category->id)}}">{{$single_category->name}}</a></h5>
+                                <h5><a href='
+                                    @if($single_category->name == "Pharmacy") 
+                                            {{ route('pharmacy') }}
+                                        @elseif($single_category->name == "Pathology Sample Collection") 
+                                            {{ route('pathology') }}
+                                        @elseif($single_category->name == "Ambulance Call Service") 
+                                            {{ route('ambulance') }}
+                                        @else
+                                            {{ route('show_services', $single_category->slug) }}
+                                        @endif
+                                    '>{{$single_category->name}}</a></h5>
                                 <p>{!! Illuminate\Support\Str::limit(strip_tags($single_category->short_description), 100) !!}</p>
                                 
                             </div>
@@ -320,7 +340,9 @@ $services = App\Models\Service::all(); // For appointment form services
                     <div class="col-xl-3 col-lg-4 col-sm-6 col-12">
                         <div class="team__item">
                             <div class="team__thumb">
+                                <a href="{{route('single_doctor',$doctor->id)}}">
                                 <img src="{{asset('storage/public/doctors/'.$doctor->image)}}" alt="webcodeltd">
+                                </a>
                             </div>
                             <div class="team__content">
                                 <h6><a href="{{route('single_doctor',$doctor->id)}}">{{$doctor->name}}</a></h6>
@@ -441,10 +463,10 @@ $services = App\Models\Service::all(); // For appointment form services
                     <div class="col-lg-4 col-sm-6 col-12">
                         <div class="blog__item">
                                 <div class="blog__thumb">
-                                    <a href="{{route('single_blog',$blog->id)}}"><img src="{{asset('storage/public/blog/'.$blog->thumbnail)}}"></a>
+                                    <a href="{{route('single_blog',$blog->slug)}}"><img src="{{asset('storage/public/blog/'.$blog->thumbnail)}}"></a>
                                 </div>
                                 <div class="blog__content">
-                                    <h4><a href="{{route('single_blog',$blog->id)}}">{{$blog->title}} </a></h4>
+                                    <h4><a href="{{route('single_blog',$blog->slug)}}">{{$blog->title}} </a></h4>
                                     <ul>
                                         @php
                                             $date = date('F j,Y', strtotime($blog->created_at));

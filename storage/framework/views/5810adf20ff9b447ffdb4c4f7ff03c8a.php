@@ -49,8 +49,14 @@ $general_info = App\Models\GeneralInfo::findOrFail(1);
                         <img src="<?php echo e(asset('frontend/assets/images/info/01.jpg')); ?>" alt="webcodeltd" />
                     </div>
                     <div class="contact__content">
-                        <p><?php echo e($general_info->address); ?></p>
+                        <p>
+                            <a href="https://www.google.com/maps/search/?api=1&query=<?php echo e(urlencode($general_info->address)); ?>" target="_blank">
+                                <?php echo e($general_info->address); ?>
+
+                            </a>
+                        </p>
                     </div>
+
                 </div>
             </div>
 
@@ -62,8 +68,21 @@ $general_info = App\Models\GeneralInfo::findOrFail(1);
                     </div>
                     <div class="contact__content">
                         <p><?php echo e($general_info->title); ?></p>
-                        <p>Enquiry: <?php echo e($general_info->enquiry_number); ?></p>
-                        <p>Appointment: <?php echo e($general_info->appointment_number); ?></p>
+                        <p>
+                        Enquiry: 
+                            <a href="tel:<?php echo e($general_info->enquiry_number); ?>">
+                                <?php echo e($general_info->enquiry_number); ?>
+
+                            </a>
+                        </p>
+                        <p>
+                            Appointment: 
+                            <a href="tel:<?php echo e($general_info->appointment_number); ?>">
+                                <?php echo e($general_info->appointment_number); ?>
+
+                            </a>
+                        </p>
+
                     </div>
                 </div>
             </div>
@@ -98,8 +117,7 @@ $general_info = App\Models\GeneralInfo::findOrFail(1);
                 <div class="section__header text-center">
                     <h2>Feel Free To Ask Something We Are Here</h2>
                     <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Unde veritatis magnam porro, temporibus perferendis eum.
+                        Feel free to reach out—our team is ready to assist you with any inquiries or support you need.
                     </p>
                 </div>
                 

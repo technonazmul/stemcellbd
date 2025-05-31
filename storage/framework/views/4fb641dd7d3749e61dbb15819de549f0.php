@@ -21,18 +21,21 @@
                 <div class="row g-4 justify-content-center">
                     <?php $__currentLoopData = $doctors; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $doctor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="col-xl-3 col-lg-4 col-sm-6 col-12">
-                        <div class="team__item">
+                        <div class="team__item h-100">
                             <div class="team__thumb">
                                 <img src="<?php echo e(asset('storage/public/doctors/'.$doctor->image)); ?>" alt="webcodeltd"  >
                             </div>
                             <div class="team__content">
                                 <h6><a href="<?php echo e(route('single_doctor',$doctor->id)); ?>"><?php echo e($doctor->name); ?></a></h6>
                                 <span><?php echo e($doctor->specialization); ?></span>
-                                <ul>
-                                    <li><a href="#"><i class="fa-regular fa-paper-plane"></i></a></li>
-                                    <li><a href=""><i class="fa-solid fa-phone"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                                </ul>
+                                <div class="mt-3">
+                                    <a href="https://advancellhealth.com/#appointment" class="lab-btn doctor-appointment-btn" 
+                                       data-doctor-id="<?php echo e($doctor->id); ?>" 
+                                       data-doctor-name="<?php echo e($doctor->name); ?>"
+                                       data-doctor-specialty="<?php echo e($doctor->speciali); ?>">
+                                        Get Appointment
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -49,6 +52,5 @@
         </div>
     </div>
     <!-- ==========Team Section Ends Here========== -->
-<?php $__env->stopSection(); ?> 
-
+<?php $__env->stopSection(); ?>
 <?php echo $__env->make('frontend.layouts.template', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Applications/MAMP/htdocs/Advancellhealth/resources/views/frontend/pages/doctors.blade.php ENDPATH**/ ?>

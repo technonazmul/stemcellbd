@@ -23,6 +23,9 @@ use App\Http\Controllers\Backend\VideoSectionController;
 use App\Http\Controllers\Backend\GalleryController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Backend\DynamicPageController;
+use App\Http\Controllers\Backend\ShippingSettingController;
+use App\Http\Controllers\Backend\CouponController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,24 +47,23 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/',[HomeController::class,'index'])->name('index');
 Route::get('/home', [AuthController::class, 'index'])->name('home');
-// Show Service
-Route::get('/service/{id}',[HomeController::class,'service'])->name('service');
+
 //Show Services under Parent Service 
-Route::get('/show_services/{id}',[HomeController::class,'show_services'])->name('show_services');
+Route::get('/services/{slug}',[HomeController::class,'show_services'])->name('show_services');
 //Show single service details
-Route::get('/single_service/{id}',[HomeController::class,'single_service'])->name('single_service');
+Route::get('/service/{slug}',[HomeController::class,'single_service'])->name('single_service');
 
 Route::get('/training',[HomeController::class,'training'])->name('training');
 Route::get('/doctors',[FrontendPagesController::class,'doctors'])->name('doctors');
 Route::get('/single_doctor/{id}',[FrontendPagesController::class,'single_doctor'])->name('single_doctor');
 Route::get('/blog',[HomeController::class,'blog'])->name('blog');
-Route::get('/single_blog/{id}',[FrontendPagesController::class,'single_blog'])->name('single_blog');
+Route::get('/blogs/{slug}',[FrontendPagesController::class,'single_blog'])->name('single_blog');
 Route::get('/blog/search',[FrontendPagesController::class,'blogSearch'])->name('blog.search');
 Route::get('/blog/search/tags/{search}',[FrontendPagesController::class,'blogSearchByTags'])->name('blog.tag.search');
 
 //frontend shop start
 Route::get('/shop',[HomeController::class,'shop'])->name('shop');
-Route::get('/shop_single/{slug}',[HomeController::class,'shop_single'])->name('shop_single');
+Route::get('/products/{slug}',[HomeController::class,'shop_single'])->name('shop_single');
 Route::post('/product_review',[HomeController::class,'product_review'])->name('product.review.save');
 
 // Dynamic Pages
@@ -86,6 +88,13 @@ Route::get('/eb_registration',[HomeController::class,'eb_registration'])->name('
 Route::post('/eb_form_submit',[FormController::class,'eb_form_submit'])->name('eb_form_submit');
 Route::post('/contact_form',[FormController::class,'contact_form'])->name('contact_form');
 Route::post('/free_consultancy',[FormController::class,'free_consultancy'])->name('free_consultancy');
+
+// pharmacy
+Route::get('/pharmacy',[FrontendPagesController::class,'pharmacy'])->name('pharmacy');
+// pathology
+Route::get('/pathology',[FrontendPagesController::class,'pathology'])->name('pathology');
+// ambulance
+Route::get('/ambulance',[FrontendPagesController::class,'ambulance'])->name('ambulance');
 
 // Admin route start, will make group and middleware later
 // Admin route end   middleware(['auth'])->
@@ -222,4 +231,11 @@ Route::get('/delete_appointment/{id}',[BackendFormController::class,'delete_appo
 
 // Page management
     Route::resource('pages', DynamicPageController::class);
+
+    // Shipping settings routes
+    Route::get('/shipping', [ShippingSettingController::class, 'index'])->name('shipping.index');
+    Route::put('/shipping', [ShippingSettingController::class, 'update'])->name('shipping.update');
+    
+    // Coupon routes
+    Route::resource('coupons', CouponController::class);
 });

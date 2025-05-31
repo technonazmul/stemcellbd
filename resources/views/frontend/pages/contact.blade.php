@@ -48,8 +48,13 @@ $general_info = App\Models\GeneralInfo::findOrFail(1);
                         <img src="{{ asset('frontend/assets/images/info/01.jpg') }}" alt="webcodeltd" />
                     </div>
                     <div class="contact__content">
-                        <p>{{ $general_info->address }}</p>
+                        <p>
+                            <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($general_info->address) }}" target="_blank">
+                                {{ $general_info->address }}
+                            </a>
+                        </p>
                     </div>
+
                 </div>
             </div>
 
@@ -61,8 +66,19 @@ $general_info = App\Models\GeneralInfo::findOrFail(1);
                     </div>
                     <div class="contact__content">
                         <p>{{ $general_info->title }}</p>
-                        <p>Enquiry: {{ $general_info->enquiry_number }}</p>
-                        <p>Appointment: {{ $general_info->appointment_number }}</p>
+                        <p>
+                        Enquiry: 
+                            <a href="tel:{{ $general_info->enquiry_number }}">
+                                {{ $general_info->enquiry_number }}
+                            </a>
+                        </p>
+                        <p>
+                            Appointment: 
+                            <a href="tel:{{ $general_info->appointment_number }}">
+                                {{ $general_info->appointment_number }}
+                            </a>
+                        </p>
+
                     </div>
                 </div>
             </div>

@@ -21,25 +21,25 @@
             <div class="section__wrapper">
                 <div class="row g-4 justify-content-center">
                     <?php
-                        $services=App\Models\Service::where('service_category_id',$show_services->id)->paginate(6);
+                        $services=App\Models\Service::where('service_category_id',$show_services->id)->paginate(12);
                     ?>
                     <?php if(!empty($services)): ?>
                     <?php $__currentLoopData = $services; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $service): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="col-lg-4 col-sm-6 col-12">
                         <div class="service__item">
                             <div class="service__thumb">
-                                <a href="<?php echo e(route('single_service',$service->id)); ?>">
+                                <a href="<?php echo e(route('single_service',$service->slug)); ?>">
                                     <img src="<?php echo e(asset('storage/public/service/'.$service->thumbnail)); ?>" alt="webcodetechnology">
                                 </a>
                             </div>
                             <div class="service__content">
-                                <h5><a href="<?php echo e(route('single_service',$service->id)); ?>"><?php echo e($service->title); ?></a></h5>
+                                <h5><a href="<?php echo e(route('single_service',$service->slug)); ?>"><?php echo e($service->title); ?></a></h5>
                                 <p>
                                     <?php echo Illuminate\Support\Str::limit(strip_tags($service->description), 150); ?>
 
                                 </p>
                                 
-                                <a href="<?php echo e(route('single_service',$service->id)); ?>" class="text-btn">Details<i class="fa-solid fa-angles-right"></i></a>
+                                <a href="<?php echo e(route('single_service',$service->slug)); ?>" class="text-btn">Details<i class="fa-solid fa-angles-right"></i></a>
                             </div>
                         </div>
                     </div>

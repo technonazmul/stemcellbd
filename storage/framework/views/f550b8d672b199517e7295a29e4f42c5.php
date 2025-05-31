@@ -24,16 +24,18 @@
                         <div class="col-lg-4 col-sm-6 col-12">
                             <div class="blog__item">
                                 <div class="blog__thumb">
-                                    <a href="<?php echo e(route('single_blog',$blog->id)); ?>"><img src="<?php echo e(asset('storage/public/blog/'.$blog->thumbnail)); ?>"></a>
+                                    <a href="<?php echo e(route('single_blog',$blog->slug)); ?>"><img src="<?php echo e(asset('storage/public/blog/'.$blog->thumbnail)); ?>"></a>
                                 </div>
                                 <div class="blog__content">
-                                    <h4><a href="<?php echo e(route('single_blog',$blog->id)); ?>"><?php echo e($blog->title); ?> </a></h4>
+                                    <h4><a href="<?php echo e(route('single_blog',$blog->slug)); ?>"><?php echo e($blog->title); ?> </a></h4>
                                     <ul>
                                         <?php
                                             $date = date('F j,Y', strtotime($blog->created_at));
                                         ?>
+                                        <a href="<?php echo e(route('single_blog',$blog->slug)); ?>">
                                         <li><i class="fa-solid fa-calendar"></i><?php echo $date ?></li>
-                                        <li><i class="fa-regular fa-folder"></i><?php echo e($blog->blog_category->name); ?></li>
+                                        
+                                        </a>
                                     </ul>
                                 </div>
                             </div>
