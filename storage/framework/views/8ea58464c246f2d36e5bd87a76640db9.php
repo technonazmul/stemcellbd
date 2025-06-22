@@ -7,7 +7,7 @@
                         <h4>Create New Coupon</h4>
                     </div>
                     <div class="card-body">
-                        <form action="<?php echo e(route('admin.coupons.store')); ?>" method="POST">
+                        <form action="<?php echo e(route('coupons.store')); ?>" method="POST">
                             <?php echo csrf_field(); ?>
                             
                             <div class="row">
@@ -272,7 +272,7 @@ unset($__errorArgs, $__bag); ?>
                             </div>
 
                             <div class="d-flex justify-content-between">
-                                <a href="<?php echo e(route('admin.coupons.index')); ?>" class="btn btn-secondary">Cancel</a>
+                                <a href="<?php echo e(route('coupons.index')); ?>" class="btn btn-secondary">Cancel</a>
                                 <button type="submit" class="btn btn-primary">Create Coupon</button>
                             </div>
                         </form>

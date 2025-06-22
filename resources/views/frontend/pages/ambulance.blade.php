@@ -114,7 +114,7 @@
                         <div class="emergency-call-box" style="background-color: #dc3545; color: white; padding: 15px 20px; border-radius: 8px; display: inline-block; font-size: 1.25rem; font-weight: bold;">
                             🚑 Emergency Call: 
                             <a href="tel:{{$general_info->enquiry_number}}" style="color: white; text-decoration: underline;">
-                                {{$general_info->enquiry_number}}
+                                {{ $general_info->pharmacy_phone ?? '01338-959606' }}
                             </a>
                         </div>
                     </div>

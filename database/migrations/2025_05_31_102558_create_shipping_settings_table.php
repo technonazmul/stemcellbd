@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('shipping_settings', function (Blueprint $table) {
             $table->id();
-            $table->decimal('default_shipping_cost', 8, 2)->default(0);
-            $table->decimal('free_shipping_threshold', 8, 2)->default(0);
+            $table->decimal('default_shipping_cost', 8, 2)->default(0)->nullable();
+            $table->decimal('free_shipping_threshold', 8, 2)->default(0)->nullable();
             $table->boolean('enable_free_shipping')->default(false);
             $table->timestamps();
         });

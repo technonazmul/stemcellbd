@@ -315,6 +315,30 @@
             </ul>
           </li>
           <li class="nav-item">
+            <a href="<?php echo e(route('admin.pharmacy')); ?>" class="nav-link">Pharmacy</a>
+          </li>
+          <li class="nav-item">
+            <a href="<?php echo e(route('admin.pathology')); ?>" class="nav-link">Pathology</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class=""></i>
+              <p>
+                Shop Management
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?php echo e(route('admin.orders.index')); ?>" class="nav-link">
+                  <i class=""></i>
+                  <p>Orders</p>
+                </a>
+              </li>
+              
+            </ul>
+          </li>
+          <li class="nav-item">
             <a href="#" class="nav-link">
               <i class=""></i>
               <p>

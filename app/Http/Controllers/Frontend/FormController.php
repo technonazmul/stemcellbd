@@ -80,4 +80,6 @@ class FormController extends Controller
         $data->save();
         return redirect()->back()->with('success','Message send Successfull');
     }
+
+    
 }

@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
     @if(!@empty($general_info))
-    <form action="{{route('admin.update_general_info',$general_info)}}" method="post">
+    <form action="{{route('admin.update_general_info',$general_info)}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="col-md-12 card card-body">
@@ -17,6 +17,14 @@
                         {{ Session::get('error') }}
                     </div>
                 @endif
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Logo</label><br>
+                    <img src="{{asset('storage/public/logos/'.$general_info->logo)}}" alt="Logo" class="img-fluid mb-2" style="max-width: 500px;">
+                </div>
+                <div class="mb-3">
+                    <label for="logo" class="form-label">Change Logo</label>
+                    <input name="logo" type="file" class="form-control" id="logo">
+                </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Company Name</label>
                     <input value="{{$general_info->title}}" name="title" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Company Name">

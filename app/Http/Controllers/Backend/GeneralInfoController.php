@@ -19,6 +19,20 @@ class GeneralInfoController extends Controller
     //update
     public function update_general_info(Request $request,$id){
         $general_info= GeneralInfo::findOrFail(1);
+        if($request->hasFile('logo')){
+            $request->validate([
+                'logo' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust image validation as needed
+            ]);
+            // Delete old logo if it exists
+            if ($general_info->logo) {
+                Storage::delete('public/logos/' . $general_info->logo);
+            }
+            // Store new logo
+            $logo = $request->file('logo');
+            $logoName = time().'.'.$logo->extension();
+            $logo->storeAs('logos', $logoName, 'public');
+            $general_info->logo = $logoName;
+        }
         $general_info->email = $request->input('email');
         $general_info->title = $request->input('title');
         $general_info->meta_name = $request->input('meta_name');

@@ -107,18 +107,23 @@
                         <img src="https://images.unsplash.com/photo-1576669801838-1b1c52121e6a?q=80&w=1953&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="webcode" class="mb-4 w-100">
                         <h5>Pathology</h5>
                         <p>Your Home Diagnostic Service</p>
-                        
+                        <div class="pharmacy-contact mb-4">
+                            <h6>📞 Pathology Phone Number</h6>
+                            <p><strong>Call us at:</strong> <a href="tel:{{ preg_replace('/[^0-9]/', '', $general_info->pathology_phone ?? '01338959605') }}">
+                                {{ $general_info->pathology_phone ?? '01338-959605' }}
+                            </a></p>
+                        </div>
                         
                         
                         <h5 class="mb-4">Order Form</h5>
-                        <form action="{{route('free_consultancy')}}" id="contact-form" method="post" enctype="multipart/form-data">
+                        <form action="{{route('pathologySubmit')}}" id="contact-form" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="row g-3">
                                 <div class="col-sm-6 col-12">
                                     <input type="text" placeholder="Your Name*" name="name" id="name" required>
                                 </div>
                                 <div class="col-sm-6 col-12">
-                                    <input type="text" placeholder="Phone Number*" name="company" id="company">
+                                    <input type="text" placeholder="Phone Number*" name="phone" id="phone">
                                 </div>
 
                                 <div class="col-sm-6 col-12">
@@ -134,7 +139,7 @@
                                 </div>
 
                                 <div class="col-12">
-                                    <textarea name="message" id="massage" rows="3" placeholder="Medicine Name (optional)"></textarea>
+                                    <textarea name="message" id="massage" rows="3" placeholder="Message"></textarea>
                                 </div>
                                 <div class="col-12">
                                     <button type="submit" class="lab-btn">Submit Request</button>

@@ -141,6 +141,7 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
 }
 </style>
 <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
+
 </head>
 
 <body>
@@ -209,7 +210,7 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
             <div class="container">
                 <div class="header__bottom--area">
                     <div class="logo">
-                        <a href="<?php echo e(route('index')); ?>"><img src="<?php echo e(asset('frontend/assets/images/header/logo.png')); ?>" alt="logo"></a>
+                        <a href="<?php echo e(route('index')); ?>"><img src="<?php echo e(asset('storage/public/logos/'.$general_info->logo)); ?>" alt="logo"></a>
                     </div>
                     <div class="header__bararea">
                         <div class="header__bar d-xl-none">

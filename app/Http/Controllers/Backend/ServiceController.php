@@ -329,4 +329,37 @@ public function edit_service_category($id){
         // Redirect back with a success message
         return redirect()->back()->with('success', 'Service and associated image deleted successfully!');
     }
+
+    // Add this method to your existing ServiceController class
+    public function updateCategoryOrder(Request $request)
+    {
+        try {
+            $order = $request->input('order');
+            
+            if (!$order || !is_array($order)) {
+                return response()->json([
+                    'success' => false, 
+                    'message' => 'Invalid order data'
+                ], 400);
+            }
+            
+            foreach ($order as $item) {
+                if (isset($item['id']) && isset($item['priority'])) {
+                    ServiceCategory::where('id', $item['id'])
+                        ->update(['priority' => $item['priority']]);
+                }
+            }
+            
+            return response()->json([
+                'success' => true,
+                'message' => 'Category order updated successfully'
+            ]);
+        } catch (\Exception $e) {
+            \Log::error('Error updating category order: ' . $e->getMessage());
+            return response()->json([
+                'success' => false, 
+                'message' => 'Failed to update category order: ' . $e->getMessage()
+            ], 500);
+        }
+    }
 }

@@ -13,7 +13,7 @@
                         </div>
                     <?php endif; ?>
 
-                    <?php echo e(__('You are logged in!')); ?>
+                    <?php echo e(__('Welcome Admin!')); ?>
 
                 </div>
             </div>
@@ -21,5 +21,4 @@
     </div>
 </div>
 <?php $__env->stopSection(); ?>
-
-<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Applications/MAMP/htdocs/Advancellhealth/resources/views/home.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('backend.dashboard', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Applications/MAMP/htdocs/Advancellhealth/resources/views/backend/main.blade.php ENDPATH**/ ?>

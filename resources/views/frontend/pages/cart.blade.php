@@ -1,25 +1,25 @@
+@php
+$shipping_settings = \App\Models\ShippingSetting::first();
+@endphp
 @extends('frontend.layouts.template')
 
 @section('content')
  <!-- ==========Page Header Section Start Here========== -->
-    <div class="pageheader bg-img" style="background-image: url(assets/images/bg/04.jpg);">
-        <div class="container">
-            <div class="pageheader__content">
-                <h2>Take best qualitytreatment....</h2>
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{route('index')}}">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Take best qualitytreatment</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
-    </div>
+   
     <!-- ==========Page Header Section Ends Here========== -->
-<div class="cart padding-tb overflow-hidden section-bg">
+<div class="cart padding-tb overflow-hidden section-bg mt-5">
     <div class="container">
         <div class="row justify-content-center g-5 g-xl-4">
             <div class="col-xl-8 col-12">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul class="mb-0">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div>
                     @if(count($cart) > 0)
                         <div class="cart__top">
@@ -51,7 +51,7 @@
                                                     <a href="{{ route('shop_single', $id) }}">{{ $details['name'] }}</a>
                                                 </div>
                                             </td>
-                                            <td class="item-price">${{ number_format($details['price'], 2) }}</td>
+                                            <td class="item-price">৳{{ number_format($details['price'], 2) }}</td>
                                             <td>
                                                 <div class="cart-plus-minus">
                                                     <div class="dec qtybutton" onclick="updateQuantity({{ $id }}, 'decrease')">-</div>
@@ -64,7 +64,7 @@
                                                     <div class="inc qtybutton" onclick="updateQuantity({{ $id }}, 'increase')">+</div>
                                                 </div>
                                             </td>
-                                            <td class="item-total">${{ number_format($itemTotal, 2) }}</td>
+                                            <td class="item-total">৳{{ number_format($itemTotal, 2) }}</td>
                                             <td>
                                                 <a href="#" onclick="removeFromCart({{ $id }})" class="remove-item">
                                                     <img src="{{ asset('assets/images/shop/del.png') }}" alt="Remove">
@@ -75,13 +75,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="cart__bottom">
-                            <form action="{{ route('cart.applyCoupon') }}" method="POST">
-                                @csrf
-                                <input type="text" name="coupon_code" placeholder="Discount code">
-                                <button type="submit" class="lab-btn">Apply Now</button>
-                            </form>
-                        </div>
+                        
                     @else
                         <div class="empty-cart text-center py-5">
                             <h3>Your cart is empty</h3>
@@ -98,57 +92,71 @@
                     <div class="sidebar__cartamount">
                         <div class="sidebar__subtotal">
                             <p>Subtotal</p>
-                            <span id="subtotal">${{ number_format($total, 2) }}</span>
+                            <span id="subtotal">৳{{ number_format($total, 2) }}</span>
                         </div>
                         <div class="sidebar__shipping">
                             <p>Shipping</p>
                             <div class="sidebar__radiolist">
                                 <div class="form-check">
-                                    <input class="form-check-input shipping-option" 
-                                           type="radio" 
-                                           name="shipping" 
-                                           id="free_shipping" 
-                                           value="0" 
-                                           checked>
+                                    <input class="form-check-input" type="radio" name="shipping" id="inside_dhaka" value="{{$shipping_settings->inside_dhaka_cost}}" checked>
                                     <div class="formcheck">
-                                        <label class="form-check-label" for="free_shipping">Free Shipping</label>
-                                        <span>+$0.00</span>
+                                        <label class="form-check-label" for="inside_dhaka">Inside Dhaka City</label>
+                                        <span data-original="{{$shipping_settings->inside_dhaka_cost}}">+৳{{$shipping_settings->inside_dhaka_cost}}</span>
                                     </div>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input shipping-option" 
-                                           type="radio" 
-                                           name="shipping" 
-                                           id="flat_rate" 
-                                           value="10">
+                                    <input class="form-check-input" type="radio" name="shipping" id="outside_dhaka" value="{{$shipping_settings->outside_dhaka_cost}}">
                                     <div class="formcheck">
-                                        <label class="form-check-label" for="flat_rate">Flat Rate</label>
-                                        <span>+$10.00</span>
+                                        <label class="form-check-label" for="outside_dhaka">Outside Dhaka City</label>
+                                        <span data-original="{{$shipping_settings->outside_dhaka_cost}}">+৳{{$shipping_settings->outside_dhaka_cost}}</span>
                                     </div>
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input shipping-option" 
-                                           type="radio" 
-                                           name="shipping" 
-                                           id="local_delivery" 
-                                           value="20">
-                                    <div class="formcheck">
-                                        <label class="form-check-label" for="local_delivery">Local Delivery</label>
-                                        <span>+$20.00</span>
-                                    </div>
-                                </div>
+
+                                <div class="sidebar__discount mt-2">
+                                <p>Discount ({{ $shipping_settings->discount_percent }}%)</p>
+                                <span id="discount-amount">-৳0.00</span>
+                            </div>
                             </div>
                         </div>
                        
+                        <form action="{{route('order.place')}}" method="POST">
+                        @csrf
                         <div class="sidebar__totalamaunt">
-                            <div class="top">
+                            <div class="top mb-3">
                                 <p>Total</p>
-                                <span id="total-amount">${{ number_format($total, 2) }}</span>
+                                <span id="total-amount">৳{{ number_format($total + 70, 2) }}</span>
                             </div>
+                            
+
+
+                            <div class="form-group mb-3">
+                                <label for="name">Full Name*</label>
+                                <input type="text" name="customer_name" class="form-control" required>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="phone">Phone Number*</label>
+                                <input type="text" name="customer_phone" class="form-control" required>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="address">Delivery Address*</label>
+                                <textarea name="address" class="form-control" rows="3" required></textarea>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="message">Message (Optional)</label>
+                                <textarea name="message" class="form-control" rows="2"></textarea>
+                            </div>
+
+                            <input type="hidden" name="shipping_cost" id="shipping-cost" value="{{ $shipping_settings->inside_dhaka_cost }}">
+
                             <div class="bottom">
-                                <a href="#" class="lab-btn">Proceed to Checkout</a>
+                                <button type="submit" class="lab-btn w-100">Place Order</button>
                             </div>
                         </div>
+                    </form>
+
                     </div>
                 </div>
             </div>
@@ -170,6 +178,7 @@
     @method('DELETE')
     <input type="hidden" name="product_id" id="remove-product-id">
 </form>
+
 
 @push('scripts')
 <script>
@@ -252,31 +261,78 @@ function removeFromCart(productId) {
 function updateItemTotal(productId, newTotal) {
     let row = document.querySelector(`tr[data-id="${productId}"]`);
     let totalCell = row.querySelector('.item-total');
-    totalCell.textContent = '$' + parseFloat(newTotal).toFixed(2);
+    totalCell.textContent = '৳' + parseFloat(newTotal).toFixed(2);
 }
 
 function updateCartTotals() {
     let subtotal = 0;
+
+    // 1. Calculate subtotal from item-total cells
     document.querySelectorAll('.item-total').forEach(cell => {
-        let amount = parseFloat(cell.textContent.replace('$', ''));
+        let amount = parseFloat(cell.textContent.replace(/[৳,]/g, ''));
         subtotal += amount;
     });
-    
-    // Update subtotal
-    document.getElementById('subtotal').textContent = '$' + subtotal.toFixed(2);
-    
-    // Calculate total with shipping
+
+    document.getElementById('subtotal').textContent = '৳' + subtotal.toFixed(2);
+
+    // 2. Read current shipping cost from selected option
     let shippingCost = parseFloat(document.querySelector('input[name="shipping"]:checked').value);
-    let total = subtotal + shippingCost;
-    document.getElementById('total-amount').textContent = '$' + total.toFixed(2);
+
+    // 3. Check free shipping settings
+    const freeShippingEnabled = {{ $shipping_settings->enable_free_shipping ? 'true' : 'false' }};
+    const freeShippingThreshold = parseFloat('{{ $shipping_settings->free_shipping_threshold }}');
+
+    if (freeShippingEnabled && subtotal >= freeShippingThreshold) {
+    shippingCost = 0;
+
+        // Show "Free" for both shipping labels
+        document.querySelectorAll('.formcheck span').forEach(span => {
+            span.textContent = 'Free';
+        });
+
+        // Show message
+        if (!document.getElementById('free-shipping-msg')) {
+            const msg = document.createElement('small');
+            msg.id = 'free-shipping-msg';
+            msg.className = 'text-success mt-1 d-block';
+            msg.innerText = 'Free shipping applied!';
+            document.querySelector('.sidebar__shipping')?.appendChild(msg);
+        }
+    } else {
+        // Restore original label price
+        document.querySelectorAll('.formcheck span').forEach(span => {
+            const original = span.getAttribute('data-original');
+            span.textContent = '+৳' + parseFloat(original).toFixed(2);
+        });
+
+        document.getElementById('free-shipping-msg')?.remove();
+    }
+
+
+    // 4. Check discount settings
+    const discountEnabled = {{ $shipping_settings->enable_discount_offer ? 'true' : 'false' }};
+    const discountPercent = parseFloat('{{ $shipping_settings->discount_percent }}');
+    const discountMinimumTotal = parseFloat('{{ $shipping_settings->discount_minimum_total }}');
+
+    let discountAmount = 0;
+    if (discountEnabled && subtotal >= discountMinimumTotal) {
+        discountAmount = (discountPercent / 100) * subtotal;
+        document.querySelector('.sidebar__discount')?.classList.remove('d-none');
+        document.getElementById('discount-amount').textContent = '-৳' + discountAmount.toFixed(2);
+    } else {
+        document.querySelector('.sidebar__discount')?.classList.add('d-none');
+    }
+
+    // 5. Final total
+    const total = subtotal - discountAmount + shippingCost;
+    console.log(shippingCost);
+    // 6. Update frontend
+    document.getElementById('total-amount').textContent = '৳' + total.toFixed(2);
+    document.getElementById('shipping-cost').value = shippingCost.toFixed(2);
 }
 
-// Handle shipping option changes
-document.querySelectorAll('.shipping-option').forEach(radio => {
-    radio.addEventListener('change', function() {
-        updateCartTotals();
-    });
-});
+
+
 
 function calculateShipping() {
     // Add your shipping calculation logic here
@@ -286,6 +342,14 @@ function calculateShipping() {
 // Initialize cart totals on page load
 document.addEventListener('DOMContentLoaded', function() {
     updateCartTotals();
+
+    // Handle shipping option changes
+    document.querySelectorAll('input[name="shipping"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            updateCartTotals();
+        });
+    });
+
 });
 </script>
 @endpush

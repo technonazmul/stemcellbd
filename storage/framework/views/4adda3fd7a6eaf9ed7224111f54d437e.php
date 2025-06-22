@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dashboard</title>
   <?php echo $__env->make('backend.inc.css', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
   <?php echo $__env->yieldContent("extra_css"); ?>
    <?php echo $__env->yieldPushContent('styles'); ?>
   <style>

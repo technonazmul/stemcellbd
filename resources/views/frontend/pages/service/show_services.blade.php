@@ -19,6 +19,14 @@
  <!-- ==========Service Section Start Here========== -->
  <div class="service padding-tb section-bg" id="service">
         <div class="container">
+            @if($show_services->name == 'Home Care Services') 
+            <div class="pharmacy-contact mb-4">
+                            <p style="
+                            font-size: 18px;
+                            text-align: center;
+                        "><strong>Call us at:</strong> <a href="tel:{{ $general_info->home_care_phone ?? '01338959604' }}">{{ $general_info->home_care_phone ?? '01338-959604' }}</a> </p>
+                        </div>
+            @endif
             <div class="section__wrapper">
                 <div class="row g-4 justify-content-center">
                     @php
@@ -26,6 +34,7 @@
                     @endphp
                     @if(!empty($services))
                     @foreach($services as $service)
+                    
                     <div class="col-lg-4 col-sm-6 col-12">
                         <div class="service__item">
                             <div class="service__thumb">

@@ -25,6 +25,9 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Backend\DynamicPageController;
 use App\Http\Controllers\Backend\ShippingSettingController;
 use App\Http\Controllers\Backend\CouponController;
+use App\Http\Controllers\Frontend\OrderController;
+use App\Http\Controllers\PathologyController;
+use App\Http\Controllers\PharmacyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,6 +82,29 @@ Route::prefix('cart')->name('cart.')->group(function () {
     Route::get('/count', [CartController::class, 'getCartCount'])->name('count');
     Route::get('/total', [CartController::class, 'getCartTotal'])->name('total');
 });
+
+Route::group(['prefix' => 'orders'], function () {
+    Route::get('/checkout', [OrderController::class, 'checkout'])->name('checkout');
+    Route::post('/place-order', [OrderController::class, 'placeOrder'])->name('order.place');
+    Route::get('/success/{orderNumber}', [OrderController::class, 'success'])->name('order.success');
+    Route::get('/track', [OrderController::class, 'track'])->name('order.track');
+    Route::post('/track', [OrderController::class, 'track'])->name('order.track.post');
+    Route::get('/my-orders', [OrderController::class, 'myOrders'])->name('my.orders');
+    Route::get('/thankyou/{order}', function (\App\Models\Order $order) {
+    return view('frontend.pages.thankyou', compact('order'));
+    })->name('thankyou');
+    
+});
+
+Route::group(['prefix' => 'pharmacy'], function () {
+    Route::post('/pharmacy-form-submit', [PharmacyController::class, 'pharmacySubmit'])->name('pharmacySubmit');
+    
+});
+Route::group(['prefix' => 'pathology'], function () {
+    Route::post('/pathology-form-submit', [PathologyController::class, 'pathologySubmit'])->name('pathologySubmit');
+    
+});
+
 
 
 //frontend shop end
@@ -238,4 +264,21 @@ Route::get('/delete_appointment/{id}',[BackendFormController::class,'delete_appo
     
     // Coupon routes
     Route::resource('coupons', CouponController::class);
+    Route::PATCH('toggle-status/{coupon}', [CouponController::class, 'toggleStatus'])->name('coupons.toggle-status');
+
+
+    // pharmacy routes
+    Route::get('/pharmacy', [PharmacyController::class, 'index'])->name('admin.pharmacy');
+    Route::get('/pathology', [PathologyController::class, 'index'])->name('admin.pathology');
+
+    // order management
+    Route::get('/orders', [OrderController::class, 'adminIndex'])->name('admin.orders.index');
+    Route::get('/orders/{order}', [OrderController::class, 'adminShow'])->name('admin.orders.show');
+    Route::put('/orders/{order}', [OrderController::class, 'adminUpdate'])->name('admin.orders.update');
+
+    //update category order
+    Route::post('/update-category-order', [ServiceController::class, 'updateCategoryOrder'])->name('admin.update_category_order');
+
+    
+
 });

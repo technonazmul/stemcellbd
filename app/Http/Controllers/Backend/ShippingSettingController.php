@@ -16,20 +16,24 @@ class ShippingSettingController extends Controller
 
     public function update(Request $request)
     {
-        $request->validate([
-            'default_shipping_cost' => 'required|numeric|min:0',
-            'free_shipping_threshold' => 'required|numeric|min:0',
-            'enable_free_shipping' => 'boolean'
-        ]);
-
+    
         $settings = ShippingSetting::getSettings();
+
         $settings->update([
-            'default_shipping_cost' => $request->default_shipping_cost,
-            'free_shipping_threshold' => $request->free_shipping_threshold,
-            'enable_free_shipping' => $request->has('enable_free_shipping')
+            'default_shipping_cost'      => $request->default_shipping_cost,
+            'free_shipping_threshold'    => $request->free_shipping_threshold,
+            'enable_free_shipping'       => $request->has('enable_free_shipping'),
+
+            'inside_dhaka_cost' => $request->inside_dhaka_cost,
+            'outside_dhaka_cost' => $request->outside_dhaka_cost,
+
+            // New: Discount offer settings
+            'enable_discount_offer'      => $request->has('enable_discount_offer'),
+            'discount_percent'           => $request->discount_percent,
+            'discount_minimum_total'     => $request->discount_minimum_total,
         ]);
 
-        return redirect()->back()
-            ->with('success', 'Shipping settings updated successfully!');
+        return redirect()->back()->with('success', 'Shipping & offer settings updated successfully!');
     }
+
 }

@@ -2315,7 +2315,7 @@ input, textarea, select {
   border-radius: 4px;
 }
 
-.shop__item:hover .shop__thumb img {
+/* .shop__item:hover .shop__thumb img {
   -webkit-transform: scale(1.3);
   -ms-transform: scale(1.3);
   transform: scale(1.3);
@@ -2323,7 +2323,7 @@ input, textarea, select {
 
 .shop__item:hover .shop__link {
   opacity: 1;
-}
+} */
 
 @media (min-width: 576px) {
   .shop__item--list .shop__thumb {

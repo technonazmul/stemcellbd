@@ -115,5 +115,15 @@ class CouponController extends Controller
             'final_shipping' => $coupon->type === 'free_shipping' ? 0 : $shippingCost
         ]);
     }
+
+    // coupne toggle status
+    public function toggleStatus(Coupon $coupon)
+    {
+        $coupon->is_active = !$coupon->is_active;
+        $coupon->save();
+
+        return redirect()->back()
+            ->with('success', 'Coupon status updated successfully!');
+    }
 }
 

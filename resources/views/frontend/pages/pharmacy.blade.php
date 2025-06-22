@@ -107,18 +107,21 @@
                         <img src="https://images.unsplash.com/photo-1576602976047-174e57a47881?q=80&w=2938&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="webcode" class="mb-4 w-100">
                         <h5>Pharmacy</h5>
                         <p>Your online pharmacy</p>
-                        
+                        <div class="pharmacy-contact mb-4">
+                            <h6>📞 Pharmacy Phone Number</h6>
+                            <p><strong>Call us at:</strong> <a href="tel:{{ $general_info->pharmacy_phone ?? '01338959603' }}">{{ $general_info->pharmacy_phone ?? '01338-959603' }}</a></p>
+                        </div>
                         
                         
                         <h5 class="mb-4">Order Form</h5>
-                        <form action="{{route('free_consultancy')}}" id="contact-form" method="post" enctype="multipart/form-data">
+                        <form action="{{route('pharmacySubmit')}}" id="contact-form" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="row g-3">
                                 <div class="col-sm-6 col-12">
                                     <input type="text" placeholder="Your Name*" name="name" id="name" required>
                                 </div>
                                 <div class="col-sm-6 col-12">
-                                    <input type="text" placeholder="Phone Number*" name="company" id="company">
+                                    <input type="text" placeholder="Phone Number*" name="phone" id="phone">
                                 </div>
 
                                 <div class="col-sm-6 col-12">
