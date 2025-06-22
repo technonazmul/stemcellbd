@@ -229,7 +229,7 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                                 <li>
                                     <a>Service</a>
                                     <?php
-                                    $service_category = App\Models\ServiceCategory::all();
+                                    $service_category = App\Models\ServiceCategory::orderBy('priority', 'asc')->get();
                                     ?>
                                     
                                     <ul>

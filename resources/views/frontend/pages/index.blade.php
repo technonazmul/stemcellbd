@@ -200,7 +200,7 @@ $services = App\Models\Service::all(); // For appointment form services
             <div class="section__wrapper">
                 <div class="row g-4 justify-content-center">
                     @php
-                    $serviceCategories=App\Models\ServiceCategory::get();
+                    $serviceCategories=App\Models\ServiceCategory::orderBy('priority', 'asc')->get();
                     @endphp
                     @foreach($serviceCategories as $single_category)
                     <div class="col-lg-4 col-sm-6 col-12">
