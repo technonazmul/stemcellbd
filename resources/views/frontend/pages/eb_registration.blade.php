@@ -8,14 +8,14 @@
 @endsection
 @section("content")
     <!-- ==========Page Header Section Start Here========== -->
-    <div class="pageheader bg-img" style="background-image: url({{asset('frontend/assets/images/bg/04.jpg')}});">
+    <div class="pageheader bg-img" style="background-image: url({{asset('storage/public/visual_edits/' . $visualEditEbRegistrationContent['header_background_image'] ?? '')}});">
         <div class="container">
             <div class="pageheader__content">
-                <h2>Early Bird Registration</h2>
+                <h2>{{ $visualEditEbRegistrationContent['header_title'] ?? 'Early Bird Registration' }}</h2>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{route('index')}}">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Early Bird Registration</li>
+                        <li class="breadcrumb-item"><a href="{{ $visualEditEbRegistrationContent['breadcrumb_first_item_link'] ?? '' }}">{{ $visualEditEbRegistrationContent['breadcrumb_first_item_text'] ?? '' }}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ $visualEditEbRegistrationContent['breadcrumb_second_item_text'] ?? 'Early Bird Registration' }}</li>
                     </ol>
                 </nav>
             </div>

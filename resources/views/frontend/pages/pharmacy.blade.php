@@ -83,14 +83,14 @@
     }
 </style>
     <!-- ==========Page Header Section Start Here========== -->
-    <div class="pageheader bg-img" style="background-image: url({{asset('frontend/assets/images/bg/04.jpg')}});">
+    <div class="pageheader bg-img" style="background-image: url({{asset('storage/public/visual_edits/' . $visualEditPharmacyContent['header_background_image'] ?? '')}});">
         <div class="container">
             <div class="pageheader__content">
-                <h2>Pharmacy</h2>
+                <h2>{{ $visualEditPharmacyContent['title'] ?? '' }}</h2>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{route('index')}}">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Pharmacy</li>
+                        <li class="breadcrumb-item"><a href="{{ $visualEditPharmacyContent['breadcrumb_first_item_link'] ?? '' }}">{{ $visualEditPharmacyContent['breadcrumb_first_item_text'] ?? '' }}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ $visualEditPharmacyContent['breadcrumb_second_item_text'] ?? '' }}</li>
                     </ol>
                 </nav>
             </div>
@@ -104,16 +104,7 @@
             <div class="row flex-row-reverse g-4">
                 <div class="col-12">
                     <div class="service__maincontent">
-                        <img src="https://images.unsplash.com/photo-1576602976047-174e57a47881?q=80&w=2938&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="webcode" class="mb-4 w-100">
-                        <h5>Pharmacy</h5>
-                        <p>Your online pharmacy</p>
-                        <div class="pharmacy-contact mb-4">
-                            <h6>📞 Pharmacy Phone Number</h6>
-                            <p><strong>Call us at:</strong> <a href="tel:{{ $general_info->pharmacy_phone ?? '01338959603' }}">{{ $general_info->pharmacy_phone ?? '01338-959603' }}</a></p>
-                        </div>
-                        
-                        
-                        <h5 class="mb-4">Order Form</h5>
+                       {!! $visualEditPharmacyContent['pharmacy_description'] ?? 'Your online pharmacy' !!}
                         <form action="{{route('pharmacySubmit')}}" id="contact-form" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="row g-3">

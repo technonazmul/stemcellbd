@@ -1,0 +1,355 @@
+@extends('backend.visualeditor.layouts.template')
+@section("extra_css")
+<style>
+    .sidebar__search form input, .shop__item, .shop__title, input, textarea, select {
+    padding: 0;
+}
+</style>
+@endsection
+@section("content")
+    <!-- ==========Page Header Section Start Here========== -->
+            <div
+            class="pageheader bg-img"
+            style="background-image: url({{asset('storage/public/visual_edits/' . $visualEditEbRegistrationContent['header_background_image'] ?? '')}})"
+        >
+            <div class="container">
+               
+
+
+                <div class="pageheader__content">
+                     <form action="{{ route('admin.visual_edit.update') }}" method="POST" enctype="multipart/form-data" class="p-4 border rounded bg-light">
+                    @csrf
+                    <input type="hidden" name="section" value="early_bird_registration_page">
+                    <input type="hidden" name="key" value="header_background_image">
+
+                    <div class="mb-3">
+                        <label for="file" class="form-label fw-bold">Upload Background Image</label>
+                        <input type="file" name="file" class="form-control" id="file" accept="image/*">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-upload me-1"></i> Upload
+                    </button>
+                </form>
+                   <div class="col-md-4 my-2 mx-auto text-center">
+                    <form action="{{ route('admin.visual_edit.update') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="section" value="early_bird_registration_page">
+                        <input type="hidden" name="key" value="title">
+
+                        <div class="">
+                            {{-- Editable H2 --}}
+                            <div class="form-group mb-3">
+                                <input type="text" name="input_value" class="form-control"
+                                    
+                                    value="{{ $visualEditEbRegistrationContent['title'] ?? '' }}">
+                            </div>
+
+                            
+
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                    </form>
+                   </div>
+                    
+                    <br>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                
+                                <form action="{{ route('admin.visual_edit.update') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="section" value="early_bird_registration_page">
+                                            <input type="hidden" name="key" value="breadcrumb_first_item_text">
+
+                                            <div class="">
+                                                {{-- Editable H2 --}}
+                                                <div class="form-group mb-3">
+                                                    <input type="text" name="input_value" class="form-control"
+                                                       
+                                                        value="{{ $visualEditEbRegistrationContent['breadcrumb_first_item_text'] ?? '' }}">
+                                                </div>
+
+                                                
+
+                                                <button type="submit" class="btn btn-primary">Update</button>
+                                            </div>
+                                        </form>
+                                        <br>
+                                        <form action="{{ route('admin.visual_edit.update') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="section" value="early_bird_registration_page">
+                                            <input type="hidden" name="key" value="breadcrumb_first_item_link">
+
+                                            <div class="">
+                                                {{-- Editable H2 --}}
+                                                <div class="form-group mb-3">
+                                                    <input type="text" name="input_value" class="form-control"
+                                                       
+                                                        value="{{ $visualEditEbRegistrationContent['breadcrumb_first_item_link'] ?? '' }}">
+                                                </div>
+
+                                                
+
+                                                <button type="submit" class="btn btn-primary">Update</button>
+                                            </div>
+                                        </form>
+                            </li>
+                            <li
+                                class="breadcrumb-item active"
+                                aria-current="page"
+                            >
+                                <form action="{{ route('admin.visual_edit.update') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="section" value="early_bird_registration_page">
+                                            <input type="hidden" name="key" value="breadcrumb_second_item_text">
+
+                                            <div class="">
+                                                {{-- Editable H2 --}}
+                                                <div class="form-group mb-3">
+                                                    <input type="text" name="input_value" class="form-control"
+                                                       
+                                                        value="{{ $visualEditEbRegistrationContent['breadcrumb_second_item_text'] ?? '' }}">
+                                                </div>
+
+                                                
+
+                                                <button type="submit" class="btn btn-primary">Update</button>
+                                            </div>
+                                        </form>
+                                        <br>
+                                        <form action="{{ route('admin.visual_edit.update') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="section" value="early_bird_registration_page">
+                                            <input type="hidden" name="key" value="breadcrumb_second_item_link">
+
+                                            <div class="">
+                                                {{-- Editable H2 --}}
+                                                <div class="form-group mb-3">
+                                                    <input type="text" name="input_value" class="form-control"
+                                                       
+                                                        value="{{ $visualEditEbRegistrationContent['breadcrumb_second_item_link'] ?? '' }}">
+                                                </div>
+
+                                                
+
+                                                <button type="submit" class="btn btn-primary">Update</button>
+                                            </div>
+                                        </form>
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- ==========Page Header Section Ends Here========== -->    
+    <div class="container">
+
+        <!-- Display validation errors -->
+        <form action="{{route('eb_form_submit')}}" method="Post">
+            @csrf
+          <div class="row ">
+            <div class="col-md-7 my-2 mx-auto">
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+            </div>
+              <div class="col-md-7 my-2 mx-auto">
+                  <div class="card ">
+                      <div class="card-body"> 
+                          <div class="mb-3">
+                              <label for="exampleFormControlInput1" class="form-label">Name</label> <span style="color:red">*</span>
+                              <input name="name" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Your answer" required>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="col-md-7 my-2 mx-auto">
+                <div class="card ">
+                    <div class="card-body">
+                        <label for="exampleFormControlInput1" class="form-label">Registration Type</label> <span style="color:red">*</span>
+                        <div class="form-check">
+                            <input name="registration_type" class="form-check-input" type="radio"  id="exampleRadio1" value="Patient (Self)"required>
+                            <label class="form-check-label" for="exampleRadio1">
+                              Patient (Self)
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input name="registration_type" class="form-check-input" type="radio"  id="exampleRadio2" value="Relative" required>
+                            <label class="form-check-label" for="exampleRadio2">
+                              Relative
+                            </label>
+                          </div>
+                    </div>
+                </div>
+              </div>
+
+              <div class="col-md-7 my-2 mx-auto">
+                <div class="card ">
+                    <div class="card-body">
+                        <label for="exampleFormControlInput1" class="form-label">Date of Birth</label> <span style="color:red">*</span>
+                            <input name="date_of_birth" type="date" class="form-control" id="datepicker" required>
+                    </div>
+                </div>
+              </div>
+
+              <div class="col-md-7 my-2 mx-auto">
+                <div class="card ">
+                    <div class="card-body">
+                        <label for="exampleFormControlInput1" class="form-label">Gender</label> <span style="color:red">*</span>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gender" id="male" value="male"required>
+                            <label class="form-check-label" for="male">
+                              Male
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gender" id="female" value="female"required>
+                            <label class="form-check-label" for="female">
+                              Female
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gender" id="others" value="others"required>
+                            <label class="form-check-label" for="others">
+                              Others
+                            </label>
+                          </div>
+                    </div>
+                </div>
+              </div>
+
+              <div class="col-md-7 my-2 mx-auto">
+                  <div class="card ">
+                      <div class="card-body">
+                          <label for="exampleFormControlInput1" class="form-label">Current Health Condition</label>
+                          <input name="c_health_condition" type="condition" class="form-control" id="exampleFormControlInput1" placeholder="Your answer">
+                      </div>
+                  </div>
+              </div>
+
+              <div class="col-md-7 my-2 mx-auto">
+                <div class="card ">
+                    <div class="card-body">
+                        <label for="exampleFormControlInput1" class="form-label">Previous Medical History</label>
+                        <input name="p_medical_history" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Your answer">
+                    </div>
+                </div>
+              </div>
+
+              <div class="col-md-7 my-2 mx-auto">
+                <div class="card ">
+                    <div class="card-body">
+                        <label for="exampleFormControlInput1" class="form-label">Treatment of Interest &nbsp;</label>
+                        <div class="form-check">
+                            <input name="treatment_of_interest[]" value="Stem Cell Therapy" class="form-check-input" type="checkbox" id="therapy">
+                            <label class="form-check-label" for="therapy">
+                                Stem Cell Therapy
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input name="treatment_of_interest[]" value="Conventional/Traditional Treatment" class="form-check-input" type="checkbox"id="traditional">
+                            <label class="form-check-label" for="traditional">
+                                Conventional/Traditional Treatment
+                            </label>
+                          </div>
+                    </div>
+                </div>
+              </div>
+              <div class="col-md-7 my-2 mx-auto">
+                <div class="card ">
+                    <div class="card-body">
+                        <label for="exampleFormControlInput1" class="form-label">Preferred Consultation Date</label>
+                            <input name="preferred_date" type="date" class="form-control" id="datepicker" min="<?php echo date('Y-m-d'); ?>">
+                    </div>
+                </div>
+              </div>
+              
+              <div class="col-md-7 my-2 mx-auto">
+                <div class="card ">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Profession</label>
+                            <input name="profession" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Your answer">
+                        </div>
+                    </div>
+                </div>
+              </div>
+
+              <div class="col-md-7 my-2 mx-auto">
+                  <div class="card ">
+                      <div class="card-body">
+                          <div class="mb-3">
+                              <label for="exampleFormControlInput1" class="form-label">Address (optional)</label>
+                              <input name="address" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Your answer">
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-md-7 my-2 mx-auto">
+                  <div class="card ">
+                      <div class="card-body">
+                          <div class="mb-3">
+                              <label for="exampleFormControlInput1" class="form-label">Email Address (optional)</label>
+                              <input name="email" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Your answer">
+                          </div>
+                      </div>
+                  </div>
+              </div>
+    
+              <div class="col-md-7 my-2 mx-auto">
+                  <div class="card ">
+                      <div class="card-body">
+                          <div class="mb-3">
+                              <label for="exampleFormControlInput1" class="form-label">Phone</label><span style="color:red">*</span>
+                              <input name="phone" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Your answer"required>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="col-md-7 my-2 mx-auto">
+                  <div class="card ">
+                      <div class="card-body">
+                          <div class="mb-3">
+                              <label for="exampleFormControlInput1" class="form-label">Your Message (optional)</label>
+                              <input name="message" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Your answer">
+                          </div>
+                      </div>
+                  </div>
+              </div>
+    
+              <div class="col-md-7 my-2 mx-auto">
+                  <div class="card ">
+                      <div class="card-body">
+                          <label for="exampleFormControlInput1" class="form-label"><u>Consent</u></label><span class="float-end" style="color:red">*</span>
+                          <p>I am giving permissions to Advancell to collect & store my data for further communication.</p>
+                          <div class="form-check">
+                              <input class="form-check-input" type="radio" name="i_agreed" id="i_agreed" value="i agreed" required>
+                              <label class="form-check-label" for="i_agreed">
+                                  I Agree
+                              </label>
+                            </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-md-7 my-2 mx-auto">
+                  <button class="btn btn-lg btn-info">Submit</button>
+                  <button type="reset" class="btn btn-outline-secondary float-end">Clear Form</button>
+              </div>
+         </div>
+        </form>  
+    </div>
+@endsection

@@ -1,14 +1,15 @@
 @extends('frontend.layouts.template')
 @section("content")
+
     <!-- ==========Page Header Section Start Here========== -->
-    <div class="pageheader bg-img" style="background-image: url({{asset('frontend/assets/images/bg/04.jpg')}});">
+    <div class="pageheader bg-img" style="background-image: url({{asset('storage/public/visual_edits/' . $visualEditShopContent['header_background_image'] ?? '')}});">
         <div class="container">
             <div class="pageheader__content">
-                <h2>All Products</h2>
+                <h2>{{ $visualEditShopContent['title'] ?? 'All Products' }}</h2>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{route('index')}}">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">product</li>
+                        <li class="breadcrumb-item"><a href="{{ $visualEditShopContent['breadcrumb_first_item_link'] ?? '' }}">{{ $visualEditShopContent['breadcrumb_first_item_text'] ?? '' }}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ $visualEditShopContent['breadcrumb_second_item_text'] ?? 'Product' }}</li>
                     </ol>
                 </nav>
             </div>

@@ -8,10 +8,28 @@ use App\Models\Form;
 use App\Models\Contact;
 use App\Models\Blog;
 use App\Models\Appointment;
+use Carbon\Carbon;
+use App\Models\Doctor;
+use App\Models\Product;
+use App\Models\Order;
+use App\Models\Pathology;
+use App\Models\Pharmacy;
+
 class PageController extends Controller
 {
     function dashboard() {
-        return view('backend.main');
+        $todayAppointments = Appointment::Count();
+        $totalDoctors = Doctor::Count();
+        $earlybirdformdata = Form::Count();
+        $totalProducts = Product::Count();
+        $totalOrders = Order::Count();
+        $pharmacyOrders = Pharmacy::Count();
+        $pathologyRequests = Pathology::Count();
+
+        $appointments = Appointment::orderBy('id', 'desc')
+            ->limit(5)
+            ->get();
+        return view('backend.main', compact('todayAppointments', 'totalDoctors', 'earlybirdformdata', 'totalProducts', 'totalOrders','pharmacyOrders','pathologyRequests','appointments'));
     }
     function doctor(){
         return view('backend.doctor.doctor');

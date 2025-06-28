@@ -83,14 +83,14 @@
     }
 </style>
     <!-- ==========Page Header Section Start Here========== -->
-    <div class="pageheader bg-img" style="background-image: url({{asset('frontend/assets/images/bg/04.jpg')}});">
+    <div class="pageheader bg-img" style="background-image: url({{asset('storage/public/visual_edits/' . $visualEditAmbulanceContent['header_background_image'] ?? '')}});">
         <div class="container">
             <div class="pageheader__content">
-                <h2>Ambulance</h2>
+                <h2>{{ $visualEditAmbulanceContent['title'] ?? '' }}</h2>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{route('index')}}">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Ambulance</li>
+                        <li class="breadcrumb-item"><a href="{{ $visualEditAmbulanceContent['breadcrumb_first_item_link'] ?? '' }}">{{ $visualEditAmbulanceContent['breadcrumb_first_item_text'] ?? '' }}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ $visualEditAmbulanceContent['breadcrumb_second_item_text'] ?? '' }}</li>
                     </ol>
                 </nav>
             </div>
@@ -104,19 +104,7 @@
             <div class="row flex-row-reverse g-4">
                 <div class="col-12">
                     <div class="service__maincontent">
-                        <img src="https://images.unsplash.com/photo-1705264895993-c544cf74a0c7?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="webcode" class="mb-4 w-100">
-                        
-                        <h5>Ambulance</h5>
-                       
-
-                       
-                        
-                        <div class="emergency-call-box" style="background-color: #dc3545; color: white; padding: 15px 20px; border-radius: 8px; display: inline-block; font-size: 1.25rem; font-weight: bold;">
-                            🚑 Emergency Call: 
-                            <a href="tel:{{$general_info->enquiry_number}}" style="color: white; text-decoration: underline;">
-                                {{ $general_info->pharmacy_phone ?? '01338-959606' }}
-                            </a>
-                        </div>
+                        {!! $visualEditAmbulanceContent['ambulance_description'] ?? 'Your online pharmacy' !!}
                     </div>
 
                 </div>

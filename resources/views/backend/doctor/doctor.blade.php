@@ -39,7 +39,7 @@
                 <td>{{$doctor->name}}</td>
                 <td>{{$doctor->phone}}</td>
                 <td>{{$doctor->specialization}}</td>
-                <td> <img height="200" width="80" src="{{asset('storage/public/doctors/'.$doctor->image)}}" class="card-img-top" alt="..."></td>
+                <td> <img style="max-width: 100px;" src="{{asset('storage/public/doctors/'.$doctor->image)}}" class="card-img-top" alt="..."></td>
                 <td>
                     {{-- popup button --}}
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{$doctor->id}}">

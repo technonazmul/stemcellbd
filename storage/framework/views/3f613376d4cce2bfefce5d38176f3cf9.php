@@ -15,7 +15,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item menu-open">
-            <a href="#" class="nav-link">
+            <a href="<?php echo e(route('admin.dashboard')); ?>" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -315,6 +315,12 @@
             </ul>
           </li>
           <li class="nav-item">
+            <a href="<?php echo e(route('subscribers.index')); ?>" class="nav-link">
+              <i class=""></i>
+              <p>Subscribers</p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="<?php echo e(route('admin.pharmacy')); ?>" class="nav-link">Pharmacy</a>
           </li>
           <li class="nav-item">
@@ -333,6 +339,10 @@
                 <a href="<?php echo e(route('admin.orders.index')); ?>" class="nav-link">
                   <i class=""></i>
                   <p>Orders</p>
+                </a>
+                <a href="<?php echo e(route('shipping.index')); ?>" class="nav-link">
+                  <i class=""></i>
+                  <p>Shipping and Offer</p>
                 </a>
               </li>
               
@@ -354,6 +364,47 @@
                 </a>
               </li>
               
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class=""></i>
+              <p>
+                Visual Editor
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?php echo e(route('admin.visual_editor.home')); ?>" class="nav-link">
+                  <i class=""></i>
+                  <p>Home Page</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="<?php echo e(route('admin.visual_editor.shop')); ?>" class="nav-link">
+                  <i class=""></i>
+                  <p>Shop Page</p>
+                </a>
+              
+              <li class="nav-item">
+                <a href="<?php echo e(route('admin.visual_editor.contact')); ?>" class="nav-link">
+                  <i class=""></i>
+                  <p>Contact Page</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo e(route('admin.visual_editor.pharmacy')); ?>" class="nav-link">
+                  <i class=""></i>
+                  <p>Pharmacy Page</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo e(route('admin.visual_editor.eb_registration')); ?>" class="nav-link">
+                  <i class=""></i>
+                  <p>Early Bird Registration Page</p>
+                </a>
             </ul>
           </li>
         </ul>

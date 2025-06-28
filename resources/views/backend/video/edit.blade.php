@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h2>{{ isset($video) ? 'Edit' : 'Create' }} Video Section</h2>
+    
 
     @if ($errors->any())
         <div class="alert alert-danger">

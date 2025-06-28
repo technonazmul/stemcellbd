@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Treatment_type;
 use App\Models\Blog;
 use App\Models\Doctor;
+use App\Models\VisualEdit;
 
 class PagesController extends Controller
 {
@@ -59,13 +60,17 @@ class PagesController extends Controller
     }
 
     public function pharmacy() {
-        return view('frontend.pages.pharmacy');
+        $visualEditPharmacyContent = VisualEdit::where('section', 'pharmacy_page')->pluck('value', 'key');
+        return view('frontend.pages.pharmacy', compact('visualEditPharmacyContent'));
     }
     public function pathology() {
-        return view('frontend.pages.pathology');
+        $visualEditPathologyContent = VisualEdit::where('section', 'pathology_page')->pluck('value', 'key');
+        return view('frontend.pages.pathology', compact('visualEditPathologyContent'));
+        
     }
     public function ambulance() {
-        return view('frontend.pages.ambulance');
+        $visualEditAmbulanceContent = VisualEdit::where('section', 'ambulance_page')->pluck('value', 'key');
+        return view('frontend.pages.ambulance', compact('visualEditAmbulanceContent'));
     }
 
 }

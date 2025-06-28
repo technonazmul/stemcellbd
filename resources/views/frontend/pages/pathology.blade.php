@@ -83,14 +83,14 @@
     }
 </style>
     <!-- ==========Page Header Section Start Here========== -->
-    <div class="pageheader bg-img" style="background-image: url({{asset('frontend/assets/images/bg/04.jpg')}});">
+    <div class="pageheader bg-img" style="background-image: url({{asset('storage/public/visual_edits/' . $visualEditPathologyContent['header_background_image'] ?? '')}});">
         <div class="container">
             <div class="pageheader__content">
-                <h2>Pathology</h2>
+                <h2>{{ $visualEditPathologyContent['title'] ?? 'Pathology' }}</h2>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{route('index')}}">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Pathology</li>
+                        <li class="breadcrumb-item"><a href="{{ $visualEditPathologyContent['breadcrumb_first_item_link'] ?? '' }}">{{ $visualEditPathologyContent['breadcrumb_first_item_text'] ?? '' }}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ $visualEditPathologyContent['breadcrumb_second_item_text'] ?? 'Pathology' }}</li>
                     </ol>
                 </nav>
             </div>
@@ -104,18 +104,7 @@
             <div class="row flex-row-reverse g-4">
                 <div class="col-12">
                     <div class="service__maincontent">
-                        <img src="https://images.unsplash.com/photo-1576669801838-1b1c52121e6a?q=80&w=1953&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="webcode" class="mb-4 w-100">
-                        <h5>Pathology</h5>
-                        <p>Your Home Diagnostic Service</p>
-                        <div class="pharmacy-contact mb-4">
-                            <h6>📞 Pathology Phone Number</h6>
-                            <p><strong>Call us at:</strong> <a href="tel:{{ preg_replace('/[^0-9]/', '', $general_info->pathology_phone ?? '01338959605') }}">
-                                {{ $general_info->pathology_phone ?? '01338-959605' }}
-                            </a></p>
-                        </div>
-                        
-                        
-                        <h5 class="mb-4">Order Form</h5>
+                        {!! $visualEditPathologyContent['pathology_description'] ?? 'Your online pathology service' !!}
                         <form action="{{route('pathologySubmit')}}" id="contact-form" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="row g-3">

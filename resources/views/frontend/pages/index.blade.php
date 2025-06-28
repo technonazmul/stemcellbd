@@ -194,8 +194,8 @@ $services = App\Models\Service::all(); // For appointment form services
     <div class="service padding-tb" id="service">
         <div class="container">
             <div class="section__header text-center">
-                <h2>Our treatment options</h2>
-                <p>The art of medicine consists in amusing the patient-while nature cures the disease. Treatment without prevention is simply unsustainable.</p>
+                <h2>{{$home_page_service_category_title}}</h2>
+                <p>{{$home_page_service_category_description}}</p>
             </div>
             <div class="section__wrapper">
                 <div class="row g-4 justify-content-center">
@@ -327,8 +327,8 @@ $services = App\Models\Service::all(); // For appointment form services
     <div class="team padding-tb" id="team">
         <div class="container">
             <div class="section__header text-center">
-                <h2>Our expert Doctor team</h2>
-                <p>The art of medicine consists in amusing the patient-while nature cures the disease. Treatment without prevention is simply unsustainable.</p>
+                <h2>{{ $home_page_doctor_title }}</h2>
+                <p>{{ $home_page_doctor_description }}</p>
             </div>
             <div class="section__wrapper">
                 <div class="row g-4 justify-content-center">
@@ -378,8 +378,8 @@ $services = App\Models\Service::all(); // For appointment form services
     <div class="testimonial padding-tb bg-img" id="testimonial" style="background-image: url({{asset('frontend/assets/images/bg/01.jpg')}});">
         <div class="container">
             <div class="section__header text-center">
-                <h2>our Client Testimonials</h2>
-                <p>The art of medicine consists in amusing the patient-while nature cures the disease. Treatment without prevention is simply unsustainable.</p>
+                <h2>{{ $home_page_testimonial_title }}</h2>
+                <p>{{ $home_page_testimonial_description }}</p>
             </div>
             <div class="section__wrapper">
                 <div class="testimonial__slider overflow-hidden">
@@ -451,8 +451,8 @@ $services = App\Models\Service::all(); // For appointment form services
     <div class="blog padding-tb" id="blog">
         <div class="container">
             <div class="section__header text-center">
-                <h2>Our blogs</h2>
-                <p>The art of medicine consists in amusing the patient-while nature cures the disease. Treatment without prevention is simply unsustainable.</p>
+                <h2>{{ $home_page_blog_title }}</h2>
+                <p>{{ $home_page_blog_description }}</p>
             </div>
             <div class="section__wrapper">
                 <div class="row g-4 justify-content-center">
@@ -513,8 +513,8 @@ $services = App\Models\Service::all(); // For appointment form services
                                         {{ session('success') }}
                                     </div>
                             @endif
-                            <h2>Take an Appointment</h2>
-                            <p>Please fill in the details below to schedule an appointment.</p>
+                            <h2>{{$home_page_appointment_title}}</h2>
+                            <p>{{$home_page_appointment_description}}</p>
                         </div>
                         <form action="{{route('admin.take_appointment')}}" method="post">
                             @csrf

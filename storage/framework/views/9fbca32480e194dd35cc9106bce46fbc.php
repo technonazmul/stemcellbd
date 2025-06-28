@@ -196,7 +196,7 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                                     <i class="fa-solid fa-user"></i>
                                 </div>
                                 <ul>
-                                    <li><a href="<?php echo e(route('login')); ?>">Login</a></li>
+                                    <li><a href="<?php echo e(route('login')); ?>"><?php echo e($headerVisuals['login_button_text'] ?? ''); ?></a></li>
                                     
                                 </ul>
                             </div>
@@ -225,38 +225,33 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                     <div class="menupart">
                         <div class="menu">
                             <ul>
-                                <li><a href="<?php echo e(route('index')); ?>" class="active">Home</a></li>
-                                <li>
-                                    <a>Service</a>
-                                    <?php
-                                    $service_category = App\Models\ServiceCategory::orderBy('priority', 'asc')->get();
-                                    ?>
-                                    
-                                    <ul>
-                                        <?php $__currentLoopData = $service_category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $service_category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <?php if($service_category->name == 'Pharmacy'): ?> 
-                                        <li><a href="<?php echo e(route('pharmacy')); ?>">Pharmacy</a></li>
-                                        <?php continue; ?>
+                                <?php $__currentLoopData = $menus; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $menu): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <li>
+                                        <a href="<?php echo e(getMenuUrl($menu)); ?>" target="<?php echo e($menu->target); ?>" class="<?php echo e($menu->css_class); ?>">
+                                            <?php if($menu->icon_class): ?>
+                                                <i class="<?php echo e($menu->icon_class); ?>"></i>
+                                            <?php endif; ?>
+                                            <?php echo e($menu->title); ?>
+
+                                        </a>
+
+                                        <?php if($menu->children && count($menu->children) > 0): ?>
+                                            <ul>
+                                                <?php $__currentLoopData = $menu->children; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $child): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <li>
+                                                        <a href="<?php echo e(getMenuUrl($child)); ?>" target="<?php echo e($child->target); ?>" class="<?php echo e($child->css_class); ?>">
+                                                            <?php if($child->icon_class): ?>
+                                                                <i class="<?php echo e($child->icon_class); ?>"></i>
+                                                            <?php endif; ?>
+                                                            <?php echo e($child->title); ?>
+
+                                                        </a>
+                                                    </li>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            </ul>
                                         <?php endif; ?>
-                                        <?php if($service_category->name == 'Pathology Sample Collection'): ?> 
-                                        <li><a href="<?php echo e(route('pathology')); ?>">Pathology Sample Collection</a></li>
-                                        <?php continue; ?>
-                                        <?php endif; ?>
-                                        <?php if($service_category->name == 'Ambulance Call Service'): ?> 
-                                        <li><a href="<?php echo e(route('ambulance')); ?>">Ambulance Call Service</a></li>
-                                        <?php continue; ?>
-                                        <?php endif; ?>
-                                        <li><a href="<?php echo e(route('show_services',$service_category->slug)); ?>"><?php echo e(ucfirst($service_category->name)); ?></a></li>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                    </ul>
-                                    
-                                </li>
-                                <li><a href="<?php echo e(route('doctors')); ?>">Doctors</a></li>
-                                
-                                <li><a href="<?php echo e(route('shop')); ?>">Shop</a></li>
-                                <li><a href="<?php echo e(route('pages.public', 'about-us')); ?>">About Us</a></li>
-                                <li><a href="<?php echo e(route('contact')); ?>">Contact</a></li>
-                                <li><a href="<?php echo e(route('eb_registration')); ?>">E.B Registration</a></li>
+                                    </li>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </ul>
                         </div>
                         <div class="cartbtn">
@@ -264,7 +259,7 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                                 <a href="<?php echo e(route('cart.index')); ?>"><i class="fa-solid fa-basket-shopping"></i></a>
                             </div>
                             <div class="headerbtn">
-                                <a href="<?php echo e(route('index')); ?>#appointment" class="lab-btn">appointment <i class="fa-solid fa-border-all"></i></a>
+                                <a href="<?php echo e($headerVisuals['appointment_button_link'] ?? ''); ?>" class="lab-btn"><?php echo e($headerVisuals['appointment_button_text'] ?? ''); ?> <i class="fa-solid fa-border-all"></i></a>
                             </div>
                         </div>
                     </div>
@@ -282,13 +277,13 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                 <div class="row g-4 align-items-center">
                     <div class="col-lg-6 col-12">
                         <div class="footer__top--title">
-                            <h3>Subscribe Our Newsletter</h3>
+                            <h3><?php echo e($footerVisuals['newsletter_title'] ?? ''); ?></h3>
                         </div>
                     </div>
                     <div class="col-lg-6 col-12">
                         <div class="footer__top--form">
-                            <form action="#">
-                                <input type="email" placeholder="enter email address">
+                            <form action="<?php echo e(route('subscribe.store')); ?>" method="POST">
+                                <input type="email" placeholder="enter email address" name="email" required>
                                 <button type="submit" class="lab-btn">subscribe now</button>
                             </form>
                         </div>
@@ -302,10 +297,10 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                     <div class="col-xl-3 col-sm-6 col-12">
                         <div class="footer__about">
                             <div class="footer__title">
-                                <h5>about us</h5>
+                                <h5><?php echo e($footerVisuals['about_us_title'] ?? ''); ?></h5>
                             </div>
                             <p><?php echo e($general_info->about_us); ?></p>
-                            <h6>follow us</h6>
+                            <h6><?php echo e($footerVisuals['follow_us_title'] ?? ''); ?></h6>
                             <ul>
                                 <li>
                                     <a href="<?php echo e($general_info->facebook); ?>" target="blank" class="facebook"><i class="fa-brands fa-facebook-f"></i> <span>Facebook</span></a>
@@ -320,7 +315,7 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                     <div class="col-xl-3 col-sm-6 col-12">
                         <div class="footer__product">
                             <div class="footer__title">
-                                <h5>Products</h5>
+                                <h5><?php echo e($footerVisuals['products_title'] ?? ''); ?></h5>
                             </div>
                             <ul>
                                  <?php $__currentLoopData = App\Models\Product::where('show_footer', 1)->get(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -351,7 +346,7 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                     <div class="col-xl-3 col-sm-6 col-12">
                         <div class="footer__post">
                             <div class="footer__title">
-                                <h5>Blogs</h5>
+                                <h5><?php echo e($footerVisuals['blogs_title'] ?? ''); ?></h5>
                             </div>
                             <ul>
                                 <?php
@@ -380,7 +375,7 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                     <div class="col-xl-3 col-sm-6 col-12">
                         <div class="footer__gallery">
                             <div class="footer__title">
-                                <h5>Our photo gallery</h5>
+                                <h5><?php echo e($footerVisuals['photo_gallery_title'] ?? ''); ?></h5>
                             </div>
                             <ul>
                                 <?php $__currentLoopData = App\Models\Gallery::all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $gallery): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>

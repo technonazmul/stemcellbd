@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h2>Video Section</h2>
+    <h2>Video Banners</h2>
     
 
     @if(session('success'))
@@ -38,11 +38,7 @@
                 <td>
                     <a href="{{ route('video.edit', $video->id) }}" class="btn btn-sm btn-warning">Edit</a>
 
-                    <form action="{{ route('video.destroy', $video->id) }}" method="POST" style="display:inline-block;">
-                        @csrf
-                        @method('DELETE')
-                        <button onclick="return confirm('Are you sure?')" class="btn btn-sm btn-danger">Delete</button>
-                    </form>
+                    
                 </td>
             </tr>
             @endforeach

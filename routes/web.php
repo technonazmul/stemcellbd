@@ -28,6 +28,9 @@ use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Frontend\OrderController;
 use App\Http\Controllers\PathologyController;
 use App\Http\Controllers\PharmacyController;
+use App\Http\Controllers\Backend\VisualEditController;
+use App\Http\Controllers\SubscriberController;
+use Illuminate\Routing\Router;
 
 /*
 |--------------------------------------------------------------------------
@@ -121,6 +124,9 @@ Route::get('/pharmacy',[FrontendPagesController::class,'pharmacy'])->name('pharm
 Route::get('/pathology',[FrontendPagesController::class,'pathology'])->name('pathology');
 // ambulance
 Route::get('/ambulance',[FrontendPagesController::class,'ambulance'])->name('ambulance');
+
+// newsletter subscription
+Route::post('/subscribe', [SubscriberController::class, 'store'])->name('subscribe.store');
 
 // Admin route start, will make group and middleware later
 // Admin route end   middleware(['auth'])->
@@ -279,6 +285,39 @@ Route::get('/delete_appointment/{id}',[BackendFormController::class,'delete_appo
     //update category order
     Route::post('/update-category-order', [ServiceController::class, 'updateCategoryOrder'])->name('admin.update_category_order');
 
+    //admin dashboard
+    Route::get('/dashboard', [BackendPageController::class, 'dashboard'])->name('admin.dashboard');
+
+    Route::group(['prefix' => 'visual-editor'], function () {
+        Route::get('/', [VisualEditController::class, 'index'])->name('admin.visual_editor.home');
+        Route::get('/contact', [VisualEditController::class, 'contact'])->name('admin.visual_editor.contact');
+        Route::get('/shop', [VisualEditController::class, 'shop'])->name('admin.visual_editor.shop');
+        Route::get('/eb_registration', [VisualEditController::class, 'ebRegistration'])->name('admin.visual_editor.eb_registration');
+        Route::get('/pharmacy', [VisualEditController::class, 'pharmacy'])->name('admin.visual_editor.pharmacy');
+        Route::get('/pathology', [VisualEditController::class, 'pathology'])->name('admin.visual_editor.pathology');
+        Route::get('/ambulance', [VisualEditController::class, 'ambulance'])->name('admin.visual_editor.ambulance');
+    });
+
+
+    // menu editor group
+    Route::group(['prefix' => 'menus'], function () {
+        Route::get('/', [\App\Http\Controllers\Backend\MenuController::class, 'index'])->name('admin.menus.index');
+        Route::get('/create', [\App\Http\Controllers\Backend\MenuController::class, 'create'])->name('admin.menus.create');
+        Route::post('/', [\App\Http\Controllers\Backend\MenuController::class, 'store'])->name('admin.menus.store');
+        Route::get('/{menu}/edit', [\App\Http\Controllers\Backend\MenuController::class, 'edit'])->name('admin.menus.edit');
+        Route::put('/{menu}', [\App\Http\Controllers\Backend\MenuController::class, 'update'])->name('admin.menus.update');
+        Route::delete('/{menu}', [\App\Http\Controllers\Backend\MenuController::class, 'destroy'])->name('admin.menus.destroy');
+        Route::post('/update-order', [\App\Http\Controllers\Backend\MenuController::class, 'updateOrder'])->name('admin.menus.update-order');
+        Route::post('/toggle-status/{menu}', [\App\Http\Controllers\Backend\MenuController::class, 'toggleStatus'])->name('admin.menus.toggleStatus');
+    });
+
+    // visual edit routes
+   
+    Route::post('/visual-edit/update', [VisualEditController::class, 'update'])->name('admin.visual_edit.update');
     
+
+    // Subscriber management
+    Route::get('/admin/subscribers', [SubscriberController::class, 'index'])->name('subscribers.index');
+    Route::delete('/admin/subscribers/{id}', [SubscriberController::class, 'destroy'])->name('subscribers.destroy');
 
 });

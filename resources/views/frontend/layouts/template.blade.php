@@ -194,7 +194,7 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                                     <i class="fa-solid fa-user"></i>
                                 </div>
                                 <ul>
-                                    <li><a href="{{route('login')}}">Login</a></li>
+                                    <li><a href="{{route('login')}}">{{ $headerVisuals['login_button_text'] ?? '' }}</a></li>
                                     
                                 </ul>
                             </div>
@@ -223,38 +223,31 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                     <div class="menupart">
                         <div class="menu">
                             <ul>
-                                <li><a href="{{route('index')}}" class="active">Home</a></li>
-                                <li>
-                                    <a>Service</a>
-                                    @php
-                                    $service_category = App\Models\ServiceCategory::orderBy('priority', 'asc')->get();
-                                    @endphp
-                                    
-                                    <ul>
-                                        @foreach($service_category as $service_category)
-                                        @if($service_category->name == 'Pharmacy') 
-                                        <li><a href="{{route('pharmacy')}}">Pharmacy</a></li>
-                                        @php continue; @endphp
+                                @foreach ($menus as $menu)
+                                    <li>
+                                        <a href="{{ getMenuUrl($menu) }}" target="{{ $menu->target }}" class="{{ $menu->css_class }}">
+                                            @if ($menu->icon_class)
+                                                <i class="{{ $menu->icon_class }}"></i>
+                                            @endif
+                                            {{ $menu->title }}
+                                        </a>
+
+                                        @if ($menu->children && count($menu->children) > 0)
+                                            <ul>
+                                                @foreach ($menu->children as $child)
+                                                    <li>
+                                                        <a href="{{ getMenuUrl($child) }}" target="{{ $child->target }}" class="{{ $child->css_class }}">
+                                                            @if ($child->icon_class)
+                                                                <i class="{{ $child->icon_class }}"></i>
+                                                            @endif
+                                                            {{ $child->title }}
+                                                        </a>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
                                         @endif
-                                        @if($service_category->name == 'Pathology Sample Collection') 
-                                        <li><a href="{{route('pathology')}}">Pathology Sample Collection</a></li>
-                                        @php continue; @endphp
-                                        @endif
-                                        @if($service_category->name == 'Ambulance Call Service') 
-                                        <li><a href="{{route('ambulance')}}">Ambulance Call Service</a></li>
-                                        @php continue; @endphp
-                                        @endif
-                                        <li><a href="{{route('show_services',$service_category->slug)}}">{{ucfirst($service_category->name)}}</a></li>
-                                        @endforeach
-                                    </ul>
-                                    
-                                </li>
-                                <li><a href="{{route('doctors')}}">Doctors</a></li>
-                                {{-- <li><a href="{{route('blog')}}">Blog</a></li> --}}
-                                <li><a href="{{route('shop')}}">Shop</a></li>
-                                <li><a href="{{route('pages.public', 'about-us')}}">About Us</a></li>
-                                <li><a href="{{route('contact')}}">Contact</a></li>
-                                <li><a href="{{route('eb_registration')}}">E.B Registration</a></li>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
                         <div class="cartbtn">
@@ -262,7 +255,7 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                                 <a href="{{route('cart.index')}}"><i class="fa-solid fa-basket-shopping"></i></a>
                             </div>
                             <div class="headerbtn">
-                                <a href="{{route('index')}}#appointment" class="lab-btn">appointment <i class="fa-solid fa-border-all"></i></a>
+                                <a href="{{ $headerVisuals['appointment_button_link'] ?? '' }}" class="lab-btn">{{ $headerVisuals['appointment_button_text'] ?? '' }} <i class="fa-solid fa-border-all"></i></a>
                             </div>
                         </div>
                     </div>
@@ -280,13 +273,13 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                 <div class="row g-4 align-items-center">
                     <div class="col-lg-6 col-12">
                         <div class="footer__top--title">
-                            <h3>Subscribe Our Newsletter</h3>
+                            <h3>{{ $footerVisuals['newsletter_title'] ?? '' }}</h3>
                         </div>
                     </div>
                     <div class="col-lg-6 col-12">
                         <div class="footer__top--form">
-                            <form action="#">
-                                <input type="email" placeholder="enter email address">
+                            <form action="{{ route('subscribe.store') }}" method="POST">
+                                <input type="email" placeholder="enter email address" name="email" required>
                                 <button type="submit" class="lab-btn">subscribe now</button>
                             </form>
                         </div>
@@ -300,10 +293,10 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                     <div class="col-xl-3 col-sm-6 col-12">
                         <div class="footer__about">
                             <div class="footer__title">
-                                <h5>about us</h5>
+                                <h5>{{ $footerVisuals['about_us_title'] ?? '' }}</h5>
                             </div>
                             <p>{{$general_info->about_us}}</p>
-                            <h6>follow us</h6>
+                            <h6>{{ $footerVisuals['follow_us_title'] ?? '' }}</h6>
                             <ul>
                                 <li>
                                     <a href="{{$general_info->facebook}}" target="blank" class="facebook"><i class="fa-brands fa-facebook-f"></i> <span>Facebook</span></a>
@@ -318,7 +311,7 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                     <div class="col-xl-3 col-sm-6 col-12">
                         <div class="footer__product">
                             <div class="footer__title">
-                                <h5>Products</h5>
+                                <h5>{{ $footerVisuals['products_title'] ?? '' }}</h5>
                             </div>
                             <ul>
                                  @foreach (App\Models\Product::where('show_footer', 1)->get() as $item)
@@ -349,7 +342,7 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                     <div class="col-xl-3 col-sm-6 col-12">
                         <div class="footer__post">
                             <div class="footer__title">
-                                <h5>Blogs</h5>
+                                <h5>{{ $footerVisuals['blogs_title'] ?? '' }}</h5>
                             </div>
                             <ul>
                                 @php
@@ -378,7 +371,7 @@ $general_info=App\Models\GeneralInfo::findOrFail(1);
                     <div class="col-xl-3 col-sm-6 col-12">
                         <div class="footer__gallery">
                             <div class="footer__title">
-                                <h5>Our photo gallery</h5>
+                                <h5>{{ $footerVisuals['photo_gallery_title'] ?? '' }}</h5>
                             </div>
                             <ul>
                                 @foreach (App\Models\Gallery::all() as $gallery)

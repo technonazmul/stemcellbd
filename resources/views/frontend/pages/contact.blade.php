@@ -6,21 +6,21 @@ $general_info = App\Models\GeneralInfo::findOrFail(1);
             <!-- ==========Page Header Section Start Here========== -->
             <div
             class="pageheader bg-img"
-            style="background-image: url({{asset('frontend/assets/images/bg/04.jpg')}})"
+            style="background-image: url({{asset('storage/public/visual_edits/' . $visualEditContactContent['header_background_image'] ?? '')}})"
         >
             <div class="container">
                 <div class="pageheader__content">
-                    <h2>Contact Us</h2>
+                    <h2>{{ $visualEditContactContent['title'] ?? 'Contact Us' }}</h2>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="{{route('index')}}">Home</a>
+                                <a href="{{ $visualEditContactContent['breadcrumb_first_item_link'] ?? '' }}">{{ $visualEditContactContent['breadcrumb_first_item_text'] ?? '' }}</a>
                             </li>
                             <li
                                 class="breadcrumb-item active"
                                 aria-current="page"
                             >
-                                contact
+                                {{ $visualEditContactContent['breadcrumb_second_item_text'] ?? 'Contact' }}
                             </li>
                         </ol>
                     </nav>
@@ -33,9 +33,9 @@ $general_info = App\Models\GeneralInfo::findOrFail(1);
         <div class="contact contact--two" id="contact">
     <div class="container">
         <div class="section__header text-center">
-            <h2>Contact Us</h2>
+            <h2>{{ $visualEditContactContent['contact_card_title'] ?? '' }}</h2>
             <p>
-                {{ $general_info->contact_description ?? 'Reach out today—we’re ready to support you on your journey to better health with science you can trust.' }}
+                {{ $visualEditContactContent['contact_card_description'] ?? '' }}
             </p>
         </div>
 
@@ -111,9 +111,9 @@ $general_info = App\Models\GeneralInfo::findOrFail(1);
         <div class="contactform padding-tb">
             <div class="container">
                 <div class="section__header text-center">
-                    <h2>Feel Free To Ask Something We Are Here</h2>
+                    <h2>{{ $visualEditContactContent['contact_form_title'] ?? '' }}</h2>
                     <p>
-                        Feel free to reach out—our team is ready to assist you with any inquiries or support you need.
+                        {{ $visualEditContactContent['contact_form_description'] ?? '' }}
                     </p>
                 </div>
                 {{-- message --}}

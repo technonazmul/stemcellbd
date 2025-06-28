@@ -1,0 +1,882 @@
+<?php
+$general_info=App\Models\GeneralInfo::findOrFail(1);
+$banner=App\Models\Banner::findOrFail(1);
+$hospitalInfos = App\Models\HospitalInfo::latest()->take(3)->get();
+$about = App\Models\About::first();
+$steps = \App\Models\Step::all();
+$stepsection = \App\Models\StepSection::first();
+$video = \App\Models\VideoSection::findOrFail(1);
+$secondvideo = \App\Models\VideoSection::findOrFail(2);
+$doctors = App\Models\Doctor::all(); // Get all doctors for appointment form
+$services = App\Models\Service::all(); // For appointment form services
+?>
+
+
+<?php $__env->startSection("content"); ?>
+<style>
+    .form-container {
+        position: relative;
+        margin-bottom: 1rem;
+    }
+    
+    .form-container label {
+        position: absolute;
+        top: -12px;
+        left: 8px;
+        color: #333;
+        font-size: 12px;
+        font-weight: 600;
+        background: white;
+        padding: 0 4px;
+        pointer-events: none;
+        transition: 0.2s;
+        z-index: 1;
+    }
+    
+    .form-container input,
+    .form-container select,
+    .form-container textarea {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #e9ecef;
+        border-radius: 4px;
+        font-size: 14px;
+        background: white;
+        transition: border-color 0.2s;
+    }
+    
+    .form-container input:focus,
+    .form-container select:focus,
+    .form-container textarea:focus {
+        outline: none;
+        border-color: #2196f3;
+    }
+    
+    .form-container input:focus + label,
+    .form-container select:focus + label,
+    .form-container textarea:focus + label {
+        color: #2196f3;
+    }
+    
+    .form-container textarea {
+        resize: vertical;
+        min-height: 100px;
+    }
+    
+    .available-days {
+        font-size: 12px;
+        color: #666;
+        margin-top: 5px;
+    }
+    
+    .available-days span {
+        background: #e8f5e8;
+        color: #2d5a2d;
+        padding: 2px 6px;
+        border-radius: 10px;
+        margin-right: 4px;
+        font-size: 10px;
+    }
+    
+    .available-days-selector {
+        margin-top: 15px;
+    }
+    
+    .available-days-selector label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #333;
+    }
+    
+    .day-option {
+        background: #f8f9fa;
+        border: 2px solid #e9ecef;
+        padding: 8px 12px;
+        margin: 5px;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: inline-block;
+        font-size: 14px;
+    }
+    
+    .day-option:hover {
+        background: #e3f2fd;
+        border-color: #2196f3;
+    }
+    
+    .day-option.selected {
+        background: #2196f3;
+        color: white;
+        border-color: #1976d2;
+    }
+</style>
+    
+    <!-- ==========Banner Section Start Here========== -->
+    <div class="banner bg-img" id="banner" style="background: url(<?php echo e(asset('storage/public/' . $banner->background_image)); ?>) rgba(0,0,0,.5);">
+        
+        <div class="container">
+            <div class="banner__content">
+                <p><a href="<?php echo e(route('admin.banner')); ?>" style="color: white;"><i class="icofont-edit"></i></a></p>
+                <h2><?php echo e($banner->title); ?></h2>
+                <p><?php echo e($banner->subtitle); ?></p>
+                <ul>
+                    <li><a href="<?php echo e(old('button1_url', $banner->button1_url ?? '')); ?>" class="lab-btn"><?php echo e(old('button1_text', $banner->button1_text ?? '')); ?></a></li>
+                    <li><a href="<?php echo e(old('button2_url', $banner->button2_url ?? '')); ?>" class="lab-btn bg-white"><?php echo e(old('button2_text', $banner->button2_text ?? '')); ?></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- ==========Banner Section Ends Here========== -->
+    
+
+    <!-- ==========Feture Section Start Here========== -->
+    <div class="feature bg-img" id="feature" style="background-image: url(<?php echo e(asset('frontend/assets/images/bg/05.jpg')); ?>);">
+        
+        <div class="feature__bottom">
+            <div class="container">
+                <div class="row g-4">
+                    <p class="text-end"><a href="<?php echo e(route('hospitalinfo.index')); ?>" style="color: white;"><i class="icofont-edit"></i></a></p>
+                    <?php $__currentLoopData = $hospitalInfos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $info): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <div class="col-lg-4 col-sm-6 col-12">
+                            <div class="feature__item">
+                                <div class="feature__thumb">
+                                    <img src="<?php echo e(asset('storage/public/hospitalinfos/' . $info->image)); ?>" alt="<?php echo e($info->title); ?>">
+                                </div>
+                                <div class="feature__content">
+                                    <h5><?php echo e($info->title); ?></h5>
+                                    <p><?php echo e($info->description); ?></p>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        
+                    
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <!-- ==========Feture Section Ends Here========== -->
+
+    <!-- ==========About Section Start Here========== -->
+    <div class="about padding-tb" id="about">
+        <div class="container">
+            <p class="text-end"><a href="<?php echo e(route('about.index')); ?>" style="color: black;"><i class="icofont-edit"></i></a></p>
+            <div class="row g-lg-0 g-5 align-items-center">
+                <div class="col-lg-6 col-12">
+                    <div class="about__thumb">
+                        <img src="<?php echo e(asset('storage/public/about/' . $about->image)); ?>" alt="about image">
+                        <div class="about__thumb--content">
+                            <div class="icon">
+                                <img src="<?php echo e(asset('storage/public/about/' . $about->icon)); ?>" alt="about icon">
+                            </div>
+                            <div class="text">
+                                <h2><span class="odometer" data-odometer-final="<?php echo e($about->experience_years); ?>">0</span><sup>+</sup></h2>
+                                <p><?php echo e($about->experience_text); ?></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-12">
+                    <div class="about__content">
+                        <h2><?php echo e($about->headline); ?></h2>
+                        <h6><?php echo e($about->sub_headline); ?></h6>
+                        <p><?php echo e($about->description); ?></p>
+                        <a href="<?php echo e(route('index')); ?><?php echo e($about->button_link ?? '#appointment'); ?>" class="lab-btn">
+                            <?php echo e($about->button_text ?? 'take an appointment'); ?>
+
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========About Section Ends Here========== -->
+
+    <!-- ==========Service Section Start Here========== -->
+    <div class="service padding-tb" id="service">
+        <div class="container">
+            <div class="section__header text-center">
+
+                <form action="<?php echo e(route('admin.visual_edit.update')); ?>" method="POST">
+                        <?php echo csrf_field(); ?>
+                        <input type="hidden" name="section" value="home_page_service_category">
+                        <div class="">
+                            
+                            <div class="form-group mb-3">
+                                <input type="text" name="title" class="form-control border-0 display-5 fw-bold"
+                                    style="font-size: 2rem;"
+                                    value="<?php echo e($home_page_service_category_title); ?>">
+                            </div>
+
+                            
+                            <div class="form-group mb-3">
+                                <textarea name="description" class="form-control border-0"
+                                        style="font-size: 1.1rem; line-height: 1.7;"
+                                        rows="3"><?php echo e($home_page_service_category_description); ?></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                    </form>
+
+            </div>
+            <div class="section__wrapper">
+                <div class="row g-4 justify-content-center">
+                    <p class="text-end"><a href="<?php echo e(route('admin.all_service')); ?>" style="color: black;"><i class="icofont-edit"></i></a></p>
+                    <?php
+                    $serviceCategories=App\Models\ServiceCategory::orderBy('priority', 'asc')->get();
+                    ?>
+                    <?php $__currentLoopData = $serviceCategories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $single_category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <div class="col-lg-4 col-sm-6 col-12">
+                        <div class="service__item">
+                            <div class="service__thumb">
+                                <a href='
+                                        <?php if($single_category->name == "Pharmacy"): ?> 
+                                            <?php echo e(route('pharmacy')); ?>
+
+                                        <?php elseif($single_category->name == "Pathology Sample Collection"): ?> 
+                                            <?php echo e(route('pathology')); ?>
+
+                                        <?php elseif($single_category->name == "Ambulance Call Service"): ?> 
+                                            <?php echo e(route('ambulance')); ?>
+
+                                        <?php else: ?>
+                                            <?php echo e(route('show_services', $single_category->slug)); ?>
+
+                                        <?php endif; ?>
+                                        '>
+                                    <img src="<?php echo e(asset('storage/public/service_categories/'.$single_category->image)); ?>" alt="webcodeltd" style="width:auto;height:300px;">
+                                </a>
+                            </div>
+                            <div class="service__content">
+                                <h5><a href='
+                                    <?php if($single_category->name == "Pharmacy"): ?> 
+                                            <?php echo e(route('pharmacy')); ?>
+
+                                        <?php elseif($single_category->name == "Pathology Sample Collection"): ?> 
+                                            <?php echo e(route('pathology')); ?>
+
+                                        <?php elseif($single_category->name == "Ambulance Call Service"): ?> 
+                                            <?php echo e(route('ambulance')); ?>
+
+                                        <?php else: ?>
+                                            <?php echo e(route('show_services', $single_category->slug)); ?>
+
+                                        <?php endif; ?>
+                                    '><?php echo e($single_category->name); ?></a></h5>
+                                <p><?php echo Illuminate\Support\Str::limit(strip_tags($single_category->short_description), 100); ?></p>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ==========Service Section Ends Here========== -->
+
+    <!-- ==========Step Section Start Here========== -->
+    <div class="step padding-tb bg-img" id="step" style="background-image: url(<?php echo e(asset('frontend/assets/images/bg/02.jpg')); ?>);">
+    <div class="container">
+        <?php if($stepsection): ?>
+        <div class="section__header text-center">
+             <p class="text-end"><a href="<?php echo e(route('step-section.edit')); ?>" style="color: white;"><i class="icofont-edit"></i></a></p>
+            
+            <h2><?php echo e($stepsection->title); ?></h2>
+            <p><?php echo e($stepsection->subtitle); ?></p>
+        </div>
+        <?php endif; ?>
+        <div class="section__wrapper">
+            <div class="row g-4 justify-content-center">
+                <p class="text-end"><a href="<?php echo e(route('steps.index')); ?>" style="color: white;"><i class="icofont-edit"></i></a></p>
+            
+                <?php $__currentLoopData = $steps; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $step): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <div class="col-xl-3 col-lg-4 col-sm-6 col-12">
+                        <div class="step__item">
+                            <div class="step__thumb">
+                                <img src="<?php echo e(asset('storage/public/step/' . $step->image)); ?>" alt="step">
+                            </div>
+                            <div class="step__content">
+                                <span><?php echo e($step->step_number); ?></span>
+                                <h5><?php echo e($step->title); ?></h5>
+                                <p><?php echo e($step->description); ?></p>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- ==========Step Section Ends Here========== -->
+
+    <!-- ==========Video Section Start Here========== -->
+    <?php if($video): ?>
+    <div class="video padding-tb" id="video">
+        
+        <div class="container">
+            <p class="text-end"><a href="<?php echo e(route('video.edit', 1)); ?>" style="color: black;"><i class="icofont-edit"></i></a></p>
+            <div class="row g-lg-0 g-5 justify-content-center align-items-center">
+                <div class="col-lg-6 col-12">
+                    <div class="video__thumb">
+                        <img src="<?php echo e(asset('storage/public/' . $video->thumb_image)); ?>" alt="video thumb">
+                        <div class="video__thumb--icon">
+                            <a href="<?php echo e(asset('storage/public/' . $video->video_url)); ?>" data-rel="lightcase">
+                                <i class="fa-solid fa-play"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-12">
+                    <div class="video__content">
+                        <h2><?php echo e($video->title); ?></h2>
+                        <p><?php echo e($video->description); ?></p>
+                        <ul>
+                            <li>
+                                <div class="thumb">
+                                    <img src="<?php echo e(asset('storage/public/' . $video->stat1_icon)); ?>" alt="icon1">
+                                </div>
+                                <div class="content">
+                                    <span><?php echo e($video->stat1_number); ?></span>
+                                    <p><?php echo e($video->stat1_text); ?></p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="thumb">
+                                    <img src="<?php echo e(asset('storage/public/' . $video->stat2_icon)); ?>" alt="icon2">
+                                </div>
+                                <div class="content">
+                                    <span><?php echo e($video->stat2_number); ?></span>
+                                    <p><?php echo e($video->stat2_text); ?></p>
+                                </div>
+                            </li>
+                        </ul>
+                        <a href="<?php echo e($video->button_url); ?>" class="lab-btn"><?php echo e($video->button_text); ?></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php endif; ?>
+    <!-- ==========Video Section Ends Here========== -->
+
+    <!-- ==========Team Section Start Here========== -->
+    <div class="team padding-tb" id="team">
+        <div class="container">
+            <div class="section__header text-center">
+                <form action="<?php echo e(route('admin.visual_edit.update')); ?>" method="POST">
+                        <?php echo csrf_field(); ?>
+                        <input type="hidden" name="section" value="home_page_doctor">
+
+                        <div class="">
+                            
+                            <div class="form-group mb-3">
+                                <input type="text" name="title" class="form-control border-0 display-5 fw-bold"
+                                    style="font-size: 2rem;"
+                                    value="<?php echo e($home_page_doctor_title); ?>">
+                            </div>
+
+                            
+                            <div class="form-group mb-3">
+                                <textarea name="description" class="form-control border-0"
+                                        style="font-size: 1.1rem; line-height: 1.7;"
+                                        rows="3"><?php echo e($home_page_doctor_description); ?></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                    </form>
+               
+            </div>
+            <div class="section__wrapper">
+                <p class="text-end"><a href="<?php echo e(route('admin.doctor')); ?>" style="color: black;"><i class="icofont-edit"></i></a></p>
+                <div class="row g-4 justify-content-center">
+                    <?php
+                    $doctors_display = App\Models\Doctor::paginate(8);
+                    ?>
+                    <?php $__currentLoopData = $doctors_display; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $doctor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php if(!empty($doctor)): ?>
+                    <div class="col-xl-3 col-lg-4 col-sm-6 col-12">
+                        <div class="team__item">
+                            <div class="team__thumb">
+                                <a href="<?php echo e(route('single_doctor',$doctor->id)); ?>">
+                                <img src="<?php echo e(asset('storage/public/doctors/'.$doctor->image)); ?>" alt="webcodeltd">
+                                </a>
+                            </div>
+                            <div class="team__content">
+                                <h6><a href="<?php echo e(route('single_doctor',$doctor->id)); ?>"><?php echo e($doctor->name); ?></a></h6>
+                                <span><?php echo e($doctor->speciali); ?></span>
+                                
+                                
+                                
+                                <div class="mt-3">
+                                    <a href="#appointment" class="lab-btn btn-sm doctor-appointment-btn" 
+                                       data-doctor-id="<?php echo e($doctor->id); ?>" 
+                                       data-doctor-name="<?php echo e($doctor->name); ?>"
+                                       data-doctor-specialty="<?php echo e($doctor->speciali); ?>">
+                                        Get Appointment
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center mt-5">
+                           <?php echo e($doctors_display->links('pagination::bootstrap-4')); ?>
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ==========Team Section Ends Here========== -->
+
+    <!-- ==========Testmonial Section Start Here========== -->
+    <div class="testimonial padding-tb bg-img" id="testimonial" style="background-image: url(<?php echo e(asset('frontend/assets/images/bg/01.jpg')); ?>);">
+        <div class="container">
+            <div class="section__header text-center">
+                 <form action="<?php echo e(route('admin.visual_edit.update')); ?>" method="POST">
+                        <?php echo csrf_field(); ?>
+                        <input type="hidden" name="section" value="home_page_testimonial">  
+
+                        <div class="">
+                            
+                            <div class="form-group mb-3">
+                                <input type="text" name="title" class="form-control border-0 display-5 fw-bold"
+                                    style="font-size: 2rem;"
+                                    value="<?php echo e($home_page_testimonial_title); ?>">
+                            </div>
+
+                            
+                            <div class="form-group mb-3">
+                                <textarea name="description" class="form-control border-0"
+                                        style="font-size: 1.1rem; line-height: 1.7;"
+                                        rows="3"><?php echo e($home_page_testimonial_description); ?></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                    </form>
+                
+            </div>
+            <div class="section__wrapper">
+                <div class="testimonial__slider overflow-hidden">
+                    <p class="text-end"><a href="<?php echo e(route('admin.show_testimonial')); ?>" style="color: white;"><i class="icofont-edit"></i></a></p>
+                    
+                    <div class="swiper-wrapper">
+                        <?php $__currentLoopData = App\Models\Testimonial::all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $testimonial): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <div class="swiper-slide">
+                            <div class="testimonial__item">
+                                <div class="testimonial__thumb">
+                                    <img src="<?php echo e(asset('storage/public/testimonial/'.$testimonial->image)); ?>" alt="webcodeltd">
+                                    <div class="testimonial__thumb--quote">
+                                        <i class="fa-solid fa-quote-right"></i>
+                                    </div>
+                                </div>
+                                <div class="testimonial__content">
+                                    <p><?php echo e($testimonial->text); ?></p>
+                                    <div class="testimonial__content--bottom">
+                                        <div class="left">
+                                            <h6><?php echo e($testimonial->name); ?></h6>
+                                            <span><?php echo e($testimonial->author); ?></span>
+                                        </div>
+                                        <div class="right">
+                                            <ul>
+                                                <?php for($i = 1; $i <= 5; $i++): ?>
+                                                    <?php if($i <= $testimonial->rating): ?>
+                                                        <li><i class="fa-solid fa-star"></i></li>
+                                                    <?php else: ?>
+                                                        <li><i class="fa-regular fa-star"></i></li>
+                                                    <?php endif; ?>
+                                                <?php endfor; ?>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    </div>
+                </div>
+                <div class="text-center mt-5">
+                    <div class="number__pagination testimonial__pagination"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ==========Testmonial Section Ends Here========== -->
+
+    <!-- ==========Result Section Start Here========== -->
+    <div class="result padding-tb" id="result">
+        
+        <div class="container">
+            <p class="text-end"><a href="<?php echo e(route('video.edit', 2)); ?>" style="color: black;"><i class="icofont-edit"></i></a></p>
+            <div class="row g-lg-0 g-5 align-items-center">
+                <div class="col-xl-6 col-12">
+                    <div class="result__content">
+                        <h2><?php echo e($secondvideo->title); ?></h2>
+                        <p><?php echo e($secondvideo->description); ?></p>
+                        <a href="<?php echo e(asset('storage/public/' . $secondvideo->video_url)); ?>" class="lab-btn" data-rel="lightcase"><?php echo e($secondvideo->button_text); ?> <i class="fa-solid fa-play"></i></a>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-12">
+                    <div class="result__thumb">
+                        <img src="<?php echo e(asset('storage/public/' . $secondvideo->thumb_image)); ?>" alt="webcodeltd">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ==========Result Section Ends Here========== -->
+
+    <!-- ==========Blog Section Start Here========== -->
+    <div class="blog padding-tb" id="blog">
+        <div class="container">
+            
+            <div class="section__header text-center">
+                <form action="<?php echo e(route('admin.visual_edit.update')); ?>" method="POST">
+                        <?php echo csrf_field(); ?>
+                        <input type="hidden" name="section" value="home_page_blog">
+
+                        <div class="">
+                            
+                            <div class="form-group mb-3">
+                                <input type="text" name="title" class="form-control border-0 display-5 fw-bold"
+                                    style="font-size: 2rem;"
+                                    value="<?php echo e($home_page_blog_title); ?>">
+                            </div>
+
+                            
+                            <div class="form-group mb-3">
+                                <textarea name="description" class="form-control border-0"
+                                        style="font-size: 1.1rem; line-height: 1.7;"
+                                        rows="3"><?php echo e($home_page_blog_description); ?></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                    </form>
+            </div>
+            <div class="section__wrapper">
+                <p class="text-end"><a href="<?php echo e(route('admin.blog')); ?>" style="color: black;"><i class="icofont-edit"></i></a></p>
+                <div class="row g-4 justify-content-center">
+                    <?php
+                    $blogs=App\Models\Blog::take(3)->get();
+                    ?>
+                    <?php $__currentLoopData = $blogs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $blog): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <div class="col-lg-4 col-sm-6 col-12">
+                        <div class="blog__item">
+                                <div class="blog__thumb">
+                                    <a href="<?php echo e(route('single_blog',$blog->slug)); ?>"><img src="<?php echo e(asset('storage/public/blog/'.$blog->thumbnail)); ?>"></a>
+                                </div>
+                                <div class="blog__content">
+                                    <h4><a href="<?php echo e(route('single_blog',$blog->slug)); ?>"><?php echo e($blog->title); ?> </a></h4>
+                                    <ul>
+                                        <?php
+                                            $date = date('F j,Y', strtotime($blog->created_at));
+                                        ?>
+                                        <li><i class="fa-solid fa-calendar"></i><?php echo $date ?></li>
+                                        <li><i class="fa-regular fa-folder"></i><?php echo e($blog->blog_category->name); ?></li>
+                                    </ul>
+                                </div>
+                            </div>
+                    </div>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </div>
+                <div class="text-center mt-5">
+                    <a href="<?php echo e(route('blog')); ?>" class="lab-btn">view all blog</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ==========Blog Section Ends Here========== -->
+
+    <!-- ==========Appointment Section Start Here========== -->
+    <div class="appointment padding-tb">
+        <div class="container">
+            
+            <div class="row g-lg-0 g-5 align-items-center">
+                <div class="col-lg-6 col-12">
+                    <div class="appointment__thumb">
+                        <img src="<?php echo e(asset('storage/public/banners/' . $general_info->appointment_banner)); ?>" alt="webcodeltd">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-12">
+                    <div class="appointment__content" id="appointment">
+                        <div class="title">
+                            <?php if($errors->any()): ?>
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <li><?php echo e($error); ?></li>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    </ul>
+                                </div>
+                                <?php endif; ?>
+                                <?php if(session('success')): ?>
+                                    <div class="alert alert-success">
+                                        <?php echo e(session('success')); ?>
+
+                                    </div>
+                            <?php endif; ?>
+                            <form action="<?php echo e(route('admin.visual_edit.update')); ?>" method="POST">
+                                <?php echo csrf_field(); ?>
+                                <input type="hidden" name="section" value="home_page_appointment">
+
+                                <div class="">
+                                    
+                                    <div class="form-group mb-3">
+                                        <input type="text" name="title" class="form-control border-1 display-5 fw-bold"
+                                            style="font-size: 2rem;"
+                                            value="<?php echo e($home_page_appointment_title); ?>">
+                                    </div>
+
+                                    
+                                    <div class="form-group mb-3">
+                                        <textarea name="description" class="form-control border-1"
+                                                style="font-size: 1.1rem; line-height: 1.7;"
+                                                rows="3"><?php echo e($home_page_appointment_description); ?></textarea>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </div>
+                            </form>
+                           
+                        </div>
+                        <br><br><br>
+                        <form action="<?php echo e(route('admin.take_appointment')); ?>" method="post">
+                            <?php echo csrf_field(); ?>
+                            <div class="row g-4">
+                                <div class="col-md-6 col-12 form-container">
+                                    <input name="name" type="text" placeholder=" " required>
+                                    <label for="name">Full Name *</label>
+                                </div>
+                                <div class="col-md-6 col-12 form-container">
+                                    <input name="phone" type="text" placeholder=" " required>
+                                    <label for="phone">Phone Number *</label>
+                                </div>
+                                <div class="col-12 form-container">
+                                    <input name="email" type="email" placeholder=" " required>
+                                    <label for="email">Email Address *</label>
+                                </div>
+                                <div class="col-md-6 col-12 form-container">
+                                    <select name="gender" required>
+                                        <option value="">Select Gender</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                    <label for="gender">Gender *</label>
+                                </div>
+                               <div class="col-md-6 col-12 form-container">
+                                    <input id="datepicker" name="date" type="date" required placeholder=" ">
+                                    <label for="datepicker">Birthdate *</label>
+                                </div>
+                                <div class="col-12 form-container">
+                                    <select name="doctor_id" id="doctor-select">
+                                        <option value="">Select Doctor (Optional)</option>
+                                        <?php $__currentLoopData = $doctors; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $doctor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <option value="<?php echo e($doctor->id); ?>" 
+                                                    data-specialty="<?php echo e($doctor->speciali); ?>"
+                                                    data-available-days="<?php echo e($doctor->available_days); ?>">
+                                                Dr. <?php echo e($doctor->name); ?> - <?php echo e($doctor->speciali); ?>
+
+                                            </option>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    </select>
+                                    <label for="doctor-select">Choose Doctor</label>
+                                </div>
+                                <div class="col-12 form-container" id="available-days-container" style="display: none;">
+                                    <select name="appointment_day" id="appointment-day-select">
+                                        <option value="">Choose a day</option>
+                                    </select>
+                                    <label for="appointment-day-select">Available Days</label>
+                                </div>
+                                <div class="col-12 form-container">
+                                    <select name="treatment_types" required>
+                                        <option value="">Select Treatment</option>
+                                        <?php $__currentLoopData = $services; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $service): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($service->title); ?>"><?php echo e($service->title); ?></option>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    </select>
+                                    <label for="treatment_types">Need Appointment For *</label>
+                                </div>
+                                <div class="col-12 form-container">
+                                    <textarea name="message" rows="4" placeholder=" " required></textarea>
+                                    <label for="message">Message *</label>
+                                </div>
+                            </div>
+                            <button type="submit" class="lab-btn">take an appointment</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ==========Appointment Section Ends Here========== -->
+
+    <!-- ==========contact Section start Here========== -->
+    <div class="contact" id="contact">
+        <div class="container">
+            <p class="text-end"><a href="<?php echo e(route('admin.general_info')); ?>" style="color: black;"><i class="icofont-edit"></i></a></p>
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-4 col-sm-6 col-12">
+                    <div class="contact__item">
+                        <div class="contact__thumb">
+                            <img src="<?php echo e(asset('frontend/assets/images/info/01.jpg')); ?>" alt="webcodeltd">
+                        </div>
+                        <?php if(!@empty($general_info)): ?>
+                        <div class="contact__content">
+                            <p><?php echo e($general_info->address); ?></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 col-12">
+                    <div class="contact__item">
+                        <div class="contact__thumb">
+                            <img src="<?php echo e(asset('frontend/assets/images/info/02.jpg')); ?>" alt="webcodeltd">
+                        </div>
+                        <div class="contact__content">
+                            <p><?php echo e($general_info->title); ?></p>
+                            <p>Enquiry: <?php echo e($general_info->enquiry_number); ?></p>
+                            <p>Appointment: <?php echo e($general_info->appointment_number); ?></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 col-12">
+                    <div class="contact__item">
+                        <div class="contact__thumb">
+                            <img src="<?php echo e(asset('frontend/assets/images/info/03.jpg')); ?>" alt="webcodeltd">
+                        </div>
+                        <div class="contact__content">
+                            <p><a href="#"><?php echo e($general_info->help_email); ?></a></p>
+                            <p><a href="#"></a><?php echo e($general_info->support_email); ?></p>
+                            <p><a href="#"><?php echo $_SERVER['HTTP_HOST']; ?></a></p>
+                        </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ==========contact Section Ends Here========== -->
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle doctor appointment button clicks
+    const doctorAppointmentBtns = document.querySelectorAll('.doctor-appointment-btn');
+    const doctorSelect = document.getElementById('doctor-select');
+    const availableDaysContainer = document.getElementById('available-days-container');
+    const appointmentDaySelect = document.getElementById('appointment-day-select');
+    
+    // Function to handle label animations for selects
+    function handleSelectLabels() {
+        const selects = document.querySelectorAll('.form-container select');
+        selects.forEach(select => {
+            const label = select.nextElementSibling;
+            if (label && label.tagName === 'LABEL') {
+                if (select.value && select.value !== '') {
+                    label.classList.add('active');
+                } else {
+                    label.classList.remove('active');
+                }
+            }
+        });
+    }
+    
+    // Function to populate available days
+    function populateAvailableDays(availableDaysString) {
+        if (!availableDaysString) {
+            availableDaysContainer.style.display = 'none';
+            return;
+        }
+        
+        const days = availableDaysString.split(',').map(day => day.trim());
+        appointmentDaySelect.innerHTML = '<option value="">Choose a day</option>';
+        
+        days.forEach(day => {
+            if (day) {
+                const option = document.createElement('option');
+                option.value = day;
+                option.textContent = day;
+                appointmentDaySelect.appendChild(option);
+            }
+        });
+        
+        availableDaysContainer.style.display = 'block';
+        handleSelectLabels(); // Update label positions after showing container
+    }
+    
+    // Handle doctor selection change
+    doctorSelect.addEventListener('change', function() {
+        const selectedOption = this.options[this.selectedIndex];
+        const availableDays = selectedOption.getAttribute('data-available-days');
+        
+        if (this.value) {
+            populateAvailableDays(availableDays);
+        } else {
+            availableDaysContainer.style.display = 'none';
+        }
+        handleSelectLabels();
+    });
+    
+    // Handle all select changes for label animation
+    document.querySelectorAll('.form-container select').forEach(select => {
+        select.addEventListener('change', handleSelectLabels);
+        select.addEventListener('focus', handleSelectLabels);
+        select.addEventListener('blur', handleSelectLabels);
+    });
+    
+    // Handle doctor appointment button clicks
+    doctorAppointmentBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const doctorId = this.getAttribute('data-doctor-id');
+            const doctorName = this.getAttribute('data-doctor-name');
+            const doctorSpecialty = this.getAttribute('data-doctor-specialty');
+            
+            // Select the doctor in the dropdown
+            if (doctorSelect) {
+                doctorSelect.value = doctorId;
+                
+                // Trigger change event to show available days
+                const selectedOption = doctorSelect.options[doctorSelect.selectedIndex];
+                const availableDays = selectedOption.getAttribute('data-available-days');
+                populateAvailableDays(availableDays);
+            }
+            
+            // Smooth scroll to appointment form
+            document.getElementById('appointment').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+            
+            // Optional: Show a notification that doctor is selected
+            const appointmentTitle = document.querySelector('.appointment__content .title h2');
+            if (appointmentTitle) {
+                const originalText = appointmentTitle.textContent;
+                appointmentTitle.textContent = `Book Appointment with Dr. ${doctorName}`;
+                
+                // Reset after 3 seconds
+                setTimeout(() => {
+                    appointmentTitle.textContent = originalText;
+                }, 3000);
+            }
+        });
+    });
+    
+    // Initial label check on page load
+    handleSelectLabels();
+});
+</script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('backend.visualeditor.layouts.template', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Applications/MAMP/htdocs/Advancellhealth/resources/views/backend/visualeditor/homepage.blade.php ENDPATH**/ ?>
