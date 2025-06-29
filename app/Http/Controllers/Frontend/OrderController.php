@@ -52,16 +52,16 @@ class OrderController extends Controller
 
         // Discount
         $discount = 0;
-        if ($shippingSettings->enable_discount_offer && $subtotal >= $shippingSettings->discount_minimum_total) {
-            $discount = ($shippingSettings->discount_percent / 100) * $subtotal;
-        }
+        // if ($shippingSettings->enable_discount_offer && $subtotal >= $shippingSettings->discount_minimum_total) {
+        //     $discount = ($shippingSettings->discount_percent / 100) * $subtotal;
+        // }
 
         // Shipping
         $shippingCost = $request->shipping_cost ?? $shippingSettings->inside_dhaka_cost;
 
-        if ($shippingSettings->enable_free_shipping && $subtotal >= $shippingSettings->free_shipping_threshold) {
-            $shippingCost = 0;
-        }
+        // if ($shippingSettings->enable_free_shipping && $subtotal >= $shippingSettings->free_shipping_threshold) {
+        //     $shippingCost = 0;
+        // }
 
         // Final total
         $totalAmount = $subtotal - $discount + $shippingCost;
@@ -71,7 +71,7 @@ class OrderController extends Controller
             'order_number' => 'ORD-' . strtoupper(Str::random(10)),
             'user_id' => auth()->check() ? auth()->id() : null,
             'customer_name' => $request->customer_name,
-            'customer_email' => $request->customer_email,
+            'customer_email' => 'test@example.com',
             'customer_phone' => $request->customer_phone,
             'shipping_address' => $request->address,
             'shipping_city' => '', // optional

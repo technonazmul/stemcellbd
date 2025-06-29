@@ -50,10 +50,11 @@ class VisualEditController extends Controller
                 ->pluck('value', 'key');
         $home_page_appointment_title = $visualEditAppointmentContent['title'] ?? '';
         $home_page_appointment_description = $visualEditAppointmentContent['description'] ?? '';
+         $visualEditContent = VisualEdit::where('section', 'home_page')->pluck('value', 'key');
 
         return view('backend.visualeditor.homepage',compact('data', 'home_page_service_category_title', 'home_page_service_category_description', 
         'home_page_blog_title', 'home_page_blog_description', 'home_page_doctor_title', 'home_page_doctor_description', 'home_page_testimonial_title',
-         'home_page_testimonial_description', 'home_page_appointment_title', 'home_page_appointment_description'));
+         'home_page_testimonial_description', 'home_page_appointment_title', 'home_page_appointment_description', 'visualEditContent'));
     }
 
     // This function will handle varios sections of contact page

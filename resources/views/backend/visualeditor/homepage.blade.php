@@ -592,11 +592,24 @@ $services = App\Models\Service::all(); // For appointment form services
     <!-- ==========Appointment Section Start Here========== -->
     <div class="appointment padding-tb">
         <div class="container">
-            
+            <form action="{{ route('admin.visual_edit.update') }}" method="POST" enctype="multipart/form-data" class="p-4 border rounded bg-light">
+                    @csrf
+                    <input type="hidden" name="section" value="home_page">
+                    <input type="hidden" name="key" value="appointment_banner">
+
+                    <div class="mb-3">
+                        <label for="file" class="form-label fw-bold">Change Image</label>
+                        <input type="file" name="file" class="form-control" id="file" accept="image/*">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-upload me-1"></i> Update
+                    </button>
+                </form>
             <div class="row g-lg-0 g-5 align-items-center">
                 <div class="col-lg-6 col-12">
                     <div class="appointment__thumb">
-                        <img src="{{ asset('storage/public/banners/' . $general_info->appointment_banner) }}" alt="webcodeltd">
+                        <img src="{{asset('storage/public/visual_edits/' . $visualEditContent['appointment_banner'] ?? '')}}" alt="webcodeltd">
                     </div>
                 </div>
                 <div class="col-lg-6 col-12">

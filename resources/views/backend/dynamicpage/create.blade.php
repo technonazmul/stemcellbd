@@ -55,7 +55,7 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-
+                    
                     <!-- Slug -->
                     <div class="mb-3">
                         <label for="slug" class="form-label">

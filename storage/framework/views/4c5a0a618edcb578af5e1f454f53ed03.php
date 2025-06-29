@@ -1,9 +1,9 @@
-@php
+<?php
 $shipping_settings = \App\Models\ShippingSetting::first();
-@endphp
-@extends('frontend.layouts.template')
+?>
 
-@section('content')
+
+<?php $__env->startSection('content'); ?>
  <!-- ==========Page Header Section Start Here========== -->
    
     <!-- ==========Page Header Section Ends Here========== -->
@@ -11,17 +11,17 @@ $shipping_settings = \App\Models\ShippingSetting::first();
     <div class="container">
         <div class="row justify-content-center g-5 g-xl-4">
             <div class="col-xl-8 col-12">
-                @if ($errors->any())
+                <?php if($errors->any()): ?>
                     <div class="alert alert-danger">
                         <ul class="mb-0">
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
+                            <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <li><?php echo e($error); ?></li>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </ul>
                     </div>
-                @endif
+                <?php endif; ?>
                 <div>
-                    @if(count($cart) > 0)
+                    <?php if(count($cart) > 0): ?>
                         <div class="cart__top">
                             <table>
                                 <thead>
@@ -34,100 +34,95 @@ $shipping_settings = \App\Models\ShippingSetting::first();
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @php $total = 0 @endphp
-                                    @foreach($cart as $id => $details)
-                                        @php $itemTotal = $details['price'] * $details['quantity'] @endphp
-                                        @php $total += $itemTotal @endphp
-                                        <tr data-id="{{ $id }}">
+                                    <?php $total = 0 ?>
+                                    <?php $__currentLoopData = $cart; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $id => $details): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <?php $itemTotal = $details['price'] * $details['quantity'] ?>
+                                        <?php $total += $itemTotal ?>
+                                        <tr data-id="<?php echo e($id); ?>">
                                             <td class="cart__item">
                                                 <div class="cart__thumb">
-                                                    <a href="{{ route('shop_single', $id) }}">
-                                                        <img src="{{ asset('storage/public/products/' . $details['image']) }}" 
-                                                             alt="{{ $details['name'] }}"
-                                                             onerror="this.src='{{ asset('assets/images/shop/default.jpg') }}'">
+                                                    <a href="<?php echo e(route('shop_single', $id)); ?>">
+                                                        <img src="<?php echo e(asset('storage/public/products/' . $details['image'])); ?>" 
+                                                             alt="<?php echo e($details['name']); ?>"
+                                                             onerror="this.src='<?php echo e(asset('assets/images/shop/default.jpg')); ?>'">
                                                     </a>
                                                 </div>
                                                 <div class="cart__content">
-                                                    <a href="{{ route('shop_single', $id) }}">{{ $details['name'] }}</a>
+                                                    <a href="<?php echo e(route('shop_single', $id)); ?>"><?php echo e($details['name']); ?></a>
                                                 </div>
                                             </td>
-                                            <td class="item-price">৳{{ number_format($details['price'], 2) }}</td>
+                                            <td class="item-price">৳<?php echo e(number_format($details['price'], 2)); ?></td>
                                             <td>
                                                 <div class="cart-plus-minus">
-                                                    <div class="dec qtybutton" onclick="updateQuantity({{ $id }}, 'decrease')">-</div>
+                                                    <div class="dec qtybutton" onclick="updateQuantity(<?php echo e($id); ?>, 'decrease')">-</div>
                                                     <input class="cart-plus-minus-box quantity-input" 
                                                            type="text" 
                                                            name="quantity" 
-                                                           value="{{ $details['quantity'] }}"
-                                                           data-id="{{ $id }}"
+                                                           value="<?php echo e($details['quantity']); ?>"
+                                                           data-id="<?php echo e($id); ?>"
                                                            readonly>
-                                                    <div class="inc qtybutton" onclick="updateQuantity({{ $id }}, 'increase')">+</div>
+                                                    <div class="inc qtybutton" onclick="updateQuantity(<?php echo e($id); ?>, 'increase')">+</div>
                                                 </div>
                                             </td>
-                                            <td class="item-total">৳{{ number_format($itemTotal, 2) }}</td>
+                                            <td class="item-total">৳<?php echo e(number_format($itemTotal, 2)); ?></td>
                                             <td>
-                                                <a href="#" onclick="removeFromCart({{ $id }})" class="remove-item">
-                                                    <img src="{{ asset('assets/images/shop/del.png') }}" alt="Remove">
+                                                <a href="#" onclick="removeFromCart(<?php echo e($id); ?>)" class="remove-item">
+                                                    <img src="<?php echo e(asset('assets/images/shop/del.png')); ?>" alt="Remove">
                                                 </a>
                                             </td>
                                         </tr>
-                                    @endforeach
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
                             </table>
                         </div>
                         
-                    @else
+                    <?php else: ?>
                         <div class="empty-cart text-center py-5">
                             <h3>Your cart is empty</h3>
                             <p>Looks like you haven't added any items to your cart yet.</p>
-                            <a href="{{route('shop')}}" class="lab-btn">Continue Shopping</a>
+                            <a href="<?php echo e(route('shop')); ?>" class="lab-btn">Continue Shopping</a>
                         </div>
-                    @endif
+                    <?php endif; ?>
                 </div>
             </div>
             
-            @if(count($cart) > 0)
+            <?php if(count($cart) > 0): ?>
             <div class="col-xl-4 col-12">
                 <div class="sidebar">
                     <div class="sidebar__cartamount">
                         <div class="sidebar__subtotal">
                             <p>Subtotal</p>
-                            <span id="subtotal">৳{{ number_format($total, 2) }}</span>
+                            <span id="subtotal">৳<?php echo e(number_format($total, 2)); ?></span>
                         </div>
                         <div class="sidebar__shipping">
                             <p>Shipping</p>
                             <div class="sidebar__radiolist">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="shipping" id="inside_dhaka" value="{{$shipping_settings->inside_dhaka_cost}}" checked>
+                                    <input class="form-check-input" type="radio" name="shipping" id="inside_dhaka" value="<?php echo e($shipping_settings->inside_dhaka_cost); ?>" checked>
                                     <div class="formcheck">
                                         <label class="form-check-label" for="inside_dhaka">Inside Dhaka City</label>
-                                        <span data-original="{{$shipping_settings->inside_dhaka_cost}}">+৳{{$shipping_settings->inside_dhaka_cost}}</span>
+                                        <span data-original="<?php echo e($shipping_settings->inside_dhaka_cost); ?>">+৳<?php echo e($shipping_settings->inside_dhaka_cost); ?></span>
                                     </div>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="shipping" id="outside_dhaka" value="{{$shipping_settings->outside_dhaka_cost}}">
+                                    <input class="form-check-input" type="radio" name="shipping" id="outside_dhaka" value="<?php echo e($shipping_settings->outside_dhaka_cost); ?>">
                                     <div class="formcheck">
                                         <label class="form-check-label" for="outside_dhaka">Outside Dhaka City</label>
-                                        <span data-original="{{$shipping_settings->outside_dhaka_cost}}">+৳{{$shipping_settings->outside_dhaka_cost}}</span>
+                                        <span data-original="<?php echo e($shipping_settings->outside_dhaka_cost); ?>">+৳<?php echo e($shipping_settings->outside_dhaka_cost); ?></span>
                                     </div>
                                 </div>
 
-                                {{-- HIDDEN DISCOUNT SECTION - Uncomment to show again --}}
-                                {{-- 
-                                <div class="sidebar__discount mt-2">
-                                    <p>Discount ({{ $shipping_settings->discount_percent }}%)</p>
-                                    <span id="discount-amount">-৳0.00</span>
-                                </div>
-                                --}}
+                                
+                                
                             </div>
                         </div>
                        
-                        <form action="{{route('order.place')}}" method="POST">
-                        @csrf
+                        <form action="<?php echo e(route('order.place')); ?>" method="POST">
+                        <?php echo csrf_field(); ?>
                         <div class="sidebar__totalamaunt">
                             <div class="top mb-3">
                                 <p>Total</p>
-                                <span id="total-amount">৳{{ number_format($total + 70, 2) }}</span>
+                                <span id="total-amount">৳<?php echo e(number_format($total + 70, 2)); ?></span>
                             </div>
                             
                             <div class="form-group mb-3">
@@ -150,7 +145,7 @@ $shipping_settings = \App\Models\ShippingSetting::first();
                                 <textarea name="message" class="form-control" rows="2"></textarea>
                             </div>
 
-                            <input type="hidden" name="shipping_cost" id="shipping-cost" value="{{ $shipping_settings->inside_dhaka_cost }}">
+                            <input type="hidden" name="shipping_cost" id="shipping-cost" value="<?php echo e($shipping_settings->inside_dhaka_cost); ?>">
 
                             <div class="bottom">
                                 <button type="submit" class="lab-btn w-100">Place Order</button>
@@ -161,27 +156,27 @@ $shipping_settings = \App\Models\ShippingSetting::first();
                     </div>
                 </div>
             </div>
-            @endif
+            <?php endif; ?>
         </div>
     </div>
 </div>
 
 <!-- Hidden forms for AJAX requests -->
 <form id="update-quantity-form" method="POST" style="display: none;">
-    @csrf
-    @method('PUT')
+    <?php echo csrf_field(); ?>
+    <?php echo method_field('PUT'); ?>
     <input type="hidden" name="product_id" id="update-product-id">
     <input type="hidden" name="quantity" id="update-quantity">
 </form>
 
 <form id="remove-item-form" method="POST" style="display: none;">
-    @csrf
-    @method('DELETE')
+    <?php echo csrf_field(); ?>
+    <?php echo method_field('DELETE'); ?>
     <input type="hidden" name="product_id" id="remove-product-id">
 </form>
 
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
 <script>
 function updateQuantity(productId, action) {
     let quantityInput = document.querySelector(`input[data-id="${productId}"]`);
@@ -199,7 +194,7 @@ function updateQuantity(productId, action) {
         quantityInput.value = newQuantity;
         
         // Send AJAX request to update cart
-        fetch(`{{ route('cart.update') }}`, {
+        fetch(`<?php echo e(route('cart.update')); ?>`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -229,7 +224,7 @@ function updateQuantity(productId, action) {
 
 function removeFromCart(productId) {
     if (confirm('Are you sure you want to remove this item from your cart?')) {
-        fetch(`{{ route('cart.remove') }}`, {
+        fetch(`<?php echo e(route('cart.remove')); ?>`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -282,8 +277,8 @@ function updateCartTotals() {
     // DISABLED FREE SHIPPING - Uncomment to enable again
     /*
     // 3. Check free shipping settings
-    const freeShippingEnabled = {{ $shipping_settings->enable_free_shipping ? 'true' : 'false' }};
-    const freeShippingThreshold = parseFloat('{{ $shipping_settings->free_shipping_threshold }}');
+    const freeShippingEnabled = <?php echo e($shipping_settings->enable_free_shipping ? 'true' : 'false'); ?>;
+    const freeShippingThreshold = parseFloat('<?php echo e($shipping_settings->free_shipping_threshold); ?>');
 
     if (freeShippingEnabled && subtotal >= freeShippingThreshold) {
         shippingCost = 0;
@@ -324,9 +319,9 @@ function updateCartTotals() {
     // DISABLED DISCOUNT CALCULATION - Uncomment to enable again
     /*
     // 4. Check discount settings
-    const discountEnabled = {{ $shipping_settings->enable_discount_offer ? 'true' : 'false' }};
-    const discountPercent = parseFloat('{{ $shipping_settings->discount_percent }}');
-    const discountMinimumTotal = parseFloat('{{ $shipping_settings->discount_minimum_total }}');
+    const discountEnabled = <?php echo e($shipping_settings->enable_discount_offer ? 'true' : 'false'); ?>;
+    const discountPercent = parseFloat('<?php echo e($shipping_settings->discount_percent); ?>');
+    const discountMinimumTotal = parseFloat('<?php echo e($shipping_settings->discount_minimum_total); ?>');
 
     let discountAmount = 0;
     if (discountEnabled && subtotal >= discountMinimumTotal) {
@@ -367,5 +362,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
-@endpush
-@endsection
+<?php $__env->stopPush(); ?>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('frontend.layouts.template', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Applications/MAMP/htdocs/Advancellhealth/resources/views/frontend/pages/cart.blade.php ENDPATH**/ ?>

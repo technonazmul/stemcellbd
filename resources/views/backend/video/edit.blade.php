@@ -49,7 +49,8 @@
         </div>
 
         <hr>
-        <h4>Stat 1</h4>
+        @if($video->id != 2)
+        <h4>Step 1</h4>
 
         <div class="mb-3">
             <label>Stat 1 Icon</label>
@@ -65,12 +66,12 @@
         </div>
 
         <div class="mb-3">
-            <label>Stat 1 Text</label>
+            <label>Step 1 Text</label>
             <input type="text" name="stat1_text" class="form-control" value="{{ old('stat1_text', $video->stat1_text ?? '') }}" />
         </div>
 
         <hr>
-        <h4>Stat 2</h4>
+        <h4>Step 2</h4>
 
         <div class="mb-3">
             <label>Stat 2 Icon</label>
@@ -81,21 +82,22 @@
         </div>
 
         <div class="mb-3">
-            <label>Stat 2 Number</label>
+            <label>Step 2 Number</label>
             <input type="text" name="stat2_number" class="form-control" value="{{ old('stat2_number', $video->stat2_number ?? '') }}" />
         </div>
 
         <div class="mb-3">
-            <label>Stat 2 Text</label>
+            <label>Step 2 Text</label>
             <input type="text" name="stat2_text" class="form-control" value="{{ old('stat2_text', $video->stat2_text ?? '') }}" />
         </div>
 
         <hr>
-
+        
         <div class="mb-3">
             <label>Button URL</label>
             <input type="url" name="button_url" class="form-control" value="{{ old('button_url', $video->button_url ?? '') }}" />
         </div>
+        @endif
 
         <div class="mb-3">
             <label>Button Text</label>
